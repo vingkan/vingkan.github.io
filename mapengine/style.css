@@ -32,6 +32,12 @@ div#header{
 	left: 0;
 	top: 0;
 	color: white;
+	/*TITLE*/
+	text-align: center;
+	font-family: "Oswald";
+	font-weight: bold;
+	line-height: 60px;
+	font-size: 25px;
 }
 
 	div#menu{
@@ -95,7 +101,7 @@ div#canvas-wrap{
 	margin: 15px;
 	padding: 0;
 	width: 910px;
-	height: 410px;
+	height: 510px;
 	overflow: scroll;
 }
 
@@ -134,8 +140,8 @@ div#canvas-wrap{
 
 	canvas#map{
 		float: left;
-		width: auto;
-		height: auto;
+		width: 5000px;
+		height: 5000px;
 		background: rgba(204, 204, 204, 0.75);
 	}
 

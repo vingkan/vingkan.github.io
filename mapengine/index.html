@@ -29,14 +29,15 @@
 
 <body>
 
-	<div id="header">
+	<div id="header" onclick="headerShift();">
 		<!--<div id="menu">
 			<h1 style="width: 265px; float: left;">World Game Map Engine</h1>
 		</div>-->
-		<h1 style="text-align: center;">World Game Map Engine</h1>
+		<!--<h1 id="title" style="text-align: center;">World Game Map Engine</h1>-->
+		World Game Map Engine
 	</div>
 
-	<div class="spacer" style="height: 60px;"></div>
+	<div id="spacer" style="height: 60px;"></div>
 
 	<div id="canvas-wrap">
 		<canvas id="map" width="5000px" height="5000px" background="red"></canvas>
@@ -54,10 +55,6 @@
 	<div class="toolbar">
 		<!-- SHORTCUTS -->
 		<input type="button" onclick="showAllCountries()" style="display: none;" accesskey="q">
-		<input type="button" onclick="moveCanvas('UP', 50)" style="display: none;" accesskey="w">
-		<input type="button" onclick="moveCanvas('DOWN', 50)" style="display: none;" accesskey="s">
-		<input type="button" onclick="moveCanvas('LEFT', 50)" style="display: none;" accesskey="a">
-		<input type="button" onclick="moveCanvas('RIGHT', 50)" style="display: none;" accesskey="d">
 		<!-- SHORTCUTS -->
 		<input type="button" value="I/O" onclick="stream();" style="background: blue;">
 		<select id="country-select" onchange="viewCountry();">

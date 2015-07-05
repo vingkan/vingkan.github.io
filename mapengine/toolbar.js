@@ -161,3 +161,30 @@ function toggleGrid(){
 	resetCanvas();
 	map.draw();
 }
+
+function headerShift(){
+	var header = document.getElementById('header');
+	var spacer = document.getElementById('spacer');
+	if(header.style.height == '30px'){
+		header.style.height = '60px';
+		header.style.lineHeight = '60px';
+		header.style.fontSize = '25px';
+		spacer.style.height = '60px';
+	}
+	else{
+		header.style.height = '30px';
+		header.style.lineHeight = '30px';
+		header.style.fontSize = '10px';
+		spacer.style.height = '20px';
+	}
+}
+
+function scale(x, y, scalar){
+	var display = document.getElementById('canvas-wrap');
+	var displayWidth = pixelToNumber(display.style.width);
+	var displayHeight = pixelToNumber(display.style.height);
+	var newX = (x / displayWidth) * scalar;
+	var newY = (y / displayHeight) * scalar;
+	var point = new Point(newX, newY);
+	return point;
+}

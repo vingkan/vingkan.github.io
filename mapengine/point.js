@@ -54,9 +54,10 @@ Point.prototype.isDraggable = function(x, y){
 }
 
 Point.prototype.openMenu = function(tempId){
+	var wrap = document.getElementById('canvas-wrap');
 	var pointMenu = document.getElementById('pointMenu');
-		pointMenu.style.marginTop = (-435 + this.y) + 'px';
-		pointMenu.style.marginLeft = (20 + this.x) + 'px';
+		pointMenu.style.marginTop = ((-540 + this.y) - wrap.scrollTop) + 'px';
+		pointMenu.style.marginLeft = ((20 + this.x) - wrap.scrollLeft) + 'px';
 		pointMenu.style.display = 'block';
 	var forward = null;
 		toolbar.forwardIndex = null;
