@@ -4,7 +4,7 @@
 
 <head>
 
-<title>World Game Map Engine V 1.1.0</title>
+<title>World Game Map Engine</title>
 
 <style>
 
@@ -23,6 +23,7 @@
 <script type="text/javascript" src="ioStream.js"></script>
 <script type="text/javascript" src="FileSaver.js"></script>
 <script type="text/javascript" src="canvasToBlob.js"></script>
+<!--<script type="text/javascript" src="shortcuts.js"></script>-->
 
 </head>
 
@@ -37,7 +38,9 @@
 
 	<div class="spacer" style="height: 60px;"></div>
 
-	<canvas id="map" width="900px" height="400px" background="red"></canvas>
+	<div id="canvas-wrap">
+		<canvas id="map" width="5000px" height="5000px" background="red"></canvas>
+	</div>
 
 	<div id="pointMenu" style="display: none;">
 		<div id="arrowLeft"></div>
@@ -49,17 +52,24 @@
 	</div>
 
 	<div class="toolbar">
-		<input type="button" onclick="showAllCountries()" style="display: none;" accesskey="a">
+		<!-- SHORTCUTS -->
+		<input type="button" onclick="showAllCountries()" style="display: none;" accesskey="q">
+		<input type="button" onclick="moveCanvas('UP', 50)" style="display: none;" accesskey="w">
+		<input type="button" onclick="moveCanvas('DOWN', 50)" style="display: none;" accesskey="s">
+		<input type="button" onclick="moveCanvas('LEFT', 50)" style="display: none;" accesskey="a">
+		<input type="button" onclick="moveCanvas('RIGHT', 50)" style="display: none;" accesskey="d">
+		<!-- SHORTCUTS -->
 		<input type="button" value="I/O" onclick="stream();" style="background: blue;">
 		<select id="country-select" onchange="viewCountry();">
 			<option value="-1">All Countries</option>
 		</select>
 		<input type="button" value="New" onclick="newCountry();" style="background: green;">
+		<input type="button" value="Grid" onclick="toggleGrid();" style="background: black;">
 		<input type="number" id="grid-increment" value="50" onchange="updateGrid();">
 		<!--<input type="button" value="&#10006" onclick="deleteCountry();" style="background: red;">-->
 		<input type="text" id="country-name" value="" onchange="updateCurrentCountry();">
 		<input type="color" id="country-color" value="#000000" onchange="updateCurrentCountry();">
-		<input type="button" id="country-delete" value="Delete" onclick="deleteCountry();" style="background: red; margin: 0 0 0 190px;">
+		<input type="button" id="country-delete" value="Delete" onclick="deleteCountry();" style="background: red; margin: 0 0 0 120px;">
 	</div>
 
 	<textarea class="terminal" id="console" style="display: none;"></textarea>
@@ -78,7 +88,7 @@
 	<p>Paragraph</p>-->
 
 	<p style="text-align: right; font-size: 12px;">
-		<i>Created by Vinesh Kannan for the World Game | V 1.1.0 July 2015 | kannanvineshg@gmail.com</i>
+		<i>Created by Vinesh Kannan for the World Game | V 1.3.0 July 2015 | kannanvineshg@gmail.com</i>
 	</p>
 
 <script>
@@ -86,12 +96,16 @@
 	var map = new CanvasMap('map');
 	var canvas = document.getElementById('map');
 		canvas.addEventListener('click', clickCanvas);
+		canvas.style.marginTop = '0px';
+		canvas.style.marginBottom = '0px';
+		canvas.style.marginLeft = '0px';
+		canvas.style.marginRight = '0px';
 	var ctx = canvas.getContext('2d');
 
 	var toolbar = new Toolbar();
 	var ioStream = new IOStream();
 
-	drawGrid(50, false);
+	drawGrid(50, false, toolbar.showNumbers);
 
 	/*map.pushCountry(new Country("Drakhazia", "#ff0000", [
 			new Point(450, 350),

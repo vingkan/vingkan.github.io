@@ -118,7 +118,7 @@ function saveOutput(){
 function saveImage(){
 	var gridIncrement = document.getElementById('grid-increment');
 	var originalIncrement = gridIncrement.value;
-		gridIncrement.value = 900;
+		gridIncrement.value = canvas.width;
 		updateGrid();
 	//var image = canvas.toDataURL('image/png');
 	

@@ -4,6 +4,8 @@ function Toolbar(){
 	this.moving = false;
 	this.forwardIndex = null;
 	this.backwardIndex = null;
+	this.showGrid = true;
+	this.showNumbers = true;
 }
 
 Toolbar.prototype.pushTempPoint = function(point){
@@ -141,4 +143,21 @@ function forwardCurrent(forward){
 		swapItems(toolbar.tempPoints, currentIndex, toolbar.backwardIndex);
 	}
 	outClick();
+}
+
+function toggleGrid(){
+	if(toolbar.showGrid){
+		if(toolbar.showNumbers){
+			toolbar.showGrid = false;
+			toolbar.showNumbers = false;
+		}
+		else{
+			toolbar.showNumbers = true;
+		}
+	}
+	else{
+		toolbar.showGrid = true;
+	}
+	resetCanvas();
+	map.draw();
 }

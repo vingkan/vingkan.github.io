@@ -59,20 +59,31 @@ CanvasMap.prototype.draw = function(){
 				this.countries[i].showPoints();
 			}
 		}
-		var gridIncrement = parseInt(document.getElementById('grid-increment').value, 10);
-		drawGrid(gridIncrement, false);
+		if(toolbar.showGrid){
+			var gridIncrement = parseInt(document.getElementById('grid-increment').value, 10);
+			drawGrid(gridIncrement, false, toolbar.showNumbers);
+		}
 	}
 }
 
-function drawGrid(interval, nodes){
+function drawGrid(interval, nodes, numbers){
+	var gridText = numbers || false;
 	ctx.lineWidth = "0.5";
 	ctx.strokeStyle = "white";
+	//GRID TEXT
+	var fontSize = 10;
+	ctx.fillStyle = 'white';
+	ctx.font = fontSize + 'px Open Sans';
 	//HORIZONTAL GRIDLINES
 	for(var y = 0; y <= canvas.height; y += interval){
 		ctx.beginPath();
 		ctx.moveTo(0, y);
 		ctx.lineTo(canvas.width, y);
 		ctx.stroke();
+		//GRID TEXT
+		if(gridText){
+			ctx.fillText(y + "", 5, 5 + fontSize + y);
+		}
 	}
 	//VERTICAL GRIDLINES
 	for(var x = 0; x <= canvas.width; x += interval){
@@ -80,20 +91,24 @@ function drawGrid(interval, nodes){
 		ctx.moveTo(x, 0);
 		ctx.lineTo(x, canvas.height);
 		ctx.stroke();
+		//GRID TEXT
+		if(gridText){
+			ctx.fillText(x + "", 5 + x, 5 + fontSize);
+		}
 	}
 	ctx.closePath();
 	if(nodes){
 		//HORIZONTAL NODES
 		for(var x = 0; x <= canvas.width; x += interval){
-			var startNode = new Node(x, 0);
-			var endNode = new Node(x, canvas.height);
+			var startNode = new Point(x, 0);
+			var endNode = new Point(x, canvas.height);
 			startNode.draw(ctx);
 			endNode.draw(ctx);
 		}
 		//VERTICAL NODES
 		for(var y = 0; y <= canvas.height; y += interval){
-			var startNode = new Node(0, y);
-			var endNode = new Node(canvas.width, y);
+			var startNode = new Point(0, y);
+			var endNode = new Point(canvas.width, y);
 			startNode.draw(ctx);
 			endNode.draw(ctx);
 		}
@@ -117,6 +132,12 @@ function getPosition(event){
 	
 	x -= canvas.offsetLeft;
 	y -= canvas.offsetTop;
+
+	var wrap = document.getElementById('canvas-wrap');
+	x += wrap.scrollLeft;
+	y += wrap.scrollTop;
+
+	//alert(x + ", " + y);
 
 	return new Coordinate(x, y);
 }

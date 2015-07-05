@@ -52,3 +52,7 @@ function componentToHex(c) {
 function rgbToHex(r, g, b) {
     return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
+
+function pixelToNumber(string){
+	return parseInt(string.match(/\d/g).join(""), 10);
+}
