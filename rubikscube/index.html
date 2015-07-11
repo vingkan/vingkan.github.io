@@ -1,0 +1,82 @@
+<html>
+
+<head>
+
+<title>Rubik's Cube Simulator</title>
+
+<!-- Add CSS files here -->
+<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="views.css">
+<!-- Imported -->
+<link rel="stylesheet" type="text/css" href="3d.css">
+<link rel="stylesheet" type="text/css" href="rotateCube.css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700|Oswald:400,700' rel='stylesheet' type='text/css'>
+
+<!-- Add JavaScript files here -->
+<script type="text/javascript" src="label.js"></script>
+<script type="text/javascript" src="part.js"></script>
+<script type="text/javascript" src="cube.js"></script>
+<script type="text/javascript" src="script.js"></script>
+<!-- Imported -->
+<script type="text/javascript" src="utils.js"></script>
+<script type="text/javascript" src="rotateCube.js"></script>
+
+</head>
+
+<body>
+
+	<div id="header">Rubik's Cube Engine</div>
+
+	<section class="visualizer">
+		<div id="cubeSpace" class="show-corner1">
+			<figure class="face" id="face-front">Front</figure>
+			<figure class="face" id="face-back">Back</figure>
+			<figure class="face" id="face-right">Right</figure>
+			<figure class="face" id="face-left">Left</figure>
+			<figure class="face" id="face-up">Up</figure>
+			<figure class="face" id="face-down">Down</figure>
+		</div>
+	</section>
+
+	 <section id="options">
+
+	    <p id="show-buttons">
+	      <button class="show-corner1">1<div class="viewLabel"><div class="down-arrow"></div>Up/Front/Right</div></button>
+	      <button class="show-corner2">2<div class="viewLabel"><div class="down-arrow"></div>Up/Front/Left</div></button>
+	      <button class="show-corner3">3<div class="viewLabel"><div class="down-arrow"></div>Up/Back/Left</div></button>
+	      <button class="show-corner4">4<div class="viewLabel"><div class="down-arrow"></div>Up/Back/Right</div></button>
+	      <button class="show-corner5">5<div class="viewLabel"><div class="down-arrow"></div>Down/Back/Left</div></button>
+	      <button class="show-corner6">6<div class="viewLabel"><div class="down-arrow"></div>Down/Back/Right</div></button>
+	      <button class="show-corner7">7<div class="viewLabel"><div class="down-arrow"></div>Down/Front/Right</div></button>
+	      <button class="show-corner8">8<div class="viewLabel"><div class="down-arrow"></div>Down/Front/Left</div></button>
+	    </p>
+
+	  </section>
+
+	<script>
+
+		var cube = createRubiksCube();
+		cube.draw();
+
+	</script>
+
+</body>
+
+</html>
+
+<!--
+
+blank
+<figure class="face" id="face-back"></figure>
+blank
+<figure class="face" id="face-left"></figure>
+<figure class="face" id="face-up"></figure>
+<figure class="face" id="face-right"></figure>
+blank
+<figure class="face" id="face-front"></figure>
+blank
+blank
+<figure class="face" id="face-down"></figure>
+blank
+
+	-->
