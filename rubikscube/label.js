@@ -24,6 +24,13 @@ Label.prototype.toChar = function(){
 /*
 * Returns HTML representation of label, div of class "label"
 */
-Label.prototype.toHTML = function(type){
-	return '<div class="label" style="background: ' + this.color + ';">' + this.toChar() + '<div class="partType">' + type + '</div></div>';
+Label.prototype.toHTML = function(type, cubeView){
+	var html = '';
+	if(cubeView){
+		html = '<div class="label" style="background: ' + this.color + ';">' + this.toChar() + '<div class="partType">' + type + '</div></div>';
+	}
+	else{
+		html = '<div class="label" style="background: ' + this.color + ';">' + this.toChar() + '</div>';
+	}
+	return html;
 }

@@ -1,3 +1,8 @@
+/*
+* Code by David DeSandro: CSS 3D Transforms
+* https://github.com/desandro/3dtransforms
+*/
+
 // ======================= DOM Utility Functions from PastryKit =============================== //
 
 // Sure, we could use jQuery or XUI for these, 

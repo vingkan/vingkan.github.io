@@ -22,7 +22,7 @@ function Part(up, down, front, back, left, right, temp){
 * Returns a string representation of the labels on the part's faces
 */
 Part.prototype.toString = function(){
-	return"up: " + this.getLabel('up').toChar() + ", down: " + this.getLabel('down').toChar() + ", front: " + this.getLabel('front').toChar() + ", back: " + this.getLabel('back').toChar() + ", left: " + this.getLabel('left').toChar() + ", right: " + this.getLabel('right').toChar();
+	return "up: " + this.getLabel('up').toChar() + ", down: " + this.getLabel('down').toChar() + ", front: " + this.getLabel('front').toChar() + ", back: " + this.getLabel('back').toChar() + ", left: " + this.getLabel('left').toChar() + ", right: " + this.getLabel('right').toChar();
 }
 
 /*
@@ -51,7 +51,7 @@ Part.prototype.getLabel = function(face){
 			label = this.right;
 			break;
 		default:
-			console.log('Invalid Face.');
+			console.log(face + ' is an Invalid Face.');
 			break;
 	}
 	return label;
@@ -63,6 +63,7 @@ Part.prototype.getLabel = function(face){
 Part.prototype.saveLastOrientation = function(){
 	var tempPart = new Part(this.up, this.down, this.front, this.back, this.left, this.right, true);
 	this.last = tempPart;
+	//console.log("Saved: " + this.toString());
 }
 
 /*
@@ -113,6 +114,7 @@ Part.prototype.updateType = function(){
 * var clockwise (boolean): rotate face clockwise, counter-clockwise if false
 */
 Part.prototype.rotate = function(face, clockwise){
+	this.checkDuplicateLabels('Start of Rotation...');
 	//Save the part's last orientation to refer to while rotating and in case a move needs to be undone
 	this.saveLastOrientation();
 	//Rotate label values around focused face
@@ -122,13 +124,13 @@ Part.prototype.rotate = function(face, clockwise){
 				this.left = this.last.front;
 				this.back = this.last.left;
 				this.right = this.last.back;
-				this.front = this.left;
+				this.front = this.last.right;
 				break;
 			case 'down':
 				this.right = this.last.front;
 				this.front = this.last.left;
 				this.left = this.last.back;
-				this.back = this.right;
+				this.back = this.last.right;
 				break;
 			case 'front':
 				this.up = this.last.left;
@@ -159,5 +161,73 @@ Part.prototype.rotate = function(face, clockwise){
 				break;
 		}
 	}
-	console.log("Changed [" + this.last.toString() + "] to [" + this.toString() + "]");
+	else{
+		switch(face){
+			case 'up':
+				this.left = this.last.back;
+				this.back = this.last.right;
+				this.right = this.last.front;
+				this.front = this.last.left;
+				break;
+			case 'down':
+				this.right = this.last.back;
+				this.front = this.last.right;
+				this.left = this.last.front;
+				this.back = this.last.left;
+				break;
+			case 'front':
+				this.up = this.last.right;
+				this.left = this.last.up;
+				this.down = this.last.left;
+				this.right = this.last.down;				
+				break;
+			case 'back':
+				this.up = this.last.left;
+				this.right = this.last.up;
+				this.down = this.last.right;
+				this.left = this.last.down;
+				break;
+			case 'left':
+				this.up = this.last.front;
+				this.back = this.last.up;
+				this.down = this.last.back;
+				this.front = this.last.down;
+				break;
+			case 'right':
+				this.up = this.last.back;
+				this.front = this.last.up;
+				this.down = this.last.front;
+				this.back = this.last.down;
+				break;
+			default:
+				console.log("Invalid Face.");
+				break;
+		}
+	}
+	this.checkDuplicateLabels('End of Rotation...');
+	//console.log("Changed [" + this.last.toString() + "] to [" + this.toString() + "]");
+}
+
+Part.prototype.checkDuplicateLabels = function(location){
+	var colors = [];
+	var faces = ['up', 'down', 'front', 'back', 'left', 'right'];
+	var coloredLabels = 0;
+	for(var i = 0; i < faces.length; i++){
+		coloredLabels = this.checkColor(this.getLabel(faces[i]).color);
+		if(coloredLabels > 1){
+			console.log(location + " " + faces[i] + " has " + coloredLabels + " duplicate labels.");
+		}
+	}
+
+}
+
+Part.prototype.checkColor = function(array, color){
+	var coloredLabels = 0;
+	var faces = ['up', 'down', 'front', 'back', 'left', 'right'];
+	for(var i = 0; i < faces.length; i++){
+		if(this.getLabel(faces[i]).color == color){
+			coloredLabels++;
+		}
+	}
+	return coloredLabels;
 }

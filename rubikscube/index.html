@@ -3,6 +3,7 @@
 <head>
 
 <title>Rubik's Cube Simulator</title>
+<link rel="icon" href="favicon.ico" type="image/ico" sizes="16x16">
 
 <!-- Add CSS files here -->
 <link rel="stylesheet" type="text/css" href="style.css">
@@ -16,6 +17,8 @@
 <script type="text/javascript" src="label.js"></script>
 <script type="text/javascript" src="part.js"></script>
 <script type="text/javascript" src="cube.js"></script>
+<script type="text/javascript" src="control.js"></script>
+<script type="text/javascript" src="solve.js"></script>
 <script type="text/javascript" src="script.js"></script>
 <!-- Imported -->
 <script type="text/javascript" src="utils.js"></script>
@@ -25,7 +28,28 @@
 
 <body>
 
-	<div id="header">Rubik's Cube Engine</div>
+	<div id="header">
+		Rubik's Cube Engine 
+		<address>
+			By Vinesh Kannan<br>
+			vkannan3@hawk.itt.edu<br>
+			IIT Exelon Summer Institute 2015<br>
+		</address>
+		<div id="unfoldedView">
+			<div class="faceSquare"></div>
+			<div class="faceSquare" id="faceSquare-back">Back</div>
+			<div class="faceSquare"></div>
+			<div class="faceSquare" id="faceSquare-left" style="transform: rotate(90deg);">Left</div>
+			<div class="faceSquare" id="faceSquare-up">Up</div>
+			<div class="faceSquare" id="faceSquare-right" style="transform: rotate(-90deg);">Right</div>
+			<div class="faceSquare"></div>
+			<div class="faceSquare" id="faceSquare-front">Front</div>
+			<div class="faceSquare"></div>
+			<div class="faceSquare"></div>
+			<div class="faceSquare" id="faceSquare-down">Down</div>
+			<div class="faceSquare"></div>
+		</div>
+	</div>
 
 	<section class="visualizer">
 		<div id="cubeSpace" class="show-corner1">
@@ -52,6 +76,17 @@
 	    </p>
 
 	  </section>
+
+	  <div class="container">
+	  		<input class="console" type="text" id="inBox">
+	  		<button onclick="inStream();">&#8634;<div class="viewLabel"><div class="down-arrow"></div>Run Rotations</div></button>
+	  		<button onclick="scramble(50);" style="margin-left: 90px;">&#10070;<div class="viewLabel"><div class="down-arrow"></div>Scramble Cube</div></button>
+	  		<button onclick="solve();" style="margin-left: 160px;">&#10004;<div class="viewLabel"><div class="down-arrow"></div>Solve Cube</div></button>
+	  		<textarea class="console" id="outBox"></textarea>
+	  </div>
+
+
+
 
 	<script>
 
