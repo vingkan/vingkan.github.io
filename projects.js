@@ -23,20 +23,20 @@ Project.prototype.getColor = function(){
 	return response;
 }
 
-Project.prototype.toHTML = function(){
+Project.prototype.toHTML = function(idNumber){
 	var backgroundTile = "background: url('style/" + this.color + ".png');"
 	var status = 'Past';
 		if(this.current){
 			status = 'Current';
 		}
 	var html = ""
-		html += '<div class="pane" style="' + backgroundTile + '">'
+		html += '<div class="projectPane" onclick="toggle(' + idNumber + ');" style="' + backgroundTile + '">'
 			html += '<div class="container">'
 				html += '<div class="projectMarker" style="background: ' + this.getColor() + ';">' + status + '</div>'
 				html += '<h2>' + this.name + '</h2>'
-				html += '<h3>' + this.date + ', ' + this.organization + '</h3>'
+				html += '<h3 id="date' + idNumber + '">' + this.date + ', ' + this.organization + '</h3>'
 				html += '<p>' + this.description + '</p>'
-				html += '<ul>'
+				html += '<ul id="ul' + idNumber + '">'
 				for(var n = 0; n < this.notes.length; n++){
 					html += '<li>' + this.notes[n] + '</li>'
 				}

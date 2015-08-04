@@ -50,6 +50,7 @@ h1, h2, h3, p, li{
 	margin: 0;
 	font-weight: normal;
 	color: white;
+	display: block;
 }
 
 h1{
@@ -85,19 +86,28 @@ p, li, div.projectMarker{
 ul{
 	margin: 0 10px;]
 	list-style-type: square;
+	display: block;
 }
 
 li{
 	padding: 10px;
 }
 
-div.pane{
+div.pane, div.projectPane{
 	background: transparent;
 	margin: 0 auto;
 	padding: 0;
 	width: 980px;
 	z-index: 5;
 }
+
+	div.projectPane{
+		transition: opacity 0.5s;
+	}
+
+	div.projectPane:hover{
+		opacity: 0.75;
+	}
 
 div.container{
 	width: 940px;
