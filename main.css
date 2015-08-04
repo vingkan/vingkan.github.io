@@ -1,3 +1,6 @@
+font-family: 'Open Sans', sans-serif;
+font-family: 'Oswald', sans-serif;
+
 html,body{
 	margin: 0;
 	padding: 0;
@@ -6,43 +9,116 @@ html,body{
 
 html{
 	background: url('style/space-cvi.jpg');
+	background-size: 100vw;
+	background-attachment: fixed;
+}
+
+	::-webkit-scrollbar{
+		width: 10px;
+		height: 10px;
+		background: rgba(0,0,0,1.0);
+	}
+
+	::-webkit-scrollbar-button{
+		background: transparent;
+	}
+
+	::-webkit-scrollbar-track{
+		background: transparent;
+	}
+
+	::-webkit-scrollbar-track-piecse{
+		background: transparent;
+	}
+
+	::-webkit-scrollbar-thumb{
+		background: rgba(24,24,24,1.0);
+	}
+
+	::-webkit-scrollbar-corner{
+		width: 10px;
+		height: 10px;
+		background: transparent;
+	}
+
+	::-webkit-resizer{
+		background: transparent;
+	}
+
+h1, h2, h3, p, li{
+	padding: 10px 0;
+	margin: 0;
+	font-weight: normal;
+	color: white;
+}
+
+h1{
+	font-family: "Oswald";
+	text-transform: uppercase;
+	text-align: center;
+	font-size: 36px;
+	line-height: 40px;
+	font-weight: bold;
+}
+
+h2{
+	font-family: "Oswald";
+	font-size: 28px;
+	line-height: 30px;
+	font-weight: bold;
+}
+
+h3{
+	font-family: "Open Sans";
+	font-size: 15px;
+	line-height: 18px;
+	font-style: italic;
+
+}
+
+p, li, div.projectMarker{
+	font-family: "Open Sans";
+	font-size: 15px;
+	line-height: 18px;
+}
+
+ul{
+	margin: 0 10px;]
+	list-style-type: square;
+}
+
+li{
+	padding: 10px;
 }
 
 div.pane{
 	background: transparent;
 	margin: 0 auto;
-	width: 100vw;
+	padding: 0;
+	width: 970px;
 	z-index: 5;
 }
 
 div.container{
-	width: 960px;
+	width: 920px;
+	padding: 10px;
 	margin: 0 auto;
 	/*background: #90A038;*/
 	background: transparent;
 }
 
-h1, p{
-	padding: 20px 10px;
-	margin: 0;
+div.projectMarker{
 	color: white;
-}
-
-h1{
-	padding: 20px 10px 0;
-	font-family: "BankGothic Md BT Medium";
-	text-transform: uppercase;
-	font-size: 34px;
+	float: left;
+	margin: -10px 15px 0 -105px;
+	background: white;
+	width: 70px;
+	height: 35px;
 	line-height: 35px;
-	margin: 0;
-	color: white;
+	padding: 5px;
+	text-align: center;
+	font-weight: bold;
+	border-bottom-left-radius: 10px;
+	
+	/*transform: rotate(-90deg);*/
 }
-
-p{
-	font-family: "Colaborate-Regular";
-	font-size: 18px;
-	line-height: 20px;
-	margin: 0;
-	color: white;
-}
-
