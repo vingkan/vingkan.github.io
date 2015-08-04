@@ -1,15 +1,51 @@
 var colorSwatch = [];
 	colorSwatch.push(new Swatch('aqua', '#006955'));
 	colorSwatch.push(new Swatch('purple', '#1a082e'));
-	
+	colorSwatch.push(new Swatch('orange', '#cc6000'));
+	colorSwatch.push(new Swatch('lightBlue', '#007cd2'));
+	colorSwatch.push(new Swatch('lime', '#89de00'));
+
 var portfolioBody = document.getElementById('portfolio');
 
 var portfolio = [];
+	portfolio.push(new Project(
+			"The Hollister Simulation",
+			"Illinois Mathematics and Science Academy",
+			"December 2014 - March 2015",
+			"lightBlue",
+			false,
+			"Description.", [
+				"Note 1.",
+				"Note 2.",
+				"Note 3."
+	]));
+	portfolio.push(new Project(
+			"Student Computer Science Initiative",
+			"Illinois Mathematics and Science Academy",
+			"October 2014 - June 2015",
+			"lime",
+			false,
+			"Description.", [
+				"Note 1.",
+				"Note 2.",
+				"Note 3."
+	]));
 	portfolio.push(new Project(
 			"STEAM School of Innovation",
 			"Illinois Mathematics and Science Academy",
 			"December 2014 - June 2015",
 			"aqua",
+			false,
+			"Description.", [
+				"Note 1.",
+				"Note 2.",
+				"Note 3."
+	]));
+	portfolio.push(new Project(
+			"TALENT Entrepreneurial Organization",
+			"Illinois Mathematics and Science Academy",
+			"September 2012 - June 2015",
+			"orange",
 			false,
 			"Description.", [
 				"Note 1.",
