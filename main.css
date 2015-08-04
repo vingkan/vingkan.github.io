@@ -95,12 +95,12 @@ div.pane{
 	background: transparent;
 	margin: 0 auto;
 	padding: 0;
-	width: 970px;
+	width: 980px;
 	z-index: 5;
 }
 
 div.container{
-	width: 920px;
+	width: 940px;
 	padding: 10px;
 	margin: 0 auto;
 	/*background: #90A038;*/
@@ -110,7 +110,7 @@ div.container{
 div.projectMarker{
 	color: white;
 	float: left;
-	margin: -10px 15px 0 -105px;
+	margin: -10px 10px 0 -100px;
 	background: white;
 	width: 70px;
 	height: 35px;
@@ -119,6 +119,5 @@ div.projectMarker{
 	text-align: center;
 	font-weight: bold;
 	border-bottom-left-radius: 10px;
-	
 	/*transform: rotate(-90deg);*/
 }
