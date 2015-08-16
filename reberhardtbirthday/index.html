@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 
+<!-- Masterpiece by Vinesh Kannan on 16 August 2015 -->
+
 <html>
 
 <head>
@@ -20,10 +22,12 @@
 		div{
 			width: 100vw;
 			height: 100vh;
-			background: rgba(0, 0, 0, 0.25);
 			position: fixed;
 			top: 0;
 			left: 0;
+		}
+
+		div#birthday{
 			line-height: 20vh;
 			text-align: center;
 			color: white;
@@ -31,9 +35,22 @@
 			font-size: 5vw;
 		}
 
-		img{
+		div#birthday p{
+			padding: 0;
+			margin: auto;
+			width: 80vw;;
+			border: 10px white solid;
+		}
+
+		img#hoolaSloth{
 			height: 50vh;
 			margin-top: 10vh;
+		}
+
+		img.sparkle{
+			position: absolute;
+			width: 10vw;
+			transition: width 3s;
 		}
 
 	</style>
@@ -41,12 +58,32 @@
 
 <body>
 
-	<iframe src="https://www.youtube.com/embed/DLzxrzFCyOs?autoplay=1" frameborder="0" allowfullscreen></iframe>
-	<div>
-		<img src="hoolaSloth.png" /><br>
-		Happy Birthday, big sloth. Love ya!
-		
+	<iframe src="https://www.youtube.com/embed/DLzxrzFCyOs?autoplay=1&loop=1" frameborder="0" allowfullscreen></iframe>
+	<div id="rickAstley"></div>
+	<div id="birthday">
+		<img id="hoolaSloth" src="hoolaSloth.png" /><br>
+		<p>Happy Birthday, big sloth. Love ya!</p>
 	</div>
+
+	<script>
+
+		var rickAstley = document.getElementById('rickAstley');
+
+		function sparkle(top, left){
+			return '<img class="sparkle" style="top: ' + top + 'px; left: ' + left + 'px;" src="sparkle.png" />';
+		}
+
+		function giveYouUp(arg){
+			var top = Math.floor((Math.random() * screen.height ));
+			var left = Math.floor((Math.random() * screen.width ));
+			setTimeout(function(){ rickAstley.innerHTML += sparkle(top, left); }, 2000);
+		}
+
+		for(var i = 0; i < 250; i++){
+			giveYouUp(false);
+		}
+
+	</script>
 
 </body>
 
