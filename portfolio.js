@@ -31,7 +31,7 @@ var portfolio = [];
 				"Note 3."
 	]));
 	portfolio.push(new Project(
-			"STEAM School of Innovation",
+			"School of STEAM Innovation",
 			"Illinois Mathematics and Science Academy",
 			"December 2014 - June 2015",
 			"aqua",
