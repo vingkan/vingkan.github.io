@@ -1,0 +1,50 @@
+<!-- VINESH KANNAN | 18 JUNE 2014 | FLOW WIDGET -->
+
+<html>
+
+<head>
+	<title>Flow Widget</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script>
+
+	//SCRIPT/////////////////////////////////////////////////
+
+	//ENDSCRIPT//////////////////////////////////////////////
+
+	</script>
+</head>
+
+<body>
+
+	<div id='header'>Go with the Flow!</div>
+
+	<div id='paper'></div>
+
+	<script>
+
+	//SCRIPT/////////////////////////////////////////////////
+
+	var setnumber = 0;
+	var paper = "";
+	var newbutton = "<div class='newset' id='newset" + setnumber + "' onclick='newset()'>Add New Set</div>";
+	var argdiv = "<div class='arg' id='arg" + setnumber;
+	var setdiv = "<div class='set' id='set" + setnumber + "'>" + newbutton + "</div>";
+	
+	
+	var paper = paper + setdiv;
+
+	document.getElementById('paper').innerHTML = paper;
+
+	function newset(){
+		var setnumber = parseInt(setnumber) + 1;
+		var paper = paper + setdiv;
+		document.getElementById('paper').innerHTML = paper;
+	}
+
+	//ENDSCRIPT//////////////////////////////////////////////
+
+	</script>
+
+</body>
+
+</html>

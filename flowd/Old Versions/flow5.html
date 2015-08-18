@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!-- VINESH KANNAN 18 JUNE 2014 FLOW WIDGET-->
+
+<html>
+
+<head>
+	<title>Flow Widget</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+	<div id='header'>
+		Go with the Flow!
+		<input id="argcounter" type="text" value="0"/>
+	</div>
+
+	<div id='paper'></div>
+
+	<script type="text/javascript">
+
+	//SCRIPT/////////////////////////////////////////////////
+	
+	function extend(argtag){
+		var counter = document.getElementById('argcounter').value;
+		var space = "<textarea class='note'>" + counter + "</textarea>";
+		var argbox = document.getElementById(argtag).innerHTML;
+		document.getElementById(argtag).innerHTML = argbox + space;
+	};
+
+	function newarg(){
+		var number = document.getElementById('argcounter').value;
+		var argnumber = parseInt(number,10) + 1;
+		document.getElementById('argcounter').value = argnumber;
+		var papercontent = document.getElementById('paper').innerHTML;
+		var note = "<textarea class='note'>" + argnumber + "</textarea>";
+		var content = note;
+		var flow = "<div class='flow' onclick='extend(arg" + argnumber + "')'>flow</div>";
+		var arg = "<div class='arg' id='arg" + argnumber + "'>" + flow + content + "</div>";
+		document.getElementById('paper').innerHTML = papercontent + arg;
+	};
+
+	//ENDSCRIPT//////////////////////////////////////////////
+
+	</script>
+
+	<div class="newarg" onclick="newarg()">New Argument</div>
+
+</body>
+
+</html>
