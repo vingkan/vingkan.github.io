@@ -79,10 +79,12 @@ h3{
 
 img.linkIcon{
 	height: 28px;
+	margin-left: 10px;
+	transition: margin-left 0.5s;
 }
 	
 	img.linkIcon:hover{
-		opacity: 0.5;
+		margin-left: 15px;
 	}
 
 p, li, div.projectMarker{

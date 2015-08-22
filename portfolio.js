@@ -8,7 +8,7 @@ var colorSwatch = [];
 
 function createTrial(link){
 	var linkIcon = "<img class='linkIcon' src='style/linkIcon.png'>"
-	var html = " <a target='_blank' href='" + link + "'>" + linkIcon + "</a>";
+	var html = "<a target='_blank' href='" + link + "'>" + linkIcon + "</a>";
 	return html;
 }
 
@@ -86,7 +86,7 @@ var education = [];
 				"Note 3."
 	]));
 	education.push(new Project(
-			"Northern Illinois Leadership Conference",
+			"Northern Illinois Leadership Conference" + createTrial('http://nilc.weebly.com/'),
 			"Boy Scouts of America, OMNI Youth Services",
 			"May - August 2013",
 			"purple",
