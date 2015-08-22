@@ -48,8 +48,8 @@ var background = [];
 			"July 2015 - May 2019",
 			"red",
 			false,
-			"Led a five-person team to design a six-hour, immersive simulation for 70+ students to improve collaboration skills.", [
-				"Note 1.",
+			"Studying undergraduate computer science.", [
+				"Member of selective Camras Scholars program, which accepts less than 1% of IIT students, designing innovative STEM education initiatives for clients in the Chicagoland area.",
 				"Note 2.",
 				"Note 3."
 	]));
@@ -59,7 +59,7 @@ var background = [];
 			"August 2012 - June 2015",
 			"darkBlue",
 			false,
-			"Led a five-person team to design a six-hour, immersive simulation for 70+ students to improve collaboration skills.", [
+			"Three-year, rigorous, residential STEM education.", [
 				"Note 1.",
 				"Note 2.",
 				"Note 3."
