@@ -7,7 +7,8 @@ var colorSwatch = [];
 	colorSwatch.push(new Swatch('red', '#de0200'));
 
 function createTrial(link){
-	var html = " <a target='_blank' href='" + link + "'>+</a>";
+	var linkIcon = "<img class='linkIcon' src='style/linkIcon.png'>"
+	var html = " <a target='_blank' href='" + link + "'>" + linkIcon + "</a>";
 	return html;
 }
 
