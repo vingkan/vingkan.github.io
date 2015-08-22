@@ -14,7 +14,7 @@ var portfolio = [];
 			"December 2014 - March 2015",
 			"lightBlue",
 			false,
-			"Description.", [
+			"Led a five-person team to design a six-hour, immersive simulation for 70+ students to improve collaboration skills.", [
 				"Note 1.",
 				"Note 2.",
 				"Note 3."
@@ -25,7 +25,7 @@ var portfolio = [];
 			"October 2014 - June 2015",
 			"lime",
 			false,
-			"Description.", [
+			"Launched student-led initiative to make computer science courses more engaging, interdisciplinary, and collaborative.", [
 				"Note 1.",
 				"Note 2.",
 				"Note 3."
@@ -36,7 +36,7 @@ var portfolio = [];
 			"December 2014 - June 2015",
 			"aqua",
 			false,
-			"Description.", [
+			"Created curriculum for two-semester program to train 40+ students in interdisciplinary thinking and collaboration.", [
 				"Note 1.",
 				"Note 2.",
 				"Note 3."
