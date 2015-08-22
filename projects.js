@@ -1,3 +1,8 @@
+function Portfolio(name, projects){
+	this.name = name;
+	this.projects = projects;
+}
+
 function Swatch(name, hex){
 	this.name = name;
 	this.hex = hex;
@@ -29,14 +34,16 @@ Project.prototype.toHTML = function(idNumber){
 		if(this.current){
 			status = 'Current';
 		}
+	var dateTag = 'date' + idNumber;
+	var noteTag = 'ul' + idNumber;
 	var html = ""
 		html += '<div class="projectPane" onclick="toggle(' + idNumber + ');" style="' + backgroundTile + '">'
 			html += '<div class="container">'
 				html += '<div class="projectMarker" style="background: ' + this.getColor() + ';">' + status + '</div>'
 				html += '<h2>' + this.name + '</h2>'
-				html += '<h3 id="date' + idNumber + '">' + this.date + ', ' + this.organization + '</h3>'
+				html += '<h3 id="' + dateTag + '">' + this.date + ', ' + this.organization + '</h3>'
 				html += '<p>' + this.description + '</p>'
-				html += '<ul id="ul' + idNumber + '">'
+				html += '<ul id="' + noteTag + '">'
 				for(var n = 0; n < this.notes.length; n++){
 					html += '<li>' + this.notes[n] + '</li>'
 				}
