@@ -5,6 +5,7 @@ var colorSwatch = [];
 	colorSwatch.push(new Swatch('lightBlue', '#007cd2'));
 	colorSwatch.push(new Swatch('lime', '#89de00'));
 	colorSwatch.push(new Swatch('red', '#de0200'));
+	colorSwatch.push(new Swatch('darkBlue', '#001392'));
 
 function createTrial(link){
 	var linkIcon = "<img class='linkIcon' src='style/linkIcon.png'>"
@@ -39,6 +40,30 @@ function toggle(idNumber){
 		noteList.style.display = 'block';
 	}
 }
+
+var background = [];
+	background.push(new Project(
+			"Illinois Institute of Technology",
+			"Bachelor's of Science, Computer Science",
+			"July 2015 - May 2019",
+			"red",
+			false,
+			"Led a five-person team to design a six-hour, immersive simulation for 70+ students to improve collaboration skills.", [
+				"Note 1.",
+				"Note 2.",
+				"Note 3."
+	]));
+	background.push(new Project(
+			"Illinois Mathematics and Science Academy",
+			"Class of 2015",
+			"August 2012 - June 2015",
+			"darkBlue",
+			false,
+			"Led a five-person team to design a six-hour, immersive simulation for 70+ students to improve collaboration skills.", [
+				"Note 1.",
+				"Note 2.",
+				"Note 3."
+	]));
 
 var education = [];
 	education.push(new Project(
@@ -110,10 +135,12 @@ var programming = [];
 				"Note 3."
 	]));
 
+var backgroundPortfolio = new Portfolio('background', background);
 var educationPortfolio = new Portfolio('education', education);
 var programmingPortfolio = new Portfolio('programming', programming);
 
 printAll([
+	backgroundPortfolio,
 	educationPortfolio,
 	programmingPortfolio
 ]);
