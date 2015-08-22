@@ -64,7 +64,7 @@ var education = [];
 				"Note 3."
 	]));
 	education.push(new Project(
-			"School of STEAM Innovation",
+			"School of STEAM Innovation" + createTrial('files/steaminnovation.pdf'),
 			"Illinois Mathematics and Science Academy",
 			"December 2014 - June 2015",
 			"aqua",
