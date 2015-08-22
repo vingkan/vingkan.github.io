@@ -1,6 +1,15 @@
-function rotate(face, clockwise){
+function rotate(face, clockwise, random){
+	var directions = random || true;
 	cube.rotate(face, clockwise);
 	cube.draw();
+	if(directions){
+		if(clockwise){
+			outStream("Rotate " + face + " face clockwise.");
+		}
+		else{
+			outStream("Rotate " + face + " face counter-clockwise.");
+		}
+	}
 }
 
 function outStream(log){
@@ -45,12 +54,6 @@ function runCommands(commands){
 		}
 		if(face != null){
 			rotate(face, clockwise);
-			if(clockwise){
-				outStream("Rotate " + face + " face clockwise.");
-			}
-			else{
-				outStream("Rotate " + face + " face counter-clockwise.");
-			}
 		}
 		key = '';
 		face = '';
@@ -78,11 +81,28 @@ function randomRotation(){
 	if(random > 2){
 		clockwise = true;
 	}
-	rotate(face, clockwise);
+	rotate(face, clockwise, false);
 }
 
 function scramble(rotations){
 	for(var i = 0; i < rotations; i++){
 		randomRotation();
 	}
+}
+
+function toggleUnfoldedView(){
+	var unfoldedContents = document.getElementById('unfoldedContents');
+	var unfoldedView = document.getElementById('unfoldedView');
+	var toggleUnfolded = document.getElementById('toggleUnfolded');
+	if(unfoldedContents.style.display == 'none'){
+		unfoldedContents.style.display = 'block';
+		unfoldedView.style.height = '255px';
+		toggleUnfolded.style.marginTop = '10px';
+	}
+	else{
+		unfoldedContents.style.display = 'none';
+		unfoldedView.style.height = '0';
+		toggleUnfolded.style.marginTop = '0';
+	}
+		
 }

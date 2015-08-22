@@ -25,6 +25,14 @@ Part.prototype.toString = function(){
 	return "up: " + this.getLabel('up').toChar() + ", down: " + this.getLabel('down').toChar() + ", front: " + this.getLabel('front').toChar() + ", back: " + this.getLabel('back').toChar() + ", left: " + this.getLabel('left').toChar() + ", right: " + this.getLabel('right').toChar();
 }
 
+Part.prototype.isType = function(type){
+	var response = false;
+	if(this.type == type){
+		response = true;
+	}
+	return response;
+}
+
 /*
 * Get label of part on a given face. Use this method instead of calling variable directly (e.g., this.up)
 * var face (string): face to return label from
@@ -55,6 +63,25 @@ Part.prototype.getLabel = function(face){
 			break;
 	}
 	return label;
+}
+
+Part.prototype.getAllLabels = function(nonBlank){
+	var all = nonBlank || true;
+	var labels = [];
+		labels.push(this.up);
+		labels.push(this.down);
+		labels.push(this.front);
+		labels.push(this.back);
+		labels.push(this.left);
+		labels.push(this.right);
+	if(!all){
+		for(var l = 0; l < labels.length; l++){
+			if(labels[l].color == 'blank'){
+				labels.slice(l, 1);
+			}
+		}
+	}
+	return labels;
 }
 
 /*
@@ -106,6 +133,60 @@ Part.prototype.updateType = function(){
 			this.type = 'over-painted';
 			break;
 	}
+}
+
+/*
+* Checks all faces of a part to see if any labels are of a given color
+* var color (color): the color to check for
+*/
+Part.prototype.hasColor = function(color){
+	var included = false;
+	if(this.up.color == color){
+		included = true;
+	}
+	if(this.down.color == color){
+		included = true;
+	}
+	if(this.front.color == color){
+		included = true;
+	}
+	if(this.back.color == color){
+		included = true;
+	}
+	if(this.left.color == color){
+		included = true;
+	}
+	if(this.right.color == color){
+		included = true;
+	}
+	return included;
+}
+
+/*
+* Checks all faces of a part and returns the one with a label of the given color
+* var color (color): the color to check for
+*/
+Part.prototype.getFaceByColor = function(color){
+	var face = null;
+	if(this.up.color == color){
+		face = 'up';
+	}
+	if(this.down.color == color){
+		face = 'down';
+	}
+	if(this.front.color == color){
+		face = 'front';
+	}
+	if(this.back.color == color){
+		face = 'back';
+	}
+	if(this.left.color == color){
+		face = 'left';
+	}
+	if(this.right.color == color){
+		face = 'right';
+	}
+	return face;
 }
 
 /*
@@ -230,4 +311,37 @@ Part.prototype.checkColor = function(array, color){
 		}
 	}
 	return coloredLabels;
+}
+
+/*
+* Checks the labels on the given faces and determines if the number of faces specified are non-blank (labeled)
+* var faces (string[]): the faces to check
+* var matches (int): the number of faces that must be non-blank to be considered labeled
+*/
+Part.prototype.hasLabels = function(faces, matches){
+	var labeled = false;
+	var labels = 0;
+	for(var f = 0; f < faces.length; f++){
+		if(this.getLabel(faces[f]).color != 'blank'){
+			labels++;
+		}
+	}
+	if(labels >= matches){
+		labeled = true;
+	}
+	return labeled;
+}
+
+Part.prototype.getEdgeFace = function(targetFace){
+	var edgeFace = '';
+	var faces = ['up', 'down', 'front', 'back', 'left', 'right'];
+	for(var f = 0; f < faces.length; f++){
+		if(this.getLabel(faces[f]).color != 'blank'){
+			edgeFace = faces[f];
+		}
+	}
+	if(!(this.isType('edge'))){
+		edgeFace = 'WRONG PART TYPE ERROR';
+	}
+	return edgeFace;
 }

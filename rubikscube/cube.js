@@ -18,15 +18,36 @@ Cube.prototype.addPart = function(part){
 * Returns array of all parts with a non-blank label on the given face
 * var face (string): the face to select
 */
-Cube.prototype.getFace = function(face){
+Cube.prototype.getFace = function(face, getType){
+	var type = getType || 'any';
 	var partsArray = [];
 	for(var i = 0; i < this.parts.length; i++){
 		if(this.parts[i].getLabel(face).color != 'blank'){
-			partsArray.push(this.parts[i]);
+			if(type == 'any'){
+				partsArray.push(this.parts[i]);
+			}
+			else if(this.parts[i].isType(type)){
+				partsArray.push(this.parts[i]);
+			}
 			//console.log(this.parts[i].toString());
 		}
 	}
 	return partsArray;
+}
+
+Cube.prototype.getFaceColor = function(face){
+	return this.findCenter(face).getLabel(face).color;
+}
+
+Cube.prototype.getColorFace = function(color){
+	var response = '';
+	var faces = ['up', 'down', 'front', 'back', 'left', 'right'];
+	for(var f = 0; f < faces.length; f++){
+		if(this.getFaceColor(faces[f]) == color){
+			response = faces[f];
+		}
+	}
+	return response;
 }
 
 Cube.prototype.checkSolved = function(){
@@ -107,6 +128,47 @@ Cube.prototype.getBorders = function(face){
 	return borders;
 }
 
+Cube.prototype.getBorderColors = function(face){
+	var borders = this.getBorders(face);
+	var borderColors = [];
+	for(var b = 0; b < borders.length; b++){
+		borderColors.push(this.getFaceColor(borders[b]));
+	}
+	return borderColors;
+}
+
+/*
+* Returns the face on the cube opposite the given face
+* var face (string): the face to select
+*/
+Cube.prototype.getOppositeFace = function(face){
+	var opposite = null;
+	switch(face){
+		case 'up':
+			opposite = 'down';
+			break;
+		case 'down':
+			opposite = 'up';
+			break;
+		case 'front':
+			opposite = 'back';
+			break;
+		case 'back':
+			opposite = 'front';
+			break;
+		case 'left':
+			opposite = 'right';
+			break;
+		case 'right':
+			opposite = 'front';
+			break;
+		default:
+			console.log(face + ' is an Invalid Face.');
+			break;
+	}
+	return opposite;
+}
+
 /*
 * Finds a specific center part that is not blank on the given face
 * var face (string): the face to select
@@ -157,6 +219,43 @@ Cube.prototype.findCorner = function(face1, face2, face3){
 	//CATCH ERROR
 	if(target == null){
 		console.log("Could not find Corner part with " + face1 + ", " + face2 + ", and " + face3 + ".");
+	}
+	return target;
+}
+
+/*
+* Returns all parts of a given type as an array
+* var type (string): the type of part to return ('center', 'edge', 'corner')
+*/
+Cube.prototype.findByType = function(type){
+	var typeParts = [];
+	for(var i = 0; i < this.parts.length; i++){
+		if(this.parts[i].type == type){
+			typeParts.push(this.parts[i]);
+		}
+	}
+	return typeParts;
+}
+
+/*
+* Finds a part of a given type with faces of the given colors
+* var type (string): the type of part to return ('center', 'edge', 'corner')
+* var colors (color[]): the colors to check for, all must be matched
+*/
+Cube.prototype.findByColors = function(type, colors){
+	var target = null;
+	var typeParts = this.findByType(type);
+	var colorsIncluded = 0;
+	for(var t = 0; t < typeParts.length; t++){
+		colorsIncluded = 0;
+		for(var c = 0; c < colors.length; c++){
+			if(typeParts[t].hasColor(colors[c])){
+				colorsIncluded++;
+			}
+		}
+		if(colorsIncluded == colors.length){
+			target = typeParts[t];
+		}
 	}
 	return target;
 }

@@ -54,6 +54,7 @@ div#header{
 	text-align: center;
 	font-family: "Oswald";
 	font-size: 25px;
+	z-index: 10;
 }
 
 	div#header address{
@@ -180,6 +181,7 @@ div.container textarea{
 	textarea#outBox{
 		line-height: 15px;
 		font-size: 10px;
+		margin-bottom: 50px;
 	}
 
 div.container button{
@@ -214,7 +216,24 @@ div.container button{
 
 div#unfoldedView{
 	width: 135px;
-	margin: 90px 0 0 10px;
+	height: 0;
+	padding: 0 10px 0 10px;
+	margin: 15px 0 0 0;
+	background: rgba(0, 0, 0, 0.25);
+	z-index: 5;
+}
+
+div#unfoldedContents{
+	padding: 10px 0;
+	display: none;
+}
+
+div#unfoldedContents p{
+	line-height: 30px;
+	font-size: 15px;
+	font-family: "Open Sans";
+	text-align: center;
+	margin: 15px 0 0 0;
 }
 
 div.faceSquare{
@@ -229,4 +248,34 @@ div.faceSquare div.label{
 	height: 10px;
 	line-height: 10px;
 	font-size: 7.5px;
+}
+
+div#setColor{
+	width: 135px;
+	height: 25px;
+}
+
+div#setColor div.label{
+	width: 17.5px;
+	height: 17.5px;
+	line-height: 17.5px;
+	font-size: 12px;
+}
+
+div#setColor div.label:hover, div.faceSquare div.label:hover{
+	opacity: 0.5;
+}
+
+div#toggleUnfolded{
+	float: left;
+	margin: 0 0 0 -10px;
+	background: rgba(0, 0, 0, 0.5);
+	padding: 10px;
+	width: 135px;
+	height: 15px;
+	line-height: 15px;
+	font-size: 15px;
+	text-align: center;
+	/*border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;*/
 }
