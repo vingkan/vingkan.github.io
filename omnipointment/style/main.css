@@ -1,7 +1,7 @@
 font-family: 'Raleway', sans-serif;
 
 /* COLORS */
-/* Dark Purple: 2d0a58 */
+/* Dark Purple: #2d0a58 */
 
 html, body{
 	margin: 0;
@@ -44,3 +44,148 @@ html{
 	::-webkit-resizer{
 		background: transparent;
 	}
+
+/* TEXT */
+
+h1, h2, h3{
+	font-family: "Raleway";
+}
+
+h1{
+
+}
+
+@media screen and (max-width: 960px){
+
+}
+
+/* HEADER */
+
+header{
+	float: left;
+	background: url('purpleDiagmonds.png');
+	width: 100%;
+	padding: 0;
+	margin: auto;
+}
+
+header img{
+	width: 40%;
+	margin: 10px 30%;
+}
+
+/* FOOTER */
+
+footer{
+	position: fixed;
+	bottom: 0;
+	float: left;
+	background: url('purpleDiagmonds.png');
+	width: 100%;
+	height: 30px;
+	padding: 10px 0;
+	color: white;
+	text-align: center;
+	line-height: 30px;
+	font-size: 15px;
+}
+
+/* BODY */
+
+div.pane{
+	margin: 0;
+	padding: 20px 0 ;
+	width: 100vw;
+	color: white;
+	text-align: center;
+}
+
+p.overText, ul{
+	color: #2d0a58;
+	font-size: 20px;
+	line-height: 40px;
+	font-weight: 600;
+}
+
+/* TOOLBARS */
+
+div.userToolbar, div.appointmentToolbar{
+	float: left;
+	background: white;
+	margin: 3%;
+	margin-bottom: 70px;
+	padding: 0;
+	height: 100vh;
+}
+
+div.userToolbar{
+	width: 20%;
+	margin-right: 0;
+}
+
+div.appointmentToolbar{
+	width: 71%;
+}
+
+	@media screen and (max-width: 960px){
+		div.userToolbar{
+			width: 29%;
+		}
+	}
+
+	@media screen and (max-width: 960px){
+		div.appointmentToolbar{
+			width: 62%;
+		}
+	}
+
+.toolbarTitle{
+	width: 100%;
+	background: url('purpleDiagmonds.png');
+	color: white;
+	font-size: 30px;
+	text-align: center;
+	margin: 0;
+	padding: 10px 0;
+	font-weight: 700;
+	/* INPUTS */
+	border: none;
+	outline: none;
+	transition: margin-top 0.5s;
+}
+
+.toolbarTitle:hover{
+	margin-top: -5px;
+}
+
+	@media screen and (max-width: 960px){
+		.toolbarTitle{
+			font-size: 20px;
+		}
+	}
+
+div.userContainer{
+	width: 90%;
+	height: 50px;
+	background: transparent;
+	margin: 5%;
+	padding: 0;
+	line-height: 50px;
+	font-size: 20px;
+	font-weight: 600;
+	overflow: hidden;
+}
+
+img.avatar{
+	float: left;
+	width: 50px;
+	border-radius: 25px;
+	margin-right: 10px;
+}
+
+div.schedule{
+	width: 90%;
+	padding: 2.5%;
+	margin: 2.5%;
+	background: url('circles.jpg');
+}
