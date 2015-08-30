@@ -32,7 +32,8 @@ html{
 	}
 
 	::-webkit-scrollbar-thumb{
-		background: rgba(255, 255, 255, 0.5);
+		/*background: rgba(255, 255, 255, 0.5);*/
+		background: #2d0a58;
 	}
 
 	::-webkit-scrollbar-corner{
@@ -78,15 +79,16 @@ header img{
 
 footer{
 	position: fixed;
+	left: 0;
 	bottom: 0;
 	float: left;
 	background: url('purpleDiagmonds.png');
 	width: 100%;
-	height: 30px;
+	height: 20px;
 	padding: 10px 0;
 	color: white;
 	text-align: center;
-	line-height: 30px;
+	line-height: 20px;
 	font-size: 15px;
 }
 
@@ -115,7 +117,7 @@ div.userToolbar, div.appointmentToolbar{
 	margin: 3%;
 	margin-bottom: 70px;
 	padding: 0;
-	height: 100vh;
+	/*height: 100vh;*/
 }
 
 div.userToolbar{
@@ -184,8 +186,67 @@ img.avatar{
 }
 
 div.schedule{
-	width: 90%;
-	padding: 2.5%;
+	width: 95%;
+	padding: 0;
 	margin: 2.5%;
-	background: url('circles.jpg');
+	overflow-x: scroll;
 }
+
+	div.scheduleContainer{
+		width: 500px;
+	}
+
+div.day{
+	float: left;
+	background: transparent;
+	margin: 20px 0 10px 5px;
+}
+
+	div.appointmentToolbar h2:first-child{
+		background: transparent;
+		margin: -20px 0 0 0;
+		padding: 0;
+		height: 20px;
+		line-height: 20px;
+		font-size: 15px;
+		text-align: center;
+		font-weight: 700;
+	}
+
+	div.slot, div.slotLabel, div.hourLabel{
+		height: 20px;
+		margin: 5px 0;
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-mis-user-select: none;
+		user-select: none;
+	}
+
+	div.slot{
+		width: 100px;
+		background: #cccccc;
+		text-align: center;
+		line-height: 20px;
+		font-size: 10px;
+		font-family: "Consolas";
+	}
+
+		div.slot:hover{
+			background: #80ff00;
+		}
+
+	div.slotLabel, div.hourLabel{
+		line-height: 20px;
+		font-size: 15px;
+		text-align: right;
+		font-weight: 700;
+		margin-right: 5px;
+	}
+
+	div.hourLabel{
+		height: 95px;
+		line-height: 95px;
+		border-bottom: 1px solid black;
+	}
