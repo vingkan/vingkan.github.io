@@ -84,12 +84,12 @@ footer{
 	float: left;
 	background: url('purpleDiagmonds.png');
 	width: 100%;
-	height: 20px;
+	height: 10px;
 	padding: 10px 0;
 	color: white;
 	text-align: center;
-	line-height: 20px;
-	font-size: 15px;
+	line-height: 10px;
+	font-size: 10px;
 }
 
 /* BODY */
@@ -190,6 +190,12 @@ div.schedule{
 	padding: 0;
 	margin: 2.5%;
 	overflow-x: scroll;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-mis-user-select: none;
+	user-select: none;
 }
 
 	div.scheduleContainer{
@@ -214,21 +220,15 @@ div.day{
 	}
 
 	div.slot, div.slotLabel, div.hourLabel{
-		height: 20px;
+		height: 25px;
 		margin: 5px 0;
-		-webkit-touch-callout: none;
-		-webkit-user-select: none;
-		-khtml-user-select: none;
-		-moz-user-select: none;
-		-mis-user-select: none;
-		user-select: none;
 	}
 
 	div.slot{
 		width: 100px;
 		background: #cccccc;
 		text-align: center;
-		line-height: 20px;
+		line-height: 25px;
 		font-size: 10px;
 		font-family: "Consolas";
 	}
@@ -246,7 +246,7 @@ div.day{
 	}
 
 	div.hourLabel{
-		height: 95px;
-		line-height: 95px;
+		height: 115px;
+		line-height: 115px;
 		border-bottom: 1px solid black;
 	}
