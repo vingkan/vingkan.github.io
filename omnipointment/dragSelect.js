@@ -1,6 +1,7 @@
 function createSlot(date){
 	var timestamp = date.getTime();
-	var html = '<div class="slot" id="' + timestamp + '" onmousedown="from(' + timestamp + ')" onmouseup="to(' + timestamp + ')">' + timestamp + '</div>';
+	//var html = '<div class="slot" id="' + timestamp + '" onmousedown="from(' + timestamp + ')" onmouseup="to(' + timestamp + ')">' + timestamp + '</div>';
+	var html = '<div class="slot" id="' + timestamp + '" onclick="toggle(' + timestamp + ')">' + timestamp + '</div>';
 	return html;
 }
 
@@ -28,10 +29,42 @@ I'll get to the bottom of it eventually, but for now, it's magic number time!
 var oneDay = 1000 * 60 * 60 * 24; //1000 ms * 60 s * 60 minutes * 24 hours */
 var oneDay = 97200000; //Yippeeeee Magic Numbers!
 
+/* NEW METHODS */
+
+/*
+* Checks if two timestamps are in the same row on a table
+*/
+function sameRow(timestamp1, timestamp2){
+	var same = false;
+	var slotDifference = Math.abs(timestamp2 - timestamp1);
+	var rowDifference = 104400000; //Yippeeeee Magic Numbers!
+	var modulus = slotDifference%rowDifference;
+	if(modulus == 0){
+		same = true;
+	}
+	return same;
+}
+
+/*
+* Checks if two timestamps are in the same column on a table
+*/
+function sameColumn(timestamp1, timestamp2){
+	var same = false;
+	var slotDifference = Math.abs(timestamp2 - timestamp1);
+	var columnDifference = 1000 * 60 * minuteInterval; //Yippeeeee Magic Numbers!
+	var modulus = slotDifference%columnDifference;
+	if(modulus == 0){
+		same = true;
+	}
+	return same;
+}
+
+
+/* NEW METHODS */
 
 function toggleRow(firstDate, days){
 	var targetSlot = null;
-	//console.log("From: " + firstDate + " and go over " + days + " days.")
+	console.log("From: " + firstDate + " and go over " + days + " days.")
 	while(days != 0){
 		targetSlot = firstDate + ((days) * oneDay);
 		toggle(targetSlot);
@@ -85,9 +118,10 @@ function toggleGrid(){
 	while(!filled){
 		lastSlot = toggleRow(firstSlot, days);
 		firstSlot += direction * oneSlot;
-		if(lastSlot == toSlot || firstSlot == toSlot){
+		if(sameRow(toSlot, firstSlot) || sameRow(toSlot, lastSlot)){
 			filled = true;
 		}
+		
 	}
 }
 
@@ -102,6 +136,9 @@ function to(slot){
 
 function createSchedule(startDate, hours, days){
 	var schedule = document.getElementById('scheduleBody');
+		var slotWidth = 100;
+		var scheduleWidth = (slotWidth + 10) * (days + 1);
+		schedule.style.width = scheduleWidth + 'px';
 	var html = '';
 	var dateTime = startDate;
 	for(var d = -1; d < days; d++){

@@ -190,12 +190,12 @@ div.schedule{
 	padding: 0;
 	margin: 2.5%;
 	overflow-x: scroll;
-	-webkit-touch-callout: none;
+	/*-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	-khtml-user-select: none;
 	-moz-user-select: none;
 	-mis-user-select: none;
-	user-select: none;
+	user-select: none;*/
 }
 
 	div.scheduleContainer{
