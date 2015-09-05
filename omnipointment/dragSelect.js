@@ -31,6 +31,14 @@ var oneDay = 97200000; //Yippeeeee Magic Numbers!
 
 /* NEW METHODS */
 
+function getMinuteInterval(){
+	return minuteInterval;
+}
+
+function setMinuteInterval(interval){
+	minuteInterval = interval;
+}
+
 /*
 * Checks if two timestamps are in the same row on a table
 */
@@ -51,12 +59,55 @@ function sameRow(timestamp1, timestamp2){
 function sameColumn(timestamp1, timestamp2){
 	var same = false;
 	var slotDifference = Math.abs(timestamp2 - timestamp1);
-	var columnDifference = 1000 * 60 * minuteInterval; //Yippeeeee Magic Numbers!
+	var columnDifference = 1000 * 60 * getMinuteInterval(); //Yippeeeee Magic Numbers!
 	var modulus = slotDifference%columnDifference;
 	if(modulus == 0){
 		same = true;
 	}
 	return same;
+}
+
+/*
+* Returns the timestamp of the next slot in the row
+* Direction (-1 or 1) indicates whether to choose a timestamp before or after (respectively) the given timestamp
+*/
+function getNextInRow(timestamp, direction){
+	var rowDifference = direction * (104400000); //Yippeeeee Magic Numbers!
+	return (timestamp + rowDifference);
+}
+
+/*
+* Returns the timestamp of the next slot in the column
+* Direction (-1 or 1) indicates whether to choose a timestamp before or after (respectively) the given timestamp
+*/
+function getNextInColumn(timestamp, direction){
+	var columnDifference = direction * (1000 * 60 * getMinuteInterval()); //Yippeeeee Magic Numbers!
+	return (timestamp + columnDifference);
+}
+
+function toggleRectangle(startSlot, rows, columns){
+	var nRows = rows;
+	var nColumns = columns;
+	var rDirection = 1;
+	var cDirection = 1;
+	if(rows < 0){
+		nRows = Math.abs(rows);
+		rDirection = -1;
+	}
+	if(columns < 0){
+		nColumns = Math.abs(columns);
+		cDirection = -1;
+	}
+	var columnHeader = startSlot;
+	var columnSlot = startSlot;
+	for(var c = 0; c < nColumns; c++){
+		columnSlot = columnHeader;
+		for(var r = 0; r < nRows; r++){
+			toggle(columnSlot);
+			columnSlot = getNextInColumn(columnSlot, cDirection);	
+		}
+		columnHeader = getNextInRow(columnHeader, rDirection);
+	}
 }
 
 
