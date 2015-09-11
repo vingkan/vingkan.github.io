@@ -1,0 +1,224 @@
+/*--------------------------------------------*/
+/*---> COLORS <-------------------------------*/
+/*--------------------------------------------*/
+
+@ecoGreen: #00c853;
+@lightGreen: @ecoGreen + #222222;
+@darkGreen: @ecoGreen - #222222;
+@skyBlue: #8ccee3;
+
+/*--------------------------------------------*/
+/*---> FONTS <--------------------------------*/
+/*--------------------------------------------*/
+
+@bitter: 'Bitter', serif;
+@margarine: 'Margarine', cursive;
+
+.BitterFont(@textColor: white, @size: 1.25em){
+	font-family: @bitter;
+	color: @textColor;
+	font-size: @size;
+	line-height: @size * 1.5;
+}
+
+/*--------------------------------------------*/
+/*---> BACKGROUND <---------------------------*/
+/*--------------------------------------------*/
+
+@keyframes animatedBackground{
+	from{background: red;}
+	to{background: yellow;}
+}
+
+
+/*--------------------------------------------*/
+/*---> LAYOUT <-------------------------------*/
+/*--------------------------------------------*/
+
+@defaultPadding: 1.00em;
+@defaultMargin: 0px;
+@defaultWidth: 400px;
+
+.BoxModel(@size: @defaultPadding){
+	padding: @size;
+	margin: @size;
+}
+
+.FullWidth(){
+	margin: 0;
+	width: 100%;
+}
+
+html{
+	background: @ecoGreen;
+	//animation: animatedBackground 1s linear infinite;
+}
+
+div#sky{
+	background: @skyBlue;
+	.FullWidth();
+}
+
+div#buildings{
+
+	background: @ecoGreen;
+	.FullWidth();
+
+	img{
+		.FullWidth();
+	}
+
+}
+
+div#wood{
+	background: url('retinaWood.png');
+	.FullWidth();
+}
+
+div#footer{
+
+	opacity: 0.75;
+	background: @darkGreen;
+	.FullWidth();
+
+	p{
+		.BitterFont(white, 0.75em) !important;
+	}
+
+}
+
+div#thankYou{
+
+	background: url('retinaWood.png');
+	.FullWidth();
+
+	p{
+		.BitterFont(@darkGreen, 0.75em);
+	}
+}
+
+/*--------------------------------------------*/
+/*---> TEXT <---------------------------------*/
+/*--------------------------------------------*/
+
+p{
+	padding: @defaultPadding;
+	.BitterFont(white, 1.25em);
+	.Center();
+}
+
+/*--------------------------------------------*/
+/*---> IMAGES <-------------------------------*/
+/*--------------------------------------------*/
+
+.Center(){
+	margin: auto auto;
+	display: block;
+	text-align: center;
+}
+
+img#teaserLogo{
+	width: 50%;
+	padding: 2.5%;
+	.Center();
+}
+
+/*--------------------------------------------*/
+/*---> FORMS <--------------------------------*/
+/*--------------------------------------------*/
+
+.FormCleanse(){
+	outline: none;
+	border: none;
+	margin: 0;
+	padding: 0;
+}
+
+input, select, button{
+	.FormCleanse();
+}
+
+div#wood{
+
+	@inputHeight: 2em;
+
+	padding: 2em auto;
+	float: left;
+	.Center();
+
+	p{
+		.BitterFont(@darkGreen, 1.25em);
+	}
+
+	input, button{
+		background: transparent;
+		margin: 0 auto 2em;
+		border: 0.5em solid @darkGreen;
+		text-align: center;
+	}
+
+	input{
+		width: 30%;
+		padding: 0 1em;
+		margin-right: 0.5em;
+		.BitterFont(@darkGreen, 1.5em);
+	}
+
+	button{
+		width: @inputHeight + 1em;
+		.BitterFont(@darkGreen, 1.5em);
+		// Based on tutorial from: stackoverflow.com/questions/17212094/fill-background-color-left-to-right-css
+		background: linear-gradient(to right, transparent 50%, white 50%);
+		background-size: 200% 100%;
+		background-position: left bottom;
+	}
+
+	button:hover{
+		background-position: right bottom;
+		transition: all 0.5s ease;
+	}
+
+	button:active{
+		background: @lightGreen;
+	}
+
+}
+
+/*--------------------------------------------*/
+/*---> SCROLLBAR <----------------------------*/
+/*--------------------------------------------*/
+
+@scrollBar: @darkGreen;
+@scrollBarBack: @ecoGreen;
+
+::-webkit-scrollbar{
+	width: 10px;
+	height: 10px;
+	background: @scrollBarBack;
+}
+
+::-webkit-scrollbar-button{
+	background: @scrollBarBack;
+}
+
+::-webkit-scrollbar-track{
+	background: @scrollBarBack;
+}
+
+::-webkit-scrollbar-track-piece{
+	background: @scrollBarBack;
+}
+
+::-webkit-scrollbar-thumb{
+	background: @scrollBar;
+}
+
+::-webkit-scrollbar-corner{
+	width: 10px;
+	height: 10px;
+	background: @scrollBarBack;
+}
+
+::-webkit-resizer{
+	background: @scrollBarBack;
+}
