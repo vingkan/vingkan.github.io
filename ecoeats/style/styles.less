@@ -25,7 +25,7 @@
 /*---> BACKGROUND <---------------------------*/
 /*--------------------------------------------*/
 
-@keyframes animatedBackground{
+@keyframes animatedBackgroundRight{
 	from{
 		background-position: 0 0;
 	}
@@ -34,12 +34,29 @@
 	}
 }
 
-.AnimatedBanner(@height: 200px){
+@keyframes animatedBackgroundLeft{
+	from{
+		background-position: 0 0;
+	}
+	to{
+		background-position: -10000% 0;
+	}
+}
+
+.AnimatedBannerRight(@height: 200px){
 	height: @height;
 	background-size: auto @height;
 	background-position: 0 0;
 	background-repeat: repeat-x;
-	animation: animatedBackground 800s linear infinite;
+	animation: animatedBackgroundRight 800s linear infinite;
+}
+
+.AnimatedBannerLeft(@height: 200px){
+	height: @height;
+	background-size: auto @height;
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	animation: animatedBackgroundLeft 800s linear infinite;
 }
 
 /*--------------------------------------------*/
@@ -79,14 +96,16 @@ div#sky{
 		@height: 100px;
 		width: 100%;
 		height: @height;
-		.AnimatedBanner(@height);
+		.AnimatedBannerRight(@height);
+		overflow: hidden;
 	}
 
 	div#buildings{
 		@height: 100px;
 		width: 100%;
 		height: @height;
-		.AnimatedBanner(@height);
+		.AnimatedBannerLeft(@height);
+		overflow: hidden;
 	}
 
 }
