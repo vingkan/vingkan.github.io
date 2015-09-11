@@ -26,10 +26,21 @@
 /*--------------------------------------------*/
 
 @keyframes animatedBackground{
-	from{background: red;}
-	to{background: yellow;}
+	from{
+		background-position: 0 0;
+	}
+	to{
+		background-position: 10000% 0;
+	}
 }
 
+.AnimatedBanner(@height: 200px){
+	height: @height;
+	background-size: auto @height;
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	animation: animatedBackground 800s linear infinite;
+}
 
 /*--------------------------------------------*/
 /*---> LAYOUT <-------------------------------*/
@@ -51,22 +62,39 @@
 
 html{
 	background: @ecoGreen;
-	//animation: animatedBackground 1s linear infinite;
 }
 
 div#sky{
+
 	background: @skyBlue;
 	.FullWidth();
+
+	img#teaserLogo{
+		width: 60%;
+		padding: 2.5%;
+		.Center();
+	}
+
+	div#clouds{
+		@height: 100px;
+		width: 100%;
+		height: @height;
+		.AnimatedBanner(@height);
+	}
+
+	div#buildings{
+		@height: 100px;
+		width: 100%;
+		height: @height;
+		.AnimatedBanner(@height);
+	}
+
 }
 
-div#buildings{
+div#grass{
 
 	background: @ecoGreen;
 	.FullWidth();
-
-	img{
-		.FullWidth();
-	}
 
 }
 
@@ -117,12 +145,6 @@ p{
 	text-align: center;
 }
 
-img#teaserLogo{
-	width: 50%;
-	padding: 2.5%;
-	.Center();
-}
-
 /*--------------------------------------------*/
 /*---> FORMS <--------------------------------*/
 /*--------------------------------------------*/
@@ -158,7 +180,7 @@ div#wood{
 	}
 
 	input{
-		width: 30%;
+		width: 70%;
 		padding: 0 1em;
 		margin-right: 0.5em;
 		.BitterFont(@darkGreen, 1.5em);
