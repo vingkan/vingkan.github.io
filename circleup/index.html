@@ -26,16 +26,97 @@
 
 	<div id="demo">Error</div>
 
-	<div id="user-list"></div>
+	<div id="user-list" style="display: block;"></div>
 
-	<textarea id ="dataIn" style="width:400px;height:200px;"></textarea>
+	<textarea id ="dataIn" style="display:block;width:400px;height:200px;"></textarea>
+	<textarea id ="userKeys" style="display:block;width:400px;height:200px;"></textarea>
 
-	<input type="button" value="Init Map" onclick="initialize();">
+	<div id="header">
+		Circle Up
+	</div>
+
+	<div id="userForm">
+
+		<input type="text" id="userfirstname" placeholder="First Name">
+		<input type="text" id="userlastname" placeholder="Last Name">
+		<input type="button" id="submit1" value="Join Map" onclick="submitOne();">
+		<br>
+		<input style="display: none;" type="text" id="unique">
+		<input style="display: none;" type="button" id="submit2" value="Got It!" onclick="submitTwo();">
+		<br>
+		<input type="button" value="See Your Friends" onclick="initialize();">
+
+	</div>
 	
 	<div id="mapContainer">
 		<div id="googleMap" style="width:100%;height:400px;"></div>
 		<div class="coord" id="latCoord">25.0000000</div>
 		<div class="coord" id="lonCoord">-65.0000000</div>
+	</div>
+
+	<div id="form">
+
+		<form action="https://docs.google.com/a/hawk.iit.edu/forms/d/1EWx5UKcGOph5hXdHmmty4mY5ir-1Pj32j0AmBi0Ax9g/formResponse" method="POST" id="ss-form" target="_self" onsubmit=""><ol role="list" class="ss-question-list" style="padding-left: 0">
+		<div class="ss-form-question errorbox-good" role="listitem">
+		<div dir="auto" class="ss-item ss-item-required ss-text"><div class="ss-form-entry">
+		<label class="ss-q-item-label" for="entry_1503901081"><div class="ss-q-title">id
+		<label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
+		<span class="ss-required-asterisk" aria-hidden="true">*</span></div>
+		<div class="ss-q-help ss-secondary-text" dir="auto"></div></label>
+		<input type="text" name="entry.1503901081" value="" class="ss-q-short" id="entry_1503901081" dir="auto" aria-label="id  " aria-required="true" required="" title="">
+		<div class="error-message" id="2119856601_errorMessage"></div>
+		<div class="required-message">This is a required question</div>
+		</div></div></div> <div class="ss-form-question errorbox-good" role="listitem">
+		<div dir="auto" class="ss-item ss-item-required ss-text"><div class="ss-form-entry">
+		<label class="ss-q-item-label" for="entry_1191619877"><div class="ss-q-title">firstname
+		<label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
+		<span class="ss-required-asterisk" aria-hidden="true">*</span></div>
+		<div class="ss-q-help ss-secondary-text" dir="auto"></div></label>
+		<input type="text" name="entry.1191619877" value="" class="ss-q-short" id="entry_1191619877" dir="auto" aria-label="firstname  " aria-required="true" required="" title="">
+		<div class="error-message" id="799607948_errorMessage"></div>
+		<div class="required-message">This is a required question</div>
+		</div></div></div> <div class="ss-form-question errorbox-good" role="listitem">
+		<div dir="auto" class="ss-item ss-item-required ss-text"><div class="ss-form-entry">
+		<label class="ss-q-item-label" for="entry_2134594167"><div class="ss-q-title">lastname
+		<label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
+		<span class="ss-required-asterisk" aria-hidden="true">*</span></div>
+		<div class="ss-q-help ss-secondary-text" dir="auto"></div></label>
+		<input type="text" name="entry.2134594167" value="" class="ss-q-short" id="entry_2134594167" dir="auto" aria-label="lastname  " aria-required="true" required="" title="">
+		<div class="error-message" id="543474321_errorMessage"></div>
+		<div class="required-message">This is a required question</div>
+		</div></div></div> <div class="ss-form-question errorbox-good" role="listitem">
+		<div dir="auto" class="ss-item ss-item-required ss-text"><div class="ss-form-entry">
+		<label class="ss-q-item-label" for="entry_1145448555"><div class="ss-q-title">lat
+		<label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
+		<span class="ss-required-asterisk" aria-hidden="true">*</span></div>
+		<div class="ss-q-help ss-secondary-text" dir="auto"></div></label>
+		<input type="text" name="entry.1145448555" value="" class="ss-q-short" id="entry_1145448555" dir="auto" aria-label="lat  " aria-required="true" required="" title="">
+		<div class="error-message" id="180268262_errorMessage"></div>
+		<div class="required-message">This is a required question</div>
+		</div></div></div> <div class="ss-form-question errorbox-good" role="listitem">
+		<div dir="auto" class="ss-item ss-item-required ss-text"><div class="ss-form-entry">
+		<label class="ss-q-item-label" for="entry_1402007270"><div class="ss-q-title">lon
+		<label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
+		<span class="ss-required-asterisk" aria-hidden="true">*</span></div>
+		<div class="ss-q-help ss-secondary-text" dir="auto"></div></label>
+		<input type="text" name="entry.1402007270" value="" class="ss-q-short" id="entry_1402007270" dir="auto" aria-label="lon  " aria-required="true" required="" title="">
+		<div class="error-message" id="1021413714_errorMessage"></div>
+		<div class="required-message">This is a required question</div>
+		</div></div></div>
+		<input type="hidden" name="draftResponse" value="[,,&quot;-4117243450318877472&quot;]
+		">
+		<input type="hidden" name="pageHistory" value="0">
+
+		<input type="hidden" name="fvv" value="0">
+
+
+		<input type="hidden" name="fbzx" value="-4117243450318877472">
+
+		<div class="ss-item ss-navigate"><table id="navigation-table"><tbody><tr><td class="ss-form-entry goog-inline-block" id="navigation-buttons" dir="ltr">
+		<input type="submit" name="submit" value="Submit" id="ss-submit" class="jfk-button jfk-button-action ">
+		<div class="ss-password-warning ss-secondary-text">Never submit passwords through Google Forms.</div></td>
+		</tr></tbody></table></div></ol></form>
+
 	</div>
 
 	<script type="text/javascript">
@@ -55,6 +136,8 @@
 							$('.users').append('<li id="name' + i + '">' + entry.gsx$firstname.$t + '</li>');
 							var dataIn = document.getElementById('dataIn');
 							dataIn.value += '["' + entry.gsx$firstname.$t + '", ' + entry.gsx$lat.$t + ', ' + entry.gsx$lon.$t + ', ' + (i+2) + ']\n';
+							var userKeys = document.getElementById('userKeys');
+							userKeys.value += entry.gsx$id.$t + '\n';
 							/*var person = new Person(
 								entry.gsx$id.$t,
 								entry.gsx$firstname.$t,
@@ -74,6 +157,7 @@
 
 
 	</script>
+	<script src="utils.js" type="text/javascript"></script>
 	<script src="geolocation.js" type="text/javascript"></script>
 	<script type="text/javascript">
 
