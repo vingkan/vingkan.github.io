@@ -20,6 +20,11 @@ function initialize(){
         position: new google.maps.LatLng(lat, lon),
         title: 'Sunny'
     })
+    var marker2 = new google.maps.Marker({
+        map: map,
+        position: new google.maps.LatLng(lat+0.02, lon+0.02),
+        title: 'Vinesh'
+    })
 
 }
 
