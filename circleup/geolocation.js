@@ -3,7 +3,7 @@ var x = document.getElementById("demo");
 var latCoord = document.getElementById('latCoord');
 var lonCoord = document.getElementById('lonCoord');
 
-function initialize(locations){
+function initialize(){
     /*var lat = 41.8528109;
     var lon = -87.6505183;*/
     var lat = parseFloat(document.getElementById('latCoord').innerHTML);
