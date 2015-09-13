@@ -102,8 +102,8 @@ div#header{
 	background: @charcoal;
 
 	img{
-		height: 4em;
-		padding: 1em;
+		height: 6em;
+		padding: 1.5em;
 	}
 
 }
@@ -114,13 +114,30 @@ div#userForm{
 	padding: 1em;
 	background: url('blueDiagmonds.png');
 
-	input{
+	input, button{
 		background: transparent;
 		border: 0.5em solid white;
 		.NewsCycleFont(white, 1.25em);
 		padding: 0 1em;
 		margin: 0.5em;
 		.PlaceHolder(@charcoal);
+	}
+
+	button{
+		.NewsCycleFont(white, 1.25em);
+		// Based on tutorial from: stackoverflow.com/questions/17212094/fill-background-color-left-to-right-css
+		background: linear-gradient(to right, transparent 50%, @darkTone 50%);
+		background-size: 200% 100%;
+		background-position: left bottom;
+	}
+
+	button:hover{
+		background-position: right bottom;
+		transition: all 0.5s ease;
+	}
+
+	button:active{
+		background: @lightTone;
 	}
 
 }
@@ -247,10 +264,11 @@ div#wood{
 
 @scrollBar: @focusColor;
 @scrollBarBack: @charcoal;
+@size: 20px;
 
 ::-webkit-scrollbar{
-	width: 10px;
-	height: 10px;
+	width: @size;
+	height: @size;
 	background: @scrollBarBack;
 }
 
@@ -271,11 +289,29 @@ div#wood{
 }
 
 ::-webkit-scrollbar-corner{
-	width: 10px;
-	height: 10px;
+	width: @size;
+	height: @size;
 	background: @scrollBarBack;
 }
 
 ::-webkit-resizer{
 	background: @scrollBarBack;
+}
+
+@placeholderColor: rgba(255, 255, 255, 0.75);
+
+::-webkit-input-placeholder {
+   color: @placeholderColor;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: @placeholderColor;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: @placeholderColor;  
+}
+
+:-ms-input-placeholder {  
+   color: @placeholderColor;  
 }
