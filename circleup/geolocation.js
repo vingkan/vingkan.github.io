@@ -14,25 +14,13 @@ function initialize(){
 var url = 'http://spreadsheets.google.com/feeds/list/1PrmblSB1Kn846lgxeSGVK4bjargdOEmAWG64QP6vh44/od6/public/values?alt=json-in-script&callback=?';
 
     var locations = [
-      ['Bondi Beach', -33.890542, 151.274856, 4],
-      ['Coogee Beach', -33.923036, 151.259052, 5],
-      ['Cronulla Beach', -34.028249, 151.157507, 3],
-      ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
-      ['Maroubra Beach', -33.950198, 151.259302, 1],
-      ['You', lat, lon, 6]
+      ['You', lat, lon, 1],
     ];
-
-$(function listBooks(){
-    $.getJSON(
-        url,
-        function(data){
-            $.each(data.feed.entry, function(i, entry){
-                //alert(entry.gsx$firstname.$t);
-                locations.push([entry.gsx$firstname.$t, parseFloat(entry.gsx$lat.$t), parseFloat(entry.gsx$lon.$t), 6+i]);
-            });
-
-        });
-});
+    locations.push([
+        document.getElementById('name2'),
+        parseFloat(document.getElementById('lat2')),
+        parseFloat(document.getElementById('lon2'))
+    ]);
 
     var mapProp = {
         center: new google.maps.LatLng(lat, lon),
@@ -41,9 +29,7 @@ $(function listBooks(){
     };
     var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
 
-    var infoWindow = new google.maps.InfoWindow({
-        content: '<div class="scrollFix">'+infoWindowContent+'</div>'
-    }).open(map);
+    var infoWindow = new google.maps.InfoWindow();
 
     var marker, i;
 
@@ -57,7 +43,7 @@ $(function listBooks(){
 
       google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
-          infowindow.setContent(locations[i][0]);
+          infowindow.setContent('<div class="scrollFix">' + locations[i][0] + '</div>');
           infowindow.open(map, marker);
         }
       })(marker, i));

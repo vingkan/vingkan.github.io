@@ -40,8 +40,7 @@
 		//var imgPath = 'urlhere';
 		var url = 'http://spreadsheets.google.com/feeds/list/1PrmblSB1Kn846lgxeSGVK4bjargdOEmAWG64QP6vh44/od6/public/values?alt=json-in-script&callback=?';
 
-		var people = [];
-		var locations = [];
+		//var people = [];
 
 		$(document).ready(function(){
 			$(function listBooks(){
@@ -50,28 +49,19 @@
 					function(data){
 						$('div#user-list').append('<ul class="users"></ul>');
 						$.each(data.feed.entry, function(i, entry){
-							var user = entry.gsx$firstname.$t + ' (' + entry.gsx$id.$t + ')';
-							//user += '<img src="' + imgPath + entry.gsx$isbn.$t + '-0.jpg">';
-							//user += entry.title.$t;
-							//user += '<br>' + entry.location.$t;
-							$('.users').append('<li>' + user + '</li>');
-							var person = new Person(
+							$('.users').append('<li id="name' + i + '">' + entry.gsx$firstname.$t + '</li>');
+							$('.users').append('<li id="lat' + i + '">' + entry.gsx$lat.$t + '</li>');
+							$('.users').append('<li id="lon' + i + '">' + entry.gsx$lon.$t + '</li>');
+							/*var person = new Person(
 								entry.gsx$id.$t,
 								entry.gsx$firstname.$t,
 								entry.gsx$lastname.$t
 							);
-							people.push(person);
-							locations.push([entry.gsx$firstname.$t, parseFloat(entry.gsx$lat.$t), parseFloat(entry.gsx$lon.$t)]);
+							people.push(person);*/
+							/*locations.push([entry.gsx$firstname.$t, parseFloat(entry.gsx$lat.$t), parseFloat(entry.gsx$lon.$t)]);*/
 						});
 
-		for(var p = 0; p < people.length; p++){
-			console.log(people[p].toString());
-		}
-
-		for(var l = 0; l < locations.length; l++){
-			console.log(locations[l]);
-			//alert(locations[l]);
-		}
+//Space for looping calls on global variables
 
 					});
 			});
