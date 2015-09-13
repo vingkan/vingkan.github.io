@@ -23,6 +23,7 @@ function initialize(locations){
         map: map,
         title: locations[i][0]
     });
+    }
 
 }
 
