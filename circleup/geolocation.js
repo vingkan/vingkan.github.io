@@ -16,9 +16,10 @@ function initialize(){
       ['Coogee Beach', -33.923036, 151.259052, 5],
       ['Cronulla Beach', -34.028249, 151.157507, 3],
       ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
-      ['Maroubra Beach', -33.950198, 151.259302, 1]
+      ['Maroubra Beach', -33.950198, 151.259302, 1],
+      ['You', lat, lon, 6]
     ];
-    
+
     var mapProp = {
         center: new google.maps.LatLng(lat, lon),
         zoom: 18,
