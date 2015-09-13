@@ -71,28 +71,6 @@
 
 getLocation();
 
-function initialize(){
-	/*var lat = 41.8528109;
-	var lon = -87.6505183;*/
-	var lat = parseFloat(document.getElementById('latCoord').innerHTML);
-	var lon = parseFloat(document.getElementById('lonCoord').innerHTML);
-	alert(lat + ", " + lon);
-	var mapProp = {
-		center: new google.maps.LatLng(lat, lon),
-		zoom: 18,
-		mapTypeId: google.maps.MapTypeId.ROADMAP
-	};
-	var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-	var marker = new google.maps.Marker({
-		map: map,
-		position: new google.maps.LatLng(lat, lon),
-		title: 'Sunny'
-	})
-
-}
-
-initialize();
-
 	</script>
 
 </body>
