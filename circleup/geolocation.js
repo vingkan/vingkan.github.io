@@ -16,11 +16,12 @@ var url = 'http://spreadsheets.google.com/feeds/list/1PrmblSB1Kn846lgxeSGVK4bjar
     var locations = [
       ['You', lat, lon, 1],
     ];
-    locations.push([
+    /*locations.push([
         document.getElementById('name2').innerHTML,
         parseFloat(document.getElementById('lat2').innerHTML),
         parseFloat(document.getElementById('lon2').innerHTML)
-    ]);
+    ]);*/
+locations.push(JSON.parse('["Vinesh", 41.8528011, -87.6505289, 2]'));
 
     var mapProp = {
         center: new google.maps.LatLng(lat, lon),
