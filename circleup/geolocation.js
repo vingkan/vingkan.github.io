@@ -22,6 +22,7 @@ function initialize(){
     var marker, i;
 
     for (i = 0; i < locations.length; i++) {  
+        alert(locations[i][0]);
       marker = new google.maps.Marker({
         position: new google.maps.LatLng(locations[i][1], locations[i][2]),
         map: map,
@@ -40,7 +41,6 @@ function initialize(){
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
-        initialize();
     } else {
         x.innerHTML = "Geolocation is not supported by this browser.";
     }
@@ -49,6 +49,7 @@ function getLocation() {
 function showPosition(position) {
     latCoord.innerHTML = position.coords.latitude;
     lonCoord.innerHTML = position.coords.longitude;
+    initialize();
 }
 
 function showError(error) {
