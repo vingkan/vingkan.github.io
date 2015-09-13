@@ -52,4 +52,5 @@ function showError(error) {
             x.innerHTML = "An unknown error occurred."
             break;
     }
+    x.style.display = 'block';
 }

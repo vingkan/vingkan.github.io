@@ -89,6 +89,26 @@ html{
 	.NewsCycleFont(white, 1em);
 }
 
+div#demo{
+	.FullWidth();
+	background: red;
+	.NewsCycleFont(white, 1.25em);
+	text-align: center;
+	display: none;
+}
+
+div#mapContainer{
+	.FullWidth();
+	background: @charcoal;
+
+	div.coord{
+		width: 48%;
+		.NewsCycleFont(@focusColor, 1.25em);
+		display: inline-block;
+		text-align: center;
+	}
+}
+
 /*--------------------------------------------*/
 /*---> TEXT <---------------------------------*/
 /*--------------------------------------------*/
