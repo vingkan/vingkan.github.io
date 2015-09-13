@@ -11,6 +11,8 @@ function initialize(){
     //alert(lat + ", " + lon);
     //locations.push(['You', lat, lon]);
 
+var url = 'http://spreadsheets.google.com/feeds/list/1PrmblSB1Kn846lgxeSGVK4bjargdOEmAWG64QP6vh44/od6/public/values?alt=json-in-script&callback=?';
+
     var locations = [
       ['Bondi Beach', -33.890542, 151.274856, 4],
       ['Coogee Beach', -33.923036, 151.259052, 5],
@@ -19,6 +21,18 @@ function initialize(){
       ['Maroubra Beach', -33.950198, 151.259302, 1],
       ['You', lat, lon, 6]
     ];
+
+$(function listBooks(){
+    $.getJSON(
+        url,
+        function(data){
+            $('div#user-list').append('<ul class="users"></ul>');
+            $.each(data.feed.entry, function(i, entry){
+                locations.push([entry.gsx$firstname.$t, parseFloat(entry.gsx$lat.$t), parseFloat(entry.gsx$lon.$t), 1]);
+            });
+
+        });
+});
 
     var mapProp = {
         center: new google.maps.LatLng(lat, lon),
@@ -32,7 +46,7 @@ function initialize(){
     var marker, i;
 
     for (i = 0; i < locations.length; i++) {  
-        alert(locations[i][0]);
+        //alert(locations[i][0]);
       marker = new google.maps.Marker({
         position: new google.maps.LatLng(locations[i][1], locations[i][2]),
         map: map,
