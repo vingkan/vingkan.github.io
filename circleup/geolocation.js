@@ -9,9 +9,7 @@ function initialize(){
     var lat = parseFloat(document.getElementById('latCoord').innerHTML);
     var lon = parseFloat(document.getElementById('lonCoord').innerHTML);
     //alert(lat + ", " + lon);
-    var locations = [];
-    locations.push(['You', lat, lon]);
-    locations.push(['Me', lat, lon]);
+    //locations.push(['You', lat, lon]);
     var mapProp = {
         center: new google.maps.LatLng(lat, lon),
         zoom: 18,
