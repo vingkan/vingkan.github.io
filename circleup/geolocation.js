@@ -9,6 +9,7 @@ function initialize(){
     var lat = parseFloat(document.getElementById('latCoord').innerHTML);
     var lon = parseFloat(document.getElementById('lonCoord').innerHTML);
     //alert(lat + ", " + lon);
+    var locations = [];
     locations.push(['You', lat, lon]);
     locations.push(['Me', lat, lon]);
     var mapProp = {
