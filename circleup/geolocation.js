@@ -17,9 +17,9 @@ var url = 'http://spreadsheets.google.com/feeds/list/1PrmblSB1Kn846lgxeSGVK4bjar
       ['You', lat, lon, 1],
     ];
     locations.push([
-        document.getElementById('name2'),
-        parseFloat(document.getElementById('lat2')),
-        parseFloat(document.getElementById('lon2'))
+        document.getElementById('name2').innerHTML,
+        parseFloat(document.getElementById('lat2').innerHTML),
+        parseFloat(document.getElementById('lon2').innerHTML)
     ]);
 
     var mapProp = {
