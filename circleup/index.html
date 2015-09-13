@@ -61,15 +61,22 @@
 								entry.gsx$lastname.$t
 							);
 							people.push(person);
-							locations.push([entry.gsx$firstname.$t, entry.gsx$lat.$t, entry.gsx$lon.$t]);
+							locations.push([entry.gsx$firstname.$t, parseFloat(entry.gsx$lat.$t), parseFloat(entry.gsx$lon.$t)]);
 						});
-					});
-			});
-		});
 
 		for(var p = 0; p < people.length; p++){
 			console.log(people[p].toString());
 		}
+
+		for(var l = 0; l < locations.length; l++){
+			console.log(locations[l]);
+			//alert(locations[l]);
+		}
+
+					});
+			});
+		});
+
 
 getLocation();
 
