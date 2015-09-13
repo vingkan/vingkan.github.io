@@ -8,7 +8,7 @@ function initialize(){
     var lon = -87.6505183;*/
     var lat = parseFloat(document.getElementById('latCoord').innerHTML);
     var lon = parseFloat(document.getElementById('lonCoord').innerHTML);
-    alert(lat + ", " + lon);
+    //alert(lat + ", " + lon);
     var mapProp = {
         center: new google.maps.LatLng(lat, lon),
         zoom: 18,
