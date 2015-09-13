@@ -16,12 +16,24 @@ var url = 'http://spreadsheets.google.com/feeds/list/1PrmblSB1Kn846lgxeSGVK4bjar
     var locations = [
       ['You', lat, lon, 1],
     ];
-    /*locations.push([
-        document.getElementById('name2').innerHTML,
-        parseFloat(document.getElementById('lat2').innerHTML),
-        parseFloat(document.getElementById('lon2').innerHTML)
-    ]);*/
-locations.push(JSON.parse('["Vinesh", 41.8528011, -87.6505289, 2]'));
+    var dataIn = document.getElementById('dataIn');
+    var dataString = dataIn.value;
+    var forJSON = [];
+    var forString = '';
+    for(var c = 0; c < dataString.length; c++){
+        if(dataString.charAt(c) == '\n'){
+            forJSON.push(forString);
+            alert(forString)
+            forString = '';
+
+        }
+        else{
+            forString += dataString.charAt(c);
+        }
+    }
+    for(var f = 0; f < forJSON.length; f++){
+        locations.push(JSON.parse(forJSON[f]));
+    }
 
     var mapProp = {
         center: new google.maps.LatLng(lat, lon),
@@ -30,7 +42,7 @@ locations.push(JSON.parse('["Vinesh", 41.8528011, -87.6505289, 2]'));
     };
     var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
 
-    var infoWindow = new google.maps.InfoWindow();
+    var infowindow = new google.maps.InfoWindow();
 
     var marker, i;
 
