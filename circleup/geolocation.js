@@ -3,28 +3,26 @@ var x = document.getElementById("demo");
 var latCoord = document.getElementById('latCoord');
 var lonCoord = document.getElementById('lonCoord');
 
-function initialize(){
+function initialize(locations){
     /*var lat = 41.8528109;
     var lon = -87.6505183;*/
     var lat = parseFloat(document.getElementById('latCoord').innerHTML);
     var lon = parseFloat(document.getElementById('lonCoord').innerHTML);
     //alert(lat + ", " + lon);
+    locations.push(['You', lat, lon]);
     var mapProp = {
         center: new google.maps.LatLng(lat, lon),
         zoom: 18,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-    var marker = new google.maps.Marker({
+    var marker, i;
+    for (i = 0; i < locations.length; i++) {  
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
         map: map,
-        position: new google.maps.LatLng(lat, lon),
-        title: 'Sunny'
-    })
-    var marker2 = new google.maps.Marker({
-        map: map,
-        position: new google.maps.LatLng(lat+0.02, lon+0.02),
-        title: 'Vinesh'
-    })
+        title: locations[i][0]
+    });
 
 }
 

@@ -41,6 +41,7 @@
 		var url = 'http://spreadsheets.google.com/feeds/list/1PrmblSB1Kn846lgxeSGVK4bjargdOEmAWG64QP6vh44/od6/public/values?alt=json-in-script&callback=?';
 
 		var people = [];
+		var locations = [];
 
 		$(document).ready(function(){
 			$(function listBooks(){
@@ -60,6 +61,7 @@
 								entry.gsx$lastname.$t
 							);
 							people.push(person);
+							locations.push([entry.gsx$firstname.$t, entry.gsx$lat.$t, entry.gsx$lon.$t]);
 						});
 					});
 			});
