@@ -40,6 +40,7 @@ function initialize(){
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
+        initialize();
     } else {
         x.innerHTML = "Geolocation is not supported by this browser.";
     }
@@ -48,7 +49,6 @@ function getLocation() {
 function showPosition(position) {
     latCoord.innerHTML = position.coords.latitude;
     lonCoord.innerHTML = position.coords.longitude;
-    initialize();
 }
 
 function showError(error) {
