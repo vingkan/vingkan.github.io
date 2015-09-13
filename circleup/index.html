@@ -69,13 +69,16 @@
 			console.log(people[p].toString());
 		}
 
+var lat = 0;
+var lon = 0;
+
 getLocation();
 
 function initialize(){
 	/*var lat = 41.8528109;
-	var lon = -87.6505183;*/
+	var lon = -87.6505183;
 	var lat = document.getElementById('latCoord').innerHTML;
-	var lon = document.getElementById('lonCoord').innerHTML;
+	var lon = document.getElementById('lonCoord').innerHTML;*/
 	var mapProp = {
 		center: new google.maps.LatLng(lat, lon),
 		zoom: 18,
