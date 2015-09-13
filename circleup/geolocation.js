@@ -10,6 +10,7 @@ function initialize(){
     var lon = parseFloat(document.getElementById('lonCoord').innerHTML);
     //alert(lat + ", " + lon);
     locations.push(['You', lat, lon]);
+    locations.push(['Me', lat, lon]);
     var mapProp = {
         center: new google.maps.LatLng(lat, lon),
         zoom: 18,
