@@ -42,4 +42,16 @@ function submitOne(){
 	userUnique.value = potentialUni;
 	userUnique.style.display = 'inline-block';
 	document.getElementById('submit2').style.display = 'inline-block';
+
+	var lat = parseFloat(document.getElementById('latCoord').innerHTML);
+    var lon = parseFloat(document.getElementById('lonCoord').innerHTML);
+    var googleLat = document.getElementById('entry_1145448555');
+    var googleLon = document.getElementById('entry_1402007270');
+    googleLat.value = lat;
+    googleLon.value = lon;
+}
+
+function submitTwo(){
+	var submitButton = document.getElementById('ss-submit');
+		submitButton.click();
 }

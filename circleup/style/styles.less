@@ -2,7 +2,7 @@
 /*---> COLORS <-------------------------------*/
 /*--------------------------------------------*/
 
-@focusColor: #BF55EC;
+@focusColor: #0EBFE9;
 @lightTone: @focusColor + #222222;
 @darkTone: @focusColor - #222222;
 @charcoal: #1a1a1a;
@@ -98,13 +98,24 @@ div#demo{
 }
 
 div#header{
-	.FredokaOneFont(white, 1.75em);
+	.FredokaOneFont(@focusColor, 2.5em);
 	.Center();
 	background: @charcoal;
 }
 
 div#userForm{
+	
 	.Center();
+	padding: 1em;
+
+	input{
+		background: transparent;
+		border: 0.5em solid white;
+		.NewsCycleFont(white, 1.25em);
+		padding: 0 1em;
+		margin: 0.5em;
+	}
+
 }
 
 div#mapContainer{
@@ -117,6 +128,14 @@ div#mapContainer{
 		display: inline-block;
 		text-align: center;
 	}
+}
+
+div#footer{
+	background: @darkTone;
+	.Center();
+	.FullWidth();
+	.NewsCycleFont(white, 1em);
+	border-top: 2em solid @focusColor;
 }
 
 /*--------------------------------------------*/
@@ -211,7 +230,7 @@ div#wood{
     .NewsCycleFont(@focusColor, 1.25em);
 }
 
-/*@scrollBar: @darkTone;
+@scrollBar: @darkTone;
 @scrollBarBack: @focusColor;
 
 ::-webkit-scrollbar{
@@ -244,4 +263,4 @@ div#wood{
 
 ::-webkit-resizer{
 	background: @scrollBarBack;
-}*/
+}

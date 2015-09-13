@@ -23,7 +23,7 @@ function initialize(){
     for(var c = 0; c < dataString.length; c++){
         if(dataString.charAt(c) == '\n'){
             forJSON.push(forString);
-            alert(forString)
+            //alert(forString)
             forString = '';
 
         }
@@ -47,7 +47,7 @@ function initialize(){
     var marker, i;
 
     for (i = 0; i < locations.length; i++) {  
-        alert(locations[i][0]);
+        //alert(locations[i][0]);
       marker = new google.maps.Marker({
         position: new google.maps.LatLng(locations[i][1], locations[i][2]),
         map: map,

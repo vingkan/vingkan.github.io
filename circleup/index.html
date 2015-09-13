@@ -26,10 +26,10 @@
 
 	<div id="demo">Error</div>
 
-	<div id="user-list" style="display: block;"></div>
+	<div id="user-list" style="display: none;"></div>
 
-	<textarea id ="dataIn" style="display:block;width:400px;height:200px;"></textarea>
-	<textarea id ="userKeys" style="display:block;width:400px;height:200px;"></textarea>
+	<textarea id ="dataIn" style="display:none;width:400px;height:200px;"></textarea>
+	<textarea id ="userKeys" style="display:none;width:400px;height:200px;"></textarea>
 
 	<div id="header">
 		Circle Up
@@ -39,10 +39,10 @@
 
 		<input type="text" id="userfirstname" placeholder="First Name">
 		<input type="text" id="userlastname" placeholder="Last Name">
-		<input type="button" id="submit1" value="Join Map" onclick="submitOne();">
+		<input type="button" id="submit1" value="Get Code" onclick="submitOne();">
 		<br>
 		<input style="display: none;" type="text" id="unique">
-		<input style="display: none;" type="button" id="submit2" value="Got It!" onclick="submitTwo();">
+		<input style="display: none;" type="button" id="submit2" value="Join Map" onclick="submitTwo();">
 		<br>
 		<input type="button" value="See Your Friends" onclick="initialize();">
 
@@ -54,9 +54,14 @@
 		<div class="coord" id="lonCoord">-65.0000000</div>
 	</div>
 
-	<div id="form">
+	<div id="form" style="display: none;">
+		<script type="text/javascript">
+			var submitted = false;
+		</script>
+		<iframe name="hidden-iframe" id="hidden-iframe" style="display: none;" onload="if(submitted){window.location='index.html';}"></iframe>
+		<form action="https://docs.google.com/a/hawk.iit.edu/forms/d/1EWx5UKcGOph5hXdHmmty4mY5ir-1Pj32j0AmBi0Ax9g/formResponse" method="POST" id="ss-form" target="hidden-iframe" onsubmit="submitted = true;">
 
-		<form action="https://docs.google.com/a/hawk.iit.edu/forms/d/1EWx5UKcGOph5hXdHmmty4mY5ir-1Pj32j0AmBi0Ax9g/formResponse" method="POST" id="ss-form" target="_self" onsubmit=""><ol role="list" class="ss-question-list" style="padding-left: 0">
+		<ol role="list" class="ss-question-list" style="padding-left: 0">
 		<div class="ss-form-question errorbox-good" role="listitem">
 		<div dir="auto" class="ss-item ss-item-required ss-text"><div class="ss-form-entry">
 		<label class="ss-q-item-label" for="entry_1503901081"><div class="ss-q-title">id
@@ -117,6 +122,10 @@
 		<div class="ss-password-warning ss-secondary-text">Never submit passwords through Google Forms.</div></td>
 		</tr></tbody></table></div></ol></form>
 
+	</div>
+
+	<div id="footer">
+		Sunny Shah and Vinesh Kannan | Circle Up | MonkeyBars OpenBuild September 2015
 	</div>
 
 	<script type="text/javascript">
