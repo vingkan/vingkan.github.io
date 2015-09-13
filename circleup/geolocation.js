@@ -26,7 +26,6 @@ $(function listBooks(){
     $.getJSON(
         url,
         function(data){
-            $('div#user-list').append('<ul class="users"></ul>');
             $.each(data.feed.entry, function(i, entry){
                 alert(entry.gsx$firstname.$t);
                 locations.push([entry.gsx$firstname.$t, parseFloat(entry.gsx$lat.$t), parseFloat(entry.gsx$lon.$t), 6+i]);
