@@ -27,7 +27,7 @@ $(function listBooks(){
         url,
         function(data){
             $.each(data.feed.entry, function(i, entry){
-                alert(entry.gsx$firstname.$t);
+                //alert(entry.gsx$firstname.$t);
                 locations.push([entry.gsx$firstname.$t, parseFloat(entry.gsx$lat.$t), parseFloat(entry.gsx$lon.$t), 6+i]);
             });
 
@@ -41,12 +41,14 @@ $(function listBooks(){
     };
     var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
 
-    var infowindow = new google.maps.InfoWindow();
+    var infoWindow = new google.maps.InfoWindow({
+        content: '<div class="scrollFix">'+infoWindowContent+'</div>'
+    }).open(map);
 
     var marker, i;
 
     for (i = 0; i < locations.length; i++) {  
-        //alert(locations[i][0]);
+        alert(locations[i][0]);
       marker = new google.maps.Marker({
         position: new google.maps.LatLng(locations[i][1], locations[i][2]),
         map: map,
