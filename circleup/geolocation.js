@@ -11,7 +11,7 @@ function initialize(){
     //alert(lat + ", " + lon);
     //locations.push(['You', lat, lon]);
 
-var url = 'http://spreadsheets.google.com/feeds/list/1PrmblSB1Kn846lgxeSGVK4bjargdOEmAWG64QP6vh44/od6/public/values?alt=json-in-script&callback=?';
+    var url = 'http://spreadsheets.google.com/feeds/list/1PrmblSB1Kn846lgxeSGVK4bjargdOEmAWG64QP6vh44/od6/public/values?alt=json-in-script&callback=?';
 
     var locations = [
       ['You', lat, lon, 1],
