@@ -28,7 +28,8 @@ $(function listBooks(){
         function(data){
             $('div#user-list').append('<ul class="users"></ul>');
             $.each(data.feed.entry, function(i, entry){
-                locations.push([entry.gsx$firstname.$t, parseFloat(entry.gsx$lat.$t), parseFloat(entry.gsx$lon.$t), 1]);
+                alert(entry.gsx$firstname.$t);
+                locations.push([entry.gsx$firstname.$t, parseFloat(entry.gsx$lat.$t), parseFloat(entry.gsx$lon.$t), 6+i]);
             });
 
         });
