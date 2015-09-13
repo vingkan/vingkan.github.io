@@ -52,6 +52,17 @@ function submitOne(){
 }
 
 function submitTwo(){
+	setInterval(function () {toggle()}, 300);
 	var submitButton = document.getElementById('ss-submit');
 		submitButton.click();
+}
+
+function toggle(){
+	var submitButton = document.getElementById('submit2');
+	if(submitButton.style.background == 'transparent'){
+		submitButton.style.background = 'white';
+	}
+	else{
+		submitButton.style.background = 'transparent';
+	}
 }

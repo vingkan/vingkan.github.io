@@ -36,6 +36,7 @@
 
 	<div id="userForm">
 
+		<p>Make finding your friends easier (and more fun) than ever.</p>
 		<input type="text" id="userfirstname" placeholder="First Name">
 		<input type="text" id="userlastname" placeholder="Last Name">
 		<button type="button" id="submit1" onclick="submitOne();">Get Code</button>
@@ -57,7 +58,7 @@
 		<script type="text/javascript">
 			var submitted = false;
 		</script>
-		<iframe name="hidden-iframe" id="hidden-iframe" style="display: none;" onload="if(submitted){window.location='index.html';}"></iframe>
+		<iframe name="hidden-iframe" id="hidden-iframe" style="display: none;" onload="if(submitted){setTimeout(function(){window.location='index.html';},3000)}"></iframe>
 		<form action="https://docs.google.com/a/hawk.iit.edu/forms/d/1EWx5UKcGOph5hXdHmmty4mY5ir-1Pj32j0AmBi0Ax9g/formResponse" method="POST" id="ss-form" target="hidden-iframe" onsubmit="submitted = true;">
 
 		<ol role="list" class="ss-question-list" style="padding-left: 0">
