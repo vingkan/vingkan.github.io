@@ -49,8 +49,9 @@ function initialize(){
     var marker, i;
 
     for (i = 0; i < locations.length; i++) {  
-        if(isLetter(locations[i][0].charAt(0))){
-            imgLetter = locations[i][0].charAt(0);
+        var firstChar = locations[i][0].charAt(0)).toLowerCase();
+        if(isLetter(firstChar){
+            imgLetter = firstChar;
         }
         else{
             imgLetter = 'etc';
