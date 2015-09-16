@@ -44,16 +44,24 @@ function initialize(){
 
     var infowindow = new google.maps.InfoWindow();
 
+    var imgLetter = '';
+
     var marker, i;
 
     for (i = 0; i < locations.length; i++) {  
+        if(isLetter(locations[i][0].charAt(0))){
+            imgLetter = locations[i][0].charAt(0);
+        }
+        else{
+            imgLetter = 'etc';
+        }
         //alert(locations[i][0]);
       marker = new google.maps.Marker({
         position: new google.maps.LatLng(locations[i][1], locations[i][2]),
         map: map,
         title: locations[i][0],
-        label: locations[i][0].charAt(0),
-        icon: 'style/favicon.png',
+        //label: locations[i][0].charAt(0),
+        icon: 'style/markers/' + imgLetter + '.png',
         animation: google.maps.Animation.DROP
       });
 
@@ -64,6 +72,10 @@ function initialize(){
         }
       })(marker, i));
     }
+}
+
+function isLetter(char){
+    return char.length === 1 && char.match(/[a-z]/i);
 }
 
 function getLocation() {
