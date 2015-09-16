@@ -42,7 +42,15 @@ function initialize(){
     };
     var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
 
+    var oms = new OverlappingMarkerSpiderfier(map);
     var infowindow = new google.maps.InfoWindow();
+    oms.addListener('click', function(marker, event){
+        infowindow.setContent(marker.desc);
+        infowindow.open(map, marker);
+    });
+    oms.addListener('spiderfy', function(markers){
+        infowindow.close();
+    });
 
     var imgLetter = '';
 
@@ -60,7 +68,7 @@ function initialize(){
       marker = new google.maps.Marker({
         position: new google.maps.LatLng(locations[i][1], locations[i][2]),
         map: map,
-        title: locations[i][0],
+        title: toTitleCase(locations[i][0]) + " " + toTitleCase(locations[i][1]),
         //label: locations[i][0].charAt(0),
         icon: 'style/markers/' + imgLetter + '.png',
         animation: google.maps.Animation.DROP,
@@ -75,6 +83,8 @@ function initialize(){
           });
       }
 
+      oms.addMarker(marker);
+
       google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
           infowindow.setContent('<div class="scrollFix">' + locations[i][0] + '</div>');
@@ -86,6 +96,11 @@ function initialize(){
 
 function isLetter(char){
     return char.length === 1 && char.match(/[a-z]/i);
+}
+
+function toTitleCase(str)
+{
+    return str;
 }
 
 function getLocation() {
