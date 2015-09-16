@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Reading List</title>
+<style type="text/css">
+.items {display:table;list-style:none;margin:0;padding:0;border-spacing:5px;}
+.items li {display:table-row;-webkit-border-radius:10px;-moz-border-radius:10px;border-radius:10px;border:1px solid #ccc;padding:5px;margin:0 0 10px 0;}
+.items li img {display:table-cell;vertical-align:top;}
+.items li span.meta {display:table-cell;vertical-align:top;margin:0;padding:0 0 0 5px;}
+.items li {margin:0 0 5px 0;}
+</style>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script> 
+<script type="text/javascript"> 
+$(document).ready(function() {	
+//source file is https://docs.google.com/spreadsheet/ccc?key=0Ak0qDiMLT3XddHlNempadUs1djdkQ0tFLWF6ci1rUUE	
+$(function listBooks() {	
+$.getJSON( "https://spreadsheets.google.com/feeds/list/0Ak0qDiMLT3XddHlNempadUs1djdkQ0tFLWF6ci1rUUE/od6/public/values?alt=json-in-script&callback=?",
+	function (data) {	
+		$('div#book-list').append('<ul class="items"></ul>');
+		$.each(data.feed.entry, function(i,entry) {	
+			var item = '<span style="display:none">' + entry.id.$t + '</span>';	
+			item += '<img src="http://covers.openlibrary.org/b/isbn/' + entry.gsx$isbn.$t + '-S.jpg"/>';
+			item += '<span class="meta"><a href="http://www.worldcat.org/isbn/' + entry.gsx$isbn.$t + '">' + entry.title.$t + '</a>';	
+			item += '<br/>Author: ' + entry.gsx$author.$t;	
+			if (entry.gsx$notes.$t) {	
+				item += '<br/>Description: ' + entry.gsx$notes.$t;	
+			}	
+			$('.items').append('<li>' + item + '</span></li>');	
+			});
+		});
+	});
+});
+</script>
+</head> 
+<body>
+	<h1>Reading List</h1> 
+	<div id="book-list"> </div> 
+</body>
+</html>

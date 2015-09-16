@@ -1,0 +1,321 @@
+/*--------------------------------------------*/
+/*---> COLORS <-------------------------------*/
+/*--------------------------------------------*/
+
+@focusColor: #0EBFE9;
+@lightTone: @focusColor + #222222;
+@darkTone: @focusColor - #222222;
+@charcoal: #1a1a1a;
+
+/*--------------------------------------------*/
+/*---> FONTS <--------------------------------*/
+/*--------------------------------------------*/
+
+@fredokaOne: 'Fredoka One', cursive;
+@newsCycle: 'News Cycle', sans-serif;
+
+.FredokaOneFont(@textColor: white, @size: 1.25em){
+	font-family: @fredokaOne;
+	color: @textColor;
+	font-size: @size;
+	line-height: @size * 1.5;
+}
+
+.NewsCycleFont(@textColor: white, @size: 1.25em){
+	font-family: @newsCycle;
+	color: @textColor;
+	font-size: @size;
+	line-height: @size * 1.5;
+}
+
+/*--------------------------------------------*/
+/*---> BACKGROUND <---------------------------*/
+/*--------------------------------------------*/
+
+@keyframes animatedBackgroundRight{
+	from{
+		background-position: 0 0;
+	}
+	to{
+		background-position: 10000% 0;
+	}
+}
+
+@keyframes animatedBackgroundLeft{
+	from{
+		background-position: 0 0;
+	}
+	to{
+		background-position: -10000% 0;
+	}
+}
+
+.AnimatedBannerRight(@height: 200px){
+	height: @height;
+	background-size: auto @height;
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	animation: animatedBackgroundRight 800s linear infinite;
+}
+
+.AnimatedBannerLeft(@height: 200px){
+	height: @height;
+	background-size: auto @height;
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	animation: animatedBackgroundLeft 800s linear infinite;
+}
+
+/*--------------------------------------------*/
+/*---> LAYOUT <-------------------------------*/
+/*--------------------------------------------*/
+
+@defaultPadding: 1.00em;
+@defaultMargin: 0px;
+@defaultWidth: 400px;
+
+.BoxModel(@size: @defaultPadding){
+	padding: @size;
+	margin: @size;
+}
+
+.FullWidth(){
+	margin: 0;
+	width: 100%;
+}
+
+html{
+	background: @focusColor;
+	.NewsCycleFont(white, 1em);
+}
+
+div#demo{
+	.FullWidth();
+	background: red;
+	.NewsCycleFont(white, 1.25em);
+	text-align: center;
+	display: none;
+}
+
+div#header{
+	.Center();
+	background: @charcoal;
+
+	img{
+		height: 6em;
+		padding: 1.5em;
+	}
+
+}
+
+div#userForm{
+	
+	.Center();
+	padding: 1em;
+	background: url('blueDiagmonds.png');
+
+	input, button{
+		background: transparent;
+		border: 0.5em solid white;
+		.NewsCycleFont(white, 1.25em);
+		padding: 0 1em;
+		margin: 0.5em;
+		.PlaceHolder(@charcoal);
+	}
+
+	button{
+		.NewsCycleFont(white, 1.25em);
+		// Based on tutorial from: stackoverflow.com/questions/17212094/fill-background-color-left-to-right-css
+		background: linear-gradient(to right, transparent 50%, @darkTone 50%);
+		background-size: 200% 100%;
+		background-position: left bottom;
+	}
+
+	button:hover{
+		background-position: right bottom;
+		transition: all 0.5s ease;
+	}
+
+	button:active{
+		background: @lightTone;
+	}
+
+	button#submit2{
+		transition: background 1s ease;
+	}
+
+}
+
+div#mapContainer{
+	.FullWidth();
+	background: @charcoal;
+
+	div.coord{
+		width: 48%;
+		.NewsCycleFont(@focusColor, 1.25em);
+		display: inline-block;
+		text-align: center;
+	}
+}
+
+div#footer{
+	background: url('blueDiagmonds.png');
+	.Center();
+	.FullWidth();
+	.NewsCycleFont(white, 1em);
+	padding: 1em 0;
+	border-bottom: 1em solid @charcoal;
+}
+
+/*--------------------------------------------*/
+/*---> TEXT <---------------------------------*/
+/*--------------------------------------------*/
+
+p{
+	padding: @defaultPadding;
+	.NewsCycleFont(white, 1.25em);
+	.Center();
+}
+
+/*--------------------------------------------*/
+/*---> IMAGES <-------------------------------*/
+/*--------------------------------------------*/
+
+.Center(){
+	margin: auto auto;
+	display: block;
+	text-align: center;
+}
+
+/*--------------------------------------------*/
+/*---> FORMS <--------------------------------*/
+/*--------------------------------------------*/
+
+.PlaceHolder(@color: #ccc) {
+	input::-webkit-input-placeholder { color: @color; }
+	input:-moz-placeholder { color: @color; }
+	textarea::-webkit-input-placeholder { color: @color; }
+	textarea:-moz-placeholder { color: @color; }
+}
+
+.FormCleanse(){
+	outline: none;
+	border: none;
+	margin: 0;
+	padding: 0;
+}
+
+input, select, button{
+	.FormCleanse();
+}
+
+div#wood{
+
+	@inputHeight: 2em;
+
+	padding: 2em auto;
+	float: left;
+	.Center();
+
+	p{
+		.NewsCycleFont(@darkTone, 1.25em);
+	}
+
+	input, button{
+		background: transparent;
+		margin: 0 auto 2em;
+		border: 0.5em solid @darkTone;
+		text-align: center;
+	}
+
+	input{
+		width: 70%;
+		padding: 0 1em;
+		margin-right: 0.5em;
+		.NewsCycleFont(@darkTone, 1.5em);
+	}
+
+	button{
+		width: @inputHeight + 1em;
+		.NewsCycleFont(@darkTone, 1.5em);
+		// Based on tutorial from: stackoverflow.com/questions/17212094/fill-background-color-left-to-right-css
+		background: linear-gradient(to right, transparent 50%, white 50%);
+		background-size: 200% 100%;
+		background-position: left bottom;
+	}
+
+	button:hover{
+		background-position: right bottom;
+		transition: all 0.5s ease;
+	}
+
+	button:active{
+		background: @lightTone;
+	}
+
+}
+
+/*--------------------------------------------*/
+/*---> SCROLLBAR <----------------------------*/
+/*--------------------------------------------*/
+
+.scrollFix {
+    line-height: 1.35;
+    overflow: hidden;
+    white-space: nowrap;
+    .NewsCycleFont(@focusColor, 1.25em);
+}
+
+@scrollBar: @focusColor;
+@scrollBarBack: @charcoal;
+@size: 20px;
+
+::-webkit-scrollbar{
+	width: @size;
+	height: @size;
+	background: @scrollBarBack;
+}
+
+::-webkit-scrollbar-button{
+	background: @scrollBarBack;
+}
+
+::-webkit-scrollbar-track{
+	background: @scrollBarBack;
+}
+
+::-webkit-scrollbar-track-piece{
+	background: @scrollBarBack;
+}
+
+::-webkit-scrollbar-thumb{
+	background: @scrollBar;
+}
+
+::-webkit-scrollbar-corner{
+	width: @size;
+	height: @size;
+	background: @scrollBarBack;
+}
+
+::-webkit-resizer{
+	background: @scrollBarBack;
+}
+
+@placeholderColor: rgba(255, 255, 255, 0.75);
+
+::-webkit-input-placeholder {
+   color: @placeholderColor;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: @placeholderColor;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: @placeholderColor;  
+}
+
+:-ms-input-placeholder {  
+   color: @placeholderColor;  
+}
