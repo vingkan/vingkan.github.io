@@ -44,15 +44,36 @@ function initialize(){
 
     var infowindow = new google.maps.InfoWindow();
 
+    var imgLetter = '';
+
     var marker, i;
 
     for (i = 0; i < locations.length; i++) {  
+        var firstChar = locations[i][0].charAt(0).toLowerCase();
+        if(isLetter(firstChar)){
+            imgLetter = firstChar;
+        }
+        else{
+            imgLetter = 'etc';
+        }
         //alert(locations[i][0]);
       marker = new google.maps.Marker({
         position: new google.maps.LatLng(locations[i][1], locations[i][2]),
         map: map,
-        title: locations[i][0]
+        title: locations[i][0],
+        //label: locations[i][0].charAt(0),
+        icon: 'style/markers/' + imgLetter + '.png',
+        animation: google.maps.Animation.DROP,
+        draggable: true
       });
+
+      if(i == 0){
+          google.maps.event.addListener(marker, 'dragend', function(){
+                    var changeLocation = document.getElementById('changeLocation');
+                    changeLocation.style.display = 'block';
+                    updateChangeLocation(marker.getPosition());
+          });
+      }
 
       google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
@@ -61,6 +82,10 @@ function initialize(){
         }
       })(marker, i));
     }
+}
+
+function isLetter(char){
+    return char.length === 1 && char.match(/[a-z]/i);
 }
 
 function getLocation() {

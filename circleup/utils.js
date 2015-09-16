@@ -59,3 +59,12 @@ function getDeviceIP() {
 
     return false;
 }
+
+function updateChangeLocation(latlon){
+	//TO-DO
+}
+
+function updateUserLocation(){
+	alert("Feature: Update User Location by Dragging Marker\nComing Soon!");
+	document.getElementById('changeLocation').style.display='none';
+}
