@@ -64,7 +64,7 @@ function initialize(){
         //label: locations[i][0].charAt(0),
         icon: 'style/markers/' + imgLetter + '.png',
         animation: google.maps.Animation.DROP,
-        draggable: true
+        draggable: (i == 0 ? true : false)
       });
 
       if(i == 0){

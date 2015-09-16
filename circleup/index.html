@@ -13,6 +13,7 @@
 	<link rel="icon" type="img/png" href="style/favicon.png" style="width:30px;">
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script> 
 	<script src="person.js" type="text/javascript"></script>
+	<script src="classie.js"></script>
 	<script src="http://maps.googleapis.com/maps/api/js"></script>
 	<style>
 
@@ -36,9 +37,15 @@
 	<textarea id ="dataIn" style="display:none;width:400px;height:200px;"></textarea>
 	<textarea id ="userKeys" style="display:none;width:400px;height:200px;"></textarea>
 
-	<div id="header">
-		<img src="style/logo.png">
-	</div>
+	<header>
+		<div class="container clearfix">
+			<img class="logo" id="big" src="style/logo.png">
+			<img class="logo" id="small" src="style/favicon.png">
+			<p>Hello, <span id="userID">User</span>.</p>
+		</div>
+	</header>
+
+	<div id="headerSpace"></div>
 
 	<div id="userForm">
 
@@ -49,7 +56,6 @@
 		<br>-->
 		<input style="display: none;" type="text" id="unique">
 		<button type="button" id="submit2" onclick="submitTwo();">Join Map</button>
-		<br>
 		<button type="button" onclick="initialize();">See Your Friends</button>
 
 	</div>
@@ -183,6 +189,7 @@
 	<script src="geolocation.js" type="text/javascript"></script>
 	<script type="text/javascript">
 
+		getDeviceIP();
 		getLocation();
 
 	</script>

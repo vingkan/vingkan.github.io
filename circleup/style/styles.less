@@ -66,6 +66,92 @@
 	animation: animatedBackgroundLeft 800s linear infinite;
 }
 
+/*
+* Collapsing Header on Scroll Tutorial:
+* http://callmenick.com/post/animated-resizing-header-on-scroll
+*/
+
+@biggerHeight: 6em;
+@smallerHeight: 3em;
+
+header{
+
+	width: 100%;
+	padding: 1em 0.5em;
+	height: @biggerHeight;
+	overflow: hidden;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 15;
+	background: @charcoal;
+	border-bottom: 0.25em solid @focusColor;
+	-webkit-transition: height 0.25s;
+	-moz-transition: height 0.25s;
+	-ms-transition: height 0.25s;
+	-o-transition: height 0.25s;
+	transition: height 0.25s;
+
+	.logo{
+		display: inline-block;
+		height: @biggerHeight;
+		line-height: @biggerHeight;
+		//float: left;
+		.Center();
+		-webkit-transition: all 0.25s;
+		-moz-transition: all 0.25s;
+		-ms-transition: all 0.25s;
+		-o-transition: all 0.25s;
+		transition: all 0.25s;
+	}
+
+	#big{
+		height: @biggerHeight;
+		line-height: @biggerHeight;
+	}
+
+	#small{
+		height: 0;
+		line-height: 0;
+	}
+
+	p{
+		display: inline-block;
+		float: left;
+		height: @biggerHeight;
+		line-height: @biggerHeight;
+		margin-top: -1.5em;
+	}
+
+}
+
+header.smaller{
+
+	height: @smallerHeight;
+
+	.logo{
+		height: @smallerHeight;
+		line-height: @smallerHeight;
+		float: left;
+	}
+
+	#big{
+		height: 0;
+		line-height: 0;
+	}
+
+	#small{
+		height: @smallerHeight;
+		line-height: @smallerHeight;
+	}
+
+	p{
+		height: @smallerHeight;
+		line-height: @smallerHeight;
+	}
+
+}
+
 /*--------------------------------------------*/
 /*---> LAYOUT <-------------------------------*/
 /*--------------------------------------------*/
@@ -97,15 +183,9 @@ div#demo{
 	display: none;
 }
 
-div#header{
-	.Center();
-	background: @charcoal;
-
-	img{
-		height: 6em;
-		padding: 1.5em;
-	}
-
+div#headerSpace{
+	height: 6em;
+	padding: 1em 0.5em;
 }
 
 div#userForm{
@@ -124,6 +204,22 @@ div#mapContainer{
 		display: inline-block;
 		text-align: center;
 	}
+}
+
+div#googleMap{
+	width: 100%;
+	height: 400px;
+	z-index: 5;
+}
+
+@media screen and (max-aspect-ratio: 3/2){
+	
+	div#googleMap{
+		width: 100%;
+		height: 600px;
+		z-index: 5;
+	}
+
 }
 
 div.alert{
@@ -237,6 +333,16 @@ button:active{
 
 button#submit2{
 	transition: background 1s ease;
+}
+
+@media screen and (max-aspect-ratio: 3/2){
+	
+	input, button{
+		display: block;
+		width: 50%;
+		.Center();
+		margin: 1em auto;
+	}
 }
 
 /*--------------------------------------------*/
