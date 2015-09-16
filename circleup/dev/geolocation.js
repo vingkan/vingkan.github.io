@@ -52,7 +52,8 @@ function initialize(){
         position: new google.maps.LatLng(locations[i][1], locations[i][2]),
         map: map,
         title: locations[i][0],
-        label: locations[i][0].charAt(0),
+        //label: locations[i][0].charAt(0),
+        icon: 'style/favicon.png',
         animation: google.maps.Animation.DROP
       });
 
