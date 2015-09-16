@@ -23,6 +23,12 @@
 
 <body>
 
+	<div class="alert" id="changeLocation" style="display: none;">
+		<p>Would you like to update your location?</p>
+		<button type="button" onclick="updateUserLocation();">Yes</button>
+		<button type="button" onclick="document.getElementById('changeLocation').style.display='none';">No</button>
+	</div>
+
 	<div id="demo">Error</div>
 
 	<div id="user-list" style="display: none;"></div>
@@ -52,6 +58,10 @@
 		<div id="googleMap" style="width:100%;height:400px;"></div>
 		<div class="coord" id="latCoord">25.0000000</div>
 		<div class="coord" id="lonCoord">-65.0000000</div>
+	</div>
+
+	<div id="next">
+		<p>What's Next for Circle Up?</p>
 	</div>
 
 	<div id="form" style="display: none;">

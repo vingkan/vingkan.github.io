@@ -109,41 +109,9 @@ div#header{
 }
 
 div#userForm{
-	
 	.Center();
 	padding: 1em;
 	background: url('blueDiagmonds.png');
-
-	input, button{
-		background: transparent;
-		border: 0.5em solid white;
-		.NewsCycleFont(white, 1.25em);
-		padding: 0 1em;
-		margin: 0.5em;
-		.PlaceHolder(@charcoal);
-	}
-
-	button{
-		.NewsCycleFont(white, 1.25em);
-		// Based on tutorial from: stackoverflow.com/questions/17212094/fill-background-color-left-to-right-css
-		background: linear-gradient(to right, transparent 50%, @darkTone 50%);
-		background-size: 200% 100%;
-		background-position: left bottom;
-	}
-
-	button:hover{
-		background-position: right bottom;
-		transition: all 0.5s ease;
-	}
-
-	button:active{
-		background: @lightTone;
-	}
-
-	button#submit2{
-		transition: background 1s ease;
-	}
-
 }
 
 div#mapContainer{
@@ -158,6 +126,24 @@ div#mapContainer{
 	}
 }
 
+div.alert{
+	@alertWidth: 30%;
+	width: @alertWidth;
+	position: fixed;
+	top: 20%;
+	left: (100% - @alertWidth)/2;
+	.Center();
+	padding: 1em;
+	background: @focusColor;
+	border: 1em solid white;
+}
+
+div#next{
+	.Center();
+	padding: 1em;
+	background: url('blueDiagmonds.png');
+}
+
 div#footer{
 	background: url('blueDiagmonds.png');
 	.Center();
@@ -165,6 +151,7 @@ div#footer{
 	.NewsCycleFont(white, 1em);
 	padding: 1em 0;
 	border-bottom: 1em solid @charcoal;
+	border-top: 0.25em dashed white;
 }
 
 /*--------------------------------------------*/
@@ -209,50 +196,34 @@ input, select, button{
 	.FormCleanse();
 }
 
-div#wood{
+input, button{
+	background: transparent;
+	border: 0.5em solid white;
+	.NewsCycleFont(white, 1.25em);
+	padding: 0 1em;
+	margin: 0.5em;
+	.PlaceHolder(@charcoal);
+}
 
-	@inputHeight: 2em;
+button{
+	.NewsCycleFont(white, 1.25em);
+	// Based on tutorial from: stackoverflow.com/questions/17212094/fill-background-color-left-to-right-css
+	background: linear-gradient(to right, transparent 50%, @darkTone 50%);
+	background-size: 200% 100%;
+	background-position: left bottom;
+}
 
-	padding: 2em auto;
-	float: left;
-	.Center();
+button:hover{
+	background-position: right bottom;
+	transition: all 0.5s ease;
+}
 
-	p{
-		.NewsCycleFont(@darkTone, 1.25em);
-	}
+button:active{
+	background: @lightTone;
+}
 
-	input, button{
-		background: transparent;
-		margin: 0 auto 2em;
-		border: 0.5em solid @darkTone;
-		text-align: center;
-	}
-
-	input{
-		width: 70%;
-		padding: 0 1em;
-		margin-right: 0.5em;
-		.NewsCycleFont(@darkTone, 1.5em);
-	}
-
-	button{
-		width: @inputHeight + 1em;
-		.NewsCycleFont(@darkTone, 1.5em);
-		// Based on tutorial from: stackoverflow.com/questions/17212094/fill-background-color-left-to-right-css
-		background: linear-gradient(to right, transparent 50%, white 50%);
-		background-size: 200% 100%;
-		background-position: left bottom;
-	}
-
-	button:hover{
-		background-position: right bottom;
-		transition: all 0.5s ease;
-	}
-
-	button:active{
-		background: @lightTone;
-	}
-
+button#submit2{
+	transition: background 1s ease;
 }
 
 /*--------------------------------------------*/

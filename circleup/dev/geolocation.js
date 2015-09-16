@@ -63,8 +63,17 @@ function initialize(){
         title: locations[i][0],
         //label: locations[i][0].charAt(0),
         icon: 'style/markers/' + imgLetter + '.png',
-        animation: google.maps.Animation.DROP
+        animation: google.maps.Animation.DROP,
+        draggable: true
       });
+
+      if(i == 0){
+          google.maps.event.addListener(marker, 'dragend', function(){
+                    var changeLocation = document.getElementById('changeLocation');
+                    changeLocation.style.display = 'block';
+                    updateChangeLocation(marker.getPosition());
+          });
+      }
 
       google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
