@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Song Sorting Test</title>
+	<link rel="stylesheet" type="text/css" href="style/reset.css">
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script> 
+	<style type="text/css">
+
+		textarea{
+			width: 100%;
+			height: 200px;
+			border: none;
+			background: #1A1A1A;
+			color: white;
+		}
+
+		.iframePlayer{
+			width: 100%;
+			height: 80px;
+		}
+
+		li.songRank{
+			padding: 10px;
+			background: #1A1A1A;
+			color: white;
+		}
+
+	</style>
+</head>
+<body>
+
+	<textarea id="incomingData"></textarea>
+
+	<input type="text" id='searchBar'>
+	<button onclick="sendSearchQuery();">Search</button>
+
+	<ul id="rankings"></ul>
+
+	<script type="text/javascript" src="utils.js"></script>
+	<script type="text/javascript" src="spotifyAPI.js"></script>
+	<script type="text/javascript" src="spotifyAPI-tracks.js"></script>
+	<script type="text/javascript" src="spotifyAPI-artists.js"></script>
+	<script type="text/javascript" src="spotifyAPI-search.js"></script>
+	<script type="text/javascript" src="jukebox.js"></script>
+	<script type="text/javascript" src="song.js"></script>
+	<script type="text/javascript" src="artist.js"></script>
+	<script type="text/javascript">
+
+		var jukebox = new Jukebox();
+
+		var rapNemesis = "3Fr6Wa1ap0Lv9KZ0lxGkiE";
+		var jennySong = "7eMpW9I1ZpVs6VQ90naDBh";
+		var takeOnMe = "2WfaOiMkCvy7F5fcp2zZ8L";
+		getTrack(rapNemesis);
+		getTrack(jennySong);
+		getTrack(takeOnMe);
+
+		var wizKhalifa = "137W8MRPWKqSmrBGDBFSop";
+		getArtist(wizKhalifa);
+
+
+		
+
+	</script>
+
+</body>
+</html>
