@@ -38,6 +38,7 @@ function getTrack(trackID){
 			var trackData = getTrackData(data);
 			serveData(trackData);
 			handleTrackData(trackData);
+			return trackData;
 		}
 	});
 }
