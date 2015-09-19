@@ -1,3 +1,5 @@
+var SEARCH_LIMIT = 10;
+
 function sendSearchQuery(){
 	var searchBar = document.getElementById('searchBar');
 	var query = sanitize(searchBar.value);
@@ -10,36 +12,41 @@ function sanitize(input){
 }
 
 function chooseFromResults(data, type){
-	var bestResult = null;
+	var results = [];
 	switch(type){
 		case 'artist':
 			console.log('choose an artist from schema!');
 			break;
 		case 'track':
-			bestResult = data.tracks.items[0];
+			for(var t = 0; t < SEARCH_LIMIT; t++){
+				results.push(data.tracks.items[t]);
+			}
 			break;
 		default: 
 			console.log("ERROR: Ran out of selection cases.");
 			break;
 	}
-	return bestResult;
+	return results;
 }
 
 function getSearchData(data, type){
-	var bestResult = chooseFromResults(data, type);
-	var dataPacket = null;
+	var results = chooseFromResults(data, type);
+	var dataPackets = [];
 	switch(type){
 		case 'artist':
-			dataPacket = getArtistData(bestResult);
+			// add loop
+			dataPackets = getArtistData(results);
 			break;
 		case 'track':
-			dataPacket = getTrackData(bestResult);
+			for(var t = 0; t < results.length; t++){
+				dataPackets.push(getTrackData(results[t]));
+			}
 			break;
 		default: 
 			console.log("ERROR: Ran out of parsing cases.");
 			break;
 	}
-	return dataPacket;
+	return dataPackets;
 }
 
 function handleSearchData(searchData, type){
@@ -48,7 +55,9 @@ function handleSearchData(searchData, type){
 			console.log('handle artist');
 			break;
 		case 'track':
-			handleTrackData(searchData)
+			for(var t = 0; t < searchData.length; t++){
+				handleTrackData(searchData[t]);
+			}
 			break;
 		default: 
 			console.log("ERROR: Ran out of handling cases.");

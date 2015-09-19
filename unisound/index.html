@@ -12,26 +12,32 @@
 	<link rel="icon" type="img/png" href="style/favicon.png" style="width:30px;">
 	<style type="text/css">
 
+		body{
+			width: 90%;
+			margin: 0 auto;
+		}
+
 		textarea{
 			display: none;
 			width: 100%;
 			height: 200px;
 			border: none;
+			outline: none;
+			margin: 20px 0;
 			background: #1A1A1A;
 			color: white;
 		}
 
 		.iframePlayer{
-			width: 90%;
-			margin: 5%;
+			width: 100%;
 			height: 80px;
 		}
 
 		li.songRank{
 			width: 100%;
 			line-height: 20px;
-			padding: 10px;
-			background: #1A1A1A;
+			padding: 10px 0;
+			background: transparent;
 			color: white;
 		}
 
@@ -52,8 +58,13 @@
 	<textarea id="incomingData"></textarea>
 
 	<div id="search">
-		<input type="text" id='searchBar'>
+		<input type="text" id='searchBar' placeholder="search for an track, artist, or album">
 		<button onclick="sendSearchQuery();">Search</button>
+	</div>
+
+	<div class="alert" style="display: none;">
+		<p>Hello!</p>
+		<button onclick="closeAlerts();">Close</button>
 	</div>
 
 	<ul id="rankings"></ul>
@@ -70,7 +81,7 @@
 
 		var jukebox = new Jukebox();
 
-		var rapNemesis = "3Fr6Wa1ap0Lv9KZ0lxGkiE";
+		/*var rapNemesis = "3Fr6Wa1ap0Lv9KZ0lxGkiE";
 		var jennySong = "7eMpW9I1ZpVs6VQ90naDBh";
 		var takeOnMe = "2WfaOiMkCvy7F5fcp2zZ8L";
 		getTrack(rapNemesis);
@@ -80,7 +91,18 @@
 		var wizKhalifa = "137W8MRPWKqSmrBGDBFSop";
 		getArtist(wizKhalifa);
 
-		getSearch('uptown funk', 'track');
+		getSearch('uptown funk', 'track');*/
+
+		/*function callback(){
+			alert('callback');
+		}
+
+		function test(callback){
+			console.log('ran')
+			callback();
+		}
+
+		test(callback);*/
 
 		
 

@@ -66,3 +66,10 @@ function init() {
     });
 }
 window.onload = init();
+
+function closeAlerts(){
+	var alerts = document.getElementsByClassName('alert');
+	for(var a = 0; a < alerts.length; a++){
+		alerts[a].style.display = 'none';
+	}
+}
