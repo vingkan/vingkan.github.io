@@ -3,6 +3,7 @@ var SEARCH_LIMIT = 10;
 function sendSearchQuery(){
 	var searchBar = document.getElementById('searchBar');
 	var query = sanitize(searchBar.value);
+	jukebox.clearForSearch();
 	getSearch(query, 'track');
 }
 

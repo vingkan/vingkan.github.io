@@ -28,19 +28,6 @@
 			color: white;
 		}
 
-		.iframePlayer{
-			width: 100%;
-			height: 80px;
-		}
-
-		li.songRank{
-			width: 100%;
-			line-height: 20px;
-			padding: 10px 0;
-			background: transparent;
-			color: white;
-		}
-
 	</style>
 </head>
 <body>
@@ -59,7 +46,7 @@
 
 	<div id="search">
 		<input type="text" id='searchBar' placeholder="search for an track, artist, or album">
-		<button onclick="sendSearchQuery();">Search</button>
+		<button onclick="sendSearchQuery();">&#128269;</button>
 	</div>
 
 	<div class="alert" style="display: none;">
@@ -67,7 +54,7 @@
 		<button onclick="closeAlerts();">Close</button>
 	</div>
 
-	<ul id="rankings"></ul>
+	<div id="rankings"></div>
 
 	<script type="text/javascript" src="utils.js"></script>
 	<script type="text/javascript" src="spotifyAPI.js"></script>
@@ -77,9 +64,12 @@
 	<script type="text/javascript" src="jukebox.js"></script>
 	<script type="text/javascript" src="song.js"></script>
 	<script type="text/javascript" src="artist.js"></script>
+	<script type="text/javascript" src="application.js"></script>
 	<script type="text/javascript">
 
 		var jukebox = new Jukebox();
+
+		getSearch('eminem', 'track');
 
 		/*var rapNemesis = "3Fr6Wa1ap0Lv9KZ0lxGkiE";
 		var jennySong = "7eMpW9I1ZpVs6VQ90naDBh";
