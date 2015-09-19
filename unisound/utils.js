@@ -1,6 +1,7 @@
 /*
 * StackOverflow Link: http://stackoverflow.com/questions/391979/get-client-ip-using-just-javascript
 */
+
 function getDeviceIP() {
     if (window.XMLHttpRequest) xmlhttp = new XMLHttpRequest();
     else xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
@@ -44,3 +45,24 @@ String.prototype.toTitleCase = function(){
     return match.charAt(0).toUpperCase() + match.substr(1);
   });
 };
+
+/*
+* Collapsing Header on Scroll Tutorial:
+* http://callmenick.com/post/animated-resizing-header-on-scroll
+*/
+
+function init() {
+    window.addEventListener('scroll', function(e){
+        var distanceY = window.pageYOffset || document.documentElement.scrollTop,
+            shrinkOn = 50,
+            header = document.querySelector("header");
+        if (distanceY > shrinkOn) {
+            classie.add(header,"smaller");
+        } else {
+            if (classie.has(header,"smaller")) {
+                classie.remove(header,"smaller");
+            }
+        }
+    });
+}
+window.onload = init();
