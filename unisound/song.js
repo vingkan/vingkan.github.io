@@ -27,8 +27,8 @@ function dataToSong(trackData){
 	var song = new Song(
 		trackData.id,
 		trackData.title,
-		trackData.artistsID,
-		trackData.artists,
+		trackData.artistID,
+		trackData.artist,
 		trackData.genre,
 		getDeviceIP()
 	);
@@ -87,7 +87,7 @@ Song.prototype.toHTML = function(type){
 		html += '<div class="songWrapper" onclick="previewSong(&#39;' + this.preview + '&#39;);">';
 		//html += '<div class="trackSelector">&#9834;+</div>';
 		html += '<img class="albumPicture" src="' + this.image + '" onclick="postTrack(&#39;' + this.getID() + '&#39;);">'
-		html += '<div class="songResult"><h2>' + this.title + '</h2><h3>' + this.artist + '</h3></div>';
+		html += '<div class="songResult"><h2>' + this.title + '[' + this.score + ']' + '</h2><h3>' + this.artist + '</h3></div>';
 		html += '</div>';
 	}
 	else if(type == 'q'){

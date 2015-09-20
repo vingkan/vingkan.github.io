@@ -2,7 +2,7 @@
 /*---> GLOBALS <------------------------------*/
 /*--------------------------------------------*/
 
-var PLAY_TIME = 3; // In Seconds
+var PLAY_TIME = 5; // In Seconds
 
 function playQueue(){
 	jukebox.play();
@@ -45,6 +45,7 @@ function Jukebox(name, id, state){
 	this.songs = [];
 	this.artists = [];
 	this.state = state; //one character to indicate type for update() calls
+	readAll()
 }
 
 Jukebox.prototype.play = function(){

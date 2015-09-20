@@ -83,3 +83,13 @@ $("#searchBar").keypress(function(e) {
       $("#searchButton").click();
     }
 });
+
+/*
+* http://stackoverflow.com/questions/6199038/javascript-event-triggered-by-pressing-space
+*/
+/*$(window).keypress(function(e) {
+  if (e.keyCode === 0 || e.keyCode === 32) {
+    //console.log('Space pressed');
+    $("#playButton").click();
+  }
+});*/
