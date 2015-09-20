@@ -41,13 +41,13 @@ var addUser = function(songID) {
     });
 }
 
-var getNumUsers = function(songID) {
+/**var getNumUsers = function(songID) {
     var num = 0;
     songsRef.child(songID).once("value", function(data) {
         num = data.child("users").val();
     });
     return num;
-}
+}*/
 
 // ADD GETUSERS HERE
 
@@ -69,7 +69,9 @@ var joinJukebox = function(jbID) {
 
 // add song method
 var addSong = function(songJSON) {
+    console.log(songJSON);
     songRef = songsRef.child(songJSON.id);
+    console.log(songsRef.child(songJSON.id));
     songRef.set(songJSON);
 };
 
@@ -101,23 +103,18 @@ var readAll = function(callback) {
 }*/
 
 // Update all when value is changed
-/**ref.on("value", function(snapshot) {
+/**JBRef.on("value", function(snapshot) {
     console.log(snapshot.val());
     var snapshotObj = snapshot.child("songs").val();
     var songs = [];
     for (var key in snapshotObj) {
 	if (snapshotObj.hasOwnProperty(key)) {
+        snapshotObj[key].isQuery = false;
 	    songs.push(dataToSong(snapshotObj[key]));
 	}
     }
-<<<<<<< HEAD
     
     jukebox.addSongs(songs, snapshot.val());
-=======
-
-    songs[0].isQuery = false;
-    jukebox.addSongs(songs);
->>>>>>> parent of 43ec068... Upload UniSound
 
 }, function(errorObject) {
     console.log("The read failed");
@@ -131,7 +128,7 @@ function getSongJSON(trackID){
     }
 }
 
-// write a track to the DB
+
 function postTrack(trackID){
     var json = getSongJSON(trackID);
     json.isQuery = false;

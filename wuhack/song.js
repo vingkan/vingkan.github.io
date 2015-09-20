@@ -6,7 +6,7 @@ function previewSong(previewLink){
 	var source = '<audio autoplay><source src="' + previewLink + '"></source></audio>';
 	var previewPlayer = document.getElementById('previewPlayer');
 	previewPlayer.innerHTML = source;
-	previewPlayer.innerHTML += '<button id="stopButton" onclick="stopPreview();">Stop Preview</button>';
+	previewPlayer.innerHTML += '<button class="longButton" id="stopButton" onclick="stopPreview();">Stop Preview</button>';
 }
 
 function stopPreview(){
@@ -58,7 +58,7 @@ function Song(id, title, artistID, artist, genre, userVotes){
 
 Song.prototype.calculateScore = function(){
 	var newScore = 0;
-	newScore += getNumUsers * WEIGHT.VOTES;
+	//newScore += this.users * WEIGHT.VOTES;
 	newScore += this.popularity * WEIGHT.POPULARITY;
 	this.setScore(newScore);
 }

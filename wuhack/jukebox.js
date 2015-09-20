@@ -172,19 +172,6 @@ Jukebox.prototype.countGenres = function(){
 			}
 		}
 	}
-	/*for(var a = 0; a < this.artist.length; a++){
-		for(var g = 0; g < genreCounter.length; g++){
-			if(genreCounter[g].genre == this.artist[a].genre){
-				genreCounter[g].count++;
-			}
-			else if(this.artist[a].genre != 'none'){
-				genreCounter.push({
-					'genre': this.artist[a].genre,
-					'count': 1
-				});
-			}
-		}
-	}*/
 	return genreCounter;
 }
 
@@ -195,10 +182,6 @@ Jukebox.prototype.addToExistingSong = function(newSong){
 	var songExists = false;
 	for(var s = 0; s < this.songs.length; s++){
 		if(this.songs[s].getID() == newSong.getID()){
-<<<<<<< HEAD
-=======
-			this.songs[s].addUsers([newSong.getUsers()[0]]);
->>>>>>> parent of 43ec068... Upload UniSound
 			this.songs[s].calculateScore();
 			songExists = true;
 		}

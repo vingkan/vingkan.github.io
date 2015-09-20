@@ -14,8 +14,12 @@
 	<link rel="icon" type="img/png" href="style/favicon.png" style="width:30px;">
 	<style type="text/css">
 
+		html{
+			background: #1A1A1A;
+		}
+
 		body{
-			width: 90%;
+			width: 100%;
 			margin: 0 auto;
 		}
 
@@ -46,33 +50,44 @@
 
 	<textarea id="incomingData"></textarea>
 
-	<div class="pane" id="party">
-			<input type="text" id="partyID" placeholder="party id">
-			<button id="joinParty" onclick="joinParty();">
-				<img src="style/join.png" />
-			</button>
-			<div id="currentParty" onclick="this.style.display='none';document.getElementById('voteButton').style.display='none';instruct('Enter the code given to you by your party host above or start browsing music below.');"></div>
-			<button class="partyOptions" id="voteButton" onclick="vote();">
-				<img src="style/upvote.png" />
-			</button>
-	</div>
-
-	<p class="instructions" id="instruct">Enter the code given to you by your party host above or start browsing music below.</p>
-
-	<div id="search">
-			<input type="text" id='searchBar' placeholder="search for a track, artist, or album" />
-			<button id="searchButton" onclick="sendSearchQuery();">
-				<img src="style/search.png" />
-			</button>
-		<div id="previewPlayer"></div>
-	</div>
-
 	<div class="alert" style="display: none;">
 		<p>Hello!</p>
 		<button onclick="closeAlerts();">Close</button>
 	</div>
 
-	<div id="rankings"></div>
+	<div class="pane" id="welcome">
+
+		<p><span class="fancy">UniSound.</span> The intelligent group playlist.</p>
+
+		<div>
+			<button class="homeButton" id="join" onclick="window.location='user.html'">
+				<img src="style/joinCharcoal.png" /><br>
+				<span class="fancy">Join a Party</span>
+			</button>
+			<button class="homeButton" id="host" onclick="window.location='host.html'">
+				<img src="style/hostCharcoal.png" /><br>
+				<span class="fancy">Host a Party</span>
+			</button>
+		</div>
+
+	</div>
+
+	<div class="pane" id="features">
+		<p>Easily send songs to speakers from your phone or browser.</p>
+		<p>Aggregate your friends' preferences to pick the best playlists.</p>
+		<p>Broaden your musical horizons.</p>
+	</div>
+
+	<div class="pane" id="credits">
+		<p>Created with the Spotify Web API for WUHack</p>
+		<p><img class="sponsor" style="width: 14em;" src="style/spotifyLogo.png">
+		<img class="sponsor" style="width: 6em;" src="style/wuhackLogo.png"></p>
+		<p>Photo from Spotify, Logos from Google</p>
+	</div>
+
+	<div class="pane" id="footer">
+		<p>Matt Price, Yongzheng Huang, Chloe Wright, and Vinesh Kannan | September 2015</p>
+	</div>
 
 	<script type="text/javascript" src="utils.js"></script>
 	<script type="text/javascript" src="spotifyAPI.js"></script>
@@ -91,35 +106,6 @@
 			'userID'
 		);
 		var ref = new Firebase("https://amber-torch-7758.firebaseio.com/");
-
-		//getSearch('pentatonix', 'track');
-
-		/*getSearch('eminem', 'track');
-
-		var rapNemesis = "3Fr6Wa1ap0Lv9KZ0lxGkiE";
-		var jennySong = "7eMpW9I1ZpVs6VQ90naDBh";
-		var takeOnMe = "2WfaOiMkCvy7F5fcp2zZ8L";
-		getTrack(rapNemesis);
-		getTrack(jennySong);
-		getTrack(takeOnMe);
-
-		var wizKhalifa = "137W8MRPWKqSmrBGDBFSop";
-		getArtist(wizKhalifa);
-
-		getSearch('uptown funk', 'track');*/
-
-		/*function callback(){
-			alert('callback');
-		}
-
-		function test(callback){
-			console.log('ran')
-			callback();
-		}
-
-		test(callback);*/
-
-		
 
 	</script>
 
