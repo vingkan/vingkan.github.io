@@ -11,6 +11,12 @@ var WEIGHT = {
 	'POPULARITY': 1.5
 };
 
+function previewSong(previewLink){
+	var source = '<source src="' + previewLink + '"></source>';
+	var previewPlayer = document.getElementById('previewPlayer');
+	previewPlayer.innerHTML = source;
+}
+
 function dataToSong(trackData){
 	var song = new Song(
 		trackData.id,
@@ -25,6 +31,7 @@ function dataToSong(trackData){
 	// ADD SPOTIFY GOODIES
 	song.popularity = trackData.popularity;
 	song.image = trackData.image;
+	song.preview = trackData.preview;
 	song.calculateScore()
 	return song;
 }
@@ -44,6 +51,7 @@ function Song(id, title, artistID, artist, genre, userID){
 	// FROM SPOTIFY
 	this.popularity = 0;
 	this.image = 'null';
+	this.preview = 'null';
 	// FROM SPOTIFY
 	this.score = 0;
 	this.calculateScore();
@@ -71,7 +79,7 @@ Song.prototype.toHTML = function(spotifyPlayer){
 	else{
 		html += '<div class="songWrapper" onclick="postTrack(&#39;' + this.getID() + '&#39;);">';
 		html += '<div class="trackSelector">&#9834;+</div>';
-			html += '<img class="albumPicture" src="' + this.image + '">'
+		html += '<img class="albumPicture" src="' + this.image + '" onclick="previewSong(&#39;' + this.preview + '&#39;);">'
 		html += '<div class="songResult"><h2>' + this.title + '</h2><h3>' + this.artist + '</h3></div>';
 		html += '</div>';
 	}
