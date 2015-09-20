@@ -34,9 +34,9 @@ var cSong = {
 
 function getSongJSON(trackID){
     for(var s = 0; s < jukebox.getSongs().length; s++){
-	if(jukebox.getSongs()[s].getID() == trackID){
-	    return JSON.stringify(jukebox.getSongs()[s]);
-	}
+        if(jukebox.getSongs()[s].getID() == trackID){
+            return JSON.stringify(jukebox.getSongs()[s]);
+        }
     }
 }
 

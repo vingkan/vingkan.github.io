@@ -47,8 +47,12 @@
 	<textarea id="incomingData"></textarea>
 
 	<div id="search">
-		<input type="text" id='searchBar' placeholder="search for an track, artist, or album">
-		<button onclick="sendSearchQuery();">&#128269;</button>
+		<input type="text" id='searchBar' placeholder="search for a track, artist, or album" />
+		<button id="searchButton" onclick="sendSearchQuery();">
+			<img src="style/search.png" />
+		</button>
+
+	<div id="previewPlayer"></div>
 	</div>
 
 	<div class="alert" style="display: none;">
@@ -56,7 +60,7 @@
 		<button onclick="closeAlerts();">Close</button>
 	</div>
 
-	<audio autoplay id="previewPlayer"></audio>
+	<p>Click the song for a preview, and the album cover to submit to the group!</p>
 
 	<div id="rankings"></div>
 

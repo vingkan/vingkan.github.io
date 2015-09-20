@@ -73,3 +73,13 @@ function closeAlerts(){
 		alerts[a].style.display = 'none';
 	}
 }
+
+/*
+* http://stackoverflow.com/questions/15802858/jquery-call-function-if-enter-hit
+*/
+$("#searchBar").keypress(function(e) {
+    if(e.which == 13) {
+      //alert('You pressed enter!');
+      $("#searchButton").click();
+    }
+});

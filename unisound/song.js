@@ -12,9 +12,15 @@ var WEIGHT = {
 };
 
 function previewSong(previewLink){
-	var source = '<source src="' + previewLink + '"></source>';
+	var source = '<audio autoplay><source src="' + previewLink + '"></source></audio>';
 	var previewPlayer = document.getElementById('previewPlayer');
 	previewPlayer.innerHTML = source;
+	previewPlayer.innerHTML += '<button onclick="stopPreview();">Stop Preview</button>';
+}
+
+function stopPreview(){
+	var previewPlayer = document.getElementById('previewPlayer');
+		previewPlayer.innerHTML = "";
 }
 
 function dataToSong(trackData){
@@ -77,9 +83,9 @@ Song.prototype.toHTML = function(spotifyPlayer){
 		html += '</div>';
 	}
 	else{
-		html += '<div class="songWrapper" onclick="postTrack(&#39;' + this.getID() + '&#39;);">';
-		html += '<div class="trackSelector">&#9834;+</div>';
-		html += '<img class="albumPicture" src="' + this.image + '" onclick="previewSong(&#39;' + this.preview + '&#39;);">'
+		html += '<div class="songWrapper" onclick="previewSong(&#39;' + this.preview + '&#39;);">';
+		//html += '<div class="trackSelector">&#9834;+</div>';
+		html += '<img class="albumPicture" src="' + this.image + '" onclick="postTrack(&#39;' + this.getID() + '&#39;);">'
 		html += '<div class="songResult"><h2>' + this.title + '</h2><h3>' + this.artist + '</h3></div>';
 		html += '</div>';
 	}
