@@ -101,22 +101,27 @@ var readAll = function(callback) {
 }*/
 
 // Update all when value is changed
-JBRef.on("value", function(snapshot) {
+/**ref.on("value", function(snapshot) {
     console.log(snapshot.val());
     var snapshotObj = snapshot.child("songs").val();
     var songs = [];
     for (var key in snapshotObj) {
 	if (snapshotObj.hasOwnProperty(key)) {
-        snapshotObj[key].isQuery = false;
 	    songs.push(dataToSong(snapshotObj[key]));
 	}
     }
+<<<<<<< HEAD
     
     jukebox.addSongs(songs, snapshot.val());
+=======
+
+    songs[0].isQuery = false;
+    jukebox.addSongs(songs);
+>>>>>>> parent of 43ec068... Upload UniSound
 
 }, function(errorObject) {
     console.log("The read failed");
-});
+});*/
 
 function getSongJSON(trackID){
     for(var s = 0; s < jukebox.getSongs().length; s++){

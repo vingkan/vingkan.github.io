@@ -52,6 +52,9 @@
 				<img src="style/join.png" />
 			</button>
 			<div id="currentParty" onclick="this.style.display='none';document.getElementById('voteButton').style.display='none';instruct('Enter the code given to you by your party host above or start browsing music below.');"></div>
+			<button class="partyOptions" id="voteButton" onclick="vote();">
+				<img src="style/upvote.png" />
+			</button>
 	</div>
 
 	<p class="instructions" id="instruct">Enter the code given to you by your party host above or start browsing music below.</p>
@@ -62,9 +65,6 @@
 				<img src="style/search.png" />
 			</button>
 		<div id="previewPlayer"></div>
-				<button class="longButton" style="display: none;" id="voteButton" onclick="vote();">
-				Vote for Songs in Party Queue
-			</button>
 	</div>
 
 	<div class="alert" style="display: none;">
