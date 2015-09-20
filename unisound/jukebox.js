@@ -138,6 +138,7 @@ Jukebox.prototype.sort = function(){
 	nonLocked.sort(function(a, b){
 		return sortSongsByScores(a, b);
 	});
+
 	this.songs = locked.concat(nonLocked);
 }
 
@@ -194,7 +195,6 @@ Jukebox.prototype.addToExistingSong = function(newSong){
 	var songExists = false;
 	for(var s = 0; s < this.songs.length; s++){
 		if(this.songs[s].getID() == newSong.getID()){
-			//this.songs[s].addUsers([newSong.users]);
 			this.songs[s].calculateScore();
 			songExists = true;
 		}

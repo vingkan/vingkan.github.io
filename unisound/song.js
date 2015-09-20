@@ -58,7 +58,7 @@ function Song(id, title, artistID, artist, genre, userVotes){
 
 Song.prototype.calculateScore = function(){
 	var newScore = 0;
-	newScore += this.users * WEIGHT.VOTES;
+	newScore += getNumUsers * WEIGHT.VOTES;
 	newScore += this.popularity * WEIGHT.POPULARITY;
 	this.setScore(newScore);
 }

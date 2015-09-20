@@ -3,7 +3,7 @@
 var ref = new Firebase("https://amber-torch-7758.firebaseio.com");
 var JBRef = new Firebase("https://amber-torch-7758.firebaseio.com/jukebox");
 var songsRef = new Firebase("https://amber-torch-7758.firebaseio.com/jukebox/songs");
-var jukeboxID = "12B";
+var jukeboxID = "";
 
 // Increments the Jukebox ID counter in the database
 var incrementID = function() {
@@ -39,6 +39,14 @@ var addUser = function(songID) {
         console.log(data);
         songsRef.child(songID).update({users: data.child("users").val() + 1});
     });
+}
+
+var getNumUsers = function(songID) {
+    var num = 0;
+    songsRef.child(songID).once("value", function(data) {
+        num = data.child("users").val();
+    });
+    return num;
 }
 
 // ADD GETUSERS HERE
@@ -78,10 +86,19 @@ var update = function(songID, key, value) {
 var readAll = function(callback) {
     songsRef.on("child_added", function(snapshot) {
         song = dataToSong(snapshot.val());
+        console.log(snapshot.val());
         song.isQuery = false;
         jukebox.addSongs([song]);
     });
 };
+
+/**var updateAll = function(callback) {
+    songsRef.on("child_changed", function(snapshot) {
+        song = dataToSong(snapshot.val());
+        song.isQuery = false;
+        jukebox.addSongs([song]);
+    }
+}*/
 
 // Update all when value is changed
 JBRef.on("value", function(snapshot) {
@@ -95,7 +112,7 @@ JBRef.on("value", function(snapshot) {
 	}
     }
     
-    jukebox.addSongs(songs);
+    jukebox.addSongs(songs, snapshot.val());
 
 }, function(errorObject) {
     console.log("The read failed");
