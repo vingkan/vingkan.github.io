@@ -5,7 +5,7 @@ function sendToPlayer(trackID){
 }
 
 function getSongPlayer(trackID){
-	var iframe = '<iframe class="iframePlayer" src="https://embed.spotify.com/?uri=spotify%3Atrack%3A' + trackID + '" frameborder="0" allowtransparency="true"></iframe>';
+	var iframe = '<iframe class="iframePlayer" src="https://embed.spotify.com/?uri=spotify%3Atrack%3A' + trackID + '" theme="white" frameborder="0" allowtransparency="true"></iframe>';
 	return iframe;
 }
 
