@@ -43,7 +43,7 @@ function Jukebox(name, id, state){
 	this.name = name;
 	this.id = id;
 	this.songs = [];
-	this.artists = [];
+	this.artist = [];
 	this.state = state; //one character to indicate type for update() calls
 	readAll()
 }
@@ -77,7 +77,7 @@ Jukebox.prototype.update = function(type){
 
 Jukebox.prototype.clearForSearch = function(){
 	this.songs = [];
-	this.artists = [];
+	this.artist = [];
 }
 
 Jukebox.prototype.sort = function(){
@@ -161,13 +161,13 @@ Jukebox.prototype.addSongs = function(songs){
 }
 
 Jukebox.prototype.getArtists = function(){
-	return this.artists;
+	return this.artist;
 }
 
 Jukebox.prototype.artistLoaded = function(artistID){
 	var loaded = false;
-	for(var a = 0; a < this.artists.length; a++){
-		if(this.artists[a].id == artistID){
+	for(var a = 0; a < this.artist.length; a++){
+		if(this.artist[a].id == artistID){
 			loaded = true;
 		}
 	}
@@ -176,9 +176,9 @@ Jukebox.prototype.artistLoaded = function(artistID){
 
 Jukebox.prototype.getArtistById = function(artistID){
 	var response = null;
-	for(var a = 0; a < this.artists.length; a++){
-		if(this.artists[a].id == artistID){
-			response = this.artists[a];
+	for(var a = 0; a < this.artist.length; a++){
+		if(this.artist[a].id == artistID){
+			response = this.artist[a];
 		}
 	}
 	return response;
@@ -192,7 +192,7 @@ Jukebox.prototype.addArtists = function(artists){
 		//var songExists = this.addToExistingSong(artists[a]);
 		//TO-DO Create Artist equivalent of this ^
 		//if(!songExists){
-			this.artists.push(artists[a]);
+			this.artist.push(artists[a]);
 		//}
 	}
 }
