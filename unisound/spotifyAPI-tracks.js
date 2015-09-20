@@ -16,7 +16,8 @@ function getTrackData(data){
 		'artistsID': data.artists[0].id,
 		'artists': data.artists[0].name,
 		'popularity': data.popularity,
-		'genre': 'null'
+		'genre': 'null',
+		'image': data.album.images[0].url
 	};
 }
 

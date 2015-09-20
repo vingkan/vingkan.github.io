@@ -8,7 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="style/styles.css">
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
-	<link href='https://fonts.googleapis.com/css?family=Oxygen:400,700,300' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Pacifico|Oxygen:300,400,700' rel='stylesheet' type='text/css'>
 	<script src="style/classie.js"></script>
 	<link rel="icon" type="img/png" href="style/favicon.png" style="width:30px;">
 	<style type="text/css">
@@ -55,6 +55,8 @@
 		<button onclick="closeAlerts();">Close</button>
 	</div>
 
+	<!-- <div class="songWrapper" id="player"></div> -->
+
 	<div id="rankings"></div>
 
 	<script type="text/javascript" src="utils.js"></script>
@@ -71,6 +73,8 @@
 	<script type="text/javascript">
 
 		var jukebox = new Jukebox();
+
+		getSearch('pentatonix', 'track');
 
 		/*getSearch('eminem', 'track');
 
