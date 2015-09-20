@@ -27,6 +27,7 @@
 
 	<div id="headerSpace"></div>
 
+	<div id="hostIdDisplay">ID should be here</div>
 	<textarea id="incomingData"></textarea>
 
 	<div id="search">
@@ -66,6 +67,10 @@
 
 		document.getElementById('rankings').innerHTML = jukebox.toHTML('q');*/
 
+	</script>
+	<script>
+	  console.log(jukeboxID);
+	  $("div#hostIdDisplay").html(jukeboxID);
 	</script>
 
 </body>
