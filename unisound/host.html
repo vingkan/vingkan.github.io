@@ -19,8 +19,8 @@
 
 	<header>
 		<div class="container clearfix">
-			<img class="logo" id="big" src="style/blackBannerLogo.png">
-			<img class="logo" id="small" src="style/blackSquareLogo.png">
+			<img class="logo" id="big" src="style/blackBannerLogo.png" onclick="window.location='index.html'">
+			<img class="logo" id="small" src="style/blackSquareLogo.png" onclick="window.location='index.html'">
 			<p>UniSound</p>
 		</div>
 	</header>
@@ -49,21 +49,22 @@
 	<script type="text/javascript" src="application.js"></script>
 	<script type="text/javascript">
 
-		/**var jukebox = new Jukebox(
+		var jukebox = new Jukebox(
 			'UniSound Party!',
 			'jukeboxID',
 			'q'
 		);
-		var rapNemesis = "3Fr6Wa1ap0Lv9KZ0lxGkiE";
+		
+		/*var rapNemesis = "3Fr6Wa1ap0Lv9KZ0lxGkiE";
 		var jennySong = "7eMpW9I1ZpVs6VQ90naDBh";
 		var takeOnMe = "2WfaOiMkCvy7F5fcp2zZ8L";
 		var laLaLatch = "6fOqEAXCwboCO4BdzbZG1K";
 		getTrack(rapNemesis);
 		getTrack(jennySong);
 		getTrack(takeOnMe);
-		getTrack(laLaLatch);*/
+		getTrack(laLaLatch);
 
-		document.getElementById('rankings').innerHTML = jukebox.toHTML('q');
+		document.getElementById('rankings').innerHTML = jukebox.toHTML('q');*/
 
 	</script>
 

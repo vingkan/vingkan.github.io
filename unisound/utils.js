@@ -83,6 +83,12 @@ $("#searchBar").keypress(function(e) {
       $("#searchButton").click();
     }
 });
+$("#partyID").keypress(function(e) {
+    if(e.which == 13) {
+      //alert('You pressed enter!');
+      $("#joinParty").click();
+    }
+});
 
 /*
 * http://stackoverflow.com/questions/6199038/javascript-event-triggered-by-pressing-space
@@ -93,3 +99,8 @@ $("#searchBar").keypress(function(e) {
     $("#playButton").click();
   }
 });*/
+
+function instruct(message){
+  var instructions = document.getElementById('instruct');
+  instructions.innerHTML = message;
+}

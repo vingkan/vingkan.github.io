@@ -189,36 +189,138 @@ textarea{
 }
 
 div#headerSpace{
-	height: 6em;
+	height: 8em;
 }
 
-div#search{
+div.pane{
 	
-	width: 100%;
-	.Center();
-	.SlideButton();
+	padding: 2em 0;
+	.FullWidth();
 
-	input#searchBar, button{
-		display: inline-block;
-		height: 4em;
-		margin: 1.25em 0 0 0;
+	p{
+		width: 100%;
+		clear: both;
 	}
 
-	input#searchBar{
-		width: 75%;
-		margin-right: -1em;
+}
+
+	div#welcome{
+		
+		background: url('spotifyPartyGray.png') no-repeat center center fixed;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+
+		height: 24em;
+
+		p{
+			color: black;
+			background: rgba(255, 255, 255, 0.85);
+			width: 100%;
+		}
+
+	}
+
+	div#features{
+		
+		background: @focusColor;
+
+		p{
+			.OxygenFont(white, 1.25em);
+			margin: 0;
+		}
+
+	}
+
+	div#credits{
+
+		img{
+			margin: 0 2em;
+		}
+
+	}
+
+	div#footer{
+		background: black;
+	}
+
+p.inputHolders{
+	margin: 0;
+	padding: 0;
+}
+
+button.homeButton{
+
+	background: rgba(255, 255, 255, 0.85);
+	float: left;
+	width: 48%;
+	margin: 1%;
+	padding: 1% 0;
+	border-radius: 2em;
+	border: 1em solid black;
+	transition: all 0.35s;
+	text-align: center;
+	font-size: 1em;
+
+	img{
+		height: 10em;
+		clear: both;
+	}
+
+}
+
+	button.homeButton:hover{
+		border: 2.5em solid white;
+		background: rgba(255, 255, 255, 1.0);
+		height: 18em;
+	}
+
+span.fancy{
+	font-family: @pacifico;
+	font-size: 1.5em;
+}
+
+div#party, div#search{
+	
+	clear: both;
+	.SlideButton();
+	.FullWidth();
+	.Center();
+
+	input, button{
+		float: left;
+		display: inline-block;
+		height: 3em;
+		line-height: 3em;
+		font-size: 1.5em;
+		padding: 0;
+		//border: 0.25em solid white;
+		border: none;
+	}
+
+	input{
+		.FullWidth();
+		margin-right: -1.25em;
 		text-align: center;
 		float: left;
+		background: rgba(255, 255, 255, 0.5);
+		color: @charcoal;
+		.PlaceHolder();
 	}
 
 	button{
 
-		width: 4em;
+		float: right;
+		width: 3em;
 		padding: 0;
 		clear: right;
+		margin: 0;
+		margin-top: -3em;
+		background: @charcoal;
 
 		img{
-			width: 3em;
+			width: 1.5em;
 			.Center();
 		}
 
@@ -227,21 +329,60 @@ div#search{
 	div#previewPlayer{
 
 		button{
-			width: 12em;
+			width: 100%;
 			font-size: 1.5em;
 			height: 2em;
 			line-height: 1.5em;
+			margin: 1em auto;
 		}
 
 	}
 
+	div#currentParty{
+		display: none;
+		height: 4.5em;
+		width: 100% - 10em;
+		background: @charcoal;
+		position: absolute;
+		z-index: 10;
+		line-height: 4.5em;
+		transition: all 0.35s;
+	}
+
+		div#currentParty:hover{
+			background: white;
+			color: @charcoal;
+		}
+
+	button.partyOptions{
+		display: none;
+		position: absolute;
+		float: right;
+		z-index: 15;
+		width: 3em;
+		height: 3em;
+		border: none;
+		margin-top: 0;
+	}
+
+}
+
+div#search{
+	margin-bottom: 6em;
+}
+
+p.instructions{
+	clear: both;
+	font-size: 1.5em;
+	line-height: 2em;
+	height: 2em;
 }
 
 div#rankings{
 
 	div.item{
 
-		width: 100%;
+		.FullWidth();
 		height: 80px;
 		margin: 1em 0;
 
@@ -281,9 +422,8 @@ div#rankings{
 div.songWrapper{
 
 	@wrapperHeight: 6em;
-
+	width: 100% - 1.5em;
 	background: @charcoal;
-	width: 100%;
 	height: @wrapperHeight;
 	display: inline-block;
 	margin-bottom: 1em;
@@ -342,6 +482,12 @@ div.songWrapper{
 
 	}
 
+	span.songScore{
+		font-family: @oxygen;
+		font-size: 0.75em;
+		color: @focusColor;
+	}
+
 	img.albumPicture{
 		width: @wrapperHeight;
 	}
@@ -350,7 +496,7 @@ div.songWrapper{
 		margin-top: -1em;
 	}
 
-	button.removeButton{
+	button.removeButton, button.upvote{
 		background: @focusColor;
 		color: @charcoal;
 		margin: 2em;
@@ -360,6 +506,15 @@ div.songWrapper{
 		float: right;
 		border-radius: 1.5em;
 		text-align: center;
+	}
+
+	button.upvote{
+		
+		img{
+			margin-top: 0.25em;
+			height: 2em;
+		}
+
 	}
 
 }
@@ -427,6 +582,10 @@ h1{
 	text-align: left;
 }*/
 
+ul li{
+	list-style-type: square;
+}
+
 /*--------------------------------------------*/
 /*---> IMAGES <-------------------------------*/
 /*--------------------------------------------*/
@@ -441,7 +600,7 @@ h1{
 /*---> FORMS <--------------------------------*/
 /*--------------------------------------------*/
 
-.PlaceHolder(@color: #ccc) {
+.PlaceHolder(@color: #1A1A1A) {
 	input::-webkit-input-placeholder { color: @color; }
 	input:-moz-placeholder { color: @color; }
 	textarea::-webkit-input-placeholder { color: @color; }
@@ -457,6 +616,8 @@ h1{
 
 input, select, button{
 	.FormCleanse();
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
 }
 
 .SlideButton(){
@@ -468,8 +629,6 @@ input, select, button{
 		padding: 0 1em;
 		margin: 1em;
 		.PlaceHolder(@charcoal);
-		box-sizing: border-box;
-		-moz-box-sizing: border-box;
 	}
 
 	button{

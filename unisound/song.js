@@ -2,15 +2,6 @@
 /*---> GLOBALS <------------------------------*/
 /*--------------------------------------------*/
 
-/*
-* Global weighting values for calculating song scores
-*/
-var WEIGHT = {
-	'VOTES': 2.0,
-	'FAIRNESS': 1.2,
-	'POPULARITY': 1.5
-};
-
 function previewSong(previewLink){
 	var source = '<audio autoplay><source src="' + previewLink + '"></source></audio>';
 	var previewPlayer = document.getElementById('previewPlayer');
@@ -30,8 +21,9 @@ function dataToSong(trackData){
 		trackData.artistID,
 		trackData.artist,
 		trackData.genre,
-		getDeviceIP()
+		1
 	);
+	song.isQuery = true;
 	// Update Artist
 	getArtist(song.artistID);
 	// ADD SPOTIFY GOODIES
@@ -46,15 +38,15 @@ function dataToSong(trackData){
 /*---> SONG CLASS <---------------------------*/
 /*--------------------------------------------*/
 
-function Song(id, title, artistID, artist, genre, userID){
+function Song(id, title, artistID, artist, genre, userVotes){
 	this.id = id;
 	this.title = title;
 	this.artistID = artistID;
 	this.artist = artist;
 	this.genre = genre;
-	this.users = [];
-	this.users.push(userID || 'anonUser');
+	this.users = 1;
 	this.isLocked = false;
+	this.isQuery = false;
 	// FROM SPOTIFY
 	this.popularity = 0;
 	this.image = 'null';
@@ -66,7 +58,7 @@ function Song(id, title, artistID, artist, genre, userID){
 
 Song.prototype.calculateScore = function(){
 	var newScore = 0;
-	newScore += this.getUsers().length * WEIGHT.VOTES;
+	newScore += this.users * WEIGHT.VOTES;
 	newScore += this.popularity * WEIGHT.POPULARITY;
 	this.setScore(newScore);
 }
@@ -83,18 +75,18 @@ Song.prototype.toHTML = function(type){
 		html += getSongPlayer(this.getID());
 		html += '</div>';
 	}
-	else if(type == 'r'){
+	else if(type == 'r' && this.isQuery){
 		html += '<div class="songWrapper" onclick="previewSong(&#39;' + this.preview + '&#39;);">';
 		//html += '<div class="trackSelector">&#9834;+</div>';
 		html += '<img class="albumPicture" src="' + this.image + '" onclick="postTrack(&#39;' + this.getID() + '&#39;);">'
-		html += '<div class="songResult"><h2>' + this.title + '[' + this.score + ']' + '</h2><h3>' + this.artist + '</h3></div>';
+		html += '<div class="songResult"><h2>' + this.title + ' <span class="songScore">' + this.score + '</span>' + '</h2><h3>' + this.artist + ', ' + this.genre.toTitleCase() + '</h3></div>';
 		html += '</div>';
 	}
-	else if(type == 'q'){
+	else if(type == 'q' && !(this.isQuery)){
 		html += '<div class="songWrapper">';
 		//html += '<div class="trackSelector">&#9834;+</div>';
 		html += '<img class="albumPicture" src="' + this.image + '">'
-		html += '<div class="songResult"><h2>' + this.title + '</h2><h3>' + this.artist + '</h3></div>';
+		html += '<div class="songResult"><h2>' + this.title + ' <span class="songScore">' + this.score + '</span>' + '</h2><h3>' + this.artist + ', ' + this.genre.toTitleCase() + '</h3></div>';
 		var icon = 'X';
 		if(this.isLocked){
 			icon = '&#128274;';
@@ -104,6 +96,14 @@ Song.prototype.toHTML = function(type){
 			html += '<button class="removeButton" onclick="removeFromQueue(&#39;' + this.id + '&#39;)">' + icon + '</button>';			
 		}
 
+		html += '</div>';
+	}
+	else if(type == 'v' && !(this.isQuery)){
+		html += '<div class="songWrapper">';
+		//html += '<div class="trackSelector">&#9834;+</div>';
+		html += '<img class="albumPicture" src="' + this.image + '">'
+		html += '<div class="songResult"><h2>' + this.title + ' <span class="songScore">' + this.score + '</span>' + '</h2><h3>' + this.artist + ', ' + this.genre.toTitleCase() + '</h3></div>';
+		html += '<button class="upvote" onclick="addUser(&#39;' + this.id + '&#39;); this.style.display=&#39;none&#39;"><img src="style/upvote.png"></button>';
 		html += '</div>';
 	}
 	return html;
@@ -139,19 +139,6 @@ Song.prototype.getGenre = function(){
 
 Song.prototype.setGenre = function(genre){
 	this.genre = genre;
-}
-
-Song.prototype.getUsers = function(){
-	return this.users;
-}
-
-/*
-* Note that userID is an array of userIDs, be sure to wrap in [] brackets, even when pushing only a single userID
-*/
-Song.prototype.addUsers = function(userID){
-	for(var u = 0; u < userID.length; u++){
-		this.users.push(userID[u]);
-	}
 }
 
 Song.prototype.getScore = function(){

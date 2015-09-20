@@ -1,9 +1,9 @@
 var SEARCH_LIMIT = 10;
 
 function sendSearchQuery(){
+	jukebox.clearForSearch();
 	var searchBar = document.getElementById('searchBar');
 	var query = sanitize(searchBar.value);
-	jukebox.clearForSearch();
 	getSearch(query, 'track');
 }
 
@@ -21,6 +21,7 @@ function chooseFromResults(data, type){
 		case 'track':
 			for(var t = 0; t < SEARCH_LIMIT; t++){
 				results.push(data.tracks.items[t]);
+				//console.log('queried: ' + data.tracks.items[t].name);
 			}
 			break;
 		default: 

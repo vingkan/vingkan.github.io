@@ -2,7 +2,16 @@
 /*---> GLOBALS <------------------------------*/
 /*--------------------------------------------*/
 
-var PLAY_TIME = 5; // In Seconds
+/*
+* Global weighting values for calculating song scores
+*/
+var WEIGHT = {
+	'VOTES': 40.0,
+	'FAIRNESS': 1.0,
+	'POPULARITY': 1.5
+};
+
+var PLAY_TIME = 10; // In Seconds
 
 function playQueue(){
 	jukebox.play();
@@ -19,10 +28,33 @@ function playQueue(){
 function removeFromQueue(trackID){
 	for(var s = 0; s < jukebox.songs.length; s++){
 		if(jukebox.songs[s].getID() == trackID){
+			deleteSong(jukebox.songs[s].getID());
 			jukebox.songs.splice(s, 1);
 		}
 	}
 	jukebox.update('q');
+}
+
+function joinParty(){
+	var partyInput = document.getElementById('partyID');
+	var currentParty = document.getElementById('currentParty');
+	if(fetchName(partyInput.value) != null){
+		console.log("It should've worked");
+		jukebox.partyID = partyInput.value;
+		instruct("Click the song for a preview and click the album cover to submit to the group!");
+		currentParty.innerHTML = "Sending songs to " + partyID.value + ". Click green to vote on songs. Click this box to change parties.";
+		currentParty.style.display = 'block';
+		document.getElementById('voteButton').style.display = 'block';
+		partyInput.value = '';
+	}
+	else{
+		instruct("That is not a valid party ID code.");
+	}
+
+}
+
+function vote(){
+	jukebox.update('v');
 }
 
 /*
@@ -45,15 +77,18 @@ function Jukebox(name, id, state){
 	this.songs = [];
 	this.artist = [];
 	this.state = state; //one character to indicate type for update() calls
-	readAll()
+	this.partyID = "null";
+	readAll();
+	createJukebox;
 }
 
 Jukebox.prototype.play = function(){
 	previewSong(this.songs[0].preview);
+	deleteSong(this.songs[0].getID());
 	this.songs.splice(0, 1);
 	setTimeout(function(){
 		jukebox.update('q');
-	}, PLAY_TIME * 1000);
+	}, 2 * PLAY_TIME * 1000);
 }
 
 Jukebox.prototype.update = function(type){
@@ -76,8 +111,17 @@ Jukebox.prototype.update = function(type){
 }
 
 Jukebox.prototype.clearForSearch = function(){
+	/*for(var s = 0; s < this.songs.length; s++){
+		if(this.songs[s].isQuery){*/
+			/* Do not call deleteSong(trackID) from application.js
+			 * because a query song should only exist in the client's
+			 * jukebox. Don't accidentally delete a real instance. */
+			/*this.songs.splice(s, 1);
+		}
+	}*/
 	this.songs = [];
 	this.artist = [];
+	this.update('r');
 }
 
 Jukebox.prototype.sort = function(){
@@ -107,6 +151,40 @@ Jukebox.prototype.updateGenres = function(){
 			}
 		}
 	}
+}
+
+Jukebox.prototype.countGenres = function(){
+	var genreCounter = [{
+		'genre': 'genre',
+		'count': 0
+	}];
+	for(var s = 0; s < this.songs.length; s++){
+		for(var g = 0; g < genreCounter.length; g++){
+			if(genreCounter[g].genre == this.songs[s].genre){
+				genreCounter[g].count++;
+			}
+			else if(this.songs[s].genre != 'none'){
+				genreCounter.push({
+					'genre': this.songs[s].genre,
+					'count': 1
+				});
+			}
+		}
+	}
+	/*for(var a = 0; a < this.artist.length; a++){
+		for(var g = 0; g < genreCounter.length; g++){
+			if(genreCounter[g].genre == this.artist[a].genre){
+				genreCounter[g].count++;
+			}
+			else if(this.artist[a].genre != 'none'){
+				genreCounter.push({
+					'genre': this.artist[a].genre,
+					'count': 1
+				});
+			}
+		}
+	}*/
+	return genreCounter;
 }
 
 /*
