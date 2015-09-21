@@ -77,7 +77,7 @@ var addSong = function(songJSON) {
 
 // delete a song from the list
 var deleteSong = function(songID) { 
-    ref.child("songs").child(songID).remove();
+    JBRef.child("songs").child(songID).remove();
 };
 
 var update = function(songID, key, value) {
@@ -103,7 +103,7 @@ var readAll = function(callback) {
 }*/
 
 // Update all when value is changed
-/**JBRef.on("value", function(snapshot) {
+JBRef.on("value", function(snapshot) {
     console.log(snapshot.val());
     var snapshotObj = snapshot.child("songs").val();
     var songs = [];
@@ -118,7 +118,7 @@ var readAll = function(callback) {
 
 }, function(errorObject) {
     console.log("The read failed");
-});*/
+});
 
 function getSongJSON(trackID){
     for(var s = 0; s < jukebox.getSongs().length; s++){
