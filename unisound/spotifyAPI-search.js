@@ -72,6 +72,7 @@ function getSearch(query, type){
 		url: spotifyBase + 'v1/search?q=' + formatQuery(query) + '&type=' + type,
 		beforeSend: function(xhr) {
 			xhr.setRequestHeader("Authorization", "Bearer " + bearer)
+			//xhr.setRequestHeader('Authorization': 'Basic ' + (new Buffer(clientID + ':' + clientSecret).toString('base64'))))
 		},
 		success: function(data){
 			var searchData = getSearchData(data, type);
@@ -84,3 +85,8 @@ function getSearch(query, type){
 function formatQuery(query){
 	return query.replace(' ', '+');
 }
+
+/*
+* Header Reference from Spotify Node.js Tutorial
+* headers: { 'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64')) },
+*/
