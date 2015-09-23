@@ -43,22 +43,62 @@
 	</script>
 
 	<header>
+		<img id="headerLogo" src="style/greenLogo.png"/>
 		<div class="fb-like" data-href="http://ecoeats.tk/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
 	</header>
 
-	<div id="sky">
+	<div class="sky">
 		<div id="clouds" style="background-image: url('style/cloudsBanner.png');"></div>
-		<img id="teaserLogo" src="style/whiteLogo.png"/>
+		<div class="wood">
+			<h1>Upcoming Meals</h1>
+			<div id="upcomingMeals">
+				<p>No meals are currently listed. Host your own!</p>
+			</div>
+		</div>
 		<div id="buildings" style="background-image: url('style/buildingsBanner.png');"></div>
 	</div>
 
-	<div id="grass">
-		<p>Thank you! Now go tell your friends.</p>
+	<div class="wood">
+		<div id="footer">
+			<p>Sunny Shah, Founder and CEO | EcoEats 2015 | Webpage by Vinesh Kannan</p>
+		</div>
 	</div>
 
-	<div id="thankYou">
-		<p>Sunny Shah, Founder and CEO | EcoEats 2015 | Webpage by Vinesh Kannan</p>
-	</div>
+	<script type="text/javascript">
+
+		var meals = [];
+		var database = new Firebase('https://ecoeats.firebaseio.com/');
+		// Generated Meals and Old Data Call Here:
+			/*var eventDate = new Date(2015, 9, 7, 18);
+			database.push({
+				name: "Domino's Pizza",
+				id: "aaa001",
+				chef: "Sunny Shah",
+				img: "dominosPizza.jpg",
+				date: eventDate,
+				capacity: 10,
+				price: 5
+			});*/
+			/*database.on('value', function(snapshot){
+				var meal = new Meal(snapshot.exportVal()['-JzwOJd0SaktF_vIg5x0']);
+				meals.push(meal);
+				loadMeals();
+			});*/
+		database.once('value', function(snapshot){
+			snapshot.forEach(function(childSnapshot){
+				var key = childSnapshot.key();
+				var childData = childSnapshot.val();
+				/*console.log(key);
+				console.log(childData);*/
+				//var meal = new Meal(snapshot.exportVal()['-JzwOJd0SaktF_vIg5x0']);
+				var meal = new Meal(childData);
+				meals.push(meal);
+				loadMeals();
+			});
+		});
+
+
+	</script>
 
 </body>
 
