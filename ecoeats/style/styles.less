@@ -6,6 +6,7 @@
 @lightGreen: @ecoGreen + #222222;
 @darkGreen: @ecoGreen - #222222;
 @skyBlue: #8ccee3;
+@charcoal: #1a1a1a;
 
 /*--------------------------------------------*/
 /*---> FONTS <--------------------------------*/
@@ -81,7 +82,7 @@ html{
 	background: @ecoGreen;
 }
 
-div#sky{
+div.sky{
 
 	background: @skyBlue;
 	.FullWidth();
@@ -110,16 +111,26 @@ div#sky{
 
 }
 
-div#grass{
-
+div.grass{
 	background: @ecoGreen;
 	.FullWidth();
+}
+
+div.wood{
+
+	background: url('retinaWood.png');
+	.FullWidth();
+
+	h1, p{
+		color: @darkGreen;
+	}
 
 }
 
-div#wood{
-	background: url('retinaWood.png');
-	.FullWidth();
+div#upcomingMeals{
+	background: rgba(255, 255, 255, 0.25);
+	padding: 1em 0;
+	.BitterFont(@darkGreen);
 }
 
 div#footer{
@@ -150,7 +161,7 @@ div#thankYou{
 header{
 
 	position: fixed;
-	background: rgba(255, 255, 255, 0.5);
+	background: rgba(255, 255, 255, 0.75);
 	height: 60px;
 	.FullWidth();
 
@@ -161,7 +172,7 @@ header{
 	}
 
 	div.fb-like{
-		float: left;
+		float: right;
 		height: 20px;
 		width: auto;
 		margin: 20px 0 0 0;
@@ -175,10 +186,21 @@ header{
 /*---> TEXT <---------------------------------*/
 /*--------------------------------------------*/
 
-p{
+h1, p{
 	padding: @defaultPadding;
 	.BitterFont(white, 1.25em);
 	.Center();
+}
+
+h1{
+	.BitterFont(white, 1.75em);
+	font-weight: bolder;
+	padding: 0.25em;
+}
+
+h1 + p{
+	margin-top: 0;
+	padding-top: 0;
 }
 
 /*--------------------------------------------*/
@@ -206,7 +228,7 @@ input, select, button{
 	.FormCleanse();
 }
 
-div#wood{
+div.wood{
 
 	@inputHeight: 2em;
 
