@@ -52,7 +52,20 @@
 		<div class="wood">
 			<h1>Upcoming Meals</h1>
 			<div id="upcomingMeals">
-				<p>No meals are currently listed. Host your own!</p>
+
+				<div class="mealPreview" style="background-image: url('style/meals/teriyakiChickenPotato.jpg');">
+					<div class="mealTitle">
+						<h2>{{Meal Name}}</h2>
+						<h3>{{Chef Names}}</h3>
+					</div>
+				</div>
+				<div class="mealPreview" style="background-image: url('style/meals/dominosPizza.jpg');">
+					<div class="mealTitle">
+						<h2>{{Meal Name}}</h2>
+						<h3>{{Chef Names}}</h3>
+					</div>
+				</div>
+
 			</div>
 		</div>
 		<div id="buildings" style="background-image: url('style/buildingsBanner.png');"></div>
@@ -67,34 +80,31 @@
 	<script type="text/javascript">
 
 		var meals = [];
-		var database = new Firebase('https://ecoeats.firebaseio.com/');
+		var mealDatabase = new Firebase('https://ecoeats.firebaseio.com/meals');
 		// Generated Meals and Old Data Call Here:
-			/*var eventDate = new Date(2015, 9, 7, 18);
-			database.push({
-				name: "Domino's Pizza",
-				id: "aaa001",
-				chef: "Sunny Shah",
-				img: "dominosPizza.jpg",
-				date: eventDate,
-				capacity: 10,
-				price: 5
+			/*var eventDate = new Date(2015, 8, 25, 20);
+			mealDatabase.push({
+				name: "Teriyaki Chicken and Potatoes",
+				id: "aaa000",
+				chef: "Paulina Pys and Misha Shah",
+				timestamp: eventDate.getTime(),
+				img: "teriyakiChickenPotato.jpg",
+				capacity: 5,
+				price: 7
 			});*/
-			/*database.on('value', function(snapshot){
+			/*mealDatabase.on('value', function(snapshot){
 				var meal = new Meal(snapshot.exportVal()['-JzwOJd0SaktF_vIg5x0']);
 				meals.push(meal);
 				loadMeals();
 			});*/
-		database.once('value', function(snapshot){
+		mealDatabase.once('value', function(snapshot){
 			snapshot.forEach(function(childSnapshot){
 				var key = childSnapshot.key();
 				var childData = childSnapshot.val();
-				/*console.log(key);
-				console.log(childData);*/
-				//var meal = new Meal(snapshot.exportVal()['-JzwOJd0SaktF_vIg5x0']);
 				var meal = new Meal(childData);
 				meals.push(meal);
-				loadMeals();
 			});
+			//loadMeals();
 		});
 
 

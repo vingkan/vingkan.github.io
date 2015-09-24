@@ -127,13 +127,6 @@ div.wood{
 
 }
 
-div#upcomingMeals{
-	background: rgba(255, 255, 255, 0.25);
-	padding: 1em 0;
-	.BitterFont(@darkGreen);
-	.Center();
-}
-
 div#footer{
 
 	background: @darkGreen;
@@ -163,6 +156,7 @@ header{
 
 	position: fixed;
 	background: rgba(255, 255, 255, 0.75);
+	border-bottom: 5px solid @ecoGreen;
 	height: 60px;
 	.FullWidth();
 
@@ -182,6 +176,52 @@ header{
 
 }
 
+/*--------------------------------------------*/
+/*---> MEALS <--------------------------------*/
+/*--------------------------------------------*/
+
+div#upcomingMeals{
+	background: rgba(255, 255, 255, 0.25);
+	.BitterFont(@darkGreen);
+	.Center();
+	padding: 1em;
+	margin: 1em;
+}
+
+div.mealPreview{
+
+	display: inline-block;
+	width: 10em;
+	height: 10em;
+	padding: 1em;
+	margin: 1em;
+
+	div.mealTitle{
+		background: rgba(255, 255, 255, 0.5);
+		padding: 0.5em;
+		margin: -1em;
+		margin-top: 0.5em;
+		position: relative;
+	}
+
+	h2{
+		.BitterFont(@charcoal, 1.25em);
+	}
+
+	h3{
+		.BitterFont(lighten(@charcoal, 10%), 1em);
+		font-style: italic;
+	}
+
+	//background-image property filled in by HTML
+	background-repeat: no-repeat;
+	background-position: center center;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+
+}
 
 /*--------------------------------------------*/
 /*---> TEXT <---------------------------------*/
@@ -200,6 +240,11 @@ h1{
 }
 
 h1 + p{
+	margin-top: 0;
+	padding-top: 0;
+}
+
+p + p{
 	margin-top: 0;
 	padding-top: 0;
 }
@@ -279,8 +324,8 @@ div.wood{
 /*---> SCROLLBAR <----------------------------*/
 /*--------------------------------------------*/
 
-@scrollBar: @darkGreen;
-@scrollBarBack: @ecoGreen;
+@scrollBar: white;
+@scrollBarBack: transparent;
 
 ::-webkit-scrollbar{
 	width: 10px;
@@ -302,6 +347,9 @@ div.wood{
 
 ::-webkit-scrollbar-thumb{
 	background: @scrollBar;
+	border-radius: 5px;
+	position: absolute;
+	margin-left: -10px;
 }
 
 ::-webkit-scrollbar-corner{
