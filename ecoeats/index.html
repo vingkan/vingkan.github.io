@@ -48,9 +48,8 @@
 		<div class="fb-like" data-href="http://ecoeats.tk/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
 	</header>
 
-	<div class="headerSpace"></div>
-
 	<div class="sky">
+		<div class="headerSpace"></div>
 		<div id="clouds" style="background-image: url('style/cloudsBanner.png');"></div>
 		<img id="teaserLogo" src="style/whiteLogo.png"/>
 		<div id="buildings" style="background-image: url('style/buildingsBanner.png');"></div>
@@ -73,62 +72,20 @@
 		</div>
 	</div>
 
-	<div style="display: none;">
-		<script type="text/javascript">
-			var submitted = false;
-		</script>
-		<iframe name="hidden-iframe" id="hidden-iframe" style="display: none;" onload="if(submitted){window.location='teaser.html';}"></iframe>
-		<form action="https://docs.google.com/a/hawk.iit.edu/forms/d/1C_2NjqxMxBH6o21nmDlE0y2EoFEjG-uw4Qr428SLFZU/formResponse" method="POST" id="ss-form" target="hidden-iframe" onsubmit="submitted = true;">
-
-		<ol role="list" class="ss-question-list" style="padding-left: 0">
-		<div class="ss-form-question errorbox-good" role="listitem">
-		<div dir="auto" class="ss-item ss-item-required ss-text"><div class="ss-form-entry">
-		<label class="ss-q-item-label" for="entry_1282620408"><div class="ss-q-title">Email Address
-		<label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
-		<span class="ss-required-asterisk" aria-hidden="true">*</span></div>
-		<div class="ss-q-help ss-secondary-text" dir="auto"></div></label>
-		<input type="text" name="entry.1282620408" value="" class="ss-q-short" id="entry_1282620408" dir="auto" aria-label="Email Address  " aria-required="true" required="" title="">
-		<div class="error-message" id="396641450_errorMessage"></div>
-		<div class="required-message">This is a required question</div>
-		</div></div></div>
-		<input type="hidden" name="draftResponse" value="[,,&quot;810585406799945146&quot;]">
-		<input type="hidden" name="pageHistory" value="0">
-		<input type="hidden" name="fvv" value="0">
-		<input type="hidden" name="fbzx" value="810585406799945146">
-		<div class="ss-item ss-navigate"><table id="navigation-table"><tbody><tr><td class="ss-form-entry goog-inline-block" id="navigation-buttons" dir="ltr">
-		<input type="submit" name="submit" value="Submit" id="ss-submit" class="jfk-button jfk-button-action ">
-		<div class="ss-password-warning ss-secondary-text">Never submit passwords through Google Forms.</div></td>
-		</tr></tbody></table></div></ol></form>
-	</div>
-
 	<script type="text/javascript">
 
 		function submitChef(){
-			var googleInput = document.getElementById('entry_1282620408');
+			var newUser = new Date();
 			var userInput = document.getElementById('teaserForm').value;
-				googleInput.value = userInput;
-			var submitButton = document.getElementById('ss-submit');
-				submitButton.click();
+			chefsDatabase.push({
+				timestamp: newUser.getTime(),
+				email: userInput
+			});
+			window.location = 'teaser.html';
 		}
 
 		var meals = [];
 		var mealDatabase = new Firebase('https://ecoeats.firebaseio.com/meals');
-		// Generated Meals and Old Data Call Here:
-			/*var eventDate = new Date(2015, 8, 25, 20);
-			mealDatabase.push({
-				name: "Teriyaki Chicken and Potatoes",
-				id: "aaa000",
-				chef: "Paulina Pys and Misha Shah",
-				timestamp: eventDate.getTime(),
-				img: "teriyakiChickenPotato.jpg",
-				capacity: 5,
-				price: 7
-			});*/
-			/*mealDatabase.on('value', function(snapshot){
-				var meal = new Meal(snapshot.exportVal()['-JzwOJd0SaktF_vIg5x0']);
-				meals.push(meal);
-				loadMeals();
-			});*/
 		mealDatabase.once('value', function(snapshot){
 			snapshot.forEach(function(childSnapshot){
 				var key = childSnapshot.key();
@@ -138,6 +95,8 @@
 			});
 			loadMeals();
 		});
+
+		var chefsDatabase = new Firebase('https://ecoeats.firebaseio.com/chefs');
 
 	</script>
 
