@@ -31,7 +31,7 @@ Meal.prototype.toString = function(){
 
 Meal.prototype.toHTML = function(){
 	var html = '';
-	html += '<div class="mealPreview" onclick="viewMeal(&#39;' + this.id + '&#39;)" style="background-image: url(&#39;style/meals/' + this.img + '&#39;);">';
+	html += '<div class="mealPreview" style="background-image: url(&#39;style/meals/' + this.img + '&#39;);">';
 		html += '<div class="info">';
 			html += '<div class="mealPay">';
 			html += '<p>Join us at ' + this.location + ' ' + moment(this.timestamp).calendar() + ' for this meal.</p>';
@@ -66,6 +66,6 @@ function sortMealsByTimestamp(meal1, meal2){
 	return meal1.timestamp - meal2.timestamp;
 }
 
-function viewMeal(id){
+/*function viewMeal(id){
 	alert(id + "");
-}
+}*/
