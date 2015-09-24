@@ -8,7 +8,6 @@ function loadMeals(){
 		for(var m = 0; m < meals.length; m++){
 			upcomingMeals.innerHTML += meals[m].toHTML();
 		}
-		upcomingMeals.innerHTML += meals[0].getHTMLPayButton();
 	}
 	else{
 		upcomingMeals.innerHTML += '<p>No meals are currently listed. Host your own!</p>';
@@ -20,6 +19,7 @@ function Meal(snapshot){
 	this.id = snapshot.id;
 	this.chef = snapshot.chef;
 	this.timestamp = snapshot.timestamp;
+	this.location = snapshot.location;
 	this.img = snapshot.img;
 	this.price = snapshot.price;
 	this.capacity = snapshot.capacity;
@@ -34,6 +34,7 @@ Meal.prototype.toHTML = function(){
 	html += '<div class="mealPreview" onclick="viewMeal(&#39;' + this.id + '&#39;)" style="background-image: url(&#39;style/meals/' + this.img + '&#39;);">';
 		html += '<div class="info">';
 			html += '<div class="mealPay">';
+			html += '<p>Join us at ' + this.location + ' ' + moment(this.timestamp).calendar() + ' for this meal.</p>';
 			html += this.getHTMLPayButton();
 			html += '</div>';
 			html += '<div class="bubble price">$' + this.price + ' per person</div>';
@@ -50,18 +51,10 @@ Meal.prototype.toHTML = function(){
 
 Meal.prototype.getHTMLPayButton = function(){
 	var button = '';
-	button += '<script';
-	  button += 'src="https://www.dwolla.com/scripts/button.min.js" class="dwolla_button" type="text/javascript"';
-	  button += 'data-key="DZ4cNXNsCrG4xbTyKPGqt4HEasxWBqk1c6pClzTSps5HU4bbDV"';
-	  button += 'data-redirect="http://ecoeats.tk/"';
-	  button += 'data-label="Pay Now"';
-	  button += 'data-name="' + this.name + '"';
-	  button += 'data-description="undefined"';
-	  button += 'data-amount="' + this.price + '"';
-	  button += 'data-guest-checkout="true"';
-	  button += 'data-type="simple"';
-	button += '>';
-	button += '</script>';
+		button += '<a class="d-btn d-btn-simple" data-key="DZ4cNXNsCrG4xbTyKPGqt4HEasxWBqk1c6pClzTSps5HU4bbDV" data-redirect="http://ecoeats.tk/" data-label="Pay and Join" data-name="EcoEats Meal: ' + this.name + '" data-description="..." data-amount="' + this.price + '" data-guest-checkout="true" data-type="simple">';
+			button += '<span class="d-btn-text">Pay and Join</span>';
+			button += '<span class="d-btn-icon"></span>';
+		button += '</a>';
 	return button;
 }
 

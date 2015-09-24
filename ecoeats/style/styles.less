@@ -273,6 +273,7 @@ div.mealPreview{
 		}
 
 	div.mealPay{
+
 		float: left;
 		background: rgba(255, 255, 255, 0.75);
 		width: 9.75em;
@@ -282,6 +283,26 @@ div.mealPreview{
 		display: none;
 		margin-bottom: -5em;
 		transition: all 1s;
+
+		p{
+			.BitterFont(@darkGreen, 0.75em);
+		}
+
+		a.d-btn, a.d-btn-simple{
+			height: 1.625em;
+			line-height: 1.625em;
+			width: 9em;
+			border-radius: 4em;
+			background: @darkGreen;
+			border: none !important;
+			outline: none !important;
+			text-shadow: none !important;
+		}
+
+		a.d-btn:hover, a.d-btn-simple:hover{
+			background: black;
+		}
+
 	}
 
 	//background-image property filled in by HTML
