@@ -8,6 +8,7 @@ function loadMeals(){
 		for(var m = 0; m < meals.length; m++){
 			upcomingMeals.innerHTML += meals[m].toHTML();
 		}
+		upcomingMeals.innerHTML += meals[0].getHTMLPayButton();
 	}
 	else{
 		upcomingMeals.innerHTML += '<p>No meals are currently listed. Host your own!</p>';
@@ -32,8 +33,11 @@ Meal.prototype.toHTML = function(){
 	var html = '';
 	html += '<div class="mealPreview" onclick="viewMeal(&#39;' + this.id + '&#39;)" style="background-image: url(&#39;style/meals/' + this.img + '&#39;);">';
 		html += '<div class="info">';
-			html += '<div class="bubble price">$' + this.price + '</div>';
-			html += '<div class="bubble capacity">' + this.capacity + '</div>';
+			html += '<div class="mealPay">';
+			html += this.getHTMLPayButton();
+			html += '</div>';
+			html += '<div class="bubble price">$' + this.price + ' per person</div>';
+			html += '<div class="bubble capacity">' + this.capacity + ' spots left </div>';
 			html += '<div class="bubble date">' + moment(this.timestamp).format('MM/DD h:mm A') + '</div>';
 		html += '</div>';
 		html += '<div class="mealTitle">';
@@ -42,6 +46,23 @@ Meal.prototype.toHTML = function(){
 		html += '</div>';
 	html += '</div>';
 	return html;
+}
+
+Meal.prototype.getHTMLPayButton = function(){
+	var button = '';
+	button += '<script';
+	  button += 'src="https://www.dwolla.com/scripts/button.min.js" class="dwolla_button" type="text/javascript"';
+	  button += 'data-key="DZ4cNXNsCrG4xbTyKPGqt4HEasxWBqk1c6pClzTSps5HU4bbDV"';
+	  button += 'data-redirect="http://ecoeats.tk/"';
+	  button += 'data-label="Pay Now"';
+	  button += 'data-name="' + this.name + '"';
+	  button += 'data-description="undefined"';
+	  button += 'data-amount="' + this.price + '"';
+	  button += 'data-guest-checkout="true"';
+	  button += 'data-type="simple"';
+	button += '>';
+	button += '</script>';
+	return button;
 }
 
 function money(value){
