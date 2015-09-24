@@ -6,7 +6,7 @@ function loadMeals(){
 		});
 		upcomingMeals.innerHTML = "";
 		for(var m = 0; m < meals.length; m++){
-			upcomingMeals.innerHTML += '<p>' + meals[m] + '</p>';
+			upcomingMeals.innerHTML += meals[m].toHTML();
 		}
 	}
 	else{
@@ -29,7 +29,19 @@ Meal.prototype.toString = function(){
 }
 
 Meal.prototype.toHTML = function(){
-
+	var html = '';
+	html += '<div class="mealPreview" onclick="viewMeal(&#39;' + this.id + '&#39;)" style="background-image: url(&#39;style/meals/' + this.img + '&#39;);">';
+		html += '<div class="info">';
+			html += '<div class="bubble price">$' + this.price + '</div>';
+			html += '<div class="bubble capacity">' + this.capacity + '</div>';
+			html += '<div class="bubble date">' + moment(this.timestamp).format('MM/DD h:mm A') + '</div>';
+		html += '</div>';
+		html += '<div class="mealTitle">';
+			html += '<h2>' + this.name + '</h2>';
+			html += '<h3>' + this.chef + '</h3>';
+		html += '</div>';
+	html += '</div>';
+	return html;
 }
 
 function money(value){
@@ -38,4 +50,8 @@ function money(value){
 
 function sortMealsByTimestamp(meal1, meal2){
 	return meal1.timestamp - meal2.timestamp;
+}
+
+function viewMeal(id){
+	alert(id + "");
 }

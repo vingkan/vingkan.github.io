@@ -7,6 +7,7 @@
 @darkGreen: @ecoGreen - #222222;
 @skyBlue: #8ccee3;
 @charcoal: #1a1a1a;
+@friendshipOrange: #ea541e;
 
 /*--------------------------------------------*/
 /*---> FONTS <--------------------------------*/
@@ -184,8 +185,8 @@ div#upcomingMeals{
 	background: rgba(255, 255, 255, 0.25);
 	.BitterFont(@darkGreen);
 	.Center();
-	padding: 1em;
-	margin: 1em;
+	//padding: 1em;
+	//margin: 1em;
 }
 
 div.mealPreview{
@@ -197,21 +198,62 @@ div.mealPreview{
 	margin: 1em;
 
 	div.mealTitle{
-		background: rgba(255, 255, 255, 0.5);
+		background: rgba(255, 255, 255, 0.75);
 		padding: 0.5em;
-		margin: -1em;
-		margin-top: 0.5em;
+		height: 3em;
+		margin: 3.5em -1em 0 -1em;
 		position: relative;
 	}
 
+	h2, h3{
+		float: left;
+		width: 100%;
+	}
+
 	h2{
-		.BitterFont(@charcoal, 1.25em);
+		.BitterFont(@charcoal, 0.80em);
+		margin-bottom: 0.25em;
 	}
 
 	h3{
-		.BitterFont(lighten(@charcoal, 10%), 1em);
+		.BitterFont(lighten(@charcoal, 20%), 0.65em);
 		font-style: italic;
 	}
+
+	div.info{
+		height: 3.5em;
+	}
+
+	div.bubble{
+		.BitterFont(white, 0.75em);
+		position: relative;
+		margin-left: -0.5em;
+		float: left;
+		color: white;
+		width: 3em;
+		height: 3em;
+		line-height: 3em;
+		border-radius: 1.5em;
+		text-align: center;
+	}
+
+		div.price{
+			background: @darkGreen;
+			z-index: 10;
+		}
+
+		div.capacity{
+			background: darken(@skyBlue, 30%);
+			z-index: 5;
+		}
+
+		div.date{
+			background: @friendshipOrange;
+			width: 9em;
+			font-size: 0.65em;
+			padding: .25em 0;
+			border-radius: 2em;
+		}
 
 	//background-image property filled in by HTML
 	background-repeat: no-repeat;
@@ -317,6 +359,16 @@ div.wood{
 	button:active{
 		background: @lightGreen;
 	}
+
+}
+
+/*--------------------------------------------*/
+/*---> RESPONSIVE <---------------------------*/
+/*--------------------------------------------*/
+
+@media screen and (max-aspect-ratio: 3/2){
+	
+	
 
 }
 

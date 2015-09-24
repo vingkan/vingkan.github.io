@@ -108,6 +108,34 @@
 				submitButton.click();
 		}
 
+		var meals = [];
+		var mealDatabase = new Firebase('https://ecoeats.firebaseio.com/meals');
+		// Generated Meals and Old Data Call Here:
+			/*var eventDate = new Date(2015, 8, 25, 20);
+			mealDatabase.push({
+				name: "Teriyaki Chicken and Potatoes",
+				id: "aaa000",
+				chef: "Paulina Pys and Misha Shah",
+				timestamp: eventDate.getTime(),
+				img: "teriyakiChickenPotato.jpg",
+				capacity: 5,
+				price: 7
+			});*/
+			/*mealDatabase.on('value', function(snapshot){
+				var meal = new Meal(snapshot.exportVal()['-JzwOJd0SaktF_vIg5x0']);
+				meals.push(meal);
+				loadMeals();
+			});*/
+		mealDatabase.once('value', function(snapshot){
+			snapshot.forEach(function(childSnapshot){
+				var key = childSnapshot.key();
+				var childData = childSnapshot.val();
+				var meal = new Meal(childData);
+				meals.push(meal);
+			});
+			loadMeals();
+		});
+
 	</script>
 
 </body>

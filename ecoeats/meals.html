@@ -58,12 +58,17 @@
 						<h2>{{Meal Name}}</h2>
 						<h3>{{Chef Names}}</h3>
 					</div>
+					<div class="bubble price">$5</div>
+					<div class="bubble capacity">7</div>
 				</div>
 				<div class="mealPreview" style="background-image: url('style/meals/dominosPizza.jpg');">
 					<div class="mealTitle">
 						<h2>{{Meal Name}}</h2>
 						<h3>{{Chef Names}}</h3>
 					</div>
+					<div class="bubble price">$5</div>
+					<div class="bubble capacity">2</div>
+					<div class="bubble date">{{Date/Time}}</div>
 				</div>
 
 			</div>
@@ -104,7 +109,7 @@
 				var meal = new Meal(childData);
 				meals.push(meal);
 			});
-			//loadMeals();
+			loadMeals();
 		});
 
 
