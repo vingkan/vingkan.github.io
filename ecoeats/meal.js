@@ -50,11 +50,25 @@ Meal.prototype.toHTML = function(){
 }
 
 Meal.prototype.getHTMLPayButton = function(){
+	/*CODE FOR DWOLLA BUTTON:
+		var button = '';
+			button += '<a class="d-btn d-btn-simple" data-key="DZ4cNXNsCrG4xbTyKPGqt4HEasxWBqk1c6pClzTSps5HU4bbDV" data-redirect="http://ecoeats.tk/" data-label="Pay and Join" data-name="EcoEats Meal: ' + this.name + '" data-description="..." data-amount="' + this.price + '" data-guest-checkout="true" data-type="simple">';
+				button += '<span class="d-btn-text">Pay and Join</span>';
+				button += '<span class="d-btn-icon"></span>';
+			button += '</a>';
+		return button;*/
 	var button = '';
-		button += '<a class="d-btn d-btn-simple" data-key="DZ4cNXNsCrG4xbTyKPGqt4HEasxWBqk1c6pClzTSps5HU4bbDV" data-redirect="http://ecoeats.tk/" data-label="Pay and Join" data-name="EcoEats Meal: ' + this.name + '" data-description="..." data-amount="' + this.price + '" data-guest-checkout="true" data-type="simple">';
-			button += '<span class="d-btn-text">Pay and Join</span>';
-			button += '<span class="d-btn-icon"></span>';
-		button += '</a>';
+		button += '<form class="paypalForm" method="post" action="https://www.paypal.com/cgi-bin/webscr" class="paypal-button" target="_top">';
+			button += '<div class="hide" id="errorBox"></div>';
+			button += '<input type="hidden" name="button" value="buynow">';
+			button += '<input type="hidden" name="item_name" value="EcoEats Meal: ' + this.name + '">';
+			button += '<input type="hidden" name="amount" value="' + this.price + '">';
+			button += '<input type="hidden" name="cmd" value="_xclick">';
+			button += '<input type="hidden" name="business" value="QWZMVF8ZHS2P4">';
+			button += '<input type="hidden" name="bn" value="JavaScriptButton_buynow">';
+			button += '<input type="hidden" name="env" value="www">';
+			button += '<button type="submit" id="' + this.id + '" onclick="togglePayButton(&#39;' + this.id + '&#39;);" class="paypal-button large">Pay Now</button>';
+		button += '</form>';
 	return button;
 }
 
