@@ -3,6 +3,7 @@ function Storage(){
 }
 
 Storage.prototype.add = function(object){
+	this.remove(object.id);
 	this.data.push(object);
 }
 
@@ -18,5 +19,14 @@ Storage.prototype.get = function(id){
 	}
 	else{
 		console.log("Failure: Could not get data with that id.");
+		return response;
+	}
+}
+
+Storage.prototype.remove = function(id){
+	for(var d = 0; d < this.data.length; d++){
+		if(this.data[d].id == id){
+			this.data.splice(d, 1);
+		}
 	}
 }
