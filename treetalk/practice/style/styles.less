@@ -1,0 +1,355 @@
+/*--------------------------------------------*/
+/*---> COLORS <-------------------------------*/
+/*--------------------------------------------*/
+
+@focusColor: #E9988C;
+@lightTone: @focusColor + #222222;
+@darkTone: @focusColor - #222222;
+@charcoal: #1a1a1a;
+
+/*--------------------------------------------*/
+/*---> FONTS <--------------------------------*/
+/*--------------------------------------------*/
+
+@oxygen: 'Oxygen', sans-serif;
+@pacifico: 'Pacifico', cursive;
+
+.OxygenFont(@textColor: white, @size: 1.25em){
+	font-family: @oxygen;
+	color: @textColor;
+	font-size: @size;
+	line-height: @size * 1.5;
+}
+
+/*--------------------------------------------*/
+/*---> BACKGROUND <---------------------------*/
+/*--------------------------------------------*/
+
+@keyframes animatedBackgroundRight{
+	from{
+		background-position: 0 0;
+	}
+	to{
+		background-position: 10000% 0;
+	}
+}
+
+@keyframes animatedBackgroundLeft{
+	from{
+		background-position: 0 0;
+	}
+	to{
+		background-position: -10000% 0;
+	}
+}
+
+.AnimatedBannerRight(@height: 200px){
+	height: @height;
+	background-size: auto @height;
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	animation: animatedBackgroundRight 800s linear infinite;
+}
+
+.AnimatedBannerLeft(@height: 200px){
+	height: @height;
+	background-size: auto @height;
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	animation: animatedBackgroundLeft 800s linear infinite;
+}
+
+/*
+* Collapsing Header on Scroll Tutorial:
+* http://callmenick.com/post/animated-resizing-header-on-scroll
+*/
+
+@biggerHeight: 6em;
+@smallerHeight: 3em;
+
+header{
+
+	width: 100%;
+	//padding: 1em 0.5em;
+	height: @biggerHeight;
+	overflow: hidden;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 15;
+	background: black;
+	border-bottom: 0.5em solid rgba(255, 255, 255, 1.0);
+	-webkit-transition: height 0.25s;
+	-moz-transition: height 0.25s;
+	-ms-transition: height 0.25s;
+	-o-transition: height 0.25s;
+	transition: height 0.25s;
+
+	.logo{
+		display: inline-block;
+		height: @biggerHeight;
+		line-height: @biggerHeight;
+		//float: left;
+		.Center();
+		-webkit-transition: all 0.25s;
+		-moz-transition: all 0.25s;
+		-ms-transition: all 0.25s;
+		-o-transition: all 0.25s;
+		transition: all 0.25s;
+	}
+
+	#big{
+		height: @biggerHeight;
+		line-height: @biggerHeight;
+	}
+
+	#small{
+		height: 0;
+		line-height: 0;
+	}
+
+	p{
+		display: inline-block;
+		float: left;
+		height: @biggerHeight;
+		line-height: @biggerHeight;
+		margin-top: -1.25em;
+		font-family: @pacifico;
+		font-weight: 700;
+	}
+
+}
+
+header.smaller{
+
+	height: @smallerHeight;
+
+	.logo{
+		height: @smallerHeight;
+		line-height: @smallerHeight;
+		float: left;
+	}
+
+	#big{
+		height: 0;
+		line-height: 0;
+	}
+
+	#small{
+		height: @smallerHeight;
+		line-height: @smallerHeight;
+	}
+
+	p{
+		height: @smallerHeight;
+		line-height: @smallerHeight;
+	}
+
+}
+
+/*--------------------------------------------*/
+/*---> LAYOUT <-------------------------------*/
+/*--------------------------------------------*/
+
+@defaultPadding: 1.00em;
+@defaultMargin: 0px;
+@defaultWidth: 400px;
+
+.BoxModel(@size: @defaultPadding){
+	padding: @size;
+	margin: @size;
+}
+
+.FullWidth(){
+	margin: 0;
+	width: 100%;
+}
+
+html{
+	background: @focusColor;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	.OxygenFont(white, 1em);
+}
+
+body{
+	width: 90%;
+	margin: 0 auto;
+}
+
+textarea{
+	display: none;
+	width: 100%;
+	height: 200px;
+	border: none;
+	outline: none;
+	margin: 20px 0;
+	background: #1A1A1A;
+	color: white;
+}
+
+div#headerSpace{
+	height: 8em;
+}
+
+div.pane{
+	
+	padding: 2em 0;
+	.FullWidth();
+
+	p{
+		width: 95%;
+		clear: both;
+	}
+
+}
+
+div.alert{
+	@alertWidth: 30%;
+	width: @alertWidth;
+	position: fixed;
+	top: 20%;
+	left: (100% - @alertWidth)/2;
+	.Center();
+	padding: 1em;
+	background: @focusColor;
+	border: 0.5em solid white;
+	z-index: 10;
+}
+
+div#footer{
+
+}
+
+/*--------------------------------------------*/
+/*---> TEXT <---------------------------------*/
+/*--------------------------------------------*/
+
+p{
+	padding: @defaultPadding;
+	.OxygenFont(white, 1.25em);
+	.Center();
+}
+
+h1{
+	padding: @defaultPadding;
+	.OxygenFont(white, 1.75em);
+	.Center();
+}
+
+ul li{
+	list-style-type: square;
+}
+
+/*--------------------------------------------*/
+/*---> IMAGES <-------------------------------*/
+/*--------------------------------------------*/
+
+.Center(){
+	margin: auto auto;
+	display: block;
+	text-align: center;
+}
+
+/*--------------------------------------------*/
+/*---> FORMS <--------------------------------*/
+/*--------------------------------------------*/
+
+.PlaceHolder(@color: #1A1A1A) {
+	input::-webkit-input-placeholder { color: @color; }
+	input:-moz-placeholder { color: @color; }
+	textarea::-webkit-input-placeholder { color: @color; }
+	textarea:-moz-placeholder { color: @color; }
+}
+
+.FormCleanse(){
+	outline: none;
+	border: none;
+	margin: 0;
+	padding: 0;
+}
+
+input, select, button{
+	.FormCleanse();
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+
+@media screen and (max-aspect-ratio: 3/2){
+	
+	/*input, button{
+		padding: 0;
+		display: block;
+		width: 100%;
+		.Center();
+		margin: 1em auto;
+	}*/
+
+}
+
+/*--------------------------------------------*/
+/*---> SCROLLBAR <----------------------------*/
+/*--------------------------------------------*/
+
+.scrollFix {
+    line-height: 1.35;
+    overflow: hidden;
+    white-space: nowrap;
+    .OxygenFont(@focusColor, 1.25em);
+}
+
+@scrollBar: rgba(255, 255, 255, 1.0);
+@scrollBarBack: rgba(255, 255, 255, 0.0);
+@size: 10px;
+
+::-webkit-scrollbar{
+	width: @size;
+	background: @scrollBarBack;
+}
+
+::-webkit-scrollbar-button{
+	background: @scrollBarBack;
+}
+
+::-webkit-scrollbar-track{
+	background: @scrollBarBack;
+	padding: 20px;
+	border-radius: 10px;
+}
+
+::-webkit-scrollbar-track-piece{
+	background: @scrollBarBack;
+}
+
+::-webkit-scrollbar-thumb{
+	background: @scrollBar;
+	border-radius: @size;
+}
+
+::-webkit-scrollbar-corner{
+	width: @size;
+	height: @size;
+	background: @scrollBarBack;
+}
+
+::-webkit-resizer{
+	background: @scrollBarBack;
+}
+
+@placeholderColor: rgba(255, 255, 255, 0.75);
+
+::-webkit-input-placeholder {
+   color: @placeholderColor;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: @placeholderColor;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: @placeholderColor;  
+}
+
+:-ms-input-placeholder {  
+   color: @placeholderColor;  
+}

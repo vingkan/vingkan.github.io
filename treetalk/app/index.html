@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Tree Talk</title>
+		<link rel="stylesheet" type="text/css" href="style/reset.css">
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<style>
+
+
+
+		</style>
+	</head>
+	<body>
+
+		<p>Hello World</p>
+
+		<script type="text/javascript" src="tree.js"></script>
+		<script type="text/javascript" src="storage.js"></script>
+		<script type="text/javascript" src="requests.js"></script>
+
+		<script type="text/javascript">
+
+			function printCoords(position){
+				console.log(position.coords)
+			}
+
+			navigator.geolocation.getCurrentPosition(printCoords);
+
+
+		</script>
+		
+	</body>
+</html>
