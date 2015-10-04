@@ -80,7 +80,7 @@
 					new Car('Car', 'blue')
 				])
 			]);
-			board.update();
+			board.print();
 
 			function updateBoardSize(size){
 				less.modifyVars({
@@ -97,14 +97,14 @@
 				board.size = limitSize;
 				board.roadSize = limitSize / 12;
 				updateBoardSize(limitSize.toString() + "px");
-				board.update();
+				board.print();
 			}
 
 			$(window).resize(updateGameWindow).resize();
 
 			setInterval(function(){
 				board.update()
-			}, 10000);
+			}, 1000);
 
 
 		</script>

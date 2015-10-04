@@ -1,12 +1,12 @@
-Board.prototype.gameSpace = "" //String: parent div for board
+Board.prototype.id = "" //String: parent div for board
 Board.prototype.size = 400; //Pixels as Double
 Board.prototype.roadSize = 40; //Pixels as Double
 Board.prototype.roads = [] //Array of Roads
 Board.prototype.trees = [] //Array of Trees
 Board.prototype.clouds = 0 //Integer
 
-function Board(gameSpaceID){
-	this.gameSpace = gameSpaceID || "gameSpace";
+function Board(id){
+	this.id = id || "gameSpace";
 	this.size = 400;
 	this.roadSize = 40;
 	this.roads = [];
@@ -16,14 +16,22 @@ function Board(gameSpaceID){
 
 Board.prototype.pollute = function(){
 	var pollution = 0;
-	pollution = 10 * this.roads.length;
+	pollution = 0 * this.roads.length;
 	this.clouds += pollution;
 }
 
 Board.prototype.update = function(){
 	this.pollute();
-	var gameSpaceDiv = document.getElementById(this.gameSpace);
+	for(var r = 0; r < this.roads.length; r++){
+		this.roads[r].update(this.size, this.roadSize);
+	}
+}
+
+Board.prototype.print = function(){
+	this.update();
+	var gameSpaceDiv = document.getElementById(this.id);
 	gameSpaceDiv.innerHTML = this.toHTML();
+	printed = true;
 }
 
 Board.prototype.toHTML = function(){
@@ -58,4 +66,14 @@ Board.prototype.addRoads = function(roadsArray){
 	for(var r = 0; r < roadsArray.length; r++){
 		this.roads.push(roadsArray[r]);
 	}
+}
+
+Board.prototype.getAllCars = function(){
+	var allCars = [];
+	for(var r = 0; r < this.roads.length; r++){
+		for(var c = 0; c < this.roads[r].cars.length; c++){
+			allCars.push(this.roads[r].cars[c]);
+		}
+	}
+	return allCars;
 }
