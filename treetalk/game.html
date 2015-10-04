@@ -102,6 +102,10 @@
 
 			$(window).resize(updateGameWindow).resize();
 
+			setInterval(function(){
+				board.update()
+			}, 10000);
+
 
 		</script>
 		
