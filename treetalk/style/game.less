@@ -1,0 +1,84 @@
+@focusTone: #61B329;
+@lightTone: @focusTone + #222222;
+@darkTone: @focusTone - #222222;
+@charcoal: #1a1a1a;
+
+@BubblegumSans: 'Bubblegum Sans', cursive;
+@Cabin: 'Cabin', sans-serif;
+
+@boardSize: 450px;
+@roadWidth: @boardSize / 12;
+@crossingSpeed: 10s;
+
+div.gameContainer{
+	float: left;
+}
+
+@borderPad: (@roadWidth * 0.25) solid transparent;
+
+div.board{
+	width: @boardSize;
+	height: @boardSize;
+	margin: 0 auto;
+	background: @darkTone;
+	border: @borderPad;
+}
+
+div.road{
+	position: absolute;
+	width: @boardSize;
+	height: @roadWidth;
+	line-height: @roadWidth;
+	overflow: hidden;
+	background: rgba(26, 26, 26, 0.5);
+	color: white;
+	font-family: @Cabin;
+	text-align: right;
+	z-index: 5;
+	border-left: @borderPad;
+	border-right: @borderPad;
+	margin-left: (@roadWidth * -0.25);
+
+	p.roadName{
+		position: absolute;
+		color: lighten(@charcoal, 50%);
+		width: 100%;
+		height: @roadWidth;
+		line-height: @roadWidth;
+		font-size: @roadWidth / 2;
+		margin: 0;
+		padding: 0;
+	}
+
+}
+
+div.vertical{
+	transform: rotate(-90deg);
+	margin-top: (@boardSize - @roadWidth) / 2;
+	text-align: left;
+}
+
+div.car{
+	@carSize: @roadWidth * 0.75;
+	position: absolute;
+	background: red;
+	margin-top: (@roadWidth * 0.25) / 2;
+	width: @carSize;
+	height: @carSize;
+	border-radius: @carSize * 0.25;
+	line-height: @carSize;
+	font-size: @carSize / 2;
+	text-align: center;
+	.MovingCar();
+	z-index: 10;
+}
+
+@-webkit-keyframes moveCar{
+	to{
+		margin-left: @boardSize;
+	}
+}
+
+.MovingCar(@speed: @crossingSpeed){
+	animation: moveCar @speed linear infinite;
+}

@@ -9,17 +9,24 @@
 		<script src="http://maps.googleapis.com/maps/api/js"></script>
 		<style>
 
+			textarea{
+				width: : 400px;
+				height: 200px;
+				padding: 10px;
+				line-height: 20px;
+				font-size: 12px;
+				background: black;
+				color: white;
+				outline: none;
+				border: none; 
+			}
 
 
 		</style>
 	</head>
 	<body>
 
-		<h1>Find Trees Close to Me: </h1>
-
-		<input type="number" id="nearbyTreesLimit" value="0" onchange="findNearbyTrees();">
-
-		<ul id="nearbyTreesList"></ul>
+		<textarea id="output"></textarea>
 		
 		<script type="text/javascript" src="geolocation.js"></script>
 		<script type="text/javascript" src="tree.js"></script>
@@ -29,24 +36,26 @@
 		<script type="text/javascript" src="main.js"></script>
 
 		<script type="text/javascript">
+			var output = document.getElementById('output');
+			var exampleID = 'callbackSample';
 
-			function findNearbyTrees(){
-				function listNearbyTrees(){
-					var results = storage.get(callId);
-					var output = document.getElementById('nearbyTreesList');
-					output.innerHTML = "";
-					for(var r = 0; r < results.length; r++){
-						output.innerHTML += '<li>' + results[r] + '</li>';
-					}
-				}
-				var callId = 'nearby_trees';
-				var limit = document.getElementById('nearbyTreesLimit').value;
-				var radius = 1000000000; //in meters
-				getTrees(callId, {
-					'$where': 'within_circle(location, ' + userLocation.latitude
-						+ ', ' + userLocation.longitude + ', ' + radius + ')'
-				}, limit, listNearbyTrees);
+			function printResults () {
+				var results = storage.get(exampleID);
+				output.value += results[0];
 			}
+
+			//getTrees(exampleID, {'tree_species':'Tilia cordata'}, 5, printResults);
+
+			var nearbyTreesID = 'nearbyTreesID';
+
+			function printTree () {
+				var treesHere = storage.get(nearbyTreesID);
+				for (var i = 0; i < treesHere.length; i++) {
+					output.value += treesHere[i] + "\n";
+				}
+			}
+
+			getTrees(nearbyTreesID, {'$where':'within_circle(location, ' + userLocation.latitude + ', ' + userLocation.longitude + ', ' + 100000000000000 + ')'}, 23, printTree);
 
 		</script>
 		

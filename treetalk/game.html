@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Tree Talk</title>
+		<link rel="stylesheet" type="text/css" href="style/reset.css">
+		<link rel="stylesheet" type="text/css" href="style/main.css">
+		<link rel="stylesheet" type="text/less" href="style/game.less">
+		<link href='https://fonts.googleapis.com/css?family=Bubblegum+Sans|Cabin:400,400italic,700' rel='stylesheet' type='text/css'>
+		<script type="text/javascript" src="style/less-1.5.0.min.js"></script>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script src="http://maps.googleapis.com/maps/api/js"></script>
+		<style>
+
+
+
+		</style>
+	</head>
+	<body>
+
+		<div id="test" class="gameContainer"></div>
+
+		<div id="gameSpace" class="gameContainer" style="display:none;">
+			<div class="board">
+				<div class="road">
+					<div class="car">Car</div>
+				</div>
+				<div class="road" style="margin-top: 120px;">
+					<div class="car">Car</div>
+					<div class="car" style="margin-left: 40px;">Car</div>
+				</div>
+				<div class="road vertical">
+					<div class="car">Car</div>
+				</div>
+			</div>
+		</div>
+
+
+
+		<!-- APP SCRIPTS -->
+		<script type="text/javascript" src="geolocation.js"></script>
+		<script type="text/javascript" src="tree.js"></script>
+		<script type="text/javascript" src="storage.js"></script>
+		<script type="text/javascript" src="requests.js"></script>
+		<script type="text/javascript" src="map.js"></script>
+
+		<!-- GAME SCRIPTS -->
+		<script type="text/javascript" src="game/board.js"></script>
+		<script type="text/javascript" src="game/road.js"></script>
+		<script type="text/javascript" src="game/car.js"></script>
+
+		<!-- MAIN SCRIPT -->
+		<script type="text/javascript" src="main.js"></script>
+
+		<script type="text/javascript">
+
+			var board = new Board('test');
+			board.addRoads([
+				new Road('31st', false, [
+					new Car('Car', 'orange')
+				]),
+				new Road('33rd', false, [
+					new Car('Car', 'red')
+				]),
+				new Road('35th', false, [
+					new Car('Car', 'yellow')
+				]),
+				new Road('37th', false, [
+					new Car('Car', 'pink')
+				]),
+				new Road('Wells', true, [
+					new Car('Car', 'green')
+				]),
+				new Road('Federal', true, [
+					new Car('Car', 'gray')
+				]),
+				new Road('State', true, [
+					new Car('Car', 'purple')
+				]),
+				new Road('Michigan', true, [
+					new Car('Car', 'blue')
+				])
+			]);
+			board.update();
+
+			function updateBoardSize(size){
+				less.modifyVars({
+					'@boardSize': size
+				});
+			}
+
+			function getWindowDimensionLimit(){
+				return ((window.innerWidth > window.innerHeight) ? window.innerHeight : window.innerWidth);
+			}
+
+			function updateGameWindow(){
+				var limitSize = getWindowDimensionLimit() * 0.95;
+				board.size = limitSize;
+				board.roadSize = limitSize / 12;
+				updateBoardSize(limitSize.toString() + "px");
+				board.update();
+			}
+
+			$(window).resize(updateGameWindow).resize();
+
+
+		</script>
+		
+	</body>
+</html>
