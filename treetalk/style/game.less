@@ -6,6 +6,10 @@
 @BubblegumSans: 'Bubblegum Sans', cursive;
 @Cabin: 'Cabin', sans-serif;
 
+/*--------------------------------------------*/
+/*---> GAME ELEMENTS <------------------------*/
+/*--------------------------------------------*/
+
 @boardSize: 450px;
 @roadWidth: @boardSize / 12;
 @crossingSpeed: 10s;
@@ -53,6 +57,7 @@ div.road{
 
 div.vertical{
 	transform: rotate(-90deg);
+	-webkit-transform: rotate(-90deg);
 	margin-top: (@boardSize - @roadWidth) / 2;
 	text-align: left;
 }
@@ -74,7 +79,7 @@ div.car{
 	text-align: center;
 	//.MovingCar();
 	transition: all 1s linear;
-	z-index: 10;
+	z-index: 20;
 }
 
 @-webkit-keyframes moveCar{
@@ -111,4 +116,114 @@ div.cloud{
 
 .PulsingCloud(@speed: 5s){
 	animation: pulseCloud @speed linear infinite;
+}
+
+/*--------------------------------------------*/
+/*---> USER ELEMENTS <------------------------*/
+/*--------------------------------------------*/
+
+div.statsWindow{
+
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	width: 0%;
+	background: @darkTone;
+	color: white;
+	border-right: 5vw solid @lightTone;
+	overflow-y: scroll;
+	z-index: 50;
+
+	&:hover{
+		width: 30vh;
+	}
+
+	button{
+
+		background: @lightTone;
+		padding: 0;
+		width: 100%;
+		height: 10vh;
+		line-height: 10vh;
+		font-size: 4vh;
+		margin-bottom: 2vh;
+		font-family: @Cabin;
+		font-weight: bold;
+		text-align: center;
+		color: white;
+		outline: none;
+		border: none;
+
+		&:hover{
+			background: @charcoal;
+			height: 20vh;
+			line-height: 20vh;
+		}
+
+		transition: all 0.5s ease;
+
+	}
+
+	transition: all 0.5s ease;
+
+}
+
+ul#nearbyTreesWindow{
+
+	li.info{
+		margin: 2vh auto;
+		width: 22vh;
+		background: transparent;
+		font-family: @Cabin;
+		text-align: center;
+	}
+
+	li.treeInfoWrapper{
+
+		background: @lightTone;
+		font-family: @Cabin;
+		font-size: 4vh;
+		line-height: 5vh;
+		padding: 1vw;
+		margin: 2vh auto;
+		height: 18vh;
+		width: 18vh;
+		border-radius: 3vh;
+
+		&:hover{
+			background: white;
+			color: @darkTone;
+		}
+
+		img, div.treeInfo{
+			display: block;
+		}
+
+		img{
+			margin: auto auto;
+			height: 9vh;
+		}
+
+		div.treeInfo{
+
+			margin-top: 1vh;
+			line-height: 4vh;
+			background: transparent;
+			font-weight: bold;
+			text-align: center;
+			overflow: hidden;
+
+			span.coords{
+				color: @darkTone;
+				font-weight: normal;
+				font-size: 55%;
+			}
+
+		}
+
+		transition: all 0.5s ease;
+
+	}
+
 }

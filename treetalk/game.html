@@ -17,21 +17,15 @@
 	</head>
 	<body>
 
-		<div id="test" class="gameContainer"></div>
+		<!-- <h1>Play The Game</h1> -->
+		<div id="game1" class="gameContainer"></div>
 
-		<div id="gameSpace" class="gameContainer" style="display:none;">
-			<div class="board">
-				<div class="road">
-					<div class="car">Car</div>
-				</div>
-				<div class="road" style="margin-top: 120px;">
-					<div class="car">Car</div>
-					<div class="car" style="margin-left: 40px;">Car</div>
-				</div>
-				<div class="road vertical">
-					<div class="car">Car</div>
-				</div>
-			</div>
+		<div class="statsWindow">
+			<h2>Find Nearby Trees</h2>
+			<button onclick="addNearbyTreesToWindow();">Go!</button>
+			<ul id="nearbyTreesWindow">
+				<li class="info">Click to see which trees are near you. You can use them to reduce the CO2 emissions!</li>
+			</ul>
 		</div>
 
 
@@ -44,61 +38,45 @@
 		<script type="text/javascript" src="map.js"></script>
 
 		<!-- GAME SCRIPTS -->
+		<script type="text/javascript" src="game/game.js"></script>
 		<script type="text/javascript" src="game/board.js"></script>
 		<script type="text/javascript" src="game/road.js"></script>
 		<script type="text/javascript" src="game/car.js"></script>
+		<script type="text/javascript" src="game/cloud.js"></script>
 
 		<!-- MAIN SCRIPT -->
 		<script type="text/javascript" src="main.js"></script>
 
 		<script type="text/javascript">
 
-			var board = new Board('test');
+			var board = new Board('game1');
 			board.addRoads([
 				new Road('31st', false, [
-					new Car('Car', 'orange')
+					new Car()
 				]),
 				new Road('33rd', false, [
-					new Car('Car', 'red')
+					new Car()
 				]),
 				new Road('35th', false, [
-					new Car('Car', 'yellow')
+					new Car()
 				]),
 				new Road('37th', false, [
-					new Car('Car', 'pink')
+					new Car()
 				]),
 				new Road('Wells', true, [
-					new Car('Car', 'green')
+					new Car()
 				]),
 				new Road('Federal', true, [
-					new Car('Car', 'gray')
+					new Car()
 				]),
 				new Road('State', true, [
-					new Car('Car', 'purple')
+					new Car()
 				]),
 				new Road('Michigan', true, [
-					new Car('Car', 'blue')
+					new Car()
 				])
 			]);
 			board.print();
-
-			function updateBoardSize(size){
-				less.modifyVars({
-					'@boardSize': size
-				});
-			}
-
-			function getWindowDimensionLimit(){
-				return ((window.innerWidth > window.innerHeight) ? window.innerHeight : window.innerWidth);
-			}
-
-			function updateGameWindow(){
-				var limitSize = getWindowDimensionLimit() * 0.95;
-				board.size = limitSize;
-				board.roadSize = limitSize / 12;
-				updateBoardSize(limitSize.toString() + "px");
-				board.print();
-			}
 
 			$(window).resize(updateGameWindow).resize();
 
@@ -106,6 +84,24 @@
 				board.update()
 			}, 1000);
 
+
+			function addNearbyTreesToWindow(){
+				function listNearbyTrees(){
+					var results = storage.get(callId);
+					var output = document.getElementById('nearbyTreesWindow');
+					output.innerHTML = "";
+					for(var r = 0; r < results.length; r++){
+						output.innerHTML += results[r].toWindowHTML();
+					}
+				}
+				var callId = 'nearby_trees';
+				var limit = 10;
+				var radius = 1000000000; //in meters
+				getTrees(callId, {
+					'$where': 'within_circle(location, ' + userLocation.latitude
+						+ ', ' + userLocation.longitude + ', ' + radius + ')'
+				}, limit, listNearbyTrees);
+			}
 
 		</script>
 		
