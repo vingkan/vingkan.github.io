@@ -2,6 +2,8 @@
 @lightTone: @focusTone + #222222;
 @darkTone: @focusTone - #222222;
 @charcoal: #1a1a1a;
+@skyBlue: #367de9;
+@friendlyOrange: #ff781e;
 
 @BubblegumSans: 'Bubblegum Sans', cursive;
 @Cabin: 'Cabin', sans-serif;
@@ -37,7 +39,6 @@ div.road{
 	color: white;
 	font-family: @Cabin;
 	text-align: right;
-	z-index: 5;
 	border-left: @borderPad;
 	border-right: @borderPad;
 	margin-left: (@roadWidth * -0.25);
@@ -48,7 +49,7 @@ div.road{
 		width: 100%;
 		height: @roadWidth;
 		line-height: @roadWidth;
-		font-size: @roadWidth / 2;
+		font-size: @roadWidth * 0.4;
 		margin: 0;
 		padding: 0;
 		z-index: 15;
@@ -103,35 +104,150 @@ div.treeSpace{
 	overflow: hidden;
 	/*background: purple;
 	opacity: 0.75;*/
-	z-index: 10;
+	z-index: 30;
 }
 
 div.treeSpace{
 
 	div.treeSlot{
 
-		background-color: @darkTone;
-		background-image: url('trees/oak.png');
+		background-color: @lightTone;
+		//background-image: url('trees/oak.png');
 		background-size: @roadWidth;
 		background-position: 0.25 * @roadWidth;
 		background-repeat: no-repeat;
-		margin: (@roadWidth * 0.7125) (@roadWidth * 0.75);
+		margin: (@roadWidth * 0.7325) (@roadWidth * 0.75);
 		width: 1.5 * @roadWidth;
 		height: 1.5 * @roadWidth;
 		line-height: 1.5 * @roadWidth;
-		border-radius: 0.75 * @roadWidth;
+		border-radius: 50%;
 		display: inline-block;
 		text-align: center;
 		font-family: @Cabin;
+		opacity: 0.25;
 
 		&:hover{
-			background-color: @lightTone;
+			background-color: @darkTone;
+			opacity: 1.0;
 		}
 
 		transition: all 1s ease;
 
+		button{
+
+			position: absolute;
+			outline: none;
+			border: none;
+			background: @lightTone;
+			color: white;
+			width: @roadWidth * 0.6;
+			height:  @roadWidth * 0.6;
+			border-radius: 50%;
+			margin-left: @roadWidth * -0.3;
+			margin-top: @roadWidth * 0.45;
+			z-index: 30;
+
+			img{
+				width: @roadWidth * 0.5;
+				margin-left: @roadWidth * -0.1;
+				transition: all 0.5s ease;
+			}
+
+			&:hover{
+
+				width: @roadWidth * 1.0;
+				height:  @roadWidth * 1.0;
+				margin-left: @roadWidth * -0.5;
+				margin-top: @roadWidth * 0.25;
+
+				img{
+					margin-left: @roadWidth * 0.0;
+				}
+
+			}
+
+			transition: all 0.5s ease;
+
+		}
+
+		div.sweeper{
+			@sweepLength: @roadWidth * 4;
+			background: @darkTone;
+			margin-left: @roadWidth / 2;
+			margin-top: @roadWidth * -1.2;
+			height: @sweepLength;
+			width: @roadWidth / 2;
+			border-radius: @roadWidth / 4;
+			transition: all 2s linear;
+			.RotatingSweeper();
+			z-index: 25;
+		}
+
 	}
 
+}
+
+/*div.treeSlot{
+
+	li.treeInfoWrapper{
+
+		background: orange;
+		font-family: @Cabin;
+		font-size: 4vh;
+		line-height: 5vh;
+		padding: 1vw;
+		margin: 2vh auto;
+		height: @roadWidth * 0.5;
+		width: @roadWidth * 0.5;
+		border-radius: 3vh;
+
+		&:hover{
+			background: white;
+			color: @darkTone;
+		}
+
+		img, div.treeInfo{
+			display: block;
+		}
+
+		img{
+			margin: auto auto;
+			height: 10px;
+		}
+
+		div.treeInfo{
+
+			margin-top: 1vh;
+			line-height: 10px;
+			background: transparent;
+			font-weight: bold;
+			text-align: center;
+			overflow: hidden;
+			display: none;
+
+			span.coords{
+				display: none;
+			}
+
+		}
+
+		transition: all 0.5s ease;
+
+	}
+
+}*/
+
+@-webkit-keyframes rotatingSweeper{
+	from{
+		transform: rotate(0deg);
+	}
+	to{
+		transform: rotate(360deg);
+	}
+}
+
+.RotatingSweeper(){
+	animation: rotatingSweeper 4s linear infinite;
 }
 
 div.cloudSpace{
@@ -150,7 +266,7 @@ div.cloud{
 	background-repeat: no-repeat;
 	//.PulsingCloud();
 	z-index: 15;
-	transition: all 0.1s ease;
+	transition: all 1s linear;
 }
 
 @-webkit-keyframes pulseCloud{
@@ -190,6 +306,18 @@ div.statsWindow{
 		width: 30vh;
 	}
 
+	h2{
+		line-height: 4vh;
+		font-size: 4vh;
+	}
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>TO-DO
+
+	span.windowLabel{
+		position: absolute;
+		display: none;
+	}
+
 	button{
 
 		background: @lightTone;
@@ -227,6 +355,8 @@ ul#nearbyTreesWindow{
 		width: 22vh;
 		background: transparent;
 		font-family: @Cabin;
+		line-height: 4vh;
+		font-size: 3vh;
 		text-align: center;
 	}
 
@@ -277,4 +407,38 @@ ul#nearbyTreesWindow{
 
 	}
 
+}
+
+div#treesWindow{
+	left: 5vw;
+}
+
+div#scoreWindow{
+	border-color: @darkTone;
+}
+
+div.alertBox{
+
+	background: @lightTone;
+	position: fixed;
+	width: 100vw;
+	height: 0vh;
+	line-height: 5vh;
+	left: 0;
+	bottom: 0;
+	z-index: 60;
+	transition: all 0.5s ease;
+
+	h3{
+		font-size: 2.5vh;
+	}
+
+}
+
+#cleanedCloudsAlert{
+	background: @skyBlue;
+}
+
+#instructionsAlert{
+	background: @friendlyOrange;
 }

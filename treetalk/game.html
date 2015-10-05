@@ -20,12 +20,32 @@
 		<!-- <h1>Play The Game</h1> -->
 		<div id="game1" class="gameContainer"></div>
 
-		<div class="statsWindow">
+		<div class="statsWindow" id="treesWindow">
+			<span class="windowLabel">Trees Menu</span>
 			<h2>Find Nearby Trees</h2>
 			<button onclick="addNearbyTreesToWindow();">Go!</button>
 			<ul id="nearbyTreesWindow">
 				<li class="info">Click to see which trees are near you. You can use them to reduce the CO2 emissions!</li>
+				<li class="info">The light green circles on the traffic grid are tree planting sites. Drag and drop trees to plant them.</li>
 			</ul>
+		</div>
+
+		<div class="statsWindow" id="scoreWindow">
+			<span class="windowLabel">Game Menu</span>
+			<h2>Game Score</h2>
+			<ul id="cloudList"></ul>
+		</div>
+
+		<div class="alertBox" id="cleanedCloudsAlert">
+			<h3>You cleaned <span id="numberCloudsCleaned">0</span> clouds!</h3>
+		</div>
+
+		<div class="alertBox" id="plantTreeAlert">
+			<h3><span id="plantTreeEvent">You can plant a tree here.</span></h3>
+		</div>
+
+		<div class="alertBox" id="instructionsAlert">
+			<h3><span id="instructions">You can plant a tree here.</span></h3>
 		</div>
 
 
@@ -36,6 +56,7 @@
 		<script type="text/javascript" src="storage.js"></script>
 		<script type="text/javascript" src="requests.js"></script>
 		<script type="text/javascript" src="map.js"></script>
+		<script type="text/javascript" src="utils.js"></script>
 
 		<!-- GAME SCRIPTS -->
 		<script type="text/javascript" src="game/game.js"></script>
@@ -84,6 +105,8 @@
 				board.update()
 			}, 1000);
 
+			instructionsSequence();
+
 
 			function addNearbyTreesToWindow(){
 				function listNearbyTrees(){
@@ -93,6 +116,7 @@
 					for(var r = 0; r < results.length; r++){
 						output.innerHTML += results[r].toWindowHTML();
 					}
+					board.addTrees(results);
 				}
 				var callId = 'nearby_trees';
 				var limit = 10;
