@@ -33,7 +33,7 @@ div.road{
 	height: @roadWidth;
 	line-height: @roadWidth;
 	overflow: hidden;
-	background: rgba(26, 26, 26, 0.5);
+	background: rgba(56, 56, 56, 1.0);
 	color: white;
 	font-family: @Cabin;
 	text-align: right;
@@ -51,6 +51,7 @@ div.road{
 		font-size: @roadWidth / 2;
 		margin: 0;
 		padding: 0;
+		z-index: 15;
 	}
 
 }
@@ -92,6 +93,54 @@ div.car{
 	animation: moveCar @speed linear infinite;
 }
 
+div.treeSpace{
+	position: absolute;
+	margin-left: @roadWidth * 1.25;
+	margin-top: @roadWidth;
+	padding: @roadWidth / 2;
+	height: @boardSize * (9/12);
+	width: @boardSize * (9/12);
+	overflow: hidden;
+	/*background: purple;
+	opacity: 0.75;*/
+	z-index: 10;
+}
+
+div.treeSpace{
+
+	div.treeSlot{
+
+		background-color: @darkTone;
+		background-image: url('trees/oak.png');
+		background-size: @roadWidth;
+		background-position: 0.25 * @roadWidth;
+		background-repeat: no-repeat;
+		margin: (@roadWidth * 0.7125) (@roadWidth * 0.75);
+		width: 1.5 * @roadWidth;
+		height: 1.5 * @roadWidth;
+		line-height: 1.5 * @roadWidth;
+		border-radius: 0.75 * @roadWidth;
+		display: inline-block;
+		text-align: center;
+		font-family: @Cabin;
+
+		&:hover{
+			background-color: @lightTone;
+		}
+
+		transition: all 1s ease;
+
+	}
+
+}
+
+div.cloudSpace{
+	position: absolute;
+	height: @boardSize;
+	width: @boardSize;
+	overflow: hidden;
+}
+
 div.cloud{
 	position: absolute;
 	width: @roadWidth;
@@ -99,7 +148,9 @@ div.cloud{
 	background-image: url('cloud.png');
 	background-size: @roadWidth auto;
 	background-repeat: no-repeat;
-	.PulsingCloud();
+	//.PulsingCloud();
+	z-index: 15;
+	transition: all 0.1s ease;
 }
 
 @-webkit-keyframes pulseCloud{
@@ -129,7 +180,7 @@ div.statsWindow{
 	left: 0;
 	height: 100vh;
 	width: 0%;
-	background: @darkTone;
+	background: @focusTone;
 	color: white;
 	border-right: 5vw solid @lightTone;
 	overflow-y: scroll;

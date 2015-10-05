@@ -1,3 +1,5 @@
+var printed = false;
+
 Board.prototype.id = "" //String: parent div for board
 Board.prototype.size = 400; //Pixels as Double
 Board.prototype.roadSize = 40; //Pixels as Double
@@ -15,7 +17,7 @@ function Board(id){
 }
 
 Board.prototype.pollute = function(){
-	if(this.clouds.length < 100){
+	if(this.clouds.length < 500){
 		for(var r = 0; r < this.roads.length; r++){
 			for(var c = 0; c < this.roads[r].cars.length; c++){
 				if(this.roads[r].cars[c].isPolluting()){
@@ -35,6 +37,9 @@ Board.prototype.update = function(){
 	for(var r = 0; r < this.roads.length; r++){
 		this.roads[r].update(this.size, this.roadSize);
 	}
+	for(var c = 0; c < this.clouds.length; c++){
+		this.clouds[c].moveCloud(this.roadSize, this.size);
+	}
 }
 
 Board.prototype.print = function(){
@@ -50,6 +55,11 @@ Board.prototype.toHTML = function(){
 	var xOffSet = this.roadSize;
 	var yOffSet = this.roadSize + (-1 * ((this.size - this.roadSize) / 2));
 	var offsetInterval = this.roadSize * 3;
+	html += '<div id="' + this.id + '-trees" class="treeSpace">';
+	for(var t = 0; t < 9; t++){
+		html += '<div class="treeSlot"></div>';
+	}
+	html += '</div>';
 	html += '<div id="' + this.id + '-clouds" class="cloudSpace">';
 	html += '</div>';
 	for(var r = 0; r < this.roads.length; r++){

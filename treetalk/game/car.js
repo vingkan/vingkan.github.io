@@ -1,7 +1,5 @@
 var carIDList = [];
 
-var printed = false;
-
 function newCarID(){
 	var newID = "car" + carIDList.length;
 	carIDList.push(newID);

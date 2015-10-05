@@ -9,7 +9,7 @@ function getWindowDimensionLimit(){
 }
 
 function updateGameWindow(){
-	var limitSize = getWindowDimensionLimit() * 0.95;
+	var limitSize = getWindowDimensionLimit() * 0.9;
 	board.size = limitSize;
 	board.roadSize = limitSize / 12;
 	updateBoardSize(limitSize.toString() + "px");
