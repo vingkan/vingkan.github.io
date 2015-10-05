@@ -8,6 +8,9 @@
 		<link href='https://fonts.googleapis.com/css?family=Bubblegum+Sans|Cabin:400,400italic,700' rel='stylesheet' type='text/css'>
 		<script type="text/javascript" src="style/less-1.5.0.min.js"></script>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<!--<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>-->
+		<script src="http://code.jquery.com/ui/1.8.21/jquery-ui.min.js"></script>
+		<script src="jquery.ui.touch-punch.min.js"></script>
 		<script src="http://maps.googleapis.com/maps/api/js"></script>
 		<style>
 
@@ -100,6 +103,8 @@
 			board.print();
 
 			$(window).resize(updateGameWindow).resize();
+
+			$('treesWindow').draggable();
 
 			setInterval(function(){
 				board.update()
