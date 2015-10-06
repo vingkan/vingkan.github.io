@@ -7,7 +7,9 @@ Board.prototype.roadSize = 40; //Pixels as Double
 Board.prototype.roads = [] //Array of Roads
 Board.prototype.trees = [] //Array of Trees
 Board.prototype.clouds = [] //Array of Clouds
-Board.prototype.cloudTreshold = 50 //Integer
+Board.prototype.cloudTreshold = 50; //Integer
+Board.prototype.selectedTree = null; //String
+Board.prototype.planting = false; //Boolean
 
 function Board(id){
 	this.id = id || "gameSpace";
@@ -77,7 +79,7 @@ Board.prototype.toHTML = function(){
 	html += '<div id="' + this.id + '-trees" class="treeSpace">';
 	for(var t = 0; t < 9; t++){
 		html += '<div class="treeSlot" id="treeSlot' + t + '" ';
-		//html += 'onclick="plantTree(&#39;Tree planting site #' + t + '&#39;);" ';
+		html += 'onclick="plantTree(' + t + ');" ';
 		html += 'ondrop="dropTree(event);" ondragover="allowDrop(event);">';
 		//html += '<button onclick="absorb(' + t + ');">O</button><div id="sweeper' + t + '" class="sweeper"></div>';
 		html += '</div>';
