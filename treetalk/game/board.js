@@ -111,6 +111,7 @@ Board.prototype.addRoads = function(roadsArray){
 Board.prototype.addTrees = function(treesArray){
 	for(var t = 0; t < treesArray.length; t++){
 		this.trees.push(treesArray[t]);
+		//$('treesWindow').draggable();
 	}
 }
 
