@@ -15,4 +15,4 @@ getTrees('b1', {
 
 getCount('c1', 'tree_species', 'Acer rubrum');
 
-initGoogleMap();
+//initGoogleMap();

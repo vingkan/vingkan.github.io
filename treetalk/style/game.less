@@ -254,18 +254,19 @@ div.cloudSpace{
 	position: absolute;
 	height: @boardSize;
 	width: @boardSize;
-	overflow: hidden;
+	z-index: 25;
+	//overflow: hidden;
 }
 
 div.cloud{
 	position: absolute;
 	width: @roadWidth;
 	height: @roadWidth;
+	color: white;
 	background-image: url('cloud.png');
 	background-size: @roadWidth auto;
 	background-repeat: no-repeat;
 	//.PulsingCloud();
-	z-index: 15;
 	transition: all 1s linear;
 }
 
@@ -289,29 +290,31 @@ div.cloud{
 /*---> USER ELEMENTS <------------------------*/
 /*--------------------------------------------*/
 
+@bubbleSize: 10vw;
+
 div#menuBubble{
 
 	position: fixed;
-	top: 2.5vw;
-	left: 2.5vw;
+	top: @bubbleSize * 0.25;
+	left: @bubbleSize * 0.25;
 	background: @charcoal;
 	color: white;
-	width: 10vw;
-	height: 10vw;
-	line-height: 10vw;
-	font-size: 5vw;
+	width: @bubbleSize;
+	height: @bubbleSize;
+	line-height: @bubbleSize;
+	font-size: @bubbleSize * 0.5;
 	font-weight: bold;
 	font-family: @Cabin;
-	border-radius: 5vw;
+	border-radius: @bubbleSize * 0.5;
 	text-align: center;
-	z-index: 75;
+	z-index: 40;
 
 	ul{
 
 		background: @charcoal;
 		color: white;
-		margin-top: -5vw;
-		margin-left: 5vw;
+		margin-top: @bubbleSize * -0.5;
+		margin-left: @bubbleSize * 0.5;
 		//padding-top: 5vw;
 		width: 0vw;
 		overflow: hidden;
@@ -319,9 +322,9 @@ div#menuBubble{
 		li{
 
 			background: transparent;
-			line-height: 2.5vw;
-			font-size: 2vw;
-			padding: 1vw;
+			line-height: @bubbleSize * 0.25;
+			font-size: @bubbleSize * 0.20;
+			padding: @bubbleSize * 0.10;
 			padding-bottom: 1vw;
 			//margin-bottom: 1vw;
 
@@ -332,7 +335,7 @@ div#menuBubble{
 			&:first-child{
 			
 				font-style: italic;
-				font-size: 1.75vw;
+				font-size: @bubbleSize * 0.175;
 			
 				&:hover{
 					background: @charcoal;
@@ -354,7 +357,7 @@ div#menuBubble{
 		font-size: 0;
 
 		ul{
-			width: 20vw;
+			width: @bubbleSize * 2.0;
 		}
 
 	}

@@ -1,6 +1,7 @@
 function updateBoardSize(size){
 	less.modifyVars({
-		'@boardSize': size
+		'@boardSize': size + "px",
+		'@bubbleSize': (size * 0.15) + "px"
 	});
 }
 
@@ -12,7 +13,7 @@ function updateGameWindow(){
 	var limitSize = getWindowDimensionLimit() * 0.9;
 	board.size = limitSize;
 	board.roadSize = limitSize / 12;
-	updateBoardSize(limitSize.toString() + "px");
+	updateBoardSize(limitSize);
 	board.print();
 }
 

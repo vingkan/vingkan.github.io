@@ -18,8 +18,7 @@ function Board(id){
 	this.roads = [];
 	this.trees = [];
 	this.clouds = [];
-	this.cloudTreshold = 50;
-	this.initialPollution();
+	this.cloudTreshold = 100;
 }
 
 Board.prototype.pollute = function(){
@@ -27,11 +26,12 @@ Board.prototype.pollute = function(){
 		for(var r = 0; r < this.roads.length; r++){
 			for(var c = 0; c < this.roads[r].cars.length; c++){
 				if(this.roads[r].cars[c].isPolluting()){
-					var xOffSet = this.roadSize;
-					var yOffSet = this.roadSize + (-1 * ((this.size - this.roadSize) / 2));
-					var xRandom = Math.random() * ((this.size) + (yOffSet / 4));
-					var yRandom = Math.random() * ((this.size - this.roadSize));
-					this.clouds.push(new Cloud(xRandom, yRandom, this.id));
+					//console.log(this.clouds.length)
+					this.roads[r].cars[c].pollute({
+						'cloudID': this.id,
+						'verticalRoad': this.roads[r].vertical,
+						'roadOffset': this.roads[r].offset
+					});
 				}
 			}
 		}
@@ -40,16 +40,13 @@ Board.prototype.pollute = function(){
 
 Board.prototype.initialPollution = function(){
 	for(var p = 0; p < this.cloudTreshold; p++){
-		var xOffSet = this.roadSize;
-		var yOffSet = this.roadSize + (-1 * ((this.size - this.roadSize) / 2));
-		var xRandom = Math.random() * ((this.size) + (yOffSet / 4));
-		var yRandom = Math.random() * ((this.size - this.roadSize));
-		this.clouds.push(new Cloud(xRandom, yRandom, this.id));
+		var xRand = this.size * ((Math.random() * 0.75) + (0.10));
+		var yRand = this.size * ((Math.random() * 0.75) + (0.10));
+		new Cloud(xRand, yRand, this.id, ' ');
 	}
 }
 
 Board.prototype.update = function(){
-	document.getElementById('cloudList').innerHTML = "";
 	this.pollute();
 	for(var r = 0; r < this.roads.length; r++){
 		this.roads[r].update(this.size, this.roadSize);
@@ -71,6 +68,7 @@ Board.prototype.print = function(){
 }
 
 Board.prototype.toHTML = function(){
+	console.log('----printing game board, clouds#: ' + this.clouds.length)
 	html = '';
 	html += '<div class="board">';
 	var xOffSet = this.roadSize;
@@ -138,4 +136,18 @@ Board.prototype.getAllCars = function(){
 		}
 	}
 	return allCars;
+}
+
+Board.prototype.getCarById = function(carID){
+	var response = null;
+	var carsArray = this.getAllCars();
+	for(var c = 0; c < carsArray.length; c++){
+		if(carsArray[c].id == carID){
+			response = carsArray[c];
+			break;
+		}
+	}
+	if(response != null){
+		return response;
+	}
 }

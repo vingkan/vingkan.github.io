@@ -44,7 +44,6 @@
 
 		<div class="statsWindow" id="scoreWindow">
 			<h2>Game Score</h2>
-			<ul id="cloudList"></ul>
 		</div>
 
 		<div class="alertBox" id="cleanedCloudsAlert">
@@ -77,6 +76,7 @@
 		<script type="text/javascript" src="game/cloud.js"></script>
 
 		<!-- MAIN SCRIPT -->
+		<!-- NOTE THAT initGoogleMap() IS TURNED OFF!!! -->
 		<script type="text/javascript" src="main.js"></script>
 
 		<script type="text/javascript">
@@ -109,6 +109,7 @@
 				])
 			]);
 			board.print();
+			board.initialPollution();
 
 			$(window).resize(updateGameWindow).resize();
 
