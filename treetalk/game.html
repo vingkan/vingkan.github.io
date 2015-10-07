@@ -7,7 +7,7 @@
 		<link rel="stylesheet" type="text/less" href="style/game.less">
 		<link href='https://fonts.googleapis.com/css?family=Bubblegum+Sans|Cabin:400,400italic,700' rel='stylesheet' type='text/css'>
 		<script type="text/javascript" src="style/less-1.5.0.min.js"></script>
-		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script type="text/javascript" src="jquery.min.js"></script>
 		<!--<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>-->
 		<script src="http://code.jquery.com/ui/1.8.21/jquery-ui.min.js"></script>
 		<script src="jquery.ui.touch-punch.min.js"></script>
@@ -21,10 +21,19 @@
 	<body>
 
 		<!-- <h1>Play The Game</h1> -->
-		<div id="game1" class="gameContainer"></div>
+		<div id="game1" onclick="closeAllWindows();" class="gameContainer"></div>
+
+		<div id="menuBubble">
+			<span>&#8801;</span>
+			<ul id="menuBarList">
+				<li>Click the game board to exit a menu.</li>
+				<li onclick="instructionsSequence();">Instructions</li>
+				<li onclick="toggleMenu('scoreWindow');">Game Scores</li>
+				<li onclick="toggleMenu('treesWindow');">Nearby Trees</li>
+			</ul>
+		</div>
 
 		<div class="statsWindow" id="treesWindow">
-			<span class="windowLabel">Trees Menu</span>
 			<h2>Find Nearby Trees</h2>
 			<button onclick="addNearbyTreesToWindow();">Go!</button>
 			<ul id="nearbyTreesWindow">
@@ -34,7 +43,6 @@
 		</div>
 
 		<div class="statsWindow" id="scoreWindow">
-			<span class="windowLabel">Game Menu</span>
 			<h2>Game Score</h2>
 			<ul id="cloudList"></ul>
 		</div>
@@ -108,14 +116,12 @@
 				board.update()
 			}, 1000);
 
-			instructionsSequence();
-
-
 			function addNearbyTreesToWindow(){
 				function listNearbyTrees(){
 					var results = storage.get(callId);
 					var output = document.getElementById('nearbyTreesWindow');
 					output.innerHTML = "";
+					output.innerHTML += '<li class="info">To plant a tree, click on it, then click on a circular planting space on the game board.</li>'
 					for(var r = 0; r < results.length; r++){
 						output.innerHTML += results[r].toWindowHTML();
 					}

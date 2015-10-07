@@ -58,16 +58,16 @@ Board.prototype.update = function(){
 		var cloudExists = true;
 		cloudExists = this.clouds[c].update(this.roadSize, this.size);
 		if(!cloudExists){
-			console.log('board.update() ' + c + ' DNE');
+			console.log('board.update() ' + c + ' Cloud DNE');
 		}
 	}
 }
 
 Board.prototype.print = function(){
-	this.update();
 	var gameSpaceDiv = document.getElementById(this.id);
 	gameSpaceDiv.innerHTML = this.toHTML();
 	printed = true;
+	this.update();
 }
 
 Board.prototype.toHTML = function(){

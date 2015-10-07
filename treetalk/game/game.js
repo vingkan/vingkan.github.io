@@ -9,7 +9,7 @@ function getWindowDimensionLimit(){
 }
 
 function updateGameWindow(){
-	var limitSize = getWindowDimensionLimit() * 0.8;
+	var limitSize = getWindowDimensionLimit() * 0.9;
 	board.size = limitSize;
 	board.roadSize = limitSize / 12;
 	updateBoardSize(limitSize.toString() + "px");
@@ -33,4 +33,21 @@ function instructionsSequence(){
 			},instructionsAlert("Thankfully, trees help replace CO2 with oxygen.", 2000))
 		}, instructionsAlert("These cars near you are creating tons of pollution!", 2000))
 	}, instructionsAlert("Welcome to Tree Talk: The Game!", 2000))
+}
+
+function closeAllWindows(){
+	var windows = document.getElementsByClassName('statsWindow');
+	for(var w = 0; w < windows.length; w++){
+		windows[w].style.width = '0';
+	}
+}
+
+function toggleMenu(menuID){
+	closeAllWindows();
+	if(document.getElementById(menuID).style.width == '20vw'){
+		document.getElementById(menuID).style.width = '0';
+	}
+	else{
+		document.getElementById(menuID).style.width = '20vw';
+	}
 }

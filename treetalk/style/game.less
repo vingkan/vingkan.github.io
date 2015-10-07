@@ -289,33 +289,94 @@ div.cloud{
 /*---> USER ELEMENTS <------------------------*/
 /*--------------------------------------------*/
 
+div#menuBubble{
+
+	position: fixed;
+	top: 2.5vw;
+	left: 2.5vw;
+	background: @charcoal;
+	color: white;
+	width: 10vw;
+	height: 10vw;
+	line-height: 10vw;
+	font-size: 5vw;
+	font-weight: bold;
+	font-family: @Cabin;
+	border-radius: 5vw;
+	text-align: center;
+
+	ul{
+
+		background: @charcoal;
+		color: white;
+		margin-top: -5vw;
+		margin-left: 5vw;
+		//padding-top: 5vw;
+		width: 0vw;
+		overflow: hidden;
+
+		li{
+
+			background: transparent;
+			line-height: 2.5vw;
+			font-size: 2vw;
+			padding: 1vw;
+			padding-bottom: 1vw;
+			//margin-bottom: 1vw;
+
+			&:hover{
+				background: @friendlyOrange;
+			}
+
+			&:first-child{
+			
+				font-style: italic;
+				font-size: 1.75vw;
+			
+				&:hover{
+					background: @charcoal;
+				}
+			
+			}
+
+			transition: all 0.5s ease;
+
+		}
+
+		transition: all 0.5s ease;
+
+	}
+
+	&:hover{
+
+		color: @charcoal;
+		font-size: 0;
+
+		ul{
+			width: 20vw;
+		}
+
+	}
+
+	transition: all 0.5s ease;
+
+}
+
 div.statsWindow{
 
 	position: fixed;
 	top: 0;
 	left: 0;
 	height: 100vh;
-	width: 0%;
-	background: @focusTone;
+	width: 0vw;
+	background: @darkTone;
 	color: white;
-	border-right: 5vw solid @lightTone;
 	overflow-y: scroll;
 	z-index: 50;
-
-	&:hover{
-		width: 30vh;
-	}
 
 	h2{
 		line-height: 4vh;
 		font-size: 4vh;
-	}
-
-//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>TO-DO
-
-	span.windowLabel{
-		position: absolute;
-		display: none;
 	}
 
 	button{
@@ -407,14 +468,6 @@ ul#nearbyTreesWindow{
 
 	}
 
-}
-
-div#treesWindow{
-	left: 5vw;
-}
-
-div#scoreWindow{
-	border-color: @darkTone;
 }
 
 div.alertBox{
