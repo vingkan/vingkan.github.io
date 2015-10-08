@@ -1,4 +1,5 @@
-function loadMeals(){
+function loadMeals(displayPast){
+	var printAll = displayPast || false;
 	var upcomingMeals = document.getElementById('upcomingMeals');
 	if(meals.length > 0){
 		meals.sort(function(a, b){
@@ -6,7 +7,9 @@ function loadMeals(){
 		});
 		upcomingMeals.innerHTML = "";
 		for(var m = 0; m < meals.length; m++){
-			upcomingMeals.innerHTML += meals[m].toHTML();
+			if(meals[m].timestamp > new Date().getTime() || printAll){
+				upcomingMeals.innerHTML += meals[m].toHTML();
+			}
 		}
 	}
 	else{
