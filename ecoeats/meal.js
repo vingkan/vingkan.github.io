@@ -31,7 +31,8 @@ Meal.prototype.toString = function(){
 
 Meal.prototype.toHTML = function(){
 	var html = '';
-	html += '<div class="mealPreview" style="background-image: url(&#39;style/meals/' + this.img + '&#39;);">';
+	//html += '<div class="mealPreview" style="background-image: url(&#39;style/meals/' + this.img + '&#39;);">';
+	html += '<div class="mealPreview" style="background-image: url(&#39;' + this.img + '&#39;);">';
 		html += '<div class="info">';
 			html += '<div class="mealPay">';
 			html += '<p>Join us at ' + this.location + ' ' + moment(this.timestamp).calendar() + ' for this meal.</p>';
