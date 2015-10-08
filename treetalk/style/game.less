@@ -92,6 +92,7 @@ div.car{
 
 .MovingCar(@speed: @crossingSpeed){
 	animation: moveCar @speed linear infinite;
+	-webkit-animation: moveCar @speed linear infinite;
 }
 
 div.treeSpace{
@@ -240,14 +241,17 @@ div.treeSpace{
 @-webkit-keyframes rotatingSweeper{
 	from{
 		transform: rotate(0deg);
+		-webkit-transform: rotate(0deg);
 	}
 	to{
 		transform: rotate(360deg);
+		-webkit-transform: rotate(360deg);
 	}
 }
 
 .RotatingSweeper(){
 	animation: rotatingSweeper 4s linear infinite;
+	-webkit-animation: rotatingSweeper 4s linear infinite;
 }
 
 div.cloudSpace{
