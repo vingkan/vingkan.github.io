@@ -27,7 +27,7 @@
 /*---> BACKGROUND <---------------------------*/
 /*--------------------------------------------*/
 
-@keyframes animatedBackgroundRight{
+@-webkit-keyframes animatedBackgroundRight{
 	from{
 		background-position: 0 0;
 	}
@@ -36,7 +36,7 @@
 	}
 }
 
-@keyframes animatedBackgroundLeft{
+@-webkit-keyframes animatedBackgroundLeft{
 	from{
 		background-position: 0 0;
 	}
@@ -381,7 +381,16 @@ div.mealPreview{
 
 div#editForm{
 
+	label{
+		display: inline-block;
+		width: 20%;
+		background: orange;
+	}
+
 	input{
+		display: inline-block;
+		width: 50%;
+		//clear: both;
 		background: white;
 		border: none;
 	}
