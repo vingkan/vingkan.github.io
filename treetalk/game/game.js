@@ -52,3 +52,22 @@ function toggleMenu(menuID){
 		document.getElementById(menuID).style.width = '20vw';
 	}
 }
+
+var menuBarList = document.getElementById('menuBarList');
+	menuBarList.style.width = '0px';
+
+function toggleMenuBubble(){
+	var bubbleSize = board.size * 0.15;
+	var menuBubble = document.getElementById('menuBubble');
+	var menuBarList = document.getElementById('menuBarList');
+	if(menuBarList.style.width == '0px'){
+		menuBarList.style.width = (2.0 * bubbleSize) + 'px';
+		menuBubble.style.color = '#1a1a1a';
+		menuBubble.style.fontSize = '0px';
+	}
+	else{
+		menuBarList.style.width = '0px';
+		menuBubble.style.color = 'white';
+		menuBubble.style.fontSize = (0.5 * bubbleSize) + 'px';
+	}
+}

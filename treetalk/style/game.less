@@ -316,16 +316,17 @@ div#menuBubble{
 		margin-top: @bubbleSize * -0.5;
 		margin-left: @bubbleSize * 0.5;
 		//padding-top: 5vw;
-		width: 0vw;
+		width: 0px;
 		overflow: hidden;
 
 		li{
 
 			background: transparent;
+			height: @bubbleSize * 0.25;
 			line-height: @bubbleSize * 0.25;
 			font-size: @bubbleSize * 0.20;
 			padding: @bubbleSize * 0.10;
-			padding-bottom: 1vw;
+			//padding-bottom: 1vw;
 			//margin-bottom: 1vw;
 
 			&:hover{
@@ -336,6 +337,7 @@ div#menuBubble{
 			
 				font-style: italic;
 				font-size: @bubbleSize * 0.175;
+				height: @bubbleSize * 0.50;
 			
 				&:hover{
 					background: @charcoal;
