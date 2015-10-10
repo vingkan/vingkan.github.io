@@ -52,23 +52,48 @@
 	<div class="wood">
 			<div class="headerSpace"></div>
 			<h1>Add/Edit Meals</h1>
+			<select id="mealSelector">
+				<option value="new-meal">Add New Meal</option>
+				<option value="meal-id">Sample Meal</option>
+			</select>
+			<button onclick="loadEditForm();">&#10004;</button>
+			<button onclick="deleteEntry();" style="background: #CF0008;">&#935;</button>
+			<p id="infoSpacer">Enter your information below for a new meal. To edit an existing meal, find it in the selector to load its data.</p>
 			<div id="editForm">
-				<label>name</label>
+				<label>
+					<div>name</div>
 					<input id="new-name" type="text" placeholder="Meal Name">
-				<label>chef</label>
-					<input id="new-chef" type="text" placeholder="Chef">
-				<label>price</label>
+				</label>
+				<label>
+					<div>chef</div>
+					<input id="new-chef" type="text" placeholder="Chef Name">
+				</label>
+				<label class="number">
+					<div>price ($)</div>
 					<input id="new-price" type="number" placeholder="5">
-				<label>capacity</label>
+				</label>
+				<label class="number">
+					<div>capacity</div>
 					<input id="new-capacity" type="number" placeholder="5">
-				<label>timestamp</label>
-					<input id="new-timestamp" type="datetime">
-				<label>location</label>
-					<input id="new-location" type="text" placeholder="Location">
-				<label>img</label>
+				</label>
+				<label>
+					<div>location</div>
+					<input id="new-location" type="text" placeholder="Location Name">
+				</label>
+				<label class="number">
+					<div>date</div>
+					<input id="new-date" type="date">
+				</label>
+				<label class="number">
+					<div>time</div>
+					<input id="new-time" type="time">
+				</label>
+				<label>
+					<div>img</div>
 					<input id="new-img" type="text" placeholder="Image URL">
+				</label>
+				<button id="teaserSubmit" onclick="updateMeal();">Update Meal</button>
 			</div>
-			<div id="upcomingMeals"></div>
 	</div>
 
 	<div class="wood">
@@ -98,9 +123,10 @@
 				var key = childSnapshot.key();
 				var childData = childSnapshot.val();
 				var meal = new Meal(childData);
+				meal.id = key;
 				meals.push(meal);
 			});
-			loadMeals();
+			loadMealOptions();
 		});
 
 
