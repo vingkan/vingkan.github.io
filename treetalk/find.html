@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Tree Talk</title>
+		<link rel="stylesheet" type="text/css" href="style/reset.css">
+		<link rel="stylesheet" type="text/css" href="style/main.css">
+		<link href='https://fonts.googleapis.com/css?family=Bubblegum+Sans|Cabin:400,400italic,700' rel='stylesheet' type='text/css'>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script src="http://maps.googleapis.com/maps/api/js"></script>
+		<style>
+
+
+
+		</style>
+	</head>
+	<body>
+
+		<h1>Find Trees Close to Me: </h1>
+
+		<input type="number" id="nearbyTreesLimit" value="0" onchange="findNearbyTrees();">
+
+		<ul id="nearbyTreesList"></ul>
+		
+		<script type="text/javascript" src="geolocation.js"></script>
+		<script type="text/javascript" src="tree.js"></script>
+		<script type="text/javascript" src="storage.js"></script>
+		<script type="text/javascript" src="requests.js"></script>
+		<script type="text/javascript" src="map.js"></script>
+		<script type="text/javascript" src="main.js"></script>
+
+		<script type="text/javascript">
+
+			function findNearbyTrees(){
+				function listNearbyTrees(){
+					var results = storage.get(callId);
+					var output = document.getElementById('nearbyTreesList');
+					output.innerHTML = "";
+					for(var r = 0; r < results.length; r++){
+						output.innerHTML += '<li>' + results[r] + '</li>';
+					}
+				}
+				var callId = 'nearby_trees';
+				var limit = document.getElementById('nearbyTreesLimit').value;
+				var radius = 1000000000; //in meters
+				getTrees(callId, {
+					'$where': 'within_circle(location, ' + userLocation.latitude
+						+ ', ' + userLocation.longitude + ', ' + radius + ')'
+				}, limit, listNearbyTrees);
+			}
+
+		</script>
+		
+	</body>
+</html>

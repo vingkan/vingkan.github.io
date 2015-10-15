@@ -1,7 +1,8 @@
-<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>Tree Talk</title>
+		<link rel="icon" type="img/png" href="style/favicon.png" style="width:30px;">
 		<link rel="stylesheet" type="text/css" href="style/reset.css">
 		<link rel="stylesheet" type="text/css" href="style/main.css">
 		<link href='https://fonts.googleapis.com/css?family=Bubblegum+Sans|Cabin:400,400italic,700' rel='stylesheet' type='text/css'>
@@ -10,16 +11,100 @@
 		<style>
 
 
+			body{
+				background: #4E8BDE;
+				/*background: url('style/arborTrees.jpg');
+				background-repeat: no-repeat;
+				background-position: center center;
+				background-attachment: fixed;
+				background-size: cover;
+				-webkit-background-size: cover;*/
+			}
+
 
 		</style>
 	</head>
-	<body>
+	<body id="home">
 
-		<h1>Find Trees Close to Me: </h1>
+		<h1>Tree Talk</h1>
 
-		<input type="number" id="nearbyTreesLimit" value="0" onchange="findNearbyTrees();">
+		<p>
+			More than 150 Americans live in areas that don't meet federal air requirements. Pollution from cars, corporations, and other carbon sources contributes to this.
+		</p>
 
-		<ul id="nearbyTreesList"></ul>
+		<p>
+			Thankfully, trees have our backs. They provide many meaningful environmental benefits, including improving air quality.
+		</p>
+
+		<ul>
+			<li>
+				<span>T</span>emperature management and cooling nearby areas
+			</li>
+			<li>
+				<span>R</span>eduction of soil erosion and water pollution
+			</li>
+			<li>
+				<span>E</span>mission of organic compounds that reduce ozone
+			</li>
+			<li>
+				<span>E</span>nergizing people with their natural beauty
+			</li>
+		</ul>
+
+		<p>
+			In this game, you will fight against the cars' pollution using trees near you!
+		</p>
+
+		<center>
+			<button onclick="window.location='game.html'" style="margin-right: 5vh;">Play The Game</button>
+			<button onclick="window.location='find.html'">Find Nearby Trees</button>
+		</center>
+
+		<img id="treeLine" src="style/treeBanner.png">
+		<div class="landing">
+
+			<div class="logoBlock">
+				<div class="logoBox">
+					<center>
+						<img src="style/socrata.png" onclick="window.location='https://data.illinois.gov/Municipality/Trees-Owned-by-the-City-of-Champaign/dzge-uybj'">
+					</center>
+				</div>
+				<div class="preview">
+					<p>
+						This app uses the City of Urbana's tree database to query the trees that are actually closest to you! Click here to see the open dataset on Socrata.
+					</p>
+				</div>
+			</div>
+			<div class="logoBlock">
+				<div class="logoBox">
+					<center>
+						<img src="style/arborday.png" onclick="window.location='http://shop.arborday.org/content.aspx?page=memberships'">
+					</center>
+				</div>
+				<div class="preview">
+					<p>
+						Join the Arbor Day Foundation today to recieve 10 trees to plant near you. The Foundation will let you select trees that grow in your local habitable zone.
+					</p>
+				</div>
+			</div>
+			<div class="logoBlock">
+				<div class="logoBox">
+					<center>
+						<img src="style/urbana.png" onclick="window.location='http://urbanaillinois.us/boards/tree-commission'">
+					</center>
+				</div>
+				<div class="preview">
+					<p>
+						The City of Urbana's Tree Commission works hard to maintain its trees and raise awareness about their importance. Click here to learn more about their work.
+					</p>
+				</div>
+			</div>
+
+			<p>
+				Created by Vinesh Kannan and Nick Li | Illinois Institute of Technology
+			</p>
+
+		</div>
 		
 		<script type="text/javascript" src="geolocation.js"></script>
 		<script type="text/javascript" src="tree.js"></script>
@@ -30,23 +115,7 @@
 
 		<script type="text/javascript">
 
-			function findNearbyTrees(){
-				function listNearbyTrees(){
-					var results = storage.get(callId);
-					var output = document.getElementById('nearbyTreesList');
-					output.innerHTML = "";
-					for(var r = 0; r < results.length; r++){
-						output.innerHTML += '<li>' + results[r] + '</li>';
-					}
-				}
-				var callId = 'nearby_trees';
-				var limit = document.getElementById('nearbyTreesLimit').value;
-				var radius = 1000000000; //in meters
-				getTrees(callId, {
-					'$where': 'within_circle(location, ' + userLocation.latitude
-						+ ', ' + userLocation.longitude + ', ' + radius + ')'
-				}, limit, listNearbyTrees);
-			}
+			
 
 		</script>
 		

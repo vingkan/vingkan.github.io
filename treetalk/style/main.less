@@ -5,6 +5,7 @@
 @focusTone: #61B329;
 @lightTone: @focusTone + #222222;
 @darkTone: @focusTone - #222222;
+@charcoal: #1A1A1A;
 
 /*--------------------------------------------*/
 /*---> LAYOUT <-------------------------------*/
@@ -19,6 +20,7 @@ html, body{
 	background:  @focusTone;
 	width: 100vw;
 	height: 100vh;
+	overflow-x: hidden;
 }
 
 ul#nearbyTreesList{
@@ -56,10 +58,12 @@ h1, h2, h3, h4{
 	font-weight: bold;
 	color: white;
 	text-align: center;
+	margin: 0;
+	padding-bottom: 0;
 }
 
 h1{
-	font-size: 2.5em;
+	font-size: 4.5em;
 }
 
 h2{
@@ -68,6 +72,130 @@ h2{
 
 p{
 	color: @darkTone;
+}
+
+body#home{
+
+	div.landing{
+		background: @darkTone;
+		padding: 0.25em 0;
+	}
+
+	p, ul{
+		color: white;
+		font-family: @Cabin;
+		font-size: 1.2em;
+		line-height: 1.5em;
+	}
+
+	p{
+		text-align: center;
+	}
+
+	ul{
+
+		width: 500px;
+		margin: 0 auto;
+
+		span{
+			color: @darkTone;
+			font-family: @BubblegumSans;
+			font-size: 2em;
+			vertical-align: middle;
+			line-height: 1em;
+			margin-right: 5px;
+			font-weight: bolder;
+		}
+
+	}
+
+	button{
+
+		background: @darkTone;
+		color: white;
+		font-family: @BubblegumSans;
+		font-size: 1.25em;
+		width: 20vh;
+		height: 20vh;
+		border: none;
+		outline: none;
+		border-radius: 50%;
+		vertical-align: top;
+
+		&:hover{
+			background: white;
+			color: @darkTone;
+			width: 30vh;
+			height: 30vh;
+		}
+
+		transition: all 0.5s ease;
+		-webkit-transition: all 0.5s ease;
+	}
+
+	img{
+		width: 100%;
+		margin-top: 2em;
+	}
+
+	div.logoBlock{
+
+		width: 90%;
+		padding: 2em 5%;
+		margin: 0 auto;
+
+		div.logoBox, div.preview{
+			display: inline-block;
+			height: auto;
+			margin: 0;
+			padding: 0;
+			vertical-align: top;
+		}
+
+		div.logoBox{
+
+			background: transparent;
+			width: 40%;
+
+			img{
+
+				width: auto;
+				height: 30%;
+				background: transparent;
+				margin: 0;
+
+				&:hover{
+					height: 35%;
+				}
+
+				transition: all 0.5s ease;
+				-webkit-transition: all 0.5s ease;
+
+			}
+
+		}
+
+		div.preview{
+			margin: auto 0;
+			width: 59%;
+			height: 30%;
+			background: transparent;
+			vertical-align: middle;
+			position: relative;
+
+			p{
+				width: 100%;
+				position: absolute;
+				top: 40%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				-webkit-transform: translate(-50%, -50%);
+				color: white;
+			}
+		}
+
+	}
+
 }
 
 /*--------------------------------------------*/
