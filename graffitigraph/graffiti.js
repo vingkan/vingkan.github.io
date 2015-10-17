@@ -1,16 +1,11 @@
-var graffitiIDList = [];
-
-function newGraffitiID(){
-	var newID = "graffiti" + graffitiIDList.length;
-	graffitiIDList.push(newID);
-	return newID;
-}
-
 Graffiti.prototype.id = ""; //String
 Graffiti.prototype.type = ""; //String
 Graffiti.prototype.requested = ""; //Date
 Graffiti.prototype.resolved = ""; //Date
+Graffiti.prototype.intersection = false; //Boolean
 Graffiti.prototype.address = ""; //String
+Graffiti.prototype.crossStreet = ""; //String
+Graffiti.prototype.surface = ""; //String, perhaps Enum eventually
 Graffiti.prototype.monikers = []; //String[]
 Graffiti.prototype.coordinates = {
 	'latitude': 0.0,
@@ -18,11 +13,18 @@ Graffiti.prototype.coordinates = {
 }; //Object of Doubles/Floats
 
 function Graffiti(data){
-	this.id = newGraffitiID();
+	this.id = data['servno'];
 	this.type = data['graffititype'];
 	this.requested = new Date(data['request_date']);
 	this.resolved = new Date(data['resolved_date']);
+	var intersectionType = false;
+	if(data['addrtype'] == 'I'){
+		intersectionType = true;
+	}
+	this.intersection = intersectionType;
 	this.address = data['address'];
+	this.crossStreet = data['crossstreet'];
+	this.surface = null;
 	this.monikers = [
 			data['graffitimoniker'],
 			data['graffitimoniker2'],
