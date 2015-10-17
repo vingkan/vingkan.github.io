@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Graffiti Graph</title>
+		<!-- ThinkChicago Team Giordano's | 16 October 2015 -->
+		<link href='https://fonts.googleapis.com/css?family=Oswald:400,700' rel='stylesheet' type='text/css'>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script src="http://maps.googleapis.com/maps/api/js"></script>
+		<script src="overlappingMarkerSpiderfier.js"></script>
+		<style>
+
+			html, body{
+				margin: 0;
+				padding: 0;
+			}
+
+			div#googleMap{
+				height: 100vh;
+				width: 100vw;
+			}
+
+			h1{
+				position: fixed;
+				top: 30px;
+				left: 30px;
+				font-family: 'Oswald', sans-serif;
+				font-size: 30px;
+				z-index: 5;
+			}
+
+			span{
+				font-size: 15px;
+			}
+
+		</style>
+	</head>
+	<body>
+
+		<h1>Graffiti Graph <span>version 0.0.1</span></h1>
+
+		<div id="googleMap"></div>
+
+		<script type="text/javascript" src="graffiti.js"></script>
+		<script type="text/javascript" src="storage.js"></script>
+		<script type="text/javascript" src="requests.js"></script>
+		<script type="text/javascript" src="map.js"></script>
+
+		<script type="text/javascript">
+
+			function sampleGraffitiData(){
+				function plotData(){
+					var results = storage.get(callId);
+					initGoogleMap(results);
+				}
+				var callId = 'nearby_trees';
+				var limit = 100;
+				getGraffiti(callId, {
+					'graffititype': 'Gang'
+				}, limit, plotData);
+			}
+
+			sampleGraffitiData();
+
+		</script>
+		
+	</body>
+</html>
