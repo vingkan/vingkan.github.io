@@ -3,7 +3,7 @@
 	<head>
 		<title>Graffiti Graph</title>
 		<!-- ThinkChicago Team Giordano's | 16 October 2015 -->
-		<link href='https://fonts.googleapis.com/css?family=Oswald:400,700' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Bevan|Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 		<script src="http://maps.googleapis.com/maps/api/js"></script>
 		<script src="overlappingMarkerSpiderfier.js"></script>
@@ -19,24 +19,41 @@
 				width: 100vw;
 			}
 
-			h1{
+			div#entry{
 				position: fixed;
 				top: 30px;
 				left: 30px;
-				font-family: 'Oswald', sans-serif;
-				font-size: 30px;
 				z-index: 5;
 			}
 
+			h1, p, span{
+				margin: 0;
+				padding: 0;
+			}
+
+			h1{
+				font-family: 'Bevan', sans-serif;
+				font-size: 4em;
+			}
+
 			span{
-				font-size: 15px;
+				font-size: 50%;
+			}
+
+			p{
+				width: 35vw;
+				font-family: 'Source Sans Pro', sans-serif;
+				font-size: 2em;
 			}
 
 		</style>
 	</head>
 	<body>
 
-		<h1>Graffiti Graph <span>version 0.0.1</span></h1>
+		<div id="entry">
+			<h1>Graffiti Graph <span>version 0.0.1</span></h1>
+			<p>Showing the first 100 incidents of gang-related graffiti from the Rockford municipal open dataset.</p>
+		</div>
 
 		<div id="googleMap"></div>
 
