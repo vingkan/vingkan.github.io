@@ -53,13 +53,15 @@
 
 				function addCurrentUser(){
 					var userName = prompt("What is your name?");
-					addUsers([new User({
-						id: null,
-						name: userName,
-						latitude: userLocation.getLat(),
-						longitude: userLocation.getLon()
-					})]);
-					getUsers();
+					if(userName != null){
+						addUsers([new User({
+							id: null,
+							name: userName,
+							latitude: userLocation.getLat(),
+							longitude: userLocation.getLon()
+						})]);
+						getUsers();
+					}
 				}
 
 		</script>

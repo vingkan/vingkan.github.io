@@ -2,7 +2,7 @@ function assignUpdate(user){
 	setInterval(function(){
 		updateUser(user);
 		console.log('Updating ' + user.name);
-	}, 5000);
+	}, 15000);
 }
 
 function getUsers(){
