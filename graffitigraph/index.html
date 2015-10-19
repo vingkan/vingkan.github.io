@@ -3,108 +3,26 @@
 	<head>
 		<title>Graffiti Graph</title>
 		<!-- ThinkChicago Team Giordano's | 16 October 2015 -->
+		<link rel="stylesheet" type="text/css" href="style/reset.css">
+		<link rel="stylesheet" type="text/css" href="style/demo.css">
 		<link href='https://fonts.googleapis.com/css?family=Bevan|Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 		<script src="http://maps.googleapis.com/maps/api/js"></script>
 		<script src="overlappingMarkerSpiderfier.js"></script>
 		<style>
 
-			html, body{
-				margin: 0;
-				padding: 0;
-			}
 
-			div#googleMap{
-				height: 100vh;
-				width: 100vw;
-			}
-
-			div#entry{
-				position: fixed;
-				top: 30px;
-				left: 30px;
-				z-index: 5;
-			}
-
-			div#exit{
-				position: fixed;
-				bottom: 30px;
-				right: 30px;
-				z-index: 5;
-				text-align: right;
-			}
-
-			div#pitch{
-				position: fixed;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
-				background: rgba(0, 0, 0, 0.5);
-				z-index: 10;
-				overflow: hidden;
-				transition: all 1s ease;
-				-webkit-transition: all 1s ease;
-			}
-
-				div#pitch p{
-					width: 100vw;
-					text-align: center;
-					color: white;
-					margin: 0;
-					padding: 0;
-					margin-top: 5vh;
-				}
-
-			iframe#slides{
-				margin-top: 5vh;
-				margin-left: 10vw;
-				height: 80vh;
-				width: 80vw;
-				border: none;
-				outline: none;
-				box-shadow: 0 0 10vw 0px black;
-			}
-
-			h1, p, span{
-				margin: 0;
-				padding: 0;
-			}
-
-			h1{
-				font-family: 'Bevan', sans-serif;
-				font-size: 4em;
-			}
-
-			span{
-				font-size: 50%;
-			}
-
-			p{
-				width: 35vw;
-				font-family: 'Source Sans Pro', sans-serif;
-				font-size: 2em;
-			}
-
-			a{
-				font-weight: bold;
-				text-decoration: none;
-				color: black;
-				transition: all 1s ease;
-				-webkit-transition: all 1s ease;
-			}
-
-			a:hover{
-				color: #F75C54;
-			}
 
 		</style>
 	</head>
 	<body>
 
-		<div id="entry">
+		<div id="entry" class="floatingHeader">
 			<h1>Graffiti Graph <span>version 0.0.1</span></h1>
-			<p>Showing the first 100 incidents of gang-related graffiti from the <a target="blank_" href="https://data.illinois.gov/Municipality/Graffiti/u4ca-yfeq">Rockford municipal open dataset.</a></p>
+			<p>
+				Showing the first 100 incidents of gang-related graffiti from the <a target="blank_" href="https://data.illinois.gov/Municipality/Graffiti/u4ca-yfeq">Rockford municipal open dataset.</a><br>
+				<a onclick="collapseEntryText();"><span>Click here to explore the map.</span></a>
+			</p>
 		</div>
 
 		<div id="googleMap"></div>
@@ -118,6 +36,7 @@
 			<p><span><b>By ThinkChicago Team Giordano's</b></span></p>
 		</div>
 
+		<script type="text/javascript" src="pretty.js"></script>
 		<script type="text/javascript" src="graffiti.js"></script>
 		<script type="text/javascript" src="storage.js"></script>
 		<script type="text/javascript" src="requests.js"></script>
@@ -138,6 +57,8 @@
 			}
 
 			sampleGraffitiData();
+
+			//$('#pitch').click();
 
 		</script>
 		

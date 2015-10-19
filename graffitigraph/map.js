@@ -20,6 +20,15 @@ function initGoogleMap(markerArray){
 	};
 	var mapDiv = document.getElementById('googleMap');
 	var googleMap = new google.maps.Map(mapDiv, mapProperties);
+	var oms = new OverlappingMarkerSpiderfier(googleMap);
+	var infoWindow = new google.maps.InfoWindow();
+	oms.addListener('click', function(marker, event){
+		infoWindow.setContent(marker.desc);
+		infoWindow.open(map, marker);
+	});
+	oms.addListener('spiderify', function(markers){
+		infoWindow.close();
+	});
 
 	for(var m = 0; m < markerArray.length; m++){
 		var current = markerArray[m];
@@ -31,5 +40,6 @@ function initGoogleMap(markerArray){
 			map: googleMap,
 			title: current.name
 		});
+		oms.addMarker(marker);
 	}
 }
