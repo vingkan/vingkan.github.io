@@ -54,6 +54,7 @@
 				function addCurrentUser(){
 					var userName = prompt("What is your name?");
 					if(userName != null){
+						navigator.geolocation.getCurrentPosition(updateCoords);
 						addUsers([new User({
 							id: null,
 							name: userName,
