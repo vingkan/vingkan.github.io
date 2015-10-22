@@ -1,6 +1,7 @@
 var googleMap;
 var oms;
 var mapUsers = [];
+var markerCount = 0;
 
 function initGoogleMap(markerArray){
 	var centerPoint = userLocation;
@@ -44,10 +45,12 @@ function initGoogleMap(markerArray){
 		});
 		oms.addMarker(marker);
 		mapUsers.push(current);
+		markerCount++;
 	}
 }
 
 function addUserMarker(user){
+	console.log(user)
 	var current = user;
 	var markerIcon = {
 		url: 'style/markers/' + current.getImgLetter() + '.png',
@@ -66,5 +69,18 @@ function addUserMarker(user){
 		animation: google.maps.Animation.DROP,
 		draggable: false
 	});
-	oms.addMarker(marker);
+	console.log(marker)
+	//oms.addMarker(marker);
+	google.maps.event.addListener(marker, 'click', (function(marker, markerCount){
+		return function(){
+			/*infoWindow.setContent(htmlInfo);
+			infoWindow.open(googleMap, marker);*/
+		}
+	})(marker, markerCount));
+	/*googleMap.panTo(
+		{
+			lat: current.getLat(),
+			lng: current.getLon()
+		}
+	);*/
 }

@@ -26,6 +26,20 @@ function addUsers(userArray){
 	}
 }
 
+function addCurrentUser(){
+	var userName = prompt("What is your name?");
+	if(userName != null){
+		navigator.geolocation.getCurrentPosition(updateCoords);
+		addUsers([new User({
+			id: null,
+			name: userName,
+			latitude: userLocation.getLat(),
+			longitude: userLocation.getLon()
+		})]);
+		getUsers();
+	}
+}
+
 function updateUser(user, geolocation){
 	var newLocation = geolocation || userLocation;
 	var userDatabase = new Firebase('https://circleup.firebaseio.com/users');

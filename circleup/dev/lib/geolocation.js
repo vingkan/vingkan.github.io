@@ -35,4 +35,4 @@ var geoOptions = {
 	timeout: 20000
 }
 
-var watchUser = navigator.geolocation.watchPosition(geoSuccess, geoError, geoOptions);
+//var watchUser = navigator.geolocation.watchPosition(geoSuccess, geoError, geoOptions);

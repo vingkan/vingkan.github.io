@@ -52,6 +52,22 @@
 
 				getUsers();
 
+				var geoTrail = function(position){
+					updateCoords(position);
+					var pointTime = new Date().getTime();
+					var trailPoint = new User({
+						name: "Trail Point",
+						timestamp: pointTime,
+						latitude: position.coords.latitude,
+						longitude: position.coords.longitude,
+						accuracy: position.coords.accuracy
+					});
+					console.log(trailPoint)
+					addUserMarker(trailPoint);
+				}
+
+				var watchUser = navigator.geolocation.watchPosition(geoTrail, geoError, geoOptions);
+
 		</script>
 		
 	</body>
