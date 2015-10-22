@@ -19,9 +19,9 @@ navigator.geolocation.getCurrentPosition(function(position){
 
 var geoSuccess = function(position){
 	updateCoords(position);
-	alert('watchPosition');
-	console.log(position);
-	console.log('{' + position.coords.latitude + ', ' + position.coords.longitude + '} (' + position.coords.accuracy + ')');
+	var geoString = '{' + position.coords.latitude + ', ' + position.coords.longitude + '} (' + position.coords.accuracy + ')';
+	alert(geoString);
+	console.log(geoString);
 }
 
 var geoError = function(){
