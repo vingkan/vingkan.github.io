@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Circle Up</title>
+		<link rel="icon" type="img/png" href="style/favicon.png" style="width:30px;">
+		<link rel="stylesheet" type="text/css" href="style/reset.css">
+		<link rel="stylesheet" type="text/css" href="style/main.css">
+		<link href='https://fonts.googleapis.com/css?family=Fredoka+One|News+Cycle:400,700' rel='stylesheet' type='text/css'>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+		<script src="http://maps.googleapis.com/maps/api/js"></script>
+		<script src="lib/overlappingMarkerSpiderfier.js"></script>
+		<style>
+
+			button{
+				position: fixed;
+				top: 30px;
+				left: 30px;
+				z-index: 10;
+			}
+
+		</style>
+	</head>
+	<body>
+
+
+		<div id="googleMap"></div>
+
+		<button onclick="addCurrentUser();">Add Me!</button>
+		
+		<!-- MODELS -->
+		<script src="models/user.js"></script>
+		<script src="models/database.js"></script>
+		<!-- LIBS -->
+		<script src="lib/utils.js"></script>
+		<script src="lib/geolocation.js"></script>
+		<script src="lib/map.js"></script>
+
+		<script type="text/javascript">
+
+				/*var sampleUsers = [];
+				sampleUsers.push(new User({
+					name: "Sunny Shah",
+					latitude: "41.853255",
+					longitude: "-87.649190"
+				}));
+				sampleUsers.push(new User({
+					name: "Vinesh Kannan",
+					latitude: "41.844112",
+					longitude: "-87.664511"
+				}));*/
+
+				getUsers();
+
+				function addCurrentUser(){
+					var userName = prompt("What is your name?");
+					if(userName != null){
+						navigator.geolocation.getCurrentPosition(updateCoords);
+						addUsers([new User({
+							id: null,
+							name: userName,
+							latitude: userLocation.getLat(),
+							longitude: userLocation.getLon()
+						})]);
+						getUsers();
+					}
+				}
+
+		</script>
+		
+	</body>
+</html>

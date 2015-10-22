@@ -1,0 +1,116 @@
+/*--------------------------------------------*/
+/*---> COLORS <-------------------------------*/
+/*--------------------------------------------*/
+
+@focusColor: #0EBFE9;
+@lightTone: @focusColor + #222222;
+@darkTone: @focusColor - #222222;
+@charcoal: #1a1a1a;
+
+/*--------------------------------------------*/
+/*---> FONTS <--------------------------------*/
+/*--------------------------------------------*/
+
+@FredokaOne: 'Fredoka One', cursive;
+@NewsCycle: 'News Cycle', sans-serif;
+@smallFont: 5vh;
+
+.Center(){
+	margin: auto auto;
+	display: block;
+	text-align: center;
+}
+
+/*
+* Collapsing Header on Scroll Tutorial:
+* http://callmenick.com/post/animated-resizing-header-on-scroll
+*/
+
+@biggerHeight: 2 * @smallFont;
+@smallerHeight: @smallFont;
+
+@smallMargin: (@smallFont * 0.25);
+
+div.headerSpace{
+	height: (@biggerHeight + (@smallMargin * 3)) * 1.0;
+}
+
+header{
+
+	width: 100vw;
+	padding: @smallMargin 0;
+	height: @biggerHeight;
+	overflow: hidden;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 15;
+	background: @charcoal;
+	border-bottom: @smallMargin solid @focusColor;
+	-webkit-transition: height 0.25s;
+	-moz-transition: height 0.25s;
+	-ms-transition: height 0.25s;
+	-o-transition: height 0.25s;
+	transition: height 0.25s;
+
+	.logo{
+		display: inline-block;
+		height: @biggerHeight;
+		line-height: @biggerHeight;
+		//float: left;
+		.Center();
+		-webkit-transition: all 0.25s;
+		-moz-transition: all 0.25s;
+		-ms-transition: all 0.25s;
+		-o-transition: all 0.25s;
+		transition: all 0.25s;
+	}
+
+	#big{
+		height: @biggerHeight;
+		line-height: @biggerHeight;
+	}
+
+	#small{
+		height: 0;
+		line-height: 0;
+	}
+
+	h6{
+		display: inline-block;
+		float: left;
+		height: @biggerHeight;
+		line-height: @biggerHeight;
+		margin-top: @smallFont * 0.5;
+	}
+
+}
+
+header.smaller{
+
+	height: @smallerHeight;
+
+	.logo{
+		height: @smallerHeight;
+		line-height: @smallerHeight;
+		float: left;
+	}
+
+	#big{
+		height: 0;
+		line-height: 0;
+	}
+
+	#small{
+		height: @smallerHeight;
+		line-height: @smallerHeight;
+	}
+
+	h6{
+		margin-top: @smallerHeight * -0.15;
+		display: inline-block;
+		height: @smallerHeight;
+		line-height: @smallerHeight;
+	}
+
+}

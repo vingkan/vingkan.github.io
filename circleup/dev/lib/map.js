@@ -1,21 +1,8 @@
-var userLocation = new User({
-	id: null,
-	name: 'Local User',
-	latitude: 0,
-	longitude: 0
-});
-
 var mapUsers = [];
 
-function updateCoords(position){
-	userLocation.coordinates.latitude = position.coords.latitude;
-	userLocation.coordinates.longitude = position.coords.longitude;
-}
-
-navigator.geolocation.getCurrentPosition(updateCoords);
-
 function initGoogleMap(markerArray){
-	var centerPoint = markerArray[0];
+	var centerPoint = userLocation;
+	markerArray.push(userLocation);
 	var mapProperties = {
 		//center: new google.maps.LatLng(userLocation.latitude, userLocation.longitude),
 		center: new google.maps.LatLng(centerPoint.getLat(), centerPoint.getLon()),
@@ -36,6 +23,12 @@ function initGoogleMap(markerArray){
 
 	for(var m = 0; m < markerArray.length; m++){
 		var current = markerArray[m];
+		var markerIcon = {
+			url: 'style/markers/' + current.getImgLetter() + '.png',
+			scaledSize: new google.maps.Size(165, 250),
+			origin: new google.maps.Point(0, 0),
+			anchor: new google.maps.Point(0, 0)
+		};
 		var marker = new google.maps.Marker({
 			title: current.name,
 			map: googleMap,
@@ -43,7 +36,7 @@ function initGoogleMap(markerArray){
 				lat: current.getLat(),
 				lng: current.getLon()
 			},
-			icon: 'style/markers/' + current.getImgLetter() + '.png',
+			icon: markerIcon, //'style/markers/' + current.getImgLetter() + '.png',
 			animation: google.maps.Animation.DROP,
 			draggable: false
 		});

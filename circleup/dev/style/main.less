@@ -1,3 +1,101 @@
+/*--------------------------------------------*/
+/*---> COLORS <-------------------------------*/
+/*--------------------------------------------*/
+
+@focusColor: #0EBFE9;
+@lightTone: @focusColor + #222222;
+@darkTone: @focusColor - #222222;
+@charcoal: #1a1a1a;
+
+/*--------------------------------------------*/
+/*---> FONTS <--------------------------------*/
+/*--------------------------------------------*/
+
+@FredokaOne: 'Fredoka One', cursive;
+@NewsCycle: 'News Cycle', sans-serif;
+@smallFont: 5vh;
+
+/*--------------------------------------------*/
+/*---> TEXT <---------------------------------*/
+/*--------------------------------------------*/
+
+p{
+	width: 90vw;
+	margin: 5vw;
+	text-align: center;
+	line-height: @smallFont * 1.25;
+}
+
+/*--------------------------------------------*/
+/*---> BODY <---------------------------------*/
+/*--------------------------------------------*/
+
+html{
+	background: url('blueDiagmonds.png');
+	//Default Text Styles
+	font-family: @NewsCycle;
+	font-size: @smallFont;
+	color: white;
+}
+
+/*--------------------------------------------*/
+/*---> LANDING <------------------------------*/
+/*--------------------------------------------*/
+
+button{
+
+	height: 10vh;
+	width: 70vw;
+	margin: 5vw 15vw;
+	border-radius: 2.5vh;
+	background: @charcoal;
+	color: white;
+	//Text Styling
+	font-family: @FredokaOne;
+	line-height: 10vh;
+	font-size: @smallFont;
+	//Form Reset
+	outline: none;
+	border: none;
+
+	&:hover{
+		background: @focusColor;
+		color: @charcoal;
+		font-weight: bold;
+	}
+
+	transition: all 0.5s ease;
+	-webkit-transition: all 0.5s ease;
+
+}
+
+div.imagine{
+	padding: 5vw 0;
+	//Set Background to Cover
+	background-repeat: no-repeat;
+	background-position: center center;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+div#pickupbasketball{
+	background-image: url('img/pickupbasketball.jpg');
+}
+
+div#lostmall{
+	background-image: url('img/lostmall.jpg');
+}
+
+div#passby{
+	background-image: url('img/passby.jpg');
+}
+
+/*--------------------------------------------*/
+/*---> MAP <----------------------------------*/
+/*--------------------------------------------*/
+
 div#googleMap{
 	width: 100vw;
 	height: 100vh;

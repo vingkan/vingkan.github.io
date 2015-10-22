@@ -1,10 +1,3 @@
-function assignUpdate(user){
-	setInterval(function(){
-		updateUser(user);
-		console.log('Updating ' + user.name);
-	}, 15000);
-}
-
 function getUsers(){
 	var users = [];
 	var userDatabase = new Firebase('https://circleup.firebaseio.com/users');
@@ -15,9 +8,6 @@ function getUsers(){
 			var user = new User(childData);
 			user.id = key;
 			users.push(user);
-			if(key === "-K11MnRD-xGAqonEV-4W"){
-				assignUpdate(user);
-			}
 		});
 		initGoogleMap(users);
 	});
@@ -36,12 +26,13 @@ function addUsers(userArray){
 	}
 }
 
-function updateUser(user){
+function updateUser(user, geolocation){
+	var newLocation = geolocation || userLocation;
 	var userDatabase = new Firebase('https://circleup.firebaseio.com/users');
 	navigator.geolocation.getCurrentPosition(updateCoords);
 	userDatabase.child(user.id).update({
-		latitude: userLocation.getLat(),
-		longitude: userLocation.getLon()
+		latitude: newLocation.getLat(),
+		longitude: newLocation.getLon()
 	});
 	getUsers();
 }
