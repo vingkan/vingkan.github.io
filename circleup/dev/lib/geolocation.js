@@ -32,7 +32,7 @@ var geoError = function(){
 var geoOptions = {
 	enableHighAccuracy: true,
 	maximumAge: 30000,
-	timeout: 0
+	timeout: 20000
 }
 
 var watchUser = navigator.geolocation.watchPosition(geoSuccess, geoError, geoOptions);

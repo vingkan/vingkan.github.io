@@ -25,7 +25,7 @@ function initGoogleMap(markerArray){
 		var current = markerArray[m];
 		var markerIcon = {
 			url: 'style/markers/' + current.getImgLetter() + '.png',
-			scaledSize: new google.maps.Size(165, 250),
+			scaledSize: new google.maps.Size(82.5, 125),
 			origin: new google.maps.Point(0, 0),
 			anchor: new google.maps.Point(0, 0)
 		};
