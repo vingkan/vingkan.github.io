@@ -1,0 +1,311 @@
+/*--------------------------------------------*/
+/*---> COLORS <-------------------------------*/
+/*--------------------------------------------*/
+
+@focusColor: #0EBFE9;
+@lightTone: @focusColor + #222222;
+@darkTone: @focusColor - #222222;
+
+@scarletRed: #E51937;
+@charcoal: #1a1a1a;
+@surfaceGray: rgb(245, 245, 245);
+
+/*--------------------------------------------*/
+/*---> FONTS <--------------------------------*/
+/*--------------------------------------------*/
+
+@AlfaSlabOne: 'Alfa Slab One', sans-serif;
+@SourceSansPro: 'Source Sans Pro', sans-serif;
+@smallFont: 5vh;
+
+/*--------------------------------------------*/
+/*---> TEXT <---------------------------------*/
+/*--------------------------------------------*/
+
+h1{
+	font-family: @AlfaSlabOne;
+	text-align: center;
+	font-size: 1.75 * @smallFont;
+	color: rgba(255, 255, 255, 0.75);
+	text-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+	text-transform: uppercase;
+}
+
+h2{
+	font-family: @AlfaSlabOne;
+	text-align: center;
+	font-size: 1.5 8 @smallFont;
+}
+
+p{
+	width: 90%;
+	margin: 5vw;
+	text-align: center;
+	line-height: @smallFont * 1.25;
+}
+
+a{
+
+	text-decoration: none;
+	color: @scarletRed;
+	font-weight: bold;
+
+	&:hover{
+		color: @charcoal;
+	}
+
+	transition: all 0.5s ease;
+
+}
+
+/*--------------------------------------------*/
+/*---> BODY <---------------------------------*/
+/*--------------------------------------------*/
+
+html{
+	background: @surfaceGray;
+	//Default Text Styles
+	font-family: @SourceSansPro;
+	font-size: @smallFont;
+	color: @charcoal;
+}
+
+/*--------------------------------------------*/
+/*---> STRUCTURE <----------------------------*/
+/*--------------------------------------------*/
+
+.Center(){
+	margin: 0 auto;
+}
+
+.CoverBackground(){
+	background-repeat: no-repeat;
+	background-position: center center;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+/*--------------------------------------------*/
+/*---> HEADER & FOOTER <----------------------*/
+/*--------------------------------------------*/
+
+@headerHeight: 7.5vh;
+
+div.headerSpace{
+	height: @headerHeight;
+	line-height: @headerHeight;
+}
+
+header{
+
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: @headerHeight;
+	background: @scarletRed;
+	color: white;
+	box-shadow: 0 0 5vh black;
+	z-index: 50;
+
+	li{
+		display: inline-block;
+		margin-right: -1vw;
+		width: 24vw;
+		height: @headerHeight;
+		line-height: @headerHeight;
+		font-size: 0.65 * @smallFont;
+		text-align: center;
+
+		&:hover{
+			background: white;
+			color: @scarletRed;
+			font-weight: bold;
+			border-bottom: 2vh solid @scarletRed;
+		}
+
+		a{
+	
+			color: white;
+
+			&:hover{
+				color: @scarletRed;
+			}
+		}
+
+		transition: all 0.5s ease;
+
+	}
+
+}
+
+footer{
+
+	background: @scarletRed;
+	color: white;
+
+	p{
+		font-size: 0.25 * @smallFont;
+		width: 100%;
+		margin: 0;
+		padding: 0;
+	}
+
+}
+
+/*--------------------------------------------*/
+/*---> FORM <----------------------------------*/
+/*--------------------------------------------*/
+
+input, button, select{
+	outline: none;
+	border: none;
+}
+
+form{
+	font-family: @SourceSansPro;
+}
+
+form#registration{
+	width: 90%;
+	padding: 2.5%;
+	.Center();
+	//background: rgba(245, 245, 245, 0.5);
+	background: transparent;
+	margin-top: -15vh;
+}
+
+input, button{
+	padding: 2.5%;
+	margin: (0.5 * @smallFont) 0;
+	font-size: @smallFont;
+}
+
+input{
+
+	width: 95%;
+	text-align: center;
+	color: @charcoal;
+	background: rgba(255, 255, 255, 0.90);
+
+	&:focus{
+		color: @scarletRed;
+		font-weight: bold;
+		background: rgba(255, 255, 255, 0.75);
+	}
+
+	transition: all 0.5s ease;
+
+}
+
+button{
+
+	width: 50%;
+	font-family: @AlfaSlabOne;
+	color: white;
+	background: linear-gradient(to right, @scarletRed 50%, @charcoal 50%);
+	background-size: 200% 100%;
+	background-position: left bottom;
+	//border-radius: 0.5 * @smallFont;
+
+	&:hover{
+		background-position: right bottom;
+	}
+
+	transition: all 0.5s ease;
+
+}
+
+/*--------------------------------------------*/
+/*---> BACKGROUNDS <--------------------------*/
+/*--------------------------------------------*/
+
+section.module.section1{
+	background: url('img/iitSkyline.jpg');
+}
+
+section.module.section2{
+	background: url('img/squaresTunnel.jpg');
+}
+
+section.module.section3{
+	background: url('img/eastSide.jpg');
+}
+
+section.module.section4{
+	background: url('img/theBean.jpg');
+}
+
+section.module.section5{
+	background: url('img/lakeShore.jpg');
+}
+
+/*--------------------------------------------*/
+/*---> PARALLAX <-----------------------------*/
+/*--------------------------------------------*/
+
+@parallaxBoxSize: 40vh;
+
+section.parallax{
+	
+	//min-height: @parallaxBoxSize;
+
+	h1{
+		//line-height: @parallaxBoxSize;
+		padding: (0.5 * @parallaxBoxSize) 0;
+	}
+	
+}
+
+/*div.container{
+	max-width: 90%;
+	.Center();
+}
+
+.ParallaxBackground(){
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	background-position: fixed;
+	background-size: cover;
+}
+
+section.module{
+
+	&:last-child{
+		margin-bottom: 0;
+	}
+
+	h2{
+		text-align: center;
+		font-family: @AlfaSlabOne;
+		font-size: 1.5 * @smallFont;
+	}
+
+}
+
+section.content{
+	background: @charcoal;
+	color: white;
+	padding: 40px 0;
+}
+
+@parallaxBoxSize: 40vh;
+
+section.parallax{
+
+	height: @parallaxBoxSize;
+	line-height: @parallaxBoxSize;
+	.ParallaxBackground();
+
+	h1{
+		color: rgba(255, 255, 255, 0.8);
+		font-family: @AlfaSlabOne;
+		font-size: 2 * @smallFont;
+		text-align: center;
+		text-transform: uppercase;
+		text-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+	}
+
+}*/
