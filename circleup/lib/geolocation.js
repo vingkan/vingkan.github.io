@@ -9,16 +9,18 @@ var userLocation = new User({
 });
 
 function updateCoords(position){
-	userLocation.coordinates.latitude = position.coords.latitude;
+	//console.log(position.coords);
+	userLocation.setGeolocation(position.coords);
+	/*userLocation.coordinates.latitude = position.coords.latitude;
 	userLocation.coordinates.longitude = position.coords.longitude;
-	userLocation.coordinates.accuracy = position.coords.accuracy;
+	userLocation.coordinates.accuracy = position.coords.accuracy;*/
 }
 
 //Turned off for Constant Location Testing
-/*navigator.geolocation.getCurrentPosition(function(position){
+navigator.geolocation.getCurrentPosition(function(position){
 	updateCoords(position);
 	console.log('getCurrentPosition');
-});*/
+});
 
 var geoSuccess = function(position){
 	updateCoords(position);

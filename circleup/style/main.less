@@ -111,6 +111,7 @@ div#passby{
 div#menu{
 	width: 100vw;
 	height: 10vh;
+	padding: 1vw 20vh;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -140,9 +141,106 @@ button.action{
 }
 
 div#googleMap{
+	background: #E8DDBD;
 	width: 100vw;
 	height: 90vh;
 	position: fixed;
+	top: 10vh;
+	left: 0;
+}
+
+/*--------------------------------------------*/
+/*---> AUTHORIZATION <------------------------*/
+/*--------------------------------------------*/
+
+div#shade{
+	background: rgba(0, 0, 0, 0.75);
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	z-index: 20;
 	top: 0;
 	left: 0;
+	display: none;
+	//Transitions
+	transition: all 0.5s ease;
+	-webkit-transition: all 0.5s ease;
+}
+
+div.credentials{
+
+	background: white;
+	width: 90vw;
+	//height: 92vh;
+	height: 0vh;
+	border-top: 3vh solid @focusColor;
+	position: fixed;
+	bottom: -3vh;
+	left: 5vw;
+	z-index: 25;
+	box-shadow: 0 0 10vw black;
+
+	h3{
+		color: @focusColor;
+		width: 90%;
+		margin: 5%;
+		font-size: 1.5 * @smallFont;
+		line-height: 2 * @smallFont;
+		text-align: center;
+	}
+
+	input, button{
+		background: @focusColor;
+		color: white;
+		font-family: @NewsCycle;
+		width: 90%;
+		margin: 5%;
+		padding: 0 0;
+		height: 2 * @smallFont;
+		line-height: 2 * @smallFont;
+		font-size: @smallFont;
+		text-align: center;
+		margin: 5vw;
+		box-sizing: border-box;
+		//Transitions
+		transition: all 0.5s ease;
+		-webkit-transition: all 0.5s ease;
+	}
+
+	input{
+
+		background: rgb(100, 100, 100);
+
+		&:focus{
+			background: @focusColor;
+		}
+
+	}
+
+	button{
+
+		height: 1.5 * @smallFont;
+		line-height: 1.5 * @smallFont;
+		font-size: 0.75 * @smallFont;
+		background: linear-gradient(to right, @focusColor 50%, @charcoal 50%);
+		background-size: 200% 100%;
+		background-position: left bottom;
+
+		&:hover{
+			background-position: right bottom;
+		}
+
+	}
+
+	p.note{
+		width: 90%;
+		margin: 5%;
+		color: @charcoal;
+		font-size: 0.5 * @smallFont;
+		line-height: 0.75 * @smallFont;
+	}
+
+	transition: all 1s ease;
+	-webkit-transition: all 1s ease;
+
 }

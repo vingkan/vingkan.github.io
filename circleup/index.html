@@ -1,200 +1,54 @@
 <!DOCTYPE html>
-
 <html>
-
-<head>
-	<title>Circle Up</title>
-	<!-- STYLESHEETS -->
-	<link rel="stylesheet" type="text/css" href="style/reset.css">
-	<link rel="stylesheet/less" type="text/css" href="style/styles.less">
-	<script src="style/less.js" type="text/javascript"></script>
-	<link rel="stylesheet" type="text/css" href="style/styles.css">
-	<link href='https://fonts.googleapis.com/css?family=Fredoka+One|News+Cycle:400,700' rel='stylesheet' type='text/css'>
-	<link rel="icon" type="img/png" href="style/favicon.png" style="width:30px;">
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script> 
-	<script src="person.js" type="text/javascript"></script>
-	<script src="classie.js"></script>
-	<script src="http://maps.googleapis.com/maps/api/js"></script>
-	<script src="overlappingMarkerSpiderfier.js"></script>
-	<style>
+	<head>
+		<title>Circle Up</title>
+		<link rel="icon" type="img/png" href="style/favicon.png" style="width:30px;">
+		<link rel="stylesheet" type="text/css" href="style/reset.css">
+		<link rel="stylesheet" type="text/css" href="style/main.css">
+		<link rel="stylesheet" type="text/css" href="style/bonus.css">
+		<link href='https://fonts.googleapis.com/css?family=Fredoka+One|News+Cycle:400,700' rel='stylesheet' type='text/css'>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<style>
 
 
 
-	</style>
-</head>
+		</style>
+	</head>
+	<body>
 
-<body>
+		<header>
+			<div class="container clearfix">
+				<img class="logo" id="big" src="style/logo.png">
+				<img class="logo" id="small" src="style/favicon.png">
+				<h6>Hello, <span id="userID">User</span>.</h6>
+			</div>
+		</header>
+		<div class="headerSpace"></div>
 
-	<div class="alert" id="changeLocation" style="display: none;">
-		<p>Would you like to update your location?</p>
-		<button type="button" onclick="updateUserLocation();">Yes</button>
-		<button type="button" onclick="document.getElementById('changeLocation').style.display='none';">No</button>
-	</div>
+		<button class="landing" onclick="window.location='map.html';">Map</button>
+		
+		<p>Circle up with your friends ...</p>
 
-	<div id="demo">Error</div>
-
-	<div id="user-list" style="display: none;"></div>
-
-	<textarea id ="dataIn" style="display:none;width:400px;height:200px;"></textarea>
-	<textarea id ="userKeys" style="display:none;width:400px;height:200px;"></textarea>
-
-	<header>
-		<div class="container clearfix">
-			<img class="logo" id="big" src="style/logo.png">
-			<img class="logo" id="small" src="style/favicon.png">
-			<p>Hello, <span id="userID">User</span>.</p>
+		<div class="imagine" id="pickupbasketball">
+			<p>... for a game of pickup basketball</p>
 		</div>
-	</header>
+		<div class="imagine" id="lostmall">
+			<p>... when you get lost at the mall</p>
+		</div>
+		<div class="imagine" id="passby">
+			<p>... for the meetup you didn't expect</p>
+		</div>
 
-	<div id="headerSpace"></div>
+		<!-- FRONT -->
+		<script type="text/javascript" src="front/classie.js"></script>
+		<script type="text/javascript" src="front/pretty.js"></script>
 
-	<div id="userForm">
-
-		<p>Make finding your friends easier (and more fun) than ever.</p>
-		<input type="text" id="userfirstname" placeholder="First Name">
-		<input type="text" id="userlastname" placeholder="Last Name">
-		<!--<button type="button" id="submit1" onclick="submitOne();">Get Code</button>
-		<br>-->
-		<input style="display: none;" type="text" id="unique">
-		<button type="button" id="submit2" onclick="submitTwo();">Join Map</button>
-		<button type="button" onclick="initialize();">See Your Friends</button>
-
-	</div>
-	
-	<div id="mapContainer">
-		<div id="googleMap" style="width:100%;height:400px;z-index:5;"></div>
-		<div class="coord" id="latCoord">25.0000000</div>
-		<div class="coord" id="lonCoord">-65.0000000</div>
-	</div>
-
-	<div id="next">
-		<h1>What's Next for Circle Up?</h1>
-		<!-- <ul>
-			<li>Alert</li>
-		</ul> -->
-	</div>
-
-	<div id="form" style="display: none;">
 		<script type="text/javascript">
-			var submitted = false;
+
+			//Automatically go to the app map page
+			window.location = 'map.html';
+
 		</script>
-		<iframe name="hidden-iframe" id="hidden-iframe" style="display: none;" onload="if(submitted){setTimeout(function(){window.location='index.html';},3000)}"></iframe>
-		<form action="https://docs.google.com/a/hawk.iit.edu/forms/d/1EWx5UKcGOph5hXdHmmty4mY5ir-1Pj32j0AmBi0Ax9g/formResponse" method="POST" id="ss-form" target="hidden-iframe" onsubmit="submitted = true;">
-
-		<ol role="list" class="ss-question-list" style="padding-left: 0">
-		<div class="ss-form-question errorbox-good" role="listitem">
-		<div dir="auto" class="ss-item ss-item-required ss-text"><div class="ss-form-entry">
-		<label class="ss-q-item-label" for="entry_1503901081"><div class="ss-q-title">id
-		<label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
-		<span class="ss-required-asterisk" aria-hidden="true">*</span></div>
-		<div class="ss-q-help ss-secondary-text" dir="auto"></div></label>
-		<input type="text" name="entry.1503901081" value="" class="ss-q-short" id="entry_1503901081" dir="auto" aria-label="id  " aria-required="true" required="" title="">
-		<div class="error-message" id="2119856601_errorMessage"></div>
-		<div class="required-message">This is a required question</div>
-		</div></div></div> <div class="ss-form-question errorbox-good" role="listitem">
-		<div dir="auto" class="ss-item ss-item-required ss-text"><div class="ss-form-entry">
-		<label class="ss-q-item-label" for="entry_1191619877"><div class="ss-q-title">firstname
-		<label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
-		<span class="ss-required-asterisk" aria-hidden="true">*</span></div>
-		<div class="ss-q-help ss-secondary-text" dir="auto"></div></label>
-		<input type="text" name="entry.1191619877" value="" class="ss-q-short" id="entry_1191619877" dir="auto" aria-label="firstname  " aria-required="true" required="" title="">
-		<div class="error-message" id="799607948_errorMessage"></div>
-		<div class="required-message">This is a required question</div>
-		</div></div></div> <div class="ss-form-question errorbox-good" role="listitem">
-		<div dir="auto" class="ss-item ss-item-required ss-text"><div class="ss-form-entry">
-		<label class="ss-q-item-label" for="entry_2134594167"><div class="ss-q-title">lastname
-		<label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
-		<span class="ss-required-asterisk" aria-hidden="true">*</span></div>
-		<div class="ss-q-help ss-secondary-text" dir="auto"></div></label>
-		<input type="text" name="entry.2134594167" value="" class="ss-q-short" id="entry_2134594167" dir="auto" aria-label="lastname  " aria-required="true" required="" title="">
-		<div class="error-message" id="543474321_errorMessage"></div>
-		<div class="required-message">This is a required question</div>
-		</div></div></div> <div class="ss-form-question errorbox-good" role="listitem">
-		<div dir="auto" class="ss-item ss-item-required ss-text"><div class="ss-form-entry">
-		<label class="ss-q-item-label" for="entry_1145448555"><div class="ss-q-title">lat
-		<label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
-		<span class="ss-required-asterisk" aria-hidden="true">*</span></div>
-		<div class="ss-q-help ss-secondary-text" dir="auto"></div></label>
-		<input type="text" name="entry.1145448555" value="" class="ss-q-short" id="entry_1145448555" dir="auto" aria-label="lat  " aria-required="true" required="" title="">
-		<div class="error-message" id="180268262_errorMessage"></div>
-		<div class="required-message">This is a required question</div>
-		</div></div></div> <div class="ss-form-question errorbox-good" role="listitem">
-		<div dir="auto" class="ss-item ss-item-required ss-text"><div class="ss-form-entry">
-		<label class="ss-q-item-label" for="entry_1402007270"><div class="ss-q-title">lon
-		<label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
-		<span class="ss-required-asterisk" aria-hidden="true">*</span></div>
-		<div class="ss-q-help ss-secondary-text" dir="auto"></div></label>
-		<input type="text" name="entry.1402007270" value="" class="ss-q-short" id="entry_1402007270" dir="auto" aria-label="lon  " aria-required="true" required="" title="">
-		<div class="error-message" id="1021413714_errorMessage"></div>
-		<div class="required-message">This is a required question</div>
-		</div></div></div>
-		<input type="hidden" name="draftResponse" value="[,,&quot;-4117243450318877472&quot;]
-		">
-		<input type="hidden" name="pageHistory" value="0">
-
-		<input type="hidden" name="fvv" value="0">
-
-
-		<input type="hidden" name="fbzx" value="-4117243450318877472">
-
-		<div class="ss-item ss-navigate"><table id="navigation-table"><tbody><tr><td class="ss-form-entry goog-inline-block" id="navigation-buttons" dir="ltr">
-		<input type="submit" name="submit" value="Submit" id="ss-submit" class="jfk-button jfk-button-action ">
-		<div class="ss-password-warning ss-secondary-text">Never submit passwords through Google Forms.</div></td>
-		</tr></tbody></table></div></ol></form>
-
-	</div>
-
-	<div id="footer">
-		Sunny Shah and Vinesh Kannan | Circle Up | MonkeyBars OpenBuild September 2015
-	</div>
-
-	<script type="text/javascript">
-
-		//var imgPath = 'urlhere';
-		var url = 'http://spreadsheets.google.com/feeds/list/1PrmblSB1Kn846lgxeSGVK4bjargdOEmAWG64QP6vh44/od6/public/values?alt=json-in-script&callback=?';
-
-		//var people = [];
-
-		$(document).ready(function(){
-			$(function listBooks(){
-				$.getJSON(
-					url,
-					function(data){
-						$('div#user-list').append('<ul class="users"></ul>');
-						$.each(data.feed.entry, function(i, entry){
-							$('.users').append('<li id="name' + i + '">' + entry.gsx$firstname.$t + '</li>');
-							var dataIn = document.getElementById('dataIn');
-							dataIn.value += '["' + entry.gsx$firstname.$t + '", ' + entry.gsx$lat.$t + ', ' + entry.gsx$lon.$t + ', ' + (i+2) + ']\n';
-							var userKeys = document.getElementById('userKeys');
-							userKeys.value += entry.gsx$id.$t + '\n';
-							/*var person = new Person(
-								entry.gsx$id.$t,
-								entry.gsx$firstname.$t,
-								entry.gsx$lastname.$t
-							);
-							people.push(person);*/
-							/*locations.push([entry.gsx$firstname.$t, parseFloat(entry.gsx$lat.$t), parseFloat(entry.gsx$lon.$t)]);*/
-						});
-
-//Space for looping calls on global variables
-
-					});
-			});
-		});
-
-
-
-
-	</script>
-	<script src="utils.js" type="text/javascript"></script>
-	<script src="geolocation.js" type="text/javascript"></script>
-	<script type="text/javascript">
-
-		getDeviceIP();
-		getLocation();
-
-	</script>
-
-</body>
-
+		
+	</body>
 </html>

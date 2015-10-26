@@ -28,16 +28,18 @@ function initGoogleMap(markerArray){
 
 	for(var m = 0; m < markerArray.length; m++){
 		var current = markerArray[m];
+		var defaultSize = new google.maps.Size(82.5, 125);
+		var currentUser = false;
+		if(currentUserMarker(current)){
+			currentUser = true;
+			defaultSize = new google.maps.Size(82.5 * 1.5, 125 * 1.5);
+		}
 		var markerIcon = {
 			url: 'style/markers/' + current.getImgLetter() + '.png',
-			scaledSize: new google.maps.Size(82.5, 125),
+			scaledSize: defaultSize,
 			origin: new google.maps.Point(0, 0),
 			anchor: new google.maps.Point(41, 125)
 		};
-		var draggableMarker = false;
-		if(currentUserMarker(current)){
-			draggableMarker = true;
-		}
 		var marker = new google.maps.Marker({
 			title: current.name,
 			map: googleMap,
@@ -47,13 +49,13 @@ function initGoogleMap(markerArray){
 			},
 			icon: markerIcon, //'style/markers/' + current.getImgLetter() + '.png',
 			animation: google.maps.Animation.DROP,
-			draggable: draggableMarker
+			draggable: currentUser
 		});
-		if(draggableMarker){
+		if(currentUser){
 			marker.addListener('dragend', function(marker, event){
 				updateMarkerPosition(marker, event);
 			});
-			draggableMarker = false;
+			currentUser = false;
 		}
 		oms.addMarker(marker);
 		mapUsers.push(current);

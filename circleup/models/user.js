@@ -1,6 +1,6 @@
 function currentUserMarker(marker){
 	userVerified = false;
-	if(marker.email === userLocation.email){
+	if(marker.email.toLowerCase() === userLocation.email.toLowerCase()){
 		userVerified = true;
 		console.log('verified: ' + marker.email + ' === ' + userLocation.email);
 	}
@@ -8,10 +8,20 @@ function currentUserMarker(marker){
 }
 
 function login(){
-	//var userEmail = document.getElementById('loginEmail');
-	var userEmail = 'jChiu@uic.edu';
+	var userEmail = document.getElementById('loginEmail').value;
+	//var userEmail = 'jChiu@uic.edu';
+	console.log(userEmail);
 	userLocation.email = userEmail;
 	getUsers();
+	toggleWindow('login');
+}
+
+function addNewUser(){
+	var newName = document.getElementById('newName').value;
+	userLocation.name = newName;
+	addCurrentUser(userLocation.name, userLocation.email);
+	getUsers();
+	toggleWindow('newUser');
 }
 
 User.prototype.id = ""; //String

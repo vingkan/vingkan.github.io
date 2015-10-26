@@ -12,27 +12,40 @@
 		<script src="lib/overlappingMarkerSpiderfier.js"></script>
 		<style>
 
-			div#login{
-				position: fixed;
-				z-index: 50;
-			}
+
 
 		</style>
 	</head>
 	<body>
 
-		<div class="menu">
-			<button class="action" onclick="addCurrentUser();">Add Me!</button>
+		<div id="shade"></div>
+
+		<div id="menu">
+			<button class="action" onclick="toggleWindow('login');">Login</button>
+			<!-- <button class="action" onclick="addCurrentUser();">Add Me!</button> -->
 		</div>
 
-		<div id="login">
-			<h2>Enter Your Email Address</h2>
+		<div class="credentials" id="login">
+			<h3>Enter Your Email Address</h3>
 			<input type="text" id="loginEmail">
 			<button onclick="login()">Login</button>
+			<p class="note">This is a working prototype of Circle Up that does not require user authentication. Anyone can edit your position on the map by logging in with your email address, but we assume that people have better things to do than move a little blue marker, so don't worry!</p>
+		</div>
+
+		<div class="credentials" id="newUser">
+			<h3>Enter Your Name</h3>
+			<p class="note">It looks like this is your first time using Circle Up. Enter your name to create an account.</p>
+			<input type="text" id="newName">
+			<button onclick="addNewUser();">Join</button>
+			<p class="note">If you entered your email incorrectly and would like to go back, click here.</p>
+			<button onclick="toggleWindow('newUser'); toggleWindow('login');">Back</button>
 		</div>
 
 		<div id="googleMap"></div>
 		
+		<!-- FRONT -->
+		<script type="text/javascript" src="front/classie.js"></script>
+		<script type="text/javascript" src="front/pretty.js"></script>
 		<!-- MODELS -->
 		<script src="models/user.js"></script>
 		<script src="models/database.js"></script>
@@ -56,15 +69,16 @@
 				}));*/
 
 				//Constant Location for Testing
-				updateCoords({
+				/*updateCoords({
 					coords: {
 						latitude: 41.853231,
 						longitude: -87.649223,
 						accuracy: 0
 					}
-				});
+				});*/
 
-				login();
+				//initGoogleMap([userLocation]);
+				toggleWindow('login');
 
 		</script>
 		

@@ -1,5 +1,6 @@
 function getUsers(){
 	var users = [];
+	var existingUser = false;
 	var userDatabase = new Firebase('https://circleup.firebaseio.com/users');
 	userDatabase.once('value', function(snapshot){
 		snapshot.forEach(function(childSnapshot){
@@ -7,12 +8,18 @@ function getUsers(){
 			var childData = childSnapshot.val();
 			var user = new User(childData);
 			user.id = key;
-			if(user.email === userLocation.email){
+			if(user.email.toLowerCase() === userLocation.email.toLowerCase()){
 				userLocation.id = key;
 				console.log('User Key is: ' + key);
+				existingUser = true;
+				user.setGeolocation(userLocation.coordinates);
+				updateUser(user, userLocation.coordinates);
 			}
 			users.push(user);
 		});
+		if(!existingUser){
+			toggleWindow('newUser');
+		}
 		initGoogleMap(users);
 	});
 }
@@ -33,9 +40,9 @@ function addUsers(userArray){
 	}
 }
 
-function addCurrentUser(){
-	var userName = prompt("What is your name?");
-	var emailAddress = prompt("What is your email address?");
+function addCurrentUser(userName, emailAddress){
+	/*var userName = prompt("What is your name?");
+	var emailAddress = prompt("What is your email address?");*/
 	if(userName != null){
 		navigator.geolocation.getCurrentPosition(updateCoords);
 		addUsers([new User({
@@ -61,8 +68,4 @@ function updateUser(user, position){
 		accuracy: newLocation.accuracy
 	});
 	//getUsers();
-}
-
-function pairUser(email){
-
 }
