@@ -21,24 +21,39 @@
 		<div id="shade"></div>
 
 		<div id="menu">
-			<button class="action" onclick="toggleWindow('login');">Login</button>
-			<!-- <button class="action" onclick="addCurrentUser();">Add Me!</button> -->
+			<center>
+				<button class="action" onclick="getUsers();">
+					&#8634;
+				</button>
+				<button class="action" onclick="toggleWindow('login');" style="width: auto; padding: 0 2vh;">
+					Login
+				</button>
+				<button class="action" onclick="toggleWindow('redeye');">
+					<img class="icon" src="style/markers/redeye.png">
+				</button>
+			</center>
 		</div>
 
 		<div class="credentials" id="login">
-			<h3>Enter Your Email Address</h3>
+			<h3>Login via Email Address</h3>
 			<input type="text" id="loginEmail">
 			<button onclick="login()">Login</button>
 			<p class="note">This is a working prototype of Circle Up that does not require user authentication. Anyone can edit your position on the map by logging in with your email address, but we assume that people have better things to do than move a little blue marker, so don't worry!</p>
 		</div>
 
 		<div class="credentials" id="newUser">
-			<h3>Enter Your Name</h3>
+			<h3>New Account</h3>
 			<p class="note">It looks like this is your first time using Circle Up. Enter your name to create an account.</p>
 			<input type="text" id="newName">
 			<button onclick="addNewUser();">Join</button>
 			<p class="note">If you entered your email incorrectly and would like to go back, click here.</p>
 			<button onclick="toggleWindow('newUser'); toggleWindow('login');">Back</button>
+		</div>
+
+		<div class="credentials" id="redeye" style="border-color: #BB0500;">
+			<h3 style="color: #BB0500;">Red Eye Contest!</h3>
+			<p class="note">Circle Up is entered in the Chicago RedEye's Big Idea contest. To make sure we don't get to have all the fun, we'll have a RedEye-related contest for our users too... keep on the lookout.</p>
+			<button onclick="toggleWindow('redeye');" style="background: #BB0500;">Close</button>
 		</div>
 
 		<div id="googleMap"></div>
@@ -53,6 +68,8 @@
 		<script src="lib/utils.js"></script>
 		<script src="lib/geolocation.js"></script>
 		<script src="lib/map.js"></script>
+		<!-- FUN -->
+		<script type="text/javascript" src="fun/redeye.js"></script>
 
 		<script type="text/javascript">
 

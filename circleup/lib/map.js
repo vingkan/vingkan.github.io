@@ -72,14 +72,15 @@ function updateMarkerPosition(marker, event){
 	updateUser(userLocation, newPosition);
 }
 
-function addUserMarker(user){
+function addUserMarker(user, allowEdits){
+	var allowDrag = allowEdits || false;
 	console.log(user)
 	var current = user;
 	var markerIcon = {
 		url: 'style/markers/' + current.getImgLetter() + '.png',
 		scaledSize: new google.maps.Size(82.5, 125),
 		origin: new google.maps.Point(0, 0),
-		anchor: new google.maps.Point(0, 0)
+		anchor: new google.maps.Point(41, 125)
 	};
 	var marker = new google.maps.Marker({
 		title: current.name,
@@ -90,9 +91,14 @@ function addUserMarker(user){
 		},
 		icon: markerIcon, //'style/markers/' + current.getImgLetter() + '.png',
 		animation: google.maps.Animation.DROP,
-		draggable: false
+		draggable: allowDrag
 	});
-	console.log(marker)
+	if(allowDrag){
+		marker.addListener('dragend', function(marker, event){
+			updateMarkerPosition(marker, event);
+		});
+	}
+	//console.log(marker)
 	//oms.addMarker(marker);
 	google.maps.event.addListener(marker, 'click', (function(marker, markerCount){
 		return function(){

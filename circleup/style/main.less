@@ -125,14 +125,18 @@ button.action{
 	background: @charcoal;
 	color: white;
 	height: 10vh;
+	width: 10vh;
 	line-height: 10vh;
 	font-family: @NewsCycle;
 	font-size: 5vh;
-	padding: 0 5vh;
 
 	&:hover{
 		background: white;
 		color: @charcoal;
+	}
+
+	img.icon{
+		height: 5vh;
 	}
 
 	transition: all 0.5s ease;
@@ -179,6 +183,7 @@ div.credentials{
 	left: 5vw;
 	z-index: 25;
 	box-shadow: 0 0 10vw black;
+	overflow-y: scroll;
 
 	h3{
 		color: @focusColor;
