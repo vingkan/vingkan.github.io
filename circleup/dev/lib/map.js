@@ -5,7 +5,7 @@ var markerCount = 0;
 
 function initGoogleMap(markerArray){
 	var centerPoint = userLocation;
-	markerArray.push(userLocation);
+	//markerArray.push(userLocation);
 	var mapProperties = {
 		//center: new google.maps.LatLng(userLocation.latitude, userLocation.longitude),
 		center: new google.maps.LatLng(centerPoint.getLat(), centerPoint.getLon()),
@@ -14,7 +14,9 @@ function initGoogleMap(markerArray){
 	};
 	var mapDiv = document.getElementById('googleMap');
 	googleMap = new google.maps.Map(mapDiv, mapProperties);
-	oms = new OverlappingMarkerSpiderfier(googleMap);
+	oms = new OverlappingMarkerSpiderfier(googleMap, {
+		circleFootSeparation: 100
+	});
 	var infoWindow = new google.maps.InfoWindow();
 	oms.addListener('click', function(marker, event){
 		infoWindow.setContent(marker.desc);
@@ -30,8 +32,12 @@ function initGoogleMap(markerArray){
 			url: 'style/markers/' + current.getImgLetter() + '.png',
 			scaledSize: new google.maps.Size(82.5, 125),
 			origin: new google.maps.Point(0, 0),
-			anchor: new google.maps.Point(0, 0)
+			anchor: new google.maps.Point(41, 125)
 		};
+		var draggableMarker = false;
+		if(currentUserMarker(current)){
+			draggableMarker = true;
+		}
 		var marker = new google.maps.Marker({
 			title: current.name,
 			map: googleMap,
@@ -41,12 +47,27 @@ function initGoogleMap(markerArray){
 			},
 			icon: markerIcon, //'style/markers/' + current.getImgLetter() + '.png',
 			animation: google.maps.Animation.DROP,
-			draggable: false
+			draggable: draggableMarker
 		});
+		if(draggableMarker){
+			marker.addListener('dragend', function(marker, event){
+				updateMarkerPosition(marker, event);
+			});
+			draggableMarker = false;
+		}
 		oms.addMarker(marker);
 		mapUsers.push(current);
 		markerCount++;
 	}
+}
+
+function updateMarkerPosition(marker, event){
+	var newPosition = {
+		latitude: marker.latLng.lat(),
+		longitude: marker.latLng.lng(),
+		accuracy: 100
+	}
+	updateUser(userLocation, newPosition);
 }
 
 function addUserMarker(user){

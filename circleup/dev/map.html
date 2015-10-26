@@ -12,21 +12,26 @@
 		<script src="lib/overlappingMarkerSpiderfier.js"></script>
 		<style>
 
-			button{
+			div#login{
 				position: fixed;
-				top: 30px;
-				left: 30px;
-				z-index: 10;
+				z-index: 50;
 			}
 
 		</style>
 	</head>
 	<body>
 
+		<div class="menu">
+			<button class="action" onclick="addCurrentUser();">Add Me!</button>
+		</div>
+
+		<div id="login">
+			<h2>Enter Your Email Address</h2>
+			<input type="text" id="loginEmail">
+			<button onclick="login()">Login</button>
+		</div>
 
 		<div id="googleMap"></div>
-
-		<button onclick="addCurrentUser();">Add Me!</button>
 		
 		<!-- MODELS -->
 		<script src="models/user.js"></script>
@@ -50,7 +55,16 @@
 					longitude: "-87.664511"
 				}));*/
 
-				getUsers();
+				//Constant Location for Testing
+				updateCoords({
+					coords: {
+						latitude: 41.853231,
+						longitude: -87.649223,
+						accuracy: 0
+					}
+				});
+
+				login();
 
 		</script>
 		

@@ -7,6 +7,10 @@ function getUsers(){
 			var childData = childSnapshot.val();
 			var user = new User(childData);
 			user.id = key;
+			if(user.email === userLocation.email){
+				userLocation.id = key;
+				console.log('User Key is: ' + key);
+			}
 			users.push(user);
 		});
 		initGoogleMap(users);
@@ -20,33 +24,45 @@ function addUsers(userArray){
 		userDatabase.push({
 			id: current.id,
 			name: current.name,
+			email: current.email,
 			latitude: current.getLat(),
-			longitude: current.getLon()
+			longitude: current.getLon(),
+			accuracy: current.getAccuracy(),
+			circles: JSON.stringify(current.circles)
 		});
 	}
 }
 
 function addCurrentUser(){
 	var userName = prompt("What is your name?");
+	var emailAddress = prompt("What is your email address?");
 	if(userName != null){
 		navigator.geolocation.getCurrentPosition(updateCoords);
 		addUsers([new User({
 			id: null,
 			name: userName,
+			email: emailAddress,
 			latitude: userLocation.getLat(),
-			longitude: userLocation.getLon()
+			longitude: userLocation.getLon(),
+			accuracy: userLocation.getAccuracy(),
+			circles: JSON.stringify(userLocation.circles)
 		})]);
 		getUsers();
 	}
 }
 
-function updateUser(user, geolocation){
-	var newLocation = geolocation || userLocation;
+function updateUser(user, position){
 	var userDatabase = new Firebase('https://circleup.firebaseio.com/users');
 	navigator.geolocation.getCurrentPosition(updateCoords);
+	var newLocation = position || userLocation.coordinates;
 	userDatabase.child(user.id).update({
-		latitude: newLocation.getLat(),
-		longitude: newLocation.getLon()
+		latitude: newLocation.latitude,
+		longitude: newLocation.longitude,
+		accuracy: newLocation.accuracy
 	});
-	getUsers();
+	//getUsers();
+}
+
+function pairUser(email){
+
 }
