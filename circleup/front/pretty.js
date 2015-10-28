@@ -82,6 +82,7 @@ function loadingSequence(){
 		"Planting easter eggs in the source code",
 		"Evaluating your life choices",
 		"Solving the RedEye sudoko puzzle",
+		"Throwing out old business model",
 		("rock paper scissors shoot").split(" "),
 		("You just got rick-rolled").split(" "),
 		("Did you catch that one?").split(" ")
@@ -90,17 +91,44 @@ function loadingSequence(){
 	var usedMessages = [];
 
 	function getRandomLoadingMessage(){
+		var defaultMessage = "All out of loading messages! Time to get a new phone";
+		var lastMessage = usedMessages[usedMessages.length - 1];
 		var message = "";
 		if(loadingMessages.length > 0){
 			var random = Math.floor(Math.random() * loadingMessages.length);
 			message = loadingMessages[random];
-			usedMessages.push(message);
-			//console.log('Used: ' + message)
-			loadingMessages.splice(random, 1);
-			//console.log(loadingMessages);
+			if($.isArray(lastMessage)){
+				console.log("was the last a burst? " + $.isArray(lastMessage))
+				var tryCounter = 1;
+				var found = false;
+				while($.isArray(message)){
+					found = false;
+					if(tryCounter >= (loadingMessages.length - 1)){
+						message = "Checking if he's dead, Jim";
+					}
+					else if(loadingMessages.length > 1){
+						random = Math.floor(Math.random() * loadingMessages.length);
+						message = loadingMessages[random];
+						found = true;
+					}
+					else{
+						message = defaultMessage;
+					}
+					tryCounter++;
+				}
+				if(found){
+					usedMessages.push(message);
+					loadingMessages.splice(random, 1);
+				}
+				console.log('replace with: ' + message)
+			}
+			else{
+				usedMessages.push(message);
+				loadingMessages.splice(random, 1);
+			}
 		}
 		else{
-			message = "All out of loading messages! Time to get a new phone";
+			message = defaultMessage;
 		}
 		return message;
 	}
@@ -118,8 +146,8 @@ function loadingSequence(){
 		var scale = 0.40; //Scale of display size
 		var inputWidth = loadedWidth; //Get DOM Width
 		var displayLoadedWidth = inputWidth / scale;
-		var max = 2;
-		var min = 1;
+		var max = 15;
+		var min = 5;
 		var random = Math.floor(Math.random() * (max - min)) + min;
 		displayLoadedWidth += random;
 		if(displayLoadedWidth >= 100){
