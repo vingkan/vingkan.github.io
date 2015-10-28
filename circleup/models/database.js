@@ -20,7 +20,11 @@ function getUsers(){
 		if(!existingUser){
 			toggleWindow('newUser');
 		}
-		initGoogleMap(users);
+		else{
+			//Better place to put this
+			loadingSequence();
+			initGoogleMap(users);
+		}
 	});
 }
 

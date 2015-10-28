@@ -249,3 +249,83 @@ div.credentials{
 	-webkit-transition: all 1s ease;
 
 }
+
+/*--------------------------------------------*/
+/*---> LOADING <------------------------------*/
+/*--------------------------------------------*/
+
+
+div#loading{
+
+	background: @charcoal;
+	width: 100vw;
+	height: 0vh;
+	position: fixed;
+	z-index: 30;
+	top: 0;
+	left: 0;
+	display: block;
+	overflow: hidden;
+
+	p#loadingMessage, div#loadingWrapper{
+		width: 40vh;
+		margin: 0 auto;
+		padding: 0;
+		//TEXT STYLES
+		text-align: center;
+		font-family: @NewsCycle;
+		color: white;
+		font-size: @smallFont;
+		line-height: 10vh;
+	}
+
+	p#loadingMessage{
+		width: 85vw;
+		background: transparent;
+		height: 30vh;
+		margin-top: 20vh;
+	}
+
+
+	div#loadingWrapper{
+
+		background: transparent;
+		height: 10vh;
+		margin-top: 5vh;
+		border: 2vh solid white;
+		overflow-x: hidden;
+
+		div#loadingBar{
+			@loadingTime: 0.5s;
+			background: url('blueDiagmonds.png');
+			height: 10vh;
+			width: 0vw;
+			//TRANSITION STYLES
+			transition: all @loadingTime ease;
+			-webkit-transition: all @loadingTime ease;
+		}
+
+		p{
+			//POSITIONING
+			background: transparent;
+			position: absolute;
+			width: 40vh;
+			margin-top: -10vh;
+			margin-left: 0vh;
+			z-index: 35;
+			//TEXT STYLES
+			text-align: center;
+			font-family: @NewsCycle;
+			color: white;
+			font-size: @smallFont;
+			line-height: 10vh;
+		}
+
+	}
+
+
+	//TRANSITION STYLES
+	transition: all 0.5s ease;
+	-webkit-transition: all 0.5s ease;
+
+}
