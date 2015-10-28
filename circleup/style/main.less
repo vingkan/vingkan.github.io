@@ -174,7 +174,8 @@ div#shade{
 div.credentials{
 
 	background: white;
-	width: 90vw;
+	width: 85vw;
+	padding: 0 2.5vw;
 	//height: 92vh;
 	height: 0vh;
 	border-top: 3vh solid @focusColor;
@@ -185,10 +186,13 @@ div.credentials{
 	box-shadow: 0 0 10vw black;
 	overflow-y: scroll;
 
+	input, button, h3, p{
+		margin: 2vh 0;
+	}
+
 	h3{
 		color: @focusColor;
-		width: 90%;
-		margin: 5%;
+		width: 100%;
 		font-size: 1.5 * @smallFont;
 		line-height: 2 * @smallFont;
 		text-align: center;
@@ -198,14 +202,12 @@ div.credentials{
 		background: @focusColor;
 		color: white;
 		font-family: @NewsCycle;
-		width: 90%;
-		margin: 5%;
+		width: 100%;
 		padding: 0 0;
 		height: 2 * @smallFont;
 		line-height: 2 * @smallFont;
 		font-size: @smallFont;
 		text-align: center;
-		margin: 5vw;
 		box-sizing: border-box;
 		//Transitions
 		transition: all 0.5s ease;
@@ -214,7 +216,8 @@ div.credentials{
 
 	input{
 
-		background: rgb(100, 100, 100);
+		//background: rgb(100, 100, 100);
+		background: @charcoal;
 
 		&:focus{
 			background: @focusColor;
@@ -224,6 +227,8 @@ div.credentials{
 
 	button{
 
+		width: 60%;
+		margin-left: 20%;
 		height: 1.5 * @smallFont;
 		line-height: 1.5 * @smallFont;
 		font-size: 0.75 * @smallFont;
@@ -238,8 +243,7 @@ div.credentials{
 	}
 
 	p.note{
-		width: 90%;
-		margin: 5%;
+		width: 100%;
 		color: @charcoal;
 		font-size: 0.5 * @smallFont;
 		line-height: 0.75 * @smallFont;

@@ -11,9 +11,11 @@ function login(){
 	var userEmail = document.getElementById('loginEmail').value;
 	//var userEmail = 'jChiu@uic.edu';
 	console.log(userEmail);
-	userLocation.email = userEmail;
-	getUsers();
-	toggleWindow('login');
+	if(userEmail != ""){
+		userLocation.email = userEmail;
+		getUsers();
+		toggleWindow('login');
+	}
 }
 
 function addNewUser(){

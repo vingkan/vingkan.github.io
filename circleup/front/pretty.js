@@ -76,18 +76,32 @@ function loadingSequence(){
 		"Twerking",
 		"Running for President",
 		"Delaying the singularity",
-		"Routing to the nearest bathroom"
+		"Routing to the nearest bathroom",
+		"Assigning absurd variable names",
+		"Questioning the meaning of life",
+		"Planting easter eggs in the source code",
+		"Evaluating your life choices",
+		"Solving the RedEye sudoko puzzle",
+		("rock paper scissors shoot").split(" "),
+		("You just got rick-rolled").split(" "),
+		("Did you catch that one?").split(" ")
 	];
 
 	var usedMessages = [];
 
 	function getRandomLoadingMessage(){
-		var random = Math.floor(Math.random() * loadingMessages.length);
-		var message = loadingMessages[random] + ' . . .';
-		usedMessages.push(message);
-		//console.log('Used: ' + message)
-		loadingMessages.splice(random, 1);
-		//console.log(loadingMessages);
+		var message = "";
+		if(loadingMessages.length > 0){
+			var random = Math.floor(Math.random() * loadingMessages.length);
+			message = loadingMessages[random];
+			usedMessages.push(message);
+			//console.log('Used: ' + message)
+			loadingMessages.splice(random, 1);
+			//console.log(loadingMessages);
+		}
+		else{
+			message = "All out of loading messages! Time to get a new phone";
+		}
 		return message;
 	}
 
@@ -104,8 +118,8 @@ function loadingSequence(){
 		var scale = 0.40; //Scale of display size
 		var inputWidth = loadedWidth; //Get DOM Width
 		var displayLoadedWidth = inputWidth / scale;
-		var max = 15;
-		var min = 5;
+		var max = 2;
+		var min = 1;
 		var random = Math.floor(Math.random() * (max - min)) + min;
 		displayLoadedWidth += random;
 		if(displayLoadedWidth >= 100){
@@ -123,6 +137,7 @@ function loadingSequence(){
 	}
 
 	function runLoadingSequence(){
+		var increment = 500;
 		var loadingMessageSpace = document.getElementById('loadingMessage');
 		loadingMessageSpace.innerHTML = "";
 		var loadingPercentage = document.getElementById('loadingPercentage');
@@ -140,8 +155,24 @@ function loadingSequence(){
 		*/
 		var intervalID = window.setInterval(function(){
 			var message = getRandomLoadingMessage();
-			//console.log(message);
-			loadingMessageSpace.innerHTML = message;
+			if($.isArray(message)){
+				var subIncrement = Math.floor(increment / message.length);
+				var subMessage = 0;
+				var subMessageInterval = setInterval(function(){
+					if(subMessage >= message.length){
+						clearInterval(subMessageInterval);
+					}
+					else{
+						loadingMessageSpace.innerHTML = message[subMessage] + ' . . .';
+						//console.log('POSTED: ' + message[subMessage] + ' . . .')
+						subMessage++;
+					}
+				}, subIncrement);
+			}
+			else{
+				loadingMessageSpace.innerHTML = message + ' . . .';
+				//console.log('POSTED: ' + message + ' . . .')
+			}
 			stillLoading = incrementLoadingDisplay();
 			if(!stillLoading){
 				clearInterval(intervalID);
@@ -149,7 +180,7 @@ function loadingSequence(){
 				//Replenish the message arrays
 				Array.prototype.push.apply(loadingMessages, usedMessages);
 			}
-		}, 500);
+		}, increment);
 	}
 
 	runLoadingSequence();
