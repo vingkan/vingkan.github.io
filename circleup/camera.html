@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Circle Up</title>
+		<link rel="icon" type="img/png" href="style/favicon.png" style="width:30px;">
+		<link rel="stylesheet" type="text/css" href="style/reset.css">
+		<link rel="stylesheet" type="text/css" href="style/main.css">
+		<link href='https://fonts.googleapis.com/css?family=Fredoka+One|News+Cycle:400,700' rel='stylesheet' type='text/css'>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<style>
+
+			img#show-picture{
+				width: 100vw;
+			}
+
+		</style>
+	</head>
+	<body>
+
+		<input type="file" id="take-picture" accept="image/*">
+		<img id="show-picture">
+
+		<script type="text/javascript">
+
+		var takePicture = document.querySelector('#take-picture');
+		takePicture.onchange = function(event){
+			var files = event.target.files,
+				file;
+			if(files && files.length > 0){
+				file = files[0];
+			}
+			var showPicture = document.querySelector('#show-picture');
+			var imgURL = window.URL.createObjectURL(file);
+			showPicture.src = imgURL;
+			//URL.revokeObjectURL(imgURL);
+		}
+
+
+
+
+		</script>
+		
+	</body>
+</html>
