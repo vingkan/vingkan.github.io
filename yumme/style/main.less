@@ -1,0 +1,263 @@
+/*--------------------------------------------*/
+/*---> COLORS <-------------------------------*/
+/*--------------------------------------------*/
+
+//Main Colors
+@PrimaryColor: #E11F26;
+@PrimaryLight: lighten(@PrimaryColor, 10%);
+@PrimaryDark: darken(@PrimaryColor, 10%);
+//Additional Colors
+@Charcoal: #1a1a1a;
+@BananaYellow: #FFD01F;
+
+/*--------------------------------------------*/
+/*---> FONTS <--------------------------------*/
+/*--------------------------------------------*/
+
+//Add Google Fonts Later
+@DisplayFont: "Unkempt", sans-serif;
+@BodyFont: "Comfortaa", sans-serif;
+
+@TextSize: 5vh;
+
+/*--------------------------------------------*/
+/*---> TEXT <---------------------------------*/
+/*--------------------------------------------*/
+
+h1, h2, h3, h4, h5, h6, p, span{
+	font-family: @BodyFont;
+	font-size: @TextSize;
+	text-align: center;
+}
+
+h1, h2, h3, h4, h5, h6{
+	font-family: @DisplayFont;
+	font-weight: bold;
+} 
+
+h1{
+	font-size: 2.0 * @TextSize;
+}
+
+h2{
+	font-size: 1.35 * @TextSize;
+}
+
+h3{
+	font-size: 1.10 * @TextSize;
+}
+
+p{
+	width: 90%;
+	font-family: @BodyFont;
+	margin: (0.5 * @TextSize) 5%;
+}
+
+/*--------------------------------------------*/
+/*---> BODY <---------------------------------*/
+/*--------------------------------------------*/
+
+html{
+	background: url('img/wood.jpg');
+	overflow-x: hidden;
+}
+
+.CoverBackground(){
+	//background-image property filled in by HTML
+	background-repeat: no-repeat;
+	background-position: center center;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+/*--------------------------------------------*/
+/*---> FORMS <--------------------------------*/
+/*--------------------------------------------*/
+
+input, select, button{
+	outline: none;
+	border: none;
+	box-sizing: border-box;
+	//TEXT STYLES
+	color: white;
+	font-family: @BodyFont;
+	font-size: @TextSize;
+	line-height: 1.5 * @TextSize;
+}
+
+input{
+
+}
+
+button{
+
+}
+
+/*--------------------------------------------*/
+/*---> ANIMATIONS <---------------------------*/
+/*--------------------------------------------*/
+
+.AnimateAll(@time: 0.5s){
+	transition: all @time ease;
+	-webkit-transition: all @time ease;
+}
+
+/*--------------------------------------------*/
+/*---> COOKING <------------------------------*/
+/*--------------------------------------------*/
+
+div.location{
+
+	width: 90vw;
+	height: 48vw;
+	margin: 5vw auto;
+	border-top: (0.15 * @TextSize) solid @PrimaryDark;
+
+	span.label{
+		background: @PrimaryDark;
+		padding: 0 0.5 * @TextSize;
+		border-bottom: (0.15 * @TextSize) solid white;
+		margin: 0 (0.5 * @TextSize);
+		//Text Style
+		font-family: @DisplayFont;
+		font-size: 0.5 * @TextSize;
+		color: white;
+	}
+
+	div.ingredient{
+
+		span.label{
+			background: @Charcoal;
+		}
+
+	}
+	
+	.CoverBackground();
+
+}
+
+div.ingredient{
+
+	width: 2.0 * @TextSize;
+	height: 2.0 * @TextSize;
+	margin: 0.5 * @TextSize;
+
+	span.label{
+		background: @PrimaryColor;
+		color: white;
+		padding: 0.25 * @TextSize;
+		margin-top: 0.625 * @TextSize;
+		margin-left: 2.25 * @TextSize;
+		position: absolute;
+		border: none;
+		font-size: 0.5 * @TextSize;
+		text-align: center;
+	}
+
+	.CoverBackground();
+
+}
+
+/*--------------------------------------------*/
+/*---> EXPERIMENTAL <-------------------------*/
+/*--------------------------------------------*/
+
+div.sidebar{
+
+	position: fixed;
+	top: 0;	
+	width: 50vw;
+	height: 100vh;
+	background: white;
+	color: @PrimaryDark;
+	border-right: 2vw solid @PrimaryDark;
+	.AnimateAll();
+	z-index: 50;
+
+	h2{
+		background: @PrimaryColor;
+		color: white;
+		padding: (0.25 * @TextSize) 0;
+	}
+
+	button.closeSideBar{
+		position: absolute;
+		top: 90vh - 5vw;
+		left: 10vw;
+		width: 30vw;
+		height: 10vh;
+		background: @PrimaryColor;
+	}
+
+}
+
+	div.sidebar-open{
+		left: 0;
+	}
+
+	div.sidebar-close{
+		left: -52vw;
+	}
+
+@headerHeight: 2.0 * @TextSize;
+
+header{
+
+	width: 96vw;
+	padding: 2vw;
+	background: @PrimaryColor;
+	border-bottom: 2vw solid @PrimaryDark;
+
+	img.logo{
+		height: @headerHeight;
+	}
+
+	button#openMenu{
+		background: @PrimaryDark;
+		width: 2.0 * @TextSize;
+		height: 2.0 * @TextSize;
+		line-height: 2.0 * @TextSize;
+		border-radius: 1.0 * @TextSize;
+		position: fixed;
+	}
+
+}
+
+div#options{
+
+	position: fixed;
+	background: transparent;
+	width: 80vw;
+	height: auto;
+	left: 8vw;
+
+	button.menuOption{
+
+		width: 100%;
+		margin: 0.25 * @TextSize 0;
+		color: @PrimaryDark;
+		background: white;
+		border-left: (0.5 * @TextSize) solid @PrimaryDark;
+		
+		&:hover{
+			background: @PrimaryDark;
+			color: white;
+		}
+
+		.AnimateAll();
+
+	}
+
+	.AnimateAll();
+
+}
+
+div.options-open{
+	top: 20vh;
+}
+
+div.options-close{
+	top: -50vh;
+}

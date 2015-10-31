@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Yumme</title>
+		<!-- <link rel="icon" type="img/png" href="style/favicon.png" style="width:30px;"> -->
+		<link rel="stylesheet" type="text/css" href="style/reset.css">
+		<link rel="stylesheet" type="text/css" href="style/main.css">
+		<link href='https://fonts.googleapis.com/css?family=Unkempt:700|Comfortaa:300' rel='stylesheet' type='text/css'>
+		<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+		<style>
+
+		
+
+		</style>
+	</head>
+	<body>
+
+		<header>
+			<button id="openMenu" onclick="toggleMenu('options');">O</button>
+			<div id="options" class="options-close">
+				<button class="menuOption" onclick="toggleSideBar('cart');">View Cart</button>
+				<button class="menuOption" onclick="toggleSideBar('recipe');">View Recipe</button>
+			</div>
+			<center>
+				<img class="logo" src="style/img/logo.png">
+			</center>
+		</header>
+
+		
+		<p>A mobile app to gamify shopping for healthy foods and reward users with discounts and special offers.</p>
+
+		<div class="sidebar sidebar-close" id="recipe">
+			<h2>My Recipe</h2>
+			<div class="container" id="container-recipe">
+				<h3>title</h3>
+				<ol>
+					<li>Setup food</li>
+					<li>cry</li>
+				</ol>
+
+			</div>
+			<button class="closeSideBar" onclick="closeAllSideBars();">Close</button>
+		</div>
+
+		<div class="sidebar sidebar-close" id="cart">
+			<h2>My Cart</h2>
+			<div class="container" id="container-cart"></div>
+			<button class="closeSideBar" onclick="closeAllSideBars();">Close</button>
+		</div>
+
+		<div id="locationSpace"></div>
+		
+		<!-- IMPORTS -->
+		<script src="imports/jquery-1.11.3.min.js"></script>
+		<script src="imports/jquery-ui.js"></script>
+		<script src="imports/touchpunch.js"></script>
+		<script src="imports/howler.js"></script>
+		<!-- VIEW -->
+		<script src="view/view.js"></script>
+		<!-- APPLICATION -->
+		<script src="application/nutrients.js"></script>
+		<!-- DATA -->
+		<script src="data/prepSpace.js"></script>
+		<script src="data/utensil.js"></script>
+		<script src="data/ingredient.js"></script>
+		<!-- DATABASE -->
+
+		<script type="text/javascript">
+
+		var plate = new PrepSpace({
+			name: 'My Plate',
+			id: 'plate',
+			image: 'style/img/plate.png'
+		});
+		document.getElementById('locationSpace').innerHTML += plate.toHTML();
+
+		var sink = new PrepSpace({
+			name: 'Sink',
+			id: 'sink',
+			image: 'style/img/sink.png'
+		});
+		document.getElementById('locationSpace').innerHTML += sink.toHTML();
+
+		var table = new PrepSpace({
+			name: 'Table',
+			id: 'table',
+			image: 'style/img/table.jpg'
+		});
+		document.getElementById('locationSpace').innerHTML += table.toHTML();
+
+		var strawberry = new Ingredient({
+			name: 'Strawberry',
+			id: 'strawberry',
+			image: 'style/img/strawberry.png'
+		});
+		document.getElementById('container-cart').innerHTML += strawberry.toHTML();
+
+		var honey = new Ingredient({
+			name: 'Honey',
+			id: 'honey',
+			image: 'style/img/honey.png'
+		});
+		document.getElementById('container-cart').innerHTML += honey.toHTML();
+
+		$('#' + strawberry.id).draggable();
+		$('#' + honey.id).draggable();
+		acceptDrops('plate')
+		acceptDrops('sink')
+		acceptDrops('table')
+
+		//toggleSideBar('cart');
+
+		</script>
+		
+	</body>
+</html>
