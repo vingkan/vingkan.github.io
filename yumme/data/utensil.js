@@ -44,7 +44,7 @@ Utensil.prototype.getMargin = function(side){
 				return (90 - this.getScaledWidth()) / 2.0;
 				break;
 			case 'right':
-				return (90 - this.getScaledWidth());
+				return (90 - (2.0 * this.getScaledWidth()));
 				break;
 			default:
 				alert('ERROR: Alignment not Defined: See Utensil.js, Utensil.getMargin()');
