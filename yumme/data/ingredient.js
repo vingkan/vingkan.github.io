@@ -12,7 +12,7 @@ function getIngredient(id){
 		return response;
 	}
 	else{
-		console.log('ERROR: An ingredient with the id: [' + id + '] was not found.');
+		alert('ERROR: An ingredient with the id: [' + id + '] was not found.');
 	}
 }
 
@@ -24,7 +24,7 @@ function Ingredient(config){
 	this.name = config['name'];
 	this.id = config['id'];
 	this.image = config['image'];
-	ingredients.push(this);
+	this.squirt = config['squirt'];
 	this.addToBank();
 }
 
@@ -45,11 +45,33 @@ Ingredient.prototype.toResultHTML = function(){
 	//html += 'id="' + this.id + '" ';
 	html += 'style="background-image: url(' + this.image + ');"';
 	html += '>';
-	html += '<button class="buy" onclick="addToCart(' + this.id + ');">+</button>';
+	html += '<button class="buy" onclick="addToCart(&quot;' + this.id + '&quot;);">+</button>';
 	html += '<span class="label">' + this.name + '</span>';
 	html += '</div>';
 	return html;
 }
+
+Ingredient.prototype.toSquirt = function(){
+	var squirt = new Howl({
+		urls: ['style/sound/squirt.mp3']
+	}).play();
+	setTimeout(function(){
+		squirt.stop();
+	}, 2000);
+	return '<div class="squirt" style="background: ' + this.squirt + ';"></div>';
+}
+
+function addToCart(ingredientID){
+	var targetIngredient = getIngredient(ingredientID);
+	//var cartContainer = document.getElementById('container-cart');
+	//cartContainer.innerHTML += targetIngredient.toHTML();
+	//toggleSideBar('cart');
+	var ingredientsTable = document.getElementById('ingredientsTable-container');
+	ingredientsTable.innerHTML += targetIngredient.toHTML();
+	registerDraggable(ingredientID);
+	closeAllSideBars();
+}
+
 /*--------------------------------------------*/
 /*---> SEARCHING <----------------------------*/
 /*--------------------------------------------*/
@@ -69,9 +91,9 @@ function searchIngredients(){
 		output.innerHTML = "";
 	if(size > 0){
 		for(var r = 0; r < size; r++){
-			var ingredientResult = getIngredient(results[r].ref)
-			console.log(results[r]);
-			console.log(ingredientResult);
+			var ingredientResult = getIngredient(results[r].ref);
+			/*console.log(results[r]);
+			console.log(ingredientResult);*/
 			output.innerHTML += ingredientResult.toResultHTML();
 		}
 	}
@@ -81,6 +103,7 @@ function searchIngredients(){
 }
 
 Ingredient.prototype.addToBank = function(){
+	ingredients.push(this);
 	ingredientsBank.add({
 		id: this.id,
 		title: this.name,
