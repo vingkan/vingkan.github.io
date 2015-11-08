@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Backend Rules</title>
+	<!-- imports Firebase.js and jQuery.js -->
+	<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+</head>
+<body>
+	<h1>Hello</h1><br>
+
+	<input type="text" id="nameInput" placeholder="Name">
+	<input type="text" id="messageInput" placeholder="Message">
+	<input type="button" id="upload" value="Submit"> 
+	<br>
+	Row Data: <br/>
+	<div id="messageDiv"></div> <!-- This div will be populated by the backend.js -->
+
+	<!-- Backend -->
+	<script type="text/javascript" src="Backend.js"></script>
+	<script type="text/javascript" src="data/tower.js"></script>
+</body>
+</html>
