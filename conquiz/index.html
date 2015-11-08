@@ -5,17 +5,18 @@
 		<title>ConQuiz</title>
 		<!-- META TAGS for mobile devices -->
 		<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+		<meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-eval' 'unsafe-inline'; style-src * 'unsafe-inline'; media-src *">
 		<!-- HERE MAPS API -->
-		<script type="text/javascript" src="http://js.api.here.com/v3/3.0/mapsjs-core.js"></script>
-		<script type="text/javascript" src="http://js.api.here.com/v3/3.0/mapsjs-service.js"></script>
-		<script type="text/javascript" src="http://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
+		<script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-core.js"></script>
+		<script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-service.js"></script>
+		<script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
 		<!-- STYLESHEETS -->
 		<link rel="stylesheet" type="text/css" href="style/reset.css">
 		<link rel="stylesheet" type="text/css" href="style/main.css">
 		<link href='https://fonts.googleapis.com/css?family=Titillium+Web:900|Source+Sans+Pro:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 		<!-- IMPORTED SCRIPTS -->
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-		<!--<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>-->
+		<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
 		<style type="text/css">
 
 			div#map-container{
@@ -32,11 +33,25 @@
 	</head>
 	<body>
 
-		<header id="menu" onclick="toggleMenu();">
+		<header id="menu" class="closed" onclick="openMenu();">
+			<span id="menu">&#8801;</span>
 			<center>
 				<img id="logo" src="style/img/goldLogo.png">
-			</center>
+			</center>			
 		</header>
+
+		<center>
+			<div id="menuOptions">
+				<h1>Menu</h1>
+				<div class="menuOption" onclick="toggleMenu('towers');">
+					Towers Menu
+				</div>
+				<div class="menuOption" onclick="toggleMenu('questions');">
+					Battle Screen
+				</div>
+			</div>
+		</center>
+
 		<div class="headerSpace"></div>
 
 		<div class="sidebar closed" id="sidebar-towers">
@@ -44,6 +59,14 @@
 			<p>The number indicates the radius size around each tower.</p>
 			<center>
 				<div class="wrapper" id="preset-towers"></div>
+			</center>
+		</div>
+
+		<div class="sidebar closed" id="sidebar-questions">
+			<h1>Battle</h1>
+			<p>Answer questions to defeat enemy troops!</p>
+			<center>
+				<div class="wrapper" id="battle-questions"></div>
 			</center>
 		</div>
 		
@@ -61,11 +84,11 @@
 	</div>
 
 		<footer>
-			<textarea id="public-log"></textarea>
+			<textarea id="public-log" readonly></textarea>
 		</footer>
 
 		<script type="text/javascript" src="frontend.js"></script>
-		<!--<script type="text/javascript" src="backend.js"></script>-->
+		<script type="text/javascript" src="backend.js"></script>
 
 		<script type="text/javascript" src="Data/game.js"></script>
 		<script type="text/javascript" src="Data/task.js"></script>
@@ -90,7 +113,7 @@
 		var game;
 		var map;
 
-		
+
 
 		function trialCallback(){
 			initHereMap();

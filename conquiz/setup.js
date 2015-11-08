@@ -3,7 +3,7 @@ function initGame(){
 		id: 'game0',
 		name: "Sample Game"
 	});
-	//loadQuestions();
+	game.questions = loadQuestions();
 	createTowerPresets();
 }
 
@@ -17,10 +17,14 @@ function setFocusObject(list, objectID){
 	focusObject = game.getObjectById(list, objectID);
 	$('#' + objectID).removeClass('preset');
 	$('#' + objectID).addClass('selected');
-	toggleMenu();
+	openMenu();
 	publicLog('Click on spot on the map to place the tower at.');
 	mapClickCallback = function(coordinates){
-		plantTowerOnMap(coordinates, focusObject.size);
+		focusObject.coordinate.latitude = coordinates.lat;
+		focusObject.coordinate.longitude = coordinates.lng;
+			circle = focusObject.getCircle();
+			map.addObject(circle);
+		focusObject.set('placed', true);
 		focusObject = null;
 		mapClickCallback = null;
 		$('#' + objectID).removeClass('selected');

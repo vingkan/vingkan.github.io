@@ -1,5 +1,20 @@
-function toggleMenu(){
-	var presetTowers = $('#sidebar-towers');
+function openMenu(){
+	$('.sidebar').removeClass('open');
+	$('.sidebar').addClass('closed');
+	var menu = $('#menuOptions');
+	if(menu.hasClass('open')){
+		menu.removeClass('open');
+		menu.addClass('closed');
+	}
+	else{
+		menu.addClass('open');
+		menu.removeClass('closed');
+		publicLog('Click a tower to add it to the map.');
+	}
+}
+
+function toggleMenu(type){
+	var presetTowers = $('#sidebar-' + type);
 	if(presetTowers.hasClass('open')){
 		presetTowers.removeClass('open');
 		presetTowers.addClass('closed');

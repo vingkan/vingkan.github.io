@@ -80,13 +80,73 @@ header{
 
 	&:hover{
 		
-		background: @mainDark;
-		height: 16vh;
+		background: white;
+
+		span#menu{
+			color: @gold;
+		}
+		//height: 16vh;
 
 		img#logo{
-			margin: 2vh auto;
-			height: 12vh;
+			margin: 0.5vh auto;
+			height: 9vh;
 		}
+
+	}
+
+	span#menu{
+
+		position: absolute;
+		color: white;
+		font-size: 8vh;
+		line-height: 10vh;
+		left: 2vh;
+
+		&:hover{
+			color: rgba(255, 255, 255, 0.5);
+		}
+
+		.AnimateAll();
+
+	}
+
+	.AnimateAll();
+
+}
+
+div#menuOptions{
+
+	position: fixed;
+	top: -95vh;
+	left: 10vw;
+	width: 80vw;
+	height: 70vh;
+	background: @gold;
+	z-index: 10;
+
+	&.closed{
+		top: -95vh;
+	}
+
+	&.open{
+		top: 15vh;
+	}
+
+	div.menuOption{
+
+		color: white;
+		height: 1.5 * @textSize;
+		line-height: 1.5 * @textSize;
+		background: @charcoal;
+		margin-bottom: 0.5vh;
+		font-size: 0.75 * @textSize;
+		border-left: 2vw solid @mainColor;
+
+		&:hover{
+			background: @mainColor;
+		}
+
+		.AnimateAll();
 
 	}
 

@@ -1,8 +1,10 @@
 
 // Reference to the root of the Firebase database
 var database = new Firebase("https://conquiz.firebaseio.com/");
-var towerbase = new Firebase("https://towercoord.firebaseio.com/-K2aUIZRYFI5l6Tov1JA/towers");
-var playerbase = new Firebase("https://towercoord.firebaseio.com/-K2aUIZRYFI5l6Tov1JA/players")
+var coordbase = new Firebase("https://towercoord.firebaseio.com/-K2aUIZRYFI5l6Tov1JA");
+var towerbase = coordbase.child("towers");
+var playerbase = coordbase.child("players");
+var troopbase = coordbase.child("troops");
 // Reference to the google sheets of questions
 var questionsLink = 'https://spreadsheets.google.com/feeds/list/1C1POJrIlpm1R3muE0ImmI_ifxpH_aEfPP-QSyl3o2Kg/1/public/basic?alt=json';
 
@@ -12,10 +14,81 @@ var rows;
 
 
 // ToDO: downloading from Firebase should be a return function, to avoid crossing stack
+/*--------------------------------------------*/
+/*---> Download troops from Firebase <--------*/
+/*--------------------------------------------*/
+function loadTroops() {
+	var troopHolder = [];
+	var newTroop;
+	troopbase.on('child_added', function(update){
+		if (update['Empty'] != "DoNotDelete") { //Stops the empty from being pulled
+			var troopJSON = update.val();
+			newTroop = new Troop({
+				id: update['id'],
+				name: update['name'],
+				playerID: update['playerID'],
+				towerID: update['towerID'],
+				question: update['question'],
+				alive: update['alive']
+			});
+			troopHolder.push(newTroop);
+		}
+		
+	});
+	return troopHolder;
+}
+
+/*--------------------------------------------*/
+/*---> Upload troops to Firebase <------------*/
+/*--------------------------------------------*/
+function uploadTroops(data) {
+	$.each(data, function(index, value){
+		troopbase.push({
+			id: value['id'],
+			name: value['name'],
+			playerID: value['playerID'],
+			towerID: value['towerID'],
+			question: value['question'],
+			alive: value['alive']
+		});
+	});
+}
+
+// This will remove all the troops in the troops folder
+function removeTroops() {
+	troopbase.once('value', function(snapshot) {
+		snapshot.forEach(function(childSnapshot){
+			// You can also get the key and the value of the child in the troopbase folder
+			//var key = childSnapshot.key();
+			//var childData = childSnapshot.val();
+			if (childSnapshot.val()!="DoNotDelete") {
+				var path = new Firebase(troopbase.child(childSnapshot.key()).toString());
+				path.remove();
+			}
+		});
+	});
+}
+
 
 /*--------------------------------------------*/
 /*---> Download player from Firebase <--------*/
 /*--------------------------------------------*/
+function loadPlayers() {
+	var playerHolder = [];
+	var newPlayer;
+	playerbase.on('child_added', function(update) {
+		var playerJSON = update.val();
+		newPlayer = new Player({
+			id: playerJSON['id'],
+			icon: playerJSON['team']['icon'],
+			color: playerJSON['team']['color'],
+			coordinate: { latitude: playerJSON['latitude'], longitude: playerJSON['longitude']},
+			troops: playerJSON['troops']
+		});
+		playerHolder.push(newPlayer);
+	});
+	return playerHolder;
+}
 
 
 /*--------------------------------------------*/
@@ -24,11 +97,12 @@ var rows;
 function uploadPlayerbase(data) {
 	$.each(data, function(index, value){
 		playerbase.push({
-			id: data['id'], 
-			name: data['name'], 
-			team: {icon: data['icon'], color: data['color']}, 
-			coordinate: {latitude: data['coordinate']['latitude'], longitude: data['coordinate']['longitude']}, 
-			troops: data['troops']
+			id: value['id'], 
+			name: value['name'], 
+			team: {icon: value['icon'], color: value['color']}, 
+			latitude: value['coordinate']['latitude'], 
+			longitude: value['coordinate']['longitude'], 
+			troops: JSON.Stringify(value['troops'])
 		});
 	});
 }
@@ -38,18 +112,20 @@ function uploadPlayerbase(data) {
 /*---> Download towers from Firebase <--------*/
 /*--------------------------------------------*/
 function loadTowers() {
+	var towerHolder = [];
 	var newTower;
-	database.on('child_added', function(update) {
+	towerbase.on('child_added', function(update) {
 		var towerJSON = update.val();
 		newTower = new Tower({
 			id: towerJSON['id'],
 			name: towerJSON['name'],
-			coordinate: {latitude: towerJSON['coordinate']['latitude'], longitude: towerJSON['coordinate']['longitude']},
+			coordinate: {latitude: towerJSON['latitude'], longitude: towerJSON['longitude']},
 			size: towerJSON['size'],
 			player: towerJSON['player']
 		});
-		game.push("towers", newTower);
+		towerHolder.push(newTower);
 	});
+	return towerHolder;
 }
 
 
@@ -60,10 +136,40 @@ function uploadTowerbase(data) {
 	$.each(data, function(index, value){
 		towerbase.push({id: value['id'], 
 			name: value['name'], 
-			coordinate: {latitude: value['coordinate']['latitude'], 
-			longitude: value['coordinate']['longitude']}, 
+			latitude: value['coordinate']['latitude'], 
+			longitude: value['coordinate']['longitude'], 
 			size: value['size'], 
 			player: value['player'] });
+	});
+	setDefaultTower();
+}
+function setDefaultTower(){
+	towerbase.once('value', function(snapshot){
+		snapshot.forEach(function(childSnapshot){
+			var path = new Firebase(towerbase.child(childSnapshot.key()).toString());
+			path.set({
+				id: childSnapshot.key(),
+				name: "",
+				latitude: 0,
+				longitude: 0,
+				size: 10,
+				player: ""
+			});
+		});
+	});
+}
+
+function updateTowerbase(data) {
+	$.each(data, function(index, value){
+		var path = new Firebase(towerbase.child(value['id']).toString());
+		path.set({
+			id: value['id'], 
+			name: value['name'], 
+			latitude: value['coordinate']['latitude'], 
+			longitude: value['coordinate']['longitude'], 
+			size: value['size'], 
+			player: value['player']
+		});
 	});
 }
 // Don't have time - going for hard code
@@ -76,17 +182,19 @@ function removeTowerbase() {
 /*---> Download question from Firebase <------*/
 /*--------------------------------------------*/
 function loadQuestions() {
+	var questionHolder = [];
     var newQuestion;
     database.on('child_added', function(update) {
         var questionJSON = update.val();
-        console.log(questionJSON)
+        //console.log(questionJSON)
         newQuestion = new Question({
             id: generateNewID('question'),
             question: questionJSON['question'],
             answers: "["+questionJSON['correct']+", "+questionJSON['wa1']+", "+questionJSON['wa2']+", "+questionJSON['wa3']+"]"
         });
-        game.push("questions", newQuestion);
+        questionHolder.push(newQuestion);
     });
+    return questionHolder;
 }
 
 

@@ -35,5 +35,14 @@ var someTroop = new Troop({
 	question: JSON.stringify("[Why?, What?]"),
 	//alive: "true"
 	});
+var aTroop = new Troop({
+	id: "14",
+	name:"myTroop",
+	playerID: "2",
+	towerID: "4",
+	question: JSON.stringify("[W1?, What?]"),
+	//alive: "true"
+	});
+var troops = [someTroop, aTroop];
 
 console.log("troop Loaded");

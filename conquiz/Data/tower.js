@@ -9,6 +9,7 @@ function Tower(data) {
 	this.size = parseFloat(data['size']);
 	this.player = data['player'];
 	this.troops = JSON.parse(data['troops']);
+	this.placed = false;
 }
 
 Tower.prototype.get = function(attribute) {
@@ -16,6 +17,7 @@ Tower.prototype.get = function(attribute) {
 }
 
 Tower.prototype.set = function(attribute, value) {
+	console.log(attribute + ' -> ' + value);
 	this[attribute] = value;
 }
 
@@ -73,6 +75,13 @@ Tower.prototype.addTroops = function(troops){
 		troops[i].set('towerID', this.id);
 	}
 	// database.push(this);
+}
+
+Tower.prototype.popTroops = function(troops){
+	for (var i = 0; i < troops.length; i++){
+		this.troops.pop(troops[i].id);
+		troops[i].set('towerID', this.id);
+	}
 }
 
 Tower.prototype.getTroopsByPlayer = function(id){
