@@ -37,7 +37,7 @@ function updateUserMarker(){
 	for(var o = 0; o < size; o++){
 		if(objects[o] instanceof H.map.Marker){
 			target = objects[o];
-			console.log('found one!');
+			console.log('Found User Marker!');
 			break;
 		}
 	}
@@ -46,8 +46,13 @@ function updateUserMarker(){
 			lat: userPosition.latitude,
 			lng: userPosition.longitude
 		});
+		console.log('Update with: ' + userPosition.toString());
 	}
 	getGeolocation(moveUserMarker);
 }
+
+$(document).click(function(){
+	updateUserMarker();
+});
 
 console.log('LOADED geolocation.js');
