@@ -15,7 +15,7 @@ function updatePosition(position){
 function getGeolocation(callback){
 	navigator.geolocation.getCurrentPosition(function(position){
 		updatePosition(position);
-		console.log('CALLED GEOLOCATOR');
+		//console.log('CALLED GEOLOCATOR');
 		if(callback){
 			callback();
 		}
@@ -73,7 +73,7 @@ function updateUserMarker(){
 	for(var o = 0; o < size; o++){
 		if(objects[o] instanceof H.map.Marker){
 			target = objects[o];
-			console.log('Found User Marker!');
+			//console.log('Found User Marker!');
 			break;
 		}
 	}
@@ -82,14 +82,18 @@ function updateUserMarker(){
 			lat: userPosition.latitude,
 			lng: userPosition.longitude
 		});
-		console.log('Update with: ' + userPosition.toString());
+		//console.log('Update with: ' + userPosition.toString());
 		game.checkAllTowers();
 	}
 	getGeolocation(moveUserMarker);
 }
 
-$(document).click(function(){
+/*$(document).click(function(){
 	updateUserMarker();
-});
+});*/
+
+window.setInterval(function(){
+	updateUserMarker();
+}, 500);
 
 console.log('LOADED geolocation.js');
