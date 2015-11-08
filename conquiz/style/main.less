@@ -49,12 +49,17 @@ div.sidebar{
 		left: -80vw;
 	}
 
-	p{
+	p, ul{
 		width: 70vw;
 		margin: 5vw;
 		color: white;
 		line-height: 0.75 * @textSize;
 		text-align: center;
+	}
+
+	li{
+		color: @gold;
+		margin: 5vh auto;
 	}
 
 	.AnimateAll();
@@ -130,6 +135,14 @@ div#menuOptions{
 
 	&.open{
 		top: 15vh;
+	}
+
+	p{
+		width: 70vw;
+		margin: 2.5vw;
+		color: white;
+		line-height: 0.75 * @textSize;
+		text-align: center;
 	}
 
 	div.menuOption{
@@ -225,6 +238,23 @@ button, input, textarea, select{
 	outline: none;
 	border: none;
 	box-sizing: border-box;
+}
+
+button{
+
+	margin: auto 15vw;
+	width: 50vw;
+	height: 10vh;
+	line-height: 10vh;
+	background: @gold;
+	color: white;
+
+	&:hover{
+		background: @mainColor;
+	}
+
+	.AnimateAll();
+
 }
 
 /*--------------------------------------------*/

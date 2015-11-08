@@ -1,4 +1,3 @@
-
 // parse array -> string
 function Troop(data){
 	this.id = data['id'];

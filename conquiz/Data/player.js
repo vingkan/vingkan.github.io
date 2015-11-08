@@ -34,11 +34,25 @@ Player.prototype.toString = function() {
 }
 
 var testPlayer = new Player({
-    "id": "marcuswan",
-    "name": "Marcus Wan",
-    "team": {"icon": "png", "color": "Blue"},
-    "coordinates": {"latitude": "10", "longitude": "20"},
-    "troops": "[]"
+    id: "marcuswan",
+    name: "Marcus Wan",
+    icon: "png", 
+    color: "Blue",
+    latitude: 10, 
+    longitude: 20,
+    troops: "[]"
 });
+var testPlayer2 = new Player({
+    id: "marcuswan",
+    name: "Marcus Wan",
+    icon: "png", 
+    color: "Blue",
+    latitude: 10, 
+    longitude: 20,
+    troops: "[]"
+});
+
+var playser = [testPlayer, testPlayer2];
+
 
 console.log("Player loaded");

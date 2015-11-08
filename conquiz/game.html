@@ -41,35 +41,34 @@
 		</header>
 
 		<center>
-			<div id="menuOptions" class="open">
+			<div id="menuOptions">
 				<h1>Menu</h1>
-				<p>Welcome to ConQuiz: the augmented reality game where you can challenge your friends to rule your community! Use this screen to set up your battlefield. Start by placing all 7 Towers on the map.</p>
-				<div class="menuOption" onclick="toggleMenu('towers');">
-					Place Towers
+				<input type="text" placeholder="secret code">
+				<button style="background: #1a1a1a;" onclick="alert('valid?');">Join Game</button>
+				<div id="entryGate" style="display: none;">
+					<div class="menuOption" onclick="toggleMenu('questions');">
+						Battle Screen
+					</div>
+					<div class="menuOption" onclick="toggleMenu('troops');">
+						My Troops
+					</div>
 				</div>
-				<p>When you finish adding all the towers, you will get codes to add other players to the match.</p>
 			</div>
 		</center>
 
 		<div class="headerSpace"></div>
 
-		<div class="sidebar closed" id="sidebar-towers">
-			<h1>Towers</h1>
-			<p>The number indicates the radius size around each tower.</p>
+		<div class="sidebar closed" id="sidebar-questions">
+			<h1>Battle</h1>
+			<p>Answer questions to defeat enemy troops!</p>
 			<center>
-				<div class="wrapper" id="preset-towers"></div>
+				<div class="wrapper" id="battle-questions"></div>
 			</center>
 		</div>
 
-		<div class="sidebar closed" id="sidebar-gameStart">
-			<h1>Game Ready!</h1>
-			<p>Each player should enter one of these codes (one per player) at the start screen:</p>
-			<ul>
-				<li>explorer</li>
-				<li>warrior</li>
-				<li>adventurer</li>
-			</ul>
-			<button onclick="window.location='game.html';">Start</button>
+		<div class="sidebar closed" id="sidebar-troops">
+			<h1>My Troops</h1>
+			<p>These are the troops currently with you:</p>
 			<center>
 				<div class="wrapper" id="my-troops"></div>
 			</center>
@@ -122,14 +121,8 @@
 
 		function trialCallback(){
 			initHereMap();
-			initGame();
-			/*var circle = new H.map.Circle({
-				lat: getUserLat(),
-				lng: getUserLon()
-			}, 5);
-
-			map.addObject(circle);*/
-
+			joinGame();
+			game = getGame();
 		}
 
 		getGeolocation(trialCallback);

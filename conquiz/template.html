@@ -41,21 +41,19 @@
 		<!-- Backend stuff
 		<input type="text" id="nameInput" placeholder="Name">
 		<input type="text" id="messageInput" placeholder="Message">
-		<input type="button" id="upload" value="Submit"> 
+		<input type="button" id="upload" value="Submit">
 		<br>
 		<div id="messageDiv"></div> -->
 		<!-- This div will be populated by the backend.js -->
 
 		<!-- backend.js tries to find some html element that are not here. -->
-		<!-- <script type="text/javascript" src="backend.js"></script> 
+		<!-- <script type="text/javascript" src="backend.js"></script>
 		<script type="text/javascript" src="data.js"></script> -->
 
 
 		<!-- NATIVE SCRIPTS -->
 		<!-- Front End -->
 		<script type="text/javascript" src="frontend.js"></script>
-		<!-- Application -->
-		<script type="text/javascript" src="application.js"></script>
 		<!-- Data Layer -->
 		<script type="text/javascript" src="data/game.js"></script>
 		<script type="text/javascript" src="data/task.js"></script>
@@ -63,6 +61,10 @@
 		<script type="text/javascript" src="data/question.js"></script>
 		<script type="text/javascript" src="data/tower.js"></script>
 		<script type="text/javascript" src="data/troop.js"></script>
+		<!-- Application -->
+				<script type="text/javascript" src="backend.js"></script>
+		<script type="text/javascript" src="application.js"></script>
+
 		<!-- Back End -->
 
 		<!-- Point of entry? -->
@@ -73,7 +75,7 @@
 			addInfoBubble(getMap());
 		}
 		getGeolocation(callback);
-		
+
 
 		console.log('LOADED MAIN');
 

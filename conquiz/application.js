@@ -13,6 +13,7 @@ var platform; // platform will be initialized with a new H map
 var map; // will be initialze later
 var defaultLayers; // default map type, will be used to store the map obtain from platform
 var ui;
+var game;
 
 // Accessor methods
 function getLat() {
@@ -133,6 +134,36 @@ function addInfoBubble(map) {
 	'</div><div>MTCC<br>IIT</div>');
 }
 
+function start_game(){
+	game = new Game({id:'0',name:'metagame'});
+	var troops = loadTroops();
+	var players = loadPlayers();
+	var towers = loadTowers();
+	var questions = game.get('questions');
 
-
+	if(players.length == 0){
+		players = [new Player({
+			    "id": "marcuswan",
+			    "name": "Marcus Wan",
+			    "team": {"icon": "png", "color": "Blue"},
+			    "coordinates": {"latitude": "10", "longitude": "20"},
+			    "troops": "[]"
+		})];
+	}
+	if(troops.length == 0){
+		for (var i = 0; i < players.length; i++){
+			for (var q = 0; q < 10; q++){
+				troops.push(new Troop({
+					id: i + "-" + q,
+					name:"Troop" + q,
+					playerID: players[i].id,
+					towerID: "-1",
+					question: JSON.stringify(questions[Math.floor(Math.random()*30)]),
+					//alive: "true"
+					}));
+			}
+		}
+	}
+}
+start_game();
 console.log('LOADED APPLICATION');

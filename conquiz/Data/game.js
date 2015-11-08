@@ -12,7 +12,8 @@ function generateRandomName(){
 }
 
 function generateNewID(objectType){
-	var objectCounter = game.get(objectType + 's').length;
+	console.log(objectType);
+	var objectCounter = game.get(objectType).length;
 	var newID = objectType + objectCounter;
 	return newID;
 }
@@ -50,6 +51,20 @@ Game.prototype.set = function(attribute, value){
 
 Game.prototype.update = function(){
 	updateTowerbase(this.towers);
+	//loadMyTroops();
+	checkGameReadyState();
+}
+
+Game.prototype.loadMyTroops = function(){
+	var size = this.troops.length;
+	var currentTroop;
+	for(var i = 0; i < size; i++){
+		//if(currentTroop.id)
+	}
+}
+
+function checkGameReadyState(){
+	var ready = false;
 	var mapObjects = map.getObjects();
 	var size = mapObjects.length;
 	var towerCount = 0;
@@ -59,12 +74,16 @@ Game.prototype.update = function(){
 		}
 	}
 	if(towerCount == 7){
+		ready = true;
 		console.log(':) GAME IS READY!');
-		openGame();
+		/*toggleMenu('towers');
+		toggleMenu('gameStart');*/
 	}
 	else{
+		ready = false;
 		console.log(':( Only ' + towerCount + ' towers have been placed.');
 	}
+	return ready;
 }
 
 Game.prototype.push = function(list, object){
@@ -95,5 +114,14 @@ Game.prototype.addTask = function(task){
 Game.prototype.printAllTowerCoordinates = function(){
 	for(var t = 0; t < this.towers.length; t++){
 		console.log(this.towers[t].id + ', ' + this.towers[t].getLat() + ', ' + this.towers[t].getLon());
+	}
+}
+
+Game.prototype.checkAllTowers = function(){
+	var size = this.towers.length;
+	for(var t = 0; t < size; t++){
+		if(isUserAtTower(this.towers[t])){
+			alert('You are at Tower: ' + this.towers[t].id + '!');
+		}
 	}
 }

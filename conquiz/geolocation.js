@@ -83,6 +83,7 @@ function updateUserMarker(){
 			lng: userPosition.longitude
 		});
 		console.log('Update with: ' + userPosition.toString());
+		game.checkAllTowers();
 	}
 	getGeolocation(moveUserMarker);
 }

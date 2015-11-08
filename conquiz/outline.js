@@ -59,9 +59,4 @@ function initHereMap(){
 
 }
 
-
-function openGame(){
-	alert(game.get('id'))
-}
-
 console.log('LOADED outline.js');

@@ -7,6 +7,16 @@ function initGame(){
 	createTowerPresets();
 }
 
+function joinGame(){
+	console.log('before1')
+	game = getGame();
+	console.log('after1')
+	/*game.questions = loadQuestions();
+	game.troops = loadTroops();
+	game.players = loadPlayers();
+	game.towers = loadTowers();*/
+}
+
 var mapClickCallback = function(coordinates){
 	console.log('no function event set yet');
 };
@@ -30,6 +40,14 @@ function setFocusObject(list, objectID){
 		$('#' + objectID).removeClass('selected');
 		$('#' + objectID).addClass('used');
 		game.update();
+		if(!checkGameReadyState()){
+			openMenu();
+			toggleMenu('towers');
+		}
+		else{
+			openMenu();
+			toggleMenu('gameStart')
+		}
 	}
 }
 
@@ -95,7 +113,7 @@ function plantTowerOnMap(coordinates, towerRadius){
 		longitude: coords[1]
 	}*/
 	var tower = new Tower({
-		id: generateNewID('tower'),
+		id: generateNewID('towers'),
 		name: "PRESET",
 		latitude: coordinates.lat,
 		longitude: coordinates.lng,
