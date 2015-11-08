@@ -118,10 +118,10 @@ Game.prototype.printAllTowerCoordinates = function(){
 }
 
 Game.prototype.checkAllTowers = function(){
-	var size = this.towers.length;
+	/*var size = this.towers.length;
 	for(var t = 0; t < size; t++){
 		if(isUserAtTower(this.towers[t])){
-			alert('You are at Tower: ' + this.towers[t].id + '!');
+			alert('You are at Tower: ' + this.towers[t].get('id') + '!');
 		}
-	}
+	}*/
 }

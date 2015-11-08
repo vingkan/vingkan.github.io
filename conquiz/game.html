@@ -44,7 +44,7 @@
 			<div id="menuOptions">
 				<h1>Menu</h1>
 				<input type="text" placeholder="secret code">
-				<button style="background: #1a1a1a;" onclick="alert('valid?');">Join Game</button>
+				<button style="background: #1a1a1a;" onclick="startGame();">Join Game</button>
 				<div id="entryGate" style="display: none;">
 					<div class="menuOption" onclick="toggleMenu('questions');">
 						Battle Screen
@@ -118,14 +118,46 @@
 		var map;
 
 
+		function startGame(){
+			setUpLocations();
+			openMenu();
+		}
+
 
 		function trialCallback(){
+
 			initHereMap();
-			joinGame();
-			game = getGame();
+			game = new Game({
+				id: 'playdemo',
+				name: 'city'
+			});
+			game.towers = loadTowers();
+			var size = game.towers.length;
+			var current;
+			var circle;
+			for(var t = 0; t < size; t++){
+				current = game.towers[t];
+				circle = current.getCircle();
+				map.addObject(circle);
+				console.log(circle);
+			}
+			openMenu();
+		}
+
+		function setUpLocations(){
+			var size = game.towers.length;
+			var current;
+			var circle;
+			for(var t = 0; t < size; t++){
+				current = game.towers[t];
+				circle = current.getCircle();
+				map.addObject(circle);
+				console.log(circle);
+			}
 		}
 
 		getGeolocation(trialCallback);
+
 
 		/*game.push('players', new Player({
 			id: generateNewID('player'),

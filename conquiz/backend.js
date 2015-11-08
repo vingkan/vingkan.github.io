@@ -212,9 +212,10 @@ function loadTowers() {
 		newTower = new Tower({
 			id: towerJSON['id'],
 			name: towerJSON['name'],
-			coordinate: {latitude: towerJSON['latitude'], longitude: towerJSON['longitude']},
+			latitude: towerJSON['latitude'],
+			longitude: towerJSON['longitude'],
 			size: towerJSON['size'],
-			player: JSON.stringify(towerJSON['player']),
+			player: 'd',//JSON.stringify(towerJSON['player']),
 			troops: "[]"
 		});
 		towerHolder.push(newTower);
@@ -235,7 +236,7 @@ function uploadTowerbase(data) {
 			size: value['size'],
 			player: value['player'] });
 	});
-	setDefaultTower();
+	//setDefaultTower();
 }
 function setDefaultTower(){
 	towerbase.once('value', function(snapshot){

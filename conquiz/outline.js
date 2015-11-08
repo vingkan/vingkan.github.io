@@ -7,7 +7,7 @@
 /*---> STORYBOARD <---------------------------*/
 /*--------------------------------------------*/
 
-function initHereMap(){
+function initHereMap(callbackcity){
 
 	/*var platform = new H.service.Platform({
 		'app_id': APP_ID,
@@ -56,6 +56,10 @@ function initHereMap(){
 	map.addObject(marker);
 	
 	console.log('LOADED HERE MAP');
+
+	//callbackcity();
+
+	console.log('you better believe it')
 
 }
 
