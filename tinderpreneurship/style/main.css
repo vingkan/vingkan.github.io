@@ -1,17 +1,1 @@
-/*--------------------------------------------*/
-/*---> PRESETS <------------------------------*/
-/*--------------------------------------------*/
-
-/*
-	font-family: 'Titillium Web', sans-serif;
-	font-family: 'Bevan', sans-serif;
-*/
-
-/*--------------------------------------------*/
-/*---> STRUCTURE <----------------------------*/
-/*--------------------------------------------*/
-
-body{
-	background: #dddddd;
-	font-family: 'Titillium Web', sans-serif;
-}
+h1,h2,h3,h4,h5,h6,li,p,ul{font-family:sans-serif;font-size:5vh}h1,h2,h3,h4,h5,h6{font-family:sans-serif}h1{font-size:7.5vh}h2{font-size:6.75vh}h3{font-size:5.75vh}
