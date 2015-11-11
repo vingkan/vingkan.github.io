@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>StartUp IIT</title>
+		<!-- <link rel="icon" type="img/png" href="style/favicon.png" style="width:30px;"> -->
+		<link rel="stylesheet" type="text/css" href="style/reset.css">
+		<link rel="stylesheet" type="text/css" href="style/main.css">
+		<link rel="stylesheet" type="text/css" href="style/parallax.css">
+		<link href='https://fonts.googleapis.com/css?family=Alfa+Slab+One|Source+Sans+Pro:400,400italic,900' rel='stylesheet' type='text/css'>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+		<style>
+
+			span.iitPun{
+				color: #E51937;
+			}
+
+			.noBottomSpace{
+				margin-bottom: 0;
+				padding-bottom: 0;
+			}
+
+		</style>
+	</head>
+	<body>
+
+		<header>	
+			<ul>
+				<a href="#home"><li onmouseover="document.getElementById('ceoLogo').src='style/img/ceoBlackLogo.png';" onmouseout="document.getElementById('ceoLogo').src='style/img/ceoWhiteLogo.png';"><img id="ceoLogo" src="style/img/ceoWhiteLogo.png"></li></a>
+				<a href="#register"><li>Register</li></a>
+				<a href="#prizes"><li>Prizes</li></a>
+				<a href="#schedule"><li>Schedule</li></a>
+				<a href="#teams"><li>Teams</li></a>
+			</ul>
+		</header>
+
+		<div class="headerSpace" id="home"></div>
+
+		<section class="module parallax section1">
+			<div class="container">
+				<h1>StartUP <span class="iitPun">IIT</span></h1>
+			</div>
+		</section>
+
+		<section class="module content">
+			<div class="container">
+				<p>StartUp IIT is a shark tank style pitch competition for entrepreneurs, hackers, creatives, and pretty much anyone that likes talking ideas.</p>
+				<p>Feel free to pitch ideas from previous hackathon projects, IPRO projects, or your own start up.</p>
+			</div>
+		</section>
+
+		<section class="module parallax section2" id="register">
+			<div class="container">
+				<h1 class="noBottomSpace">Register</h1>
+				<form id="registration">
+					<input type="text" id="name" placeholder="Your Name">
+					<input type="text" id="email" placeholder="Your Email">
+					<center>
+						<button onclick="submitUser();">Submit</button>
+					</center>
+				</form>
+			</div>
+		</section>
+
+		<section class="module content">
+			<div class="container">
+				<p>Invite your friends to sign up at <a href="http://quickpiitch.tk">quickpIITch.tk</a>!</p>
+			</div>
+		</section>
+
+		<section class="module parallax section3" id="prizes">
+			<div class="container">
+				<h1>Prizes</h1>
+			</div>
+		</section>
+
+		<section class="module content">
+			<div class="container">
+				<p>More information coming soon...</p>
+			</div>
+		</section>
+		
+		<section class="module parallax section4" id="schedule">
+			<div class="container">
+				<h1>Schedule</h1>
+			</div>
+		</section>
+
+		<section class="module content">
+			<div class="container">
+				<p>More information coming soon...</p>
+			</div>
+		</section>
+
+		<section class="module parallax section5" id="teams">
+			<div class="container">
+				<h1>Teams</h1>
+			</div>
+		</section>
+
+		<section class="module content">
+			<div class="container">
+				<p>More information coming soon...</p>
+			</div>
+			<div class="footerSpace"></div>
+		</section>
+
+		<footer>
+			<address>iitceo.tk</address>
+		</footer>
+
+
+		<script type="text/javascript">
+
+			function submitUser(){
+				var name = document.getElementById('name').value;
+				var email = document.getElementById('email').value;
+				alert(name + ': ' + email);
+			}
+
+		</script>
+		
+	</body>
+</html>
