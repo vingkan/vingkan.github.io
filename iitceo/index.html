@@ -64,7 +64,7 @@
 
 		<section class="module content">
 			<div class="container">
-				<p>Invite your friends to sign up at <a href="http://quickpiitch.tk">quickpIITch.tk</a>!</p>
+				<p>Invite your friends to RSVP on our <a href="https://www.facebook.com/events/999480900103276/" target="_blank">Facebook Event</a>!</p>
 			</div>
 		</section>
 
@@ -76,7 +76,14 @@
 
 		<section class="module content">
 			<div class="container">
-				<p>More information coming soon...</p>
+				<p>More than $1000 worth of prizes will be up for grabs in these three categories:</p>
+				<h2>Social Enterprise</h2>
+				<p>Best business plan for a social venture, based on creativity and potential impact.</p>
+				<h2>Best MVP</h2>
+				<p>Best combination of a business plan and successful execution of a clever and informative Minimum Viable Product.</p>
+				<h2>Best Overall</h2>
+				<p>Like no one ever was.</p>
+				</p>
 			</div>
 		</section>
 		
@@ -115,7 +122,13 @@
 			function submitUser(){
 				var name = document.getElementById('name').value;
 				var email = document.getElementById('email').value;
-				alert(name + ': ' + email);
+				//alert(name + ': ' + email);
+				var eventRef = new Firebase("https://tinderpreneurship.firebaseio.com/events/startup-iit");
+				eventRef.push({
+					name: name,
+					email: email
+				});
+				window.location = "#teams";
 			}
 
 		</script>
