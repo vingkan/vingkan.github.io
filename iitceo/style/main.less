@@ -47,6 +47,30 @@ p{
 	line-height: @smallFont * 1.5;
 }
 
+div.container{
+
+	ul{
+		width: 90%;
+		margin: 5vw;
+		font-size: 0.75 * @smallFont;
+		line-height: @smallFont * 1.15;
+	}
+
+	span{
+		color: @scarletRed;
+		font-weight: bolder;
+
+		&::after{
+			content: '';
+		}
+	}
+
+	li{
+		list-style-type: none;
+	}
+
+}
+
 a{
 
 	text-decoration: none;
@@ -127,7 +151,7 @@ header{
 	li{
 		display: inline-block;
 		margin-right: -1vw;
-		width: 19vw;
+		width: 18vw;
 		height: @headerHeight;
 		line-height: @headerHeight;
 		font-size: 0.50 * @smallFont;
