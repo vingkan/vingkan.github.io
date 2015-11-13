@@ -71,7 +71,7 @@ String.prototype.toTitleCase = function toTitleCase(){
 function convertOptionTagName(tag, toReadable){
 	var response;
 	if(toReadable){
-		response = tag.replace('-', ' ').toTitleCase();
+		response = tag.replace(/-/g, ' ').toTitleCase();
 	}
 	else{
 		response = tag.replace(/\s+/g, '-').toLowerCase();
