@@ -3,18 +3,24 @@
 /*--------------------------------------------*/
 
 var skills = [
+	"Business Model Canvases",
 	"Public Speaking",
 	"Graphic Design",
 	"Brainstorming",
-	"Web Development",
+	"Report Writing",
+	"Marketing",
+	"Programming",
 	"Time Management",
-	"Slide Decks",
-	"Reports",
+	"Slide Presentation Design",
 	"Statistics",
 	"Animation",
 	"Photography",
 	"Finances",
-	"Business Model Canvases"
+	"Research",
+	"CAD/Drafting",
+	"UI/UX Design",
+	"Server Side",
+	"Comedy"
 ];
 
 /*--------------------------------------------*/
