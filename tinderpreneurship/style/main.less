@@ -29,8 +29,29 @@ body{
 	margin: 0 auto;
 }
 
+@headerHeight: 10vh;
+
+/*header{
+
+	position: fixed;
+	width: 100vw;
+	height: 1.5 * @headerHeight;
+	top: 0;
+	left: 0;
+	background: @mainColor;
+
+	img.logo{
+		//width: 80%;
+		height: @headerHeight;
+		margin: @textSize auto;
+		margin-bottom: 0.5 * @textSize;
+	}
+
+}*/
+
 img.logo{
-	width: 80%;
+	//width: 80%;
+	height: @headerHeight;
 	margin: @textSize auto;
 	margin-bottom: 0.5 * @textSize;
 }
@@ -82,20 +103,24 @@ h1, h2, h3, h4, h5, h6{
 	text-align: center;
 	color: @mainColor;
 	margin-top: 0.75 * @textSize;
-	margin-bottom: 0.25 * @textSize;
+	margin-bottom: 0.05 * @textSize;
 }
 
 h1{
-	font-size: 1.25 * @textSize;
+	width: 90%;
+	margin: 5%;
+	font-size: 1.15 * @textSize;
+	color: white;
+	border-bottom: 0.5vh dashed @mainColor;
 }
 
 h2{
-	font-size: 1.15 * @textSize;
-	line-height: 1.25 * @textSize;
+	font-size: 0.85 * @textSize;
+	line-height: 0.95 * @textSize;
 }
 
 h3{
-	font-size: 1.05 * @textSize;
+	font-size: 0.75 * @textSize;
 }
 
 h1.title{
@@ -115,6 +140,25 @@ p{
 	line-height: 1.10 * @textSize;
 	margin: 0.50 * @textSize;
 }
+
+	p.subtitle{
+		
+		font-size: 0.40 * @textSize;
+		line-height: 0.50 * @textSize;
+		//margin: 0.20 * @textSize;
+	}
+
+ul{
+	width: 85%;
+	margin: 5% 10%;
+}
+
+li{
+	font-size: 0.75 * @textSize;
+	list-style-type: square;
+	text-align: left;
+}
+
 
 /*--------------------------------------------*/
 /*---> FORMS <--------------------------------*/
@@ -137,7 +181,7 @@ button{
 	width: 92&;
 	padding: 0 4%;
 	height: 2.0 * @textSize;
-	margin: (1.0 * @textSize) auto;
+	margin: (0.5 * @textSize) auto;
 	background: @mainColor;
 	color: white;
 	font-family: @headFont;
@@ -152,14 +196,24 @@ button{
 
 }
 
+	section#menu{
+
+		button{
+			width: 90vw - 4vh;
+			margin: 2vh auto;
+		}
+
+	}
+
 textarea{
 	min-width: 90%;
 	max-width: 90%;
+	min-height: 4.0 * @textSize;
 	padding: 5%;
-	border: (0.15 * @textSize) solid @mainColor;
-	margin: (1.0 * @textSize) auto;
-	font-size: @textSize;
-	line-height: 1.15 * @textSize;
+	border: (0.15 * @textSize) solid white;
+	margin: (0.5 * @textSize) auto;
+	font-size: 0.75 * @textSize;
+	line-height: @textSize;
 	color: white;
 	background: transparent;
 }
@@ -197,6 +251,83 @@ input[type="checkbox"]{
 
 input[type="checkbox"]:checked + div.checkSquare{
 	background: @mainColor;
+}
+
+/*--------------------------------------------*/
+/*---> MESSAGE ALERTS <-----------------------*/
+/*--------------------------------------------*/
+
+div#messageBox{
+
+	position: fixed;
+	bottom: 0;
+	//left: 0;
+	background: @mainDark;
+	width: 100vw;
+	height: 70vh;
+	overflow-x: hidden;
+	overflow-y: scroll;
+
+	h4{
+
+		margin-top: 0;
+		background: @charcoal;
+		color: white;
+		font-size: 0.75 * @textSize;
+		padding: 0.85 * @textSize;
+
+		&:hover{
+			background: white;
+			color: @charcoal;
+		}
+
+		.AnimateAll();
+
+	}
+
+	&.open{
+		bottom: 0;
+	}
+
+	&.close{
+		bottom: -70vh;
+	}
+
+	.AnimateAll();
+
+}
+
+/*--------------------------------------------*/
+/*---> BROWSING <-----------------------------*/
+/*--------------------------------------------*/
+
+@profileHeight: 55vh;
+
+div.people{
+
+	background: transparent;
+	height: @profileHeight;
+	width: 80vw;
+	border: 5vw solid rgba(255, 255, 255, 0.05);
+	margin: 5vw 2.5vw;
+	overflow-y: scroll;
+
+	h2{
+		color: white;
+	}
+
+	button{
+		position: absolute;
+		z-index: 5;
+		width: 7.5vw;
+		height: @profileHeight;
+		line-height: @profileHeight;
+		left: 2.5vw;
+		padding: 0;
+		margin: 0;
+		border-radius: 0;
+	}
+
 }
 
 /*--------------------------------------------*/
@@ -240,4 +371,124 @@ input[type="checkbox"]:checked + div.checkSquare{
 
 ::-webkit-resizer{
 	background: @scrollBarBack;
+}
+
+/*--------------------------------------------*/
+/*---> COLLAPSING HEADER <--------------------*/
+/*--------------------------------------------*/
+
+/*
+* Collapsing Header on Scroll Tutorial:
+* http://callmenick.com/post/animated-resizing-header-on-scroll
+*/
+
+.Center(){
+	margin: 0 auto;
+}
+
+@focusColor: @mainColor;
+@smallFont: @textSize;
+@biggerHeight: 2 * @smallFont;
+@smallerHeight: @smallFont;
+
+@smallMargin: (@smallFont * 0.25);
+
+div.headerSpace{
+	height: (@biggerHeight + (@smallMargin * 3)) * 1.0 + 2vh;
+}
+
+header{
+
+	width: 90vw;
+	padding: (1.5 * @smallMargin) 5vw;
+	height: @biggerHeight;
+	overflow: hidden;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 15;
+	background: #0B0B0B;
+	border-bottom: @smallMargin solid white;
+	-webkit-transition: height 0.25s;
+	-moz-transition: height 0.25s;
+	-ms-transition: height 0.25s;
+	-o-transition: height 0.25s;
+	transition: height 0.25s;
+
+	.logo{
+		display: inline-block;
+		height: @biggerHeight;
+		line-height: @biggerHeight;
+		//float: left;
+		.Center();
+		-webkit-transition: all 0.25s;
+		-moz-transition: all 0.25s;
+		-ms-transition: all 0.25s;
+		-o-transition: all 0.25s;
+		transition: all 0.25s;
+	}
+
+	#big{
+		height: @biggerHeight;
+		line-height: @biggerHeight;
+	}
+
+	#small{
+		height: 0;
+		line-height: 0;
+	}
+
+	h6{
+		display: inline-block;
+		float: left;
+		height: @biggerHeight;
+		line-height: @biggerHeight;
+		margin-top: @smallFont * 0.5;
+	}
+
+	button{
+		display: none;
+	}
+
+}
+
+header.smaller{
+
+	height: @smallerHeight;
+
+	.logo{
+		height: @smallerHeight;
+		line-height: @smallerHeight;
+		float: left;
+	}
+
+	#big{
+		height: 0;
+		line-height: 0;
+	}
+
+	#small{
+		height: @smallerHeight;
+		line-height: @smallerHeight;
+	}
+
+	h6{
+		margin-top: @smallerHeight * -0.15;
+		display: inline-block;
+		height: @smallerHeight;
+		line-height: @smallerHeight;
+	}
+
+	button{
+		display: block;
+		position: fixed;
+		top: 0;
+		right: 0;
+		height: @biggerHeight - @smallMargin;
+		padding: 0;
+		margin: 0;
+		width: @biggerHeight;
+		border-radius: 0;
+	}
+
 }
