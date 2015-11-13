@@ -330,7 +330,7 @@ function getProfileById(targetID){
 /*--------------------------------------------*/
 
 function loadContactProfiles(){
-	var alreadyLiked = JSON.parse(getProfileById(userID).profile.youliked);
+	var alreadyLiked = JSON.parse(getProfileById(userID).profile.likedyou);
 	var size = alreadyLiked.length;
 	var output = document.getElementById('contactSpace');
 		output.innerHTML = "";
