@@ -97,8 +97,21 @@ html{
 	color: @charcoal;
 }
 
+.AnimateAll(@time: 0.5s){
+	transition: all @time ease;
+	-webkit-transition: all @time ease;
+}
+
 img.logo{
+
 	width: 85vw;
+
+	&:hover{
+		opacity: 0.5;
+	}
+
+	.AnimateAll();
+
 }
 
 /*--------------------------------------------*/

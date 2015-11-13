@@ -20,6 +20,10 @@
 				padding-bottom: 0;
 			}
 
+			#formAlert{
+				display: none;
+			}
+
 		</style>
 	</head>
 	<body>
@@ -54,18 +58,19 @@
 		<section class="module parallax section2" id="register">
 			<div class="container">
 				<h1 class="noBottomSpace">Register</h1>
-				<form id="registration">
+				<div id="registration">
 					<input type="text" id="name" placeholder="Your Name">
 					<input type="text" id="email" placeholder="Your Email">
 					<center>
 						<button onclick="submitUser();">Submit</button>
 					</center>
-				</form>
+				</div>
 			</div>
 		</section>
 
 		<section class="module content">
 			<div class="container">
+				<p id="formAlert"><span class="iitPun">Please enter a valid name and email address.</span></p>
 				<p>Invite your friends to RSVP on our <a href="https://www.facebook.com/events/999480900103276/" target="_blank">Facebook Event</a>!</p>
 			</div>
 		</section>
@@ -122,10 +127,11 @@
 
 		<section class="module content">
 			<div class="container">
-				<p>Don't worry if you don't know who to work with this weekend...</p>
+				<p id="submitMessage">Don't worry if you don't know who to work with this weekend...</p>
 				<center>
-					<img class="logo" src='style/img/tinderpreneurship.png'>
+					<img class="logo" onclick="window.location='/tinderpreneurship';" src='style/img/tinderpreneurship.png'>
 				</center>
+				<p>Click the logo to try it out!</p>
 				<p>Tinderpreneurship is a tool based on the popular dating app to take the anxiety out of finding teammates. Check back in the days leading up to the event for the app's MVP, which StartUp IIT will be piloting!</p>
 			</div>
 			<div class="footerSpace"></div>
@@ -141,13 +147,19 @@
 			function submitUser(){
 				var name = document.getElementById('name').value;
 				var email = document.getElementById('email').value;
-				//alert(name + ': ' + email);
-				var eventRef = new Firebase("https://tinderpreneurship.firebaseio.com/events/startup-iit");
-				eventRef.push({
-					name: name,
-					email: email
-				});
-				window.location = "#teams";
+				if(name != "" && email != ""){
+					var eventRef = new Firebase("https://tinderpreneurship.firebaseio.com/events/startup-iit");
+					eventRef.push({
+						name: name,
+						email: email
+					});
+					document.getElementById('formAlert').style.display = 'none';
+					document.getElementById('submitMessage').innerHTML = "Thanks for signing up! In case you're wondering about who you should work with this weekend...";
+					window.location = "#teams";
+				}
+				else{
+					document.getElementById('formAlert').style.display = 'block';
+				}
 			}
 
 		</script>
