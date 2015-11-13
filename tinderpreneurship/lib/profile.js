@@ -303,6 +303,7 @@ function checkList(targetID, userList){
 	var size = userList.length;
 	for(var u = 0; u < size; u++){
 		if(userList[u] === targetID){
+			//console.log(userList[u] + ' vs' + targetID)
 			//console.log('match!')
 			found = true;
 			break;
@@ -330,14 +331,17 @@ function getProfileById(targetID){
 /*--------------------------------------------*/
 
 function loadContactProfiles(){
-	var alreadyLiked = JSON.parse(getProfileById(userID).profile.likedyou);
-	var size = alreadyLiked.length;
+	var likedYouList = JSON.parse(getProfileById(userID).profile.likedyou);
+	var youLikedList = JSON.parse(getProfileById(userID).profile.youliked);
+	var size = likedYouList.length;
 	var output = document.getElementById('contactSpace');
 		output.innerHTML = "";
 	if(size > 0){
 		for(var u = 0; u < size; u++){
-			if(alreadyLiked[u].uid != userID){
-				output.innerHTML += getProfileById(alreadyLiked[u]).getProfileDiv(false);
+			if(likedYouList[u] != userID){
+				if(checkList(likedYouList[u], youLikedList)){
+					output.innerHTML += getProfileById(likedYouList[u]).getProfileDiv(false);
+				}
 			}
 		}
 	}
