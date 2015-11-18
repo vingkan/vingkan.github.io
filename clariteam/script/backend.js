@@ -23,14 +23,17 @@ function setListening(room, bool) {
 	newListener.set(bool);
 }
 
+/*
+* TEMPORARILY TURNED OFF SINCE WE WON'T BE NEED ARRAYS FOR NOW!
+*/
 function notifyDevices(room) {
-	var listenDir = new Firebase(url+"Rooms/"+room+"/LISTENING");
+	/*var listenDir = new Firebase(url+"Rooms/"+room+"/LISTENING");
 	listenDir.on('value', function(snapshot){
 		alert(snapshot.val());
 		if (snapshot.val()) {
 			startListening();
 		}
-	});
+	});*/
 }
 
 var getResultsOutput = [];

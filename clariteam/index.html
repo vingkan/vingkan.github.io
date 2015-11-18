@@ -4,69 +4,13 @@
 		<title>MobiHack</title>
 		<link rel="stylesheet" type="text/css" href="style/reset.css">
 		<link rel="stylesheet" type="text/css" href="style/main.css">
+		<link rel="icon" type="img/png" href="style/favicon.png" style="width:30px;">
 		<!-- IMPORTED SCRIPTS -->
 		<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700|Karla:400,700,400italic' rel='stylesheet' type='text/css'>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 		<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
 		<link href='http://fonts.googleapis.com/css?family=Rancho&effect=shadow-multiple' rel='stylesheet' type='text/css'>
-
 		<style>
-
-			body{
-				font-family: 'Karla', sans-serif;
-			}
-
-			img{
-				height: 30vh;
-				clear: both;
-				margin-top: 5vh;
-			}
-
-			input{
-				width: 80vw;
-				padding: auto 5vw;
-				height: 10vh;
-				line-height: 10vh;
-				font-size: 5vh;
-				margin: 5vh auto;
-				outline: none;
-				border: 1vh solid #009D90;
-				color: #009D90;
-				text-align: center;
-			}
-
-			button{
-				outline: none;
-				border: none;
-				background: #009D90;
-				color: white;
-				height: 5vh;
-				line-height: 5vh;
-				font-size: 3vh;
-				width: 60vw;
-				margin: 2vh;
-			}
-
-			button:hover{
-				background: #1a1a1a;
-			}
-
-			div#output{
-				width: 90vw;
-				line-height: 5vh;
-				font-size: 3vh;
-				text-align: left;
-				color: #009D90;
-				margin-top: 5vh;
-			}
-
-			h2{
-				font-weight: bold;
-				text-align: center;
-				font-family: 'Montserrat', sans-serif;
-				font-size: 5vh;
-				line-height: 10vh;
-			}
 
 
 		</style>
@@ -80,12 +24,19 @@
 
 			<input type="text" id="roomKeyInput" value="">
 
-			<button onclick="setRoomKey();">Join Game</button>
+			<button onclick="globalStart();">Record</button>
 
-			<!-- Button called starts-->
+			<!--<button onclick="setRoomKey();">Join</button>
 			<button id="start" onclick="initListening(true);">Start</button>
 			<button id="stop" onclick="initListening(false);">Stop</button>
-			<button id="resuls" onclick="endSession();">Results</button>
+			<button id="resuls" onclick="endSession();">Results</button>-->
+
+			<!--<input x-webkit-speech>-->
+			<div id="interim-transcript">
+				<p>transcription will be output here</p>
+			</div>
+
+			<button onclick="globalStop();">Stop</button>
 
 			<div id="output"></div>
 

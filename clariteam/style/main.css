@@ -1,0 +1,106 @@
+body{
+	font-family: 'Karla', sans-serif;
+}
+
+img{
+	height: 30vh;
+	clear: both;
+	margin-top: 5vh;
+}
+
+input{
+	width: 80vw;
+	padding: auto 5vw;
+	height: 10vh;
+	line-height: 10vh;
+	font-size: 5vh;
+	margin: 5vh auto;
+	outline: none;
+	border: 1vh solid #009D90;
+	color: #009D90;
+	text-align: center;
+}
+
+button{
+	outline: none;
+	border: none;
+	background: #009D90;
+	color: white;
+	height: 5vh;
+	line-height: 5vh;
+	font-size: 3vh;
+	width: 60vw;
+	margin: 2vh;
+}
+
+button:hover{
+	background: #1a1a1a;
+}
+
+div#output{
+	width: 90vw;
+	line-height: 5vh;
+	font-size: 3vh;
+	text-align: left;
+	color: #009D90;
+	margin-top: 5vh;
+}
+
+h2{
+	font-weight: bold;
+	text-align: center;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 5vh;
+	line-height: 10vh;
+}
+
+div.confidence{
+	background: #8AD64E;
+	padding: 3vh 1vh;
+	color: white;
+	width: 40vw;
+}
+
+/*
+* BONUS STYLES
+*/
+
+p{
+	color: #009D90;
+  white-space: nowrap;
+  overflow: hidden;
+  margin: 2vh auto;
+  font-size: 3vh;
+  width: 90%;
+  animation: type 2s steps(60, end); 
+}
+
+p:nth-child(2){
+  animation: type 4s steps(60, end);
+}
+
+p a{
+  text-decoration: none;
+}
+
+span{
+  animation: blink 1s infinite;
+}
+
+@keyframes type{ 
+  from { width: 0; } 
+} 
+
+@keyframes type2{
+  0%{width: 0;}
+  50%{width: 0;}
+  100%{ width: 100; } 
+} 
+
+@keyframes blink{
+  to{opacity: .0;}
+}
+
+::selection{
+  background: black;
+}
