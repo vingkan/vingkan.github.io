@@ -7,6 +7,7 @@
 @mainDark: @mainColor - #222222;
 
 @charcoal: #1a1a1a;
+@alienPurple: #784EAA;
 
 /*--------------------------------------------*/
 /*---> FONTS <--------------------------------*/
@@ -30,6 +31,7 @@
 
 p, h1, h2, h3, ul, li{
 	.BodyFont();
+	margin: (0.5 * @textSize) auto;
 }
 
 h1, h2, h3{
@@ -56,6 +58,18 @@ p{
 	font-size: 1.0 * @textSize;
 	line-height: 1.25 * @textSize;
 	text-align: center;
+}
+
+ul{
+	width: 80%;
+	margin: auto 10%;
+}
+
+li{
+	font-size: 1.0 * @textSize;
+	line-height: 1.25 * @textSize;
+	list-style: disc;
+	margin: (0.15 * @textSize) auto;
 }
 
 /*--------------------------------------------*/
@@ -87,6 +101,20 @@ div#logo{
 		height: 50vh;
 	}
 
+}
+
+div#aliens{
+
+	img{
+		height: 15vh;
+		margin: 1vh;
+	}
+
+}
+
+div#contact{
+	background: @alienPurple;
+	color: white;
 }
 
 /*--------------------------------------------*/
