@@ -1,4 +1,4 @@
-var USER_ID;
+var USER_ID;// = '103105083532765828171';
 
 function checkUserInDatabase(authData){
 	USER_ID = authData.google.id;

@@ -4,13 +4,13 @@ function initHeatMapDisplay(heatmapObject){
     cellSize = itemSize-1,
     width = 800,
     height = 800,
-    margin = {top:20,right:20,bottom:20,left:25};
+    margin = {top:20,right:20,bottom:20,left:40};
 
   //formats
   var hourFormat = d3.time.format('%H'),
     dayFormat = d3.time.format('%j'),
     timeFormat = d3.time.format('%Y-%m-%dT%X'),
-    monthDayFormat = d3.time.format('%m.%d');
+    monthDayFormat = d3.time.format('%m/%d');
 
   //data vars for rendering
   var dateExtent = null,
@@ -30,11 +30,11 @@ function initHeatMapDisplay(heatmapObject){
       .tickFormat(monthDayFormat),
     yAxisScale = d3.scale.linear()
       .range([0,axisHeight])
-      .domain([0,24]),
+      .domain([0,2400]),
     yAxis = d3.svg.axis()
       .orient('left')
-      .ticks(5)
-      .tickFormat(d3.format('02d'))
+      .ticks(10)
+      .tickFormat(d3.format('04d'))
       .scale(yAxisScale);
 
   initCalibration();
@@ -54,7 +54,7 @@ function initHeatMapDisplay(heatmapObject){
 
 /*      }
   d3.json(file,function(err,data){*/
-    console.log(treeData);
+    console.log(treeData)
     data = treeData.heatmapObject.data;
     data.forEach(function(valueObj){
       valueObj['date'] = timeFormat.parse(valueObj['timestamp']);
@@ -81,14 +81,14 @@ function initHeatMapDisplay(heatmapObject){
     .append('text')
       .text('date')
       .attr('transform','translate('+axisWidth+',-10)');
-
+      console.log(yAxis)
     svg.append('g')
       .attr('transform','translate('+margin.left+','+margin.top+')')
       .attr('class','y axis')
       .call(yAxis)
     .append('text')
       .text('time')
-      .attr('transform','translate(-10,'+axisHeight+') rotate(-90)');
+      .attr('transform','translate(-10,'+(axisHeight+40)+') rotate(-90)');
 
     //render heatmap rects
     dayOffset = dayFormat(dateExtent[0]);

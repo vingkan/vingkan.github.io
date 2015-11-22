@@ -121,8 +121,10 @@
 				<p>This will allow you to visualize when your teammates are free to meet.</p>
 				<input type="text" id='responses-meeting-id' class="underscore-bar" placeholder="appointment id" onchange="checkMeetingName(this.id);">
 				<button onclick="viewResponses()">Visualize</button>
+			</div>
 				<!-- Person Filter -->
-				<table id="filter-responses"></table>
+			<table id="filter-responses"></table>
+			<div class="container">
 				<!-- D3 Vizsualizer -->
 				<div id="d3viz" style="display: block;">
 					<div class="days-hours-heatmap">
@@ -195,7 +197,8 @@
 
 			/*toggleSection('view-responses');
 			document.getElementById('responses-meeting-id').value = 'wildhacks-debrief';
-			viewResponses();*/
+			viewResponses();
+			loadDisplayViz();*/
 
 			//toggleSection('create-event');
 

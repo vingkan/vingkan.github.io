@@ -8,6 +8,7 @@ function viewResponses(){
 	var meetingID = document.getElementById('responses-meeting-id').value;
 	console.log(meetingID)
 	viewMeetingHeatMap(meetingID);
+	loadDisplayViz();
 }
 
 function viewMeetingHeatMap(loadMeetingID){

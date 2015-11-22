@@ -2,6 +2,7 @@ function TimeSlot(data){
 
 	return {
 		uid: USER_ID,
+		name: data['name'],
 		mid: data['mid'],
 		time: data['time'],
 		duration: data['duration'],
