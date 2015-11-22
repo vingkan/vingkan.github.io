@@ -1,97 +1,118 @@
 <!DOCTYPE html>
-
 <html>
+	<head>
+		<title>Omnipointment</title>
+		<link rel="stylesheet" type="text/css" href="style/reset.css">
+		<link rel="stylesheet" type="text/css" href="style/main.css">
+		<link rel="icon" type="img/png" href="style/favicon.png" style="width:30px;">
+		<!-- IMPORTED SCRIPTS -->
+		<script type="text/javascript" src="scripts/moment.js"></script>
+		<link href='https://fonts.googleapis.com/css?family=Raleway:700|Source+Sans+Pro:400,600,400italic' rel='stylesheet' type='text/css'>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+		<!--<script type="text/javascript" src="scripts/x-tag-no-polyfills.min.js"></script>-->
+		<script type="text/javascript" src="scripts/underscore.js"></script>
+		<script type="text/javascript" src="scripts/backbone.js"></script>
+		<style>
 
-<head>
-	<title>Omnipointment... Coming Soon</title>
-	<link rel="stylesheet" type="text/css" href="style/main.css">
-	<link rel="icon" type="img/png" href="style/favicon.png" style="width:30px;">
-	<link href='http://fonts.googleapis.com/css?family=Raleway:400,700,600' rel='stylesheet' type='text/css'>
-	<style>
+			section{
+				display: none;
+			}
 
-		html, body{
-			margin: 0;
-			padding: 0;
-		}
+			section#view-menu{
+				display: block
+			}
 
-		html{
-			background: url('style/circles.jpg');
-			background-position: fixed;
-		}
+		</style>
+	</head>
 
-		ul{
-			width: 50vw;
-			margin: auto;
-			text-align: left;
-		}
+	<body>
 
-		div#teaser{
-			width: 70vw;
-			margin: auto;
-			font-size: 30px;
-			font-weight: 700;
-			line-height: 50px;
-		}
+		<header>
+			<center>
+				<img src="style/img/purple-long-logo.png">
+				<button onclick="toggleSection('view-menu');">&#8801;</button>
+			</center>
+		</header>
 
-		img#bigLogo{
-			width: 70vw;
-			margin-left: -20px;
-		}
+		<div class="headerSpace"></div>
 
-		img.screenshot{
-			width: 100vw;
-		}
+		<section id='view-menu'>
+			<div id="menu" class="container">
+				<h1>Menu</h1>
+				<p>You can open a meeting request by entering its appointment id.</p>
+				<input type="text" id='find-meeting-id' class="underscore-bar" placeholder="appointment id" onchange="checkMeetingName(this.id);">
+				<button onclick="loadMeeting()">Load Meeting</button>
+				
+				<button onclick="toggleSection('create-event')">Create Appointment</button>
+			</div>
+		</section>
 
-	</style>
-</head>
+		<section id="create-event">
 
-<body>
+				<center>
+			<div class="editorUI">
+				<h1>Create Your Event</h1>
+				<p>As you pick dates and times here, an event table will be generated below.</p>
+				<h3>Appointment ID</h3>
+				<input id="new-meeting-id" type="text" class="underscore-bar" placeholder="no spaces, only numbers and letters" onchange="checkMeetingName(this.id);">
+				<h3>Appointment Name</h3>
+				<input id="new-meeting-name" type="text" class="underscore-bar" placeholder="now you can have spaces :)">
+				<h3>Dates</h3>
+				<input id="add-dates" class="underscore-bar" type="date" onchange="selectDate(this);">
+				<div id="selected-dates"></div>
+				<h3>Times</h3>
+				<!-- <div class="selector-label start-label">Start:</div> -->
+				<select id="interval-start" class="time-intervals">
+					<option value="null">Start</option>
+				</select>
+				<!-- <div class="selector-label end-label">End:</div> -->
+				<select id="interval-end" class="time-intervals">
+					<option value="null">End</option>
+				</select>
+				<p>Priority slots let users indicate preference.</p>
+				<button id="set-normal" class="priority-setter" onclick="addTimeRange(false);">Add Normal</button>
+				<button id="set-priority" class="priority-setter" onclick="addTimeRange(true);">Add Priority</button>
+				<button id="add-meeting" onclick="addMeeting();">Save Meeting</button>
+			</div>
+				</center>
 
-	<div class="pane" style="background: transparent;">
-		<p class="overText">
-			Group scheduling solutions for all...
-		</p>
-	</div>
+			<table id="user-grid">
+				<p>Your Event Here.</p>
+			</table>
 
-	<div class="pane" style="background: url('style/purpleDiagmonds.png');">
-		<div id="teaser">
-			<img id="bigLogo" src="style/whiteLogo.png">
-			<br>Coming Soon...
-		</div>
-	</div>
+		</section>
 
-	<div class="pane" style="background: transparent;">
-		<p class="overText">
-			<ul>
-				<li>Keep the quick and dirty scheduling of When2Meet... without the dirty</li>
-				<li>Edit time slots after creation, unlike Doodle and When2Meet</li>
-				<li>Filter attendees to schedule around specific team members</li>
-				<li>Import from Google Calendar and past Omnipointments</li>
-				<li>View all your Omnipointments in one place</li>
-			</ul>
-		</p>
-	</div>
+		<section id="load-meeting">
+			
+			<h1 id="load-meeting-name">Meeting Request</h1>
+			<table id="load-grid"></table>
 
-	<div class="pane" style="background: transparent;">
-		<img class="screenshot" src="style/avengersDemo.png">
-	</div>
+		</section>
 
-	<div class="pane" style="background: transparent;">
-		<p class="overText">
-			<i>"Did someone invite Hawkeye? Is he even a main character?"</i>
-		</p>
-	</div>
+		<!-- NATIVE SCRIPTS -->
+		<script type="text/javascript" src="scripts/user.js"></script>
+		<script type="text/javascript" src="scripts/backend.js"></script>
+		<script type="text/javascript" src="scripts/data.js"></script>
+		<script type="text/javascript" src="scripts/application.js"></script>
+		<script type="text/javascript" src="scripts/frontend.js"></script>
+		<!-- POST-LOAD SCRIPTS -->
+		<script type="text/javascript" src="scripts/views/timeslot.js"></script>
+		<script type="text/javascript" src="scripts/experimental.js"></script>
+		<script type="text/javascript" src="scripts/creatorUI.js"></script>
+		<script type="text/javascript" src="scripts/slotManager.js"></script>
+		<script type="text/javascript" src="scripts/ycombinator.js"></script>
+		
+		<script type="text/javascript">
 
-	<div class="pane" style="background: url('style/purpleDiagmonds.png');">
-		Vinesh Kannan | August 2015 | vkannan3@hawk.iit.edu
-	</div>
+			//toggleSection('create-event');
 
-	<script>
+			/*document.getElementById('find-meeting-id').value = 'sample-meeting';
+			loadMeeting();*/
 
+			console.log("LOADED main.js");
 
-
-	</script>
-
-</body>
-
+		</script>
+		
+	</body>
 </html>

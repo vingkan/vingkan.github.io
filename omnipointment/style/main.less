@@ -1,0 +1,530 @@
+/*--------------------------------------------*/
+/*---> COLORS <-------------------------------*/
+/*--------------------------------------------*/
+
+@mainColor: #2d0a58;
+@mainLight: @mainColor + #222222;
+@mainDark: @mainColor - #222222;
+
+@charcoal: #1a1a1a;
+@lightGray: transparent;
+
+@softPurple: #b789f5;
+
+@freeGreen: #b3ff99;
+@maybeYellow: #ffff99;
+@busyRed: #ff9999;
+
+/*--------------------------------------------*/
+/*---> FONTS <--------------------------------*/
+/*--------------------------------------------*/
+
+@textSize: 3vh;
+
+@Raleway: 'Raleway', sans-serif;
+
+@SourceSansPro: 'Source Sans Pro', sans-serif;
+
+.HeadFont(){
+	font-family: @Raleway;
+}
+
+.BodyFont(){
+	font-family: @SourceSansPro;
+}
+
+/*--------------------------------------------*/
+/*---> TEXT <---------------------------------*/
+/*--------------------------------------------*/
+
+p, h1, h2, h3, ul, li{
+	.BodyFont();
+	margin: (0.5 * @textSize) auto;
+}
+
+h1, h2, h3{
+	.HeadFont();
+	text-align: center;
+	font-weight: bolder;
+	color: @mainColor;
+}
+
+h1{
+	font-size: 1.5 * @textSize;
+	line-height: 1.75 * @textSize;
+}
+
+h2{
+	font-size: 1.25 * @textSize;
+	line-height: 1.5 * @textSize;
+}
+
+h2{
+	font-size: 1.1 * @textSize;
+	line-height: 1.35 * @textSize;
+}
+
+p{
+	font-size: 1.0 * @textSize;
+	line-height: 1.25 * @textSize;
+	text-align: center;
+}
+
+ul{
+	width: 80%;
+	margin: auto 10%;
+}
+
+li{
+	font-size: 1.0 * @textSize;
+	line-height: 1.25 * @textSize;
+	list-style: disc;
+	margin: (0.15 * @textSize) auto;
+}
+
+/*--------------------------------------------*/
+/*---> BODY <---------------------------------*/
+/*--------------------------------------------*/
+
+html{
+	background: url('img/wood.jpg');
+	background-attachment: fixed;
+	background-position: top center;
+	background-size: auto 150%;
+	//Default Text Styles
+	.BodyFont();
+	font-size: @textSize;
+	color: white;
+	overflow-x: hidden;
+}
+
+body{
+	margin: 0;
+	width: 98vw;
+	margin: 0 auto;
+}
+
+.AnimateAll(@time: 0.5s){
+	transition: all @time ease;
+	-webkit-transition: all @time ease;
+}
+
+/*--------------------------------------------*/
+/*---> STRUCTURE <----------------------------*/
+/*--------------------------------------------*/
+
+div.container{
+	background: url('img/whiteDiagmonds.png');
+	color: @charcoal;
+	width: 85vw;
+	padding: 2vh;
+	margin: 4vh auto;
+	border-radius: 1vh;
+}
+
+/*--------------------------------------------*/
+/*---> HEADER & FOOTER <----------------------*/
+/*--------------------------------------------*/
+
+header{
+
+	background: url('img/whiteDiagmonds.png');
+	position: fixed;
+	width: 100vw;
+	top: 0;
+	left: 0;
+	border-top: 1vh solid @mainColor;
+	border-bottom: 1vh solid @mainColor;
+	height: 10vh;
+	z-index: 60;
+
+	img{
+		height: 6vh;
+		margin-top: 2vh;
+		margin-left: -3vh;
+	}
+
+	button{
+		background: #dddddd;
+		color: @mainColor;
+		//font-weight: bold;
+		font-size: 4vh;
+		position: fixed;
+		width: 6vh;
+		height: 10vh;
+		top: 1vh;
+		right: 0;
+	}
+
+}
+
+div.headerSpace{
+	height: 11vh;
+}
+
+/*--------------------------------------------*/
+/*---> MENU <---------------------------------*/
+/*--------------------------------------------*/
+
+div#menu{
+
+	button{
+
+		width: 100%;
+		background: url('img/purple.png');
+		color: white;
+		height: 2.0 * @textSize;
+		line-height: 2.0 * @textSize;
+		font-size: 1.0 * @textSize;
+		text-align: center;
+		margin-top: 2vh;
+
+		&:hover{
+			background: @freeGreen;
+			color: @charcoal;
+			font-weight: bold;
+		}
+
+		.AnimateAll();
+
+	}
+
+}
+
+/*--------------------------------------------*/
+/*---> TABLES <-------------------------------*/
+/*--------------------------------------------*/
+
+table{
+	margin: 1vh auto;
+	width: 98% - 2vh;
+}
+
+th{
+	font-size: 0.75 * @textSize;
+	height: 1.5 * @textSize;
+	line-height: 1.5 * @textSize;
+	background: @charcoal;
+	color: white;
+	width: 20%;
+}
+
+td.grid-label{
+	
+	div.slot{
+		background: @charcoal;
+	}
+	
+}
+
+
+/*--------------------------------------------*/
+/*---> X-TAGS <-------------------------------*/
+/*--------------------------------------------*/
+
+x-timeslot, div.timeslot{
+	
+	div{
+
+		font-size: 0.75 * @textSize;
+		text-align: center;
+		color: white;
+
+		&:hover{
+			//opacity: 0.5;
+		}
+
+		.AnimateAll(0.25s);
+
+	}
+
+	div.slot{
+		padding: 2%;
+		margin: 2% auto;
+		width: 94%;
+		height: 1.5 * @textSize;
+		line-height: 1.5 * @textSize;
+		overflow: hidden;
+	}
+
+	div.priority{
+		background-image: url('img/trans-lines.png');
+		background-size: 5vh;
+		font-weight: bold;
+	}
+
+	div.popup{
+		
+		background: white;
+		border: 1vh solid @charcoal;
+		position: absolute;
+		margin-top: (0 * @textSize);
+		margin-left: 4vh;
+
+		button{
+
+			width: 100%;
+			padding: 1vh;
+			background: @charcoal;
+			color: @charcoal;
+			font-weight: bold;
+			text-align: center;
+			float: left;
+			clear: both;
+
+		}
+
+		div.pointer{
+			position: absolute;
+			margin: -2vh 2vh;
+			width: 0;
+			height: 0;
+			border-style: solid;
+			border-width: 0 2vh 2vh 2vh;
+			border-color: transparent transparent @charcoal transparent;
+
+		}
+
+		button.available{
+			background: @freeGreen;
+		}
+
+		button.partial{
+			background: @maybeYellow;
+		}
+
+		button.unavailable{
+			background: @busyRed;
+		}
+
+	}
+
+}
+
+div.is-free{
+	background-color: @freeGreen;
+	color: @charcoal !important;
+	font-weight: bold;
+}
+
+div.maybe-free{
+	background-color: @maybeYellow;
+	color: @charcoal !important;
+	font-weight: bold;
+}
+
+div.not-free{
+	background-color: gray;
+}
+
+div.visible{
+	display: block;
+}
+
+div.invisible{
+	display: none;
+}
+
+p.range-break{
+	height: 0.5 * @textSize;
+	line-height: 0;
+}
+
+/*--------------------------------------------*/
+/*---> FORM <----------------------------------*/
+/*--------------------------------------------*/
+
+input, button, select{
+	outline: none;
+	border: none;
+}
+
+input.underscore-bar{
+
+	width: 100%;
+	color: @charcoal;
+	border-bottom: 1vh solid @mainColor;
+	text-align: center;
+	height: 2.0 * @textSize;
+	line-height: 2.0 * @textSize;
+	font-size: 1.0 * @textSize;
+
+	&:focus{
+		border-bottom: 1vh solid @freeGreen;
+	}
+
+	.AnimateAll();
+
+}
+
+option{
+	text-align: center;
+	width: 50%;
+}
+
+div.editorUI{
+
+	background: url('img/whiteDiagmonds.png');
+	color: @charcoal;
+	width: 85vw;
+	padding: 2vh;
+	margin: 4vh auto;
+	border-radius: 1vh;
+
+	h1, h2, h3{
+		color: @charcoal;
+	}
+
+	input, button, select{
+		outline: none;
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
+		height: 2.0 * @textSize;
+		font-size: 1.0 * @textSize;
+		text-align: center;
+		width: 96%;
+		margin: 1vh 2%;
+		.BodyFont();
+	}
+
+	input[type="date"]{
+		background: @lightGray;
+		padding-left: 2.6 * @textSize;
+		color: @charcoal;
+		font-weight: bold;
+		margin: 1vh auto;
+	}
+
+	div#selected-dates{
+
+		width: 92%;
+		margin: 1vh 2%;
+		padding: 1%;
+		background: @lightGray;
+
+		div.date-icon{
+			background: @mainColor;
+			width: 22%;
+			height: 1.5 * @textSize;
+			line-height: 1.5 * @textSize;
+			color: white;
+			border-radius: 0.5vh;
+			font-weight: bold;
+			text-align: center;
+			display: inline-block;
+			margin: 1%;
+		}
+
+	}
+
+	/*div.selector-label{
+		background: @charcoal;
+		color: white;
+		width: 2.0 * @textSize;
+		height: 1.8 * @textSize;
+		padding: (0.1 * @textSize) (0.2 * @textSize);
+		line-height: 2.0 * @textSize;
+		font-size: 0.75 * @textSize;
+		position: absolute;
+		margin-top: 1vh;
+		text-align: center;
+	}
+
+	div.start-label{
+		margin-left: 0.25 * @textSize;
+
+		&+ select{
+			padding-left: 1.8 * @textSize;
+		}
+	}
+
+	div.end-label{
+		margin-top: -7vh;
+		right: 0.25 * @textSize;
+	}*/
+
+	select{
+		background: @lightGray;
+		color: @charcoal;
+		font-weight: bold;
+		width: 45%;
+		display: inline-block;
+	}
+
+	button{
+
+		font-weight: bold;
+		height: 2.0 * @textSize;
+
+		&:hover{
+			height: 2.5 * @textSize;
+		}
+
+		.AnimateAll();
+
+	}
+
+	button.priority-setter{
+		width: 45%;
+		margin: 2%;
+		display: inline-block;
+	}
+
+	button#set-normal{
+		background: @maybeYellow;
+	}
+
+	button#set-priority{
+		background: @freeGreen;
+	}
+
+	button#add-meeting{
+		background: @mainColor;
+		color: white;
+	}
+
+}
+
+/*--------------------------------------------*/
+/*---> SCROLLBAR <----------------------------*/
+/*--------------------------------------------*/
+
+@scrollBar: rgba(255, 255, 255, 0.5);
+@scrollBarBack: rgba(255, 255, 255, 0.1);
+
+::-webkit-scrollbar{
+	width: 2vw;
+	height: 2vw;
+	background: @scrollBarBack;
+	z-index: 50;
+}
+
+::-webkit-scrollbar-button{
+	background: @scrollBarBack;
+}
+
+::-webkit-scrollbar-track{
+	background: @scrollBarBack;
+}
+
+::-webkit-scrollbar-track-piece{
+	background: @scrollBarBack;
+}
+
+::-webkit-scrollbar-thumb{
+	background: @scrollBar;
+	//border-radius: 5px;
+	position: absolute;
+	margin-left: -2vw;
+}
+
+::-webkit-scrollbar-corner{
+	width: 2vw;
+	height: 2vw;
+	background: @scrollBarBack;
+}
+
+::-webkit-resizer{
+	background: @scrollBarBack;
+}
