@@ -2,6 +2,7 @@ function TimeSlot(data){
 
 	return {
 		uid: USER_ID,
+		mid: data['mid'],
 		time: data['time'],
 		duration: data['duration'],
 		free: data['free'],
@@ -22,6 +23,16 @@ function TimeSlot(data){
 		}
 	}
 
+}
+
+function slotsAreEqual(slot1, slot2){
+	var equal = false;
+	var sameStart = (slot1.time === slot2.time);
+	var sameDuration = (slot1.duration === slot2.duration);
+	if(sameStart && sameDuration){
+		equal = true;
+	}
+	return equal;
 }
 
 console.log('LOADED data.js');

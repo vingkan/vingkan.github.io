@@ -114,12 +114,35 @@ body{
 /*--------------------------------------------*/
 
 div.container{
+
 	background: url('img/whiteDiagmonds.png');
 	color: @charcoal;
 	width: 85vw;
 	padding: 2vh;
 	margin: 4vh auto;
 	border-radius: 1vh;
+
+	button{
+
+		width: 100%;
+		background: url('img/purple.png');
+		color: white;
+		height: 2.0 * @textSize;
+		line-height: 2.0 * @textSize;
+		font-size: 1.0 * @textSize;
+		text-align: center;
+		margin-top: 2vh;
+
+		&:hover{
+			background: @freeGreen;
+			color: @charcoal;
+			font-weight: bold;
+		}
+
+		.AnimateAll();
+
+	}
+	
 }
 
 /*--------------------------------------------*/

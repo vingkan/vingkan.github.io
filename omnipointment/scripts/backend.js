@@ -46,25 +46,53 @@ function addMeeting(){
 }
 
 function loadMeeting(){
+
+	function loadTimeSlotsCallback(timeSlotList){
+		var database = new Firebase("https://omnipointment.firebaseio.com/meetings/" + meetingID);
+		database.once('value', function(snapshot){
+			var meeting = snapshot.val();
+			console.log('Found in database:');
+			console.log(meeting);
+			var dateStrings = JSON.parse(meeting.dateOptions);
+			var size = dateStrings.length;
+			var grid = {
+				dateOptions: [],
+				timeOptions: []
+			}
+			for(var d = 0; d < size; d++){
+				grid.dateOptions.push(new Date(dateStrings[d]));
+			}
+			grid.timeOptions = JSON.parse(meeting.timeOptions);
+			toggleSection('load-meeting');
+			document.getElementById('load-meeting-name').innerHTML = meeting.name;
+			createGrid(meetingID, 'load-grid', grid.dateOptions, grid.timeOptions, timeSlotList);
+		});
+	}
+
 	var meetingID = document.getElementById('find-meeting-id').value;
-	var database = new Firebase("https://omnipointment.firebaseio.com/meetings/" + meetingID);
-	database.on('value', function(snapshot){
-		var meeting = snapshot.val();
-		console.log('Found in database:');
-		console.log(meeting);
-		var dateStrings = JSON.parse(meeting.dateOptions);
-		var size = dateStrings.length;
-		var grid = {
-			dateOptions: [],
-			timeOptions: []
+	var userRef = new Firebase("https://omnipointment.firebaseio.com/users/" + USER_ID + "/meetings/" + meetingID);
+	userRef.once('value', function(snapshot){
+		var timeSlotList = JSON.parse(snapshot.val());
+		//console.log(timeSlotList);
+		loadTimeSlotsCallback(timeSlotList);
+	});
+
+}
+
+function updateAvailability(){
+	var meetingID = document.getElementById('find-meeting-id').value;
+	var timeslots = getFreeSlots();
+	var data = JSON.stringify(timeslots);
+	var userRef = new Firebase("https://omnipointment.firebaseio.com/users/" + USER_ID + "/meetings/" + meetingID);
+	userRef.set(data);
+	var meetingRef = new Firebase("https://omnipointment.firebaseio.com/meetings/" + meetingID + "/users");
+	meetingRef.once('value', function(snapshot){
+		var userArray = JSON.parse(snapshot.val());
+		if($.inArray(USER_ID, userArray) === -1){
+			userArray.push(USER_ID);
+			var newArray = JSON.stringify(userArray);
+			meetingRef.set(newArray);
 		}
-		for(var d = 0; d < size; d++){
-			grid.dateOptions.push(new Date(dateStrings[d]));
-		}
-		grid.timeOptions = JSON.parse(meeting.timeOptions);
-		toggleSection('load-meeting');
-		document.getElementById('load-meeting-name').innerHTML = meeting.name;
-		createGrid('load-grid', grid.dateOptions, grid.timeOptions);
 	});
 }
 

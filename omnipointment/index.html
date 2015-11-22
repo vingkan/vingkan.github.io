@@ -19,7 +19,7 @@
 				display: none;
 			}
 
-			section#view-menu{
+			section#login{
 				display: block
 			}
 
@@ -42,9 +42,34 @@
 				<h1>Menu</h1>
 				<p>You can open a meeting request by entering its appointment id.</p>
 				<input type="text" id='find-meeting-id' class="underscore-bar" placeholder="appointment id" onchange="checkMeetingName(this.id);">
-				<button onclick="loadMeeting()">Load Meeting</button>
-				
-				<button onclick="toggleSection('create-event')">Create Appointment</button>
+				<button onclick="loadMeeting()">RSVP to Meeting</button>
+				<button onclick="toggleSection('view-responses')">View Responses</button>
+				<button onclick="toggleSection('create-event')">Create New Appointment</button>
+				<button onclick="toggleSection('about')">About Omnipointment</button>
+			</div>
+		</section>
+
+		<section id="login">
+			<div class="container">
+				<h1>Login</h1>
+				<p>Teams should spend less time trying to find a time to meet and more time doing great work. Omnipointment can make that happen.</p>
+				<center>
+					<button onclick="googleLogin();">Login with Google</button>
+				</center>
+			</div>
+		</section>
+
+		<section id="about">
+			<div class="container">
+				<h1>About</h1>
+				<p>Omnipointment helps team schedule their meetings in a more intuitive way.</p>
+				<h2>The Team</h2>
+				<ul>
+					<li>Vinesh Kannan</li>
+					<li>Brendan Batliner</li>
+					<li>Haosheng "Nick" Li</li>
+					<li>Sunny Shah</li>
+				</ul>
 			</div>
 		</section>
 
@@ -90,20 +115,87 @@
 
 		</section>
 
+		<section id='view-responses'>
+			<div class="container">
+				<h1>View Meeting Responses</h1>
+				<p>This will allow you to visualize when your teammates are free to meet.</p>
+				<input type="text" id='responses-meeting-id' class="underscore-bar" placeholder="appointment id" onchange="checkMeetingName(this.id);">
+				<button onclick="viewResponses()">Visualize</button>
+				<!-- Person Filter -->
+				<table id="filter-responses"></table>
+				<!-- D3 Vizsualizer -->
+				<div id="d3viz" style="display: block;">
+					<div class="days-hours-heatmap">
+				  		<!-- calibration and render type controller -->
+				      	<div class="calibration" role="calibration">
+				        	<div class="group" role="example">
+				          		<svg width="120" height="17"> </svg>
+				          		<div role="description" class="description">
+				            		<label>Less</label>
+				            		<label>More</label>
+				          		</div>        
+				        	</div>
+				        	<div role="toggleDisplay" class="display-control">
+				          		<div>
+				            		<input type="radio" name="displayType" checked/>
+				           		 	<label>count</label>
+				          		</div>
+				          		<div>
+				            		<input type="radio" name="displayType"/>
+				            		<label>daily</label> 
+				          		</div>
+				        	</div>
+				      	</div>
+				  		<!-- heatmap -->
+				  		<svg role="heatmap" class="heatmap"></svg>
+					</div>
+				</div>
+			</div>
+		</section>
+
+<style>
+  	div#d3viz{font-family:arial, 'Hiragino Sans GB',Tahoma, Arial, Helvetica, STHeiti;font-size: 14px;}
+	.days-hours-heatmap{padding: 20px 0 20px 0;width: 500px;margin: 0 auto;}
+	.days-hours-heatmap .calibration{margin-bottom: 15px;width:400px;}
+	.days-hours-heatmap .calibration .group{display: inline-block;}
+	.days-hours-heatmap .calibration .description{width:108px;}
+	.days-hours-heatmap .calibration .description>label:last-child{float:right;}
+	.days-hours-heatmap .calibration>.display-control{float:right;}
+	.days-hours-heatmap .calibration>.display-control label{vertical-align: top;}
+	.days-hours-heatmap .calibration>.display-control input[type='radio']{cursor: pointer;}
+
+	.days-hours-heatmap .heatmap .axis path{display: none;}
+	.days-hours-heatmap .heatmap .axis line{fill: none;stroke: #000;shape-rendering: crispEdges;}
+	.days-hours-heatmap .heatmap .axis text{font-size: 12px}
+</style>
+
 		<!-- NATIVE SCRIPTS -->
 		<script type="text/javascript" src="scripts/user.js"></script>
 		<script type="text/javascript" src="scripts/backend.js"></script>
 		<script type="text/javascript" src="scripts/data.js"></script>
 		<script type="text/javascript" src="scripts/application.js"></script>
 		<script type="text/javascript" src="scripts/frontend.js"></script>
+
 		<!-- POST-LOAD SCRIPTS -->
 		<script type="text/javascript" src="scripts/views/timeslot.js"></script>
 		<script type="text/javascript" src="scripts/experimental.js"></script>
 		<script type="text/javascript" src="scripts/creatorUI.js"></script>
 		<script type="text/javascript" src="scripts/slotManager.js"></script>
 		<script type="text/javascript" src="scripts/ycombinator.js"></script>
-		
+		<script type="text/javascript" src="scripts/visual.js"></script>
+		<script type="text/javascript" src="scripts/filter.js"></script>
+
+		<!-- D3 SCRIPTS -->
+		<script type="text/javascript" src="graph.js"></script>
+		<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
 		<script type="text/javascript">
+
+			//toggleSection('view-menu');
+
+			/*toggleSection('view-responses');
+			document.getElementById('responses-meeting-id').value = 'wildhacks-debrief';
+			viewResponses();*/
 
 			//toggleSection('create-event');
 

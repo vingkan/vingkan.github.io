@@ -1,16 +1,32 @@
 var GLOBAL_TIMESLOTS = [];
 var GLOBAL_TIMESLOT_VIEWS = [];
 
-function createTimeRangeArray(options) {
+function createTimeRangeArray(options, userTimeSlots) {
 	var date = options['start'];
 	var interval = options['interval'];
+	var timeSlotList = userTimeSlots;
+	//console.log(timeSlotList)
 
 	var slots = [];
 	for(var t = 0; t < options['length']; t+=interval){
 		var div = document.createElement('div');
 		var freeData = options['free'] || 0;
+
+		if(userTimeSlots){
+			var resultArray = compareSortedTimeSlotList(date, timeSlotList);
+			//console.log(resultArray)
+			var comparisonResult = resultArray[resultArray.length - 1];
+			//console.log(comparisonResult)
+			if(comparisonResult > 0){
+				//console.log('MATCH!')
+				freeData = comparisonResult;
+				timeSlotList = resultArray.slice(0, timeSlotList.length - 1);
+			}
+		}
+
 		var model = new TimeSlotModel({
 			el: div,
+			mid: options['mid'],
 			time: date.getTime(),
 			duration: interval,
 			free: freeData,

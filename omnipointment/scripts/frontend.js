@@ -28,10 +28,10 @@ function toggleSection(focusSection, override){
 	}
 	else{
 		if(currentSection === 'login'){
-			openSection('about', true);
+			toggleSection('about', true);
 		}
 		else{
-			openSection('login', true);
+			toggleSection('login', true);
 		}
 		//displayMessage("You must be logged in to continue");
 	}

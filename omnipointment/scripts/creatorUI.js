@@ -100,7 +100,8 @@ function addTimeRange(isPriority){
 }
 
 function createUserEventGrid(){
-	createGrid('user-grid', dateOptions, timeOptions);
+	var userMeetingID = document.getElementById('new-meeting-id').value;
+	createGrid(userMeetingID, 'user-grid', dateOptions, timeOptions);
 }
 
 function createRangeLabelsArray(options){
@@ -134,7 +135,7 @@ function renderRangeLabels(columnID, rangeLabelsArray){
 	}
 }
 
-function createGrid(tableID, columns, rows){
+function createGrid(meetingID, tableID, columns, rows, userTimeSlots){
 	var table = document.getElementById(tableID);
 	while (table.firstChild) {
 	    table.removeChild(table.firstChild);
@@ -163,13 +164,14 @@ function createGrid(tableID, columns, rows){
 				currentDate.setHours(rows[r].startHours);
 				currentDate.setMinutes(rows[r].startMinutes);
 				var rangeOptions = {
+					mid: meetingID,
 					start: currentDate,
 					interval: GLOBAL_INTERVAL,
 					length: rows[r].duration,
 					free: rows[r].free,
 					isPriority: rows[r].isPriority
 				};
-				timeRangeArray.push(createTimeRangeArray(rangeOptions));
+				timeRangeArray.push(createTimeRangeArray(rangeOptions, userTimeSlots));
 			}
 			renderTimeRanges(columnID, timeRangeArray);
 		}

@@ -27,3 +27,19 @@ function isAvailable(startTime, duration, timeslots) {
     });
     return minAvailableTime <= start && maxAvailableTime >= end;
 }
+
+function compareSortedTimeSlotList(currentDate, timeSlotList){
+    var response = 0;
+    var keepArray = [];
+    var size = timeSlotList.length;
+    for(var t = 0; t < size; t++){
+        if(currentDate.getTime() === timeSlotList[t].time){
+            response = timeSlotList[t].free;
+        }
+        else{
+            keepArray.push(timeSlotList[t]);
+        }
+    }
+    keepArray.push(response);
+    return keepArray;
+}

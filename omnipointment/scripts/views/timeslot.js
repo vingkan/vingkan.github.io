@@ -6,10 +6,11 @@ var TimeSlotModel = Backbone.Model.extend({
 	defaults: function () {
 		return {
 			uid: USER_ID,
+      mid: 'no-meeting',
 			time: 0,
-		  	duration: 15,
-		  	free: 0,
-		  	isPriority: false,
+	  	duration: 15,
+	  	free: 0,
+	  	isPriority: false,
 		};
 	},
 
@@ -29,6 +30,7 @@ var TimeSlotModel = Backbone.Model.extend({
 
     getDataObject: function(){
         return TimeSlot({
+          mid: this.attributes.mid,
           time: this.attributes.time,
           duration: this.attributes.duration,
           free: this.attributes.free
@@ -93,6 +95,7 @@ var TimeSlotView = Backbone.View.extend({
         } else {
          	this.toggleFree();
         }
+        updateAvailability();
     },
   
   	toggleFree: function () {
