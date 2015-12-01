@@ -8,6 +8,7 @@
 
 @charcoal: #1a1a1a;
 @alienPurple: #784EAA;
+@astroBlue: #2b83d5;
 
 /*--------------------------------------------*/
 /*---> FONTS <--------------------------------*/
@@ -15,7 +16,7 @@
 
 @Arvo: 'Arvo', sans-serif;
 @SourceSansPro: 'Source Sans Pro', sans-serif;
-@textSize: 5vh;
+@textSize: 3vh;
 
 .HeadFont(){
 	font-family: @Arvo;
@@ -31,12 +32,15 @@
 
 p, h1, h2, h3, ul, li{
 	.BodyFont();
-	margin: (0.5 * @textSize) auto;
+	.GlobalMargin();
+	.PartiallyFilled();
 }
 
 h1, h2, h3{
 	.HeadFont();
 	text-align: center;
+	font-weight: bold;
+	clear: both;
 }
 
 h1{
@@ -49,7 +53,7 @@ h2{
 	line-height: 1.5 * @textSize;
 }
 
-h2{
+h3{
 	font-size: 1.1 * @textSize;
 	line-height: 1.35 * @textSize;
 }
@@ -72,6 +76,11 @@ li{
 	margin: (0.15 * @textSize) auto;
 }
 
+span.bold{
+	font-weight: bold;
+	color: @mainColor;
+}
+
 /*--------------------------------------------*/
 /*---> BODY <---------------------------------*/
 /*--------------------------------------------*/
@@ -84,6 +93,10 @@ html{
 	color: @charcoal;
 }
 
+.PartiallyFilled(){
+	width: 90%;
+}
+
 .AnimateAll(@time: 0.5s){
 	transition: all @time ease;
 	-webkit-transition: all @time ease;
@@ -92,6 +105,65 @@ html{
 /*--------------------------------------------*/
 /*---> STRUCTURE <----------------------------*/
 /*--------------------------------------------*/
+
+.GlobalMargin(){
+	margin: (0.75 * @textSize) auto;
+}
+
+.FillBackgroundImage(){
+	background-repeat: no-repeat;
+	background-position: center center;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+.AlienSquares(@size: 75%){
+	background-image: url('img/background/trans-alien-squares.png');
+	background-position: center center;
+	background-repeat: repeat;
+	background-size: @size;
+}
+
+img.spotlight{
+	width: 90vw;
+	margin: (0.75 * @textSize) auto;
+}
+
+/*
+ * Examples of Alternate Mixins:
+ * .PhotoCoverBar(@charcoal, 5vw); (Standard, Left Align)
+ * .PhotoCoverBar(@astroBlue, 35vw); (Right Align)
+ * .PhotoCoverBar(@charcoal, 20vw); (Center Align)
+*/
+.PhotoCoverBar(@color: @charcoal, @left: 5vw, @width: 60vw){
+
+	background: rgba(255, 255, 255, 0.8);
+	border-top: 2.5vh solid @color;
+	width: @width;
+	margin-left: @left;
+	color: @color;
+
+	&:hover{
+		background: rgba(255, 255, 255, 1.0);
+	}
+
+	.AnimateAll();
+
+}
+
+div.photo-cover{
+
+	position: absolute;
+	background: rgba(255, 255, 255, 0.8);
+	border-top: 2.5vh solid @charcoal;
+	bottom: 0;
+	padding-bottom: 2.5vw;
+	margin-left: 5vw;
+	color: @charcoal;
+
+}
 
 div#logo{
 
@@ -112,9 +184,85 @@ div#aliens{
 
 }
 
+div#problem{
+	background: @astroBlue;
+	.AlienSquares();
+	color: white;
+}
+
+div#solution{
+
+	background: url('img/background/agc-woodchips.jpg');
+	.FillBackgroundImage();
+
+	div.photo-cover{
+		.PhotoCoverBar(@charcoal, 20vw);
+	}
+
+}
+
+div#imagine-users{
+
+	background: @alienPurple;
+	.AlienSquares();
+	color: white;
+
+	div.profile{
+
+		img{
+			width: 35vw;
+		}
+
+		h3{
+			font-size: 1.1 * @textSize;
+			line-height: 1.35 * @textSize;
+		}
+
+	}
+
+}
+
+div#user-narrative-1{
+	background: url('img/background/agc-kids-laptop.jpg');
+	.FillBackgroundImage();
+}
+
+div#user-narrative-2{
+
+	background: @mainColor;
+	.AlienSquares();
+
+	div.photo-cover{
+		.PhotoCoverBar(@charcoal, 10vw, 80vw);
+	}
+
+}
+
 div#contact{
 	background: @alienPurple;
+	.AlienSquares();
 	color: white;
+}
+
+div.profile{
+
+	display: inline-block;
+	vertical-align: top;
+	//float: left;
+
+	img{
+		width: 15vw;
+		margin: (0.25 * @textSize) 2vw;
+		border-radius: 50%;
+	}
+
+	h3{
+		font-size: 0.75 * @textSize;
+		line-height: 1.0 * @textSize;
+		font-weight: normal;
+		height: 2.0 * @textSize;
+	}
+
 }
 
 /*--------------------------------------------*/
