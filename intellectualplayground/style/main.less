@@ -9,6 +9,8 @@
 @charcoal: #1a1a1a;
 @alienPurple: #784EAA;
 @astroBlue: #2b83d5;
+@martianRed: #e34826;
+@lunarYellow: #fcdb39;
 
 /*--------------------------------------------*/
 /*---> FONTS <--------------------------------*/
@@ -139,14 +141,14 @@ img.spotlight{
 */
 .PhotoCoverBar(@color: @charcoal, @left: 5vw, @width: 60vw){
 
-	background: rgba(255, 255, 255, 0.8);
+	background: rgba(255, 255, 255, 1.0);
 	border-top: 2.5vh solid @color;
 	width: @width;
 	margin-left: @left;
 	color: @color;
 
 	&:hover{
-		background: rgba(255, 255, 255, 1.0);
+		box-shadow: 0 0 20px @charcoal;
 	}
 
 	.AnimateAll();
@@ -201,6 +203,12 @@ div#solution{
 
 }
 
+div#process{
+	background-color: @mainColor;
+	color: white;
+	.AlienSquares();
+}
+
 div#imagine-users{
 
 	background: @alienPurple;
@@ -229,7 +237,7 @@ div#user-narrative-1{
 
 div#user-narrative-2{
 
-	background: @mainColor;
+	background: @astroBlue;
 	.AlienSquares();
 
 	div.photo-cover{
@@ -238,10 +246,15 @@ div#user-narrative-2{
 
 }
 
-div#contact{
-	background: @alienPurple;
-	.AlienSquares();
+div#lessons{
+	background-color: @martianRed;
 	color: white;
+	.AlienSquares();
+}
+
+div#contact{
+	background: white;
+	.AlienSquares();
 }
 
 div.profile{
@@ -251,7 +264,7 @@ div.profile{
 	//float: left;
 
 	img{
-		width: 15vw;
+		width: 14vw;
 		margin: (0.25 * @textSize) 2vw;
 		border-radius: 50%;
 	}
@@ -261,6 +274,18 @@ div.profile{
 		line-height: 1.0 * @textSize;
 		font-weight: normal;
 		height: 2.0 * @textSize;
+	}
+
+}
+
+div#thanks{
+
+	background-color: @lunarYellow;
+	color: white;
+	.AlienSquares();
+
+	div.photo-cover{
+		.PhotoCoverBar(@charcoal, 10vw, 80vw);
 	}
 
 }
