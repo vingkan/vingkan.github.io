@@ -11,6 +11,7 @@
 @astroBlue: #2b83d5;
 @martianRed: #e34826;
 @lunarYellow: #fcdb39;
+@warpspeedGreen: #98d52b;
 
 /*--------------------------------------------*/
 /*---> FONTS <--------------------------------*/
@@ -63,6 +64,10 @@ h3{
 p{
 	font-size: 1.0 * @textSize;
 	line-height: 1.25 * @textSize;
+	text-align: left;
+}
+
+p.center{
 	text-align: center;
 }
 
@@ -130,6 +135,11 @@ html{
 
 img.spotlight{
 	width: 90vw;
+	margin: (0.75 * @textSize) auto;
+}
+
+img.photo{
+	height: 50vh;
 	margin: (0.75 * @textSize) auto;
 }
 
@@ -203,6 +213,12 @@ div#solution{
 
 }
 
+div#micropilot{
+	background-color: @warpspeedGreen;
+	color: white;
+	.AlienSquares();
+}
+
 div#process{
 	background-color: @mainColor;
 	color: white;
@@ -264,7 +280,7 @@ div.profile{
 	//float: left;
 
 	img{
-		width: 14vw;
+		width: 12vw;
 		margin: (0.25 * @textSize) 2vw;
 		border-radius: 50%;
 	}
