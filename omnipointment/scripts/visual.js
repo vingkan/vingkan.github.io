@@ -22,7 +22,7 @@ function viewMeetingHeatMap(loadMeetingID){
 		var jsonData = {
 			data: heatMap
 		};
-		console.log(jsonData);
+		//console.log(jsonData);
 		initHeatMapDisplay(jsonData);
 	}
 

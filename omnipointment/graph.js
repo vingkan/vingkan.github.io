@@ -54,7 +54,7 @@ function initHeatMapDisplay(heatmapObject){
 
 /*      }
   d3.json(file,function(err,data){*/
-    console.log(treeData)
+    //console.log(treeData)
     data = treeData.heatmapObject.data;
     data.forEach(function(valueObj){
       valueObj['date'] = timeFormat.parse(valueObj['timestamp']);
@@ -81,7 +81,7 @@ function initHeatMapDisplay(heatmapObject){
     .append('text')
       .text('date')
       .attr('transform','translate('+axisWidth+',-10)');
-      console.log(yAxis)
+      //console.log(yAxis)
     svg.append('g')
       .attr('transform','translate('+margin.left+','+margin.top+')')
       .attr('class','y axis')

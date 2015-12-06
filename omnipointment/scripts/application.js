@@ -46,7 +46,12 @@ function renderTimeRange(outputID, timeSlotArray) {
 		view.render();
 		output.appendChild(view.el);
 	}
-	timeSlotArray.forEach((timeslot) => GLOBAL_TIMESLOTS.push(timeslot));
+	//timeSlotArray.forEach((timeslot) => GLOBAL_TIMESLOTS.push(timeslot));
+	//REPLACE ARROW FUNCTIOn
+	var size = timeSlotArray.size;
+	for(var t = 0; t < size; t++){
+		GLOBAL_TIMESLOTS.push(timeSlotArray[t]);
+	}
 }
 
 function renderTimeRanges(outputID, timeRangeArray) {

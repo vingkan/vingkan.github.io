@@ -15,7 +15,7 @@ function viewMeetingFilterMap(loadMeetingID){
 		var jsonData = {
 			data: heatMap
 		};
-		console.log(jsonData);
+		//console.log(jsonData);
 		initHeatMapDisplay(jsonData);
 	}
 
@@ -95,18 +95,24 @@ function viewMeetingFilterMap(loadMeetingID){
 
 function compareSortedTimeSlotListFilter(currentDate, timeSlotList){
     var response = 'NO_ONE';
+    var freeArray = [];
     var keepArray = [];
     var size = timeSlotList.length;
     for(var t = 0; t < size; t++){
         if(currentDate.getTime() === timeSlotList[t].time){
-            response = timeSlotList[t].name;
+            response = 'SOME_ONE';
+            freeArray.push(timeSlotList[t]);
         }
         else{
             keepArray.push(timeSlotList[t]);
         }
     }
-    keepArray.push(response);
-    return keepArray;
+    var resultsObject = {
+    	result: response,
+    	freeSlots: freeArray,
+    	keepSlots: keepArray
+    }
+    return resultsObject;
 }
 
 function createDisplayVizArray(options, userTimeSlots) {
@@ -121,35 +127,37 @@ function createDisplayVizArray(options, userTimeSlots) {
 		var freeData = options['free'] || 0;
 
 		if(userTimeSlots){
-			var resultArray = compareSortedTimeSlotListFilter(date, timeSlotList);
-			//console.log(resultArray)
-			var comparisonResult = resultArray[resultArray.length - 1];
-			//console.log(comparisonResult)
+			var resultsObject = compareSortedTimeSlotListFilter(date, timeSlotList);
+			var comparisonResult = resultsObject.result;
 			if(comparisonResult != 'NO_ONE'){
-				//console.log('MATCH!')
 				freeData = comparisonResult;
-				timeSlotList = resultArray.slice(0, timeSlotList.length - 1);
+				timeSlotList = resultsObject.keepSlots;
 			}
 		}
 
-		/*var model = new TimeSlotModel({
-			el: div,
-			mid: options['mid'],
-			time: date.getTime(),
-			duration: interval,
-			free: freeData,
-			isPriority: options['isPriority']
-		});
-		slots.push(model);*/
-
-		var userListHTML = '';
+		var userListHTML = '<div class="name-filter"><div class="pointer"></div><ul>';
+		
+		var numFree = 0;
 
 		if(comparisonResult != 'NO_ONE'){
-			userListHTML += '<div class="name-filter">' + freeData + '</div>';
+			var peopleSlots = resultsObject.freeSlots;
+			var peopleFree = peopleSlots.length;
+			for(var p = 0; p < peopleFree; p++){
+				userListHTML += '<li>' + peopleSlots[p].name + '</li>';
+				numFree++;
+			}
+			userListHTML += '</ul></div>';
+		}
+		else{
+			userListHTML = '';
 		}
 
 		var timeLabel = moment(date).format('h:mm A');
-		var label = '<div class="timeslot"><div class="slot">' + timeLabel + userListHTML + '</div></div>';
+		var timeLabelDiv = '<div class="time-label">' + timeLabel + '</div>';
+		var opacity = numFree / options['totalUsers'];
+		var peopleFreeDiv = '<div class="people-free" style="opacity: ' + opacity + ';">' + numFree + '</div>';
+		numFree = 0;
+		var label = '<div class="timeslot">' + timeLabelDiv + '<div class="slot">' + peopleFreeDiv + userListHTML + '</div></div>';
 		slots.push(label);
 
 
@@ -177,12 +185,12 @@ function renderDisplayViz(columnID, displayVizArray){
 
 function loadDisplayViz(){
 
-	function loadTimeSlotsCallback(timeSlotList){
+	function loadTimeSlotsCallback(timeSlotList, totalUsers){
 		var database = new Firebase("https://omnipointment.firebaseio.com/meetings/" + meetingID);
 		database.once('value', function(snapshot){
 			var meeting = snapshot.val();
-			console.log('Found in database:');
-			console.log(meeting);
+			/*console.log('Found in database:');
+			console.log(meeting);*/
 			var dateStrings = JSON.parse(meeting.dateOptions);
 			var size = dateStrings.length;
 			var grid = {
@@ -195,33 +203,70 @@ function loadDisplayViz(){
 			grid.timeOptions = JSON.parse(meeting.timeOptions);
 			//toggleSection('load-meeting');
 			//document.getElementById('load-meeting-name').innerHTML = meeting.name;
-			createVizGrid(meetingID, 'filter-responses', grid.dateOptions, grid.timeOptions, timeSlotList);
+			createVizGrid(meetingID, 'filter-responses', grid.dateOptions, grid.timeOptions, timeSlotList, totalUsers);
 		});
 	}
 
 	var meetingID = document.getElementById('responses-meeting-id').value;
-	var nameRef = new Firebase("https://omnipointment.firebaseio.com/users/" + USER_ID + "/google/name");
-	nameRef.once('value', function(snapshot){
 
-		var userName = snapshot.val();
+	//var currentUserID;
+	var allMeetingTimeSlots = [];
 
-		var userRef = new Firebase("https://omnipointment.firebaseio.com/users/" + USER_ID + "/meetings/" + meetingID);
-		userRef.once('value', function(snapshot){
-			var timeSlotList = JSON.parse(snapshot.val());
-			var tSize = timeSlotList.length;
-			for(var l = 0; l < tSize; l++){
-				timeSlotList[l]['name'] = userName;
-			}
-			//console.log(timeSlotList);
-			loadTimeSlotsCallback(timeSlotList);
-		});
+	var meetingUsersRef = new Firebase("https://omnipointment.firebaseio.com/meetings/" + meetingID + "/users");
+	meetingUsersRef.once('value', function(snapshot){
+
+		var meetingUsersList = JSON.parse(snapshot.val());
+		var usersSize = meetingUsersList.length;
+
+		for(var u = 0; u < usersSize; u++){
+
+			var currentUserID = meetingUsersList[u];
+			console.log(currentUserID + ' vs ' + meetingUsersList[u])
+
+			var nameRef = new Firebase("https://omnipointment.firebaseio.com/users/" + currentUserID + "/google");
+			nameRef.once('value', function(snapshot){
+
+				var userGoogle = snapshot.val();
+				var userName = userGoogle.name;
+				var userKey = userGoogle.uid;
+
+				var path = "https://omnipointment.firebaseio.com/users/" + userKey + "/meetings/" + meetingID;
+				
+				var userRef = new Firebase(path);
+				userRef.once('value', function(snapshot){
+
+					var timeSlotList = JSON.parse(snapshot.val());
+					
+					console.log(timeSlotList)
+					console.log(timeSlotList[0].uid)
+					
+					var tSize = timeSlotList.length;
+					for(var l = 0; l < tSize; l++){
+
+						timeSlotList[l]['name'] = userName;
+						console.log(moment(timeSlotList[l]['time']).format('hh:mm: ') + timeSlotList[l]['name'])
+						allMeetingTimeSlots.push(timeSlotList[l]);
+					}
+
+						if(u === usersSize){
+							loadTimeSlotsCallback(allMeetingTimeSlots, usersSize);
+						}
+					
+				});
+
+			});
+			
+		}
 
 	});
 
 
+	//loadTimeSlotsCallback(allMeetingTimeSlots);
+
+
 }
 
-function createVizGrid(meetingID, tableID, columns, rows, userTimeSlots){
+function createVizGrid(meetingID, tableID, columns, rows, userTimeSlots, totalUsers){
 	var table = document.getElementById(tableID);
 	while (table.firstChild) {
 	    table.removeChild(table.firstChild);
@@ -255,7 +300,8 @@ function createVizGrid(meetingID, tableID, columns, rows, userTimeSlots){
 					interval: GLOBAL_INTERVAL,
 					length: rows[r].duration,
 					free: rows[r].free,
-					isPriority: rows[r].isPriority
+					isPriority: rows[r].isPriority,
+					totalUsers: totalUsers
 				};
 				timeRangeArray.push(createDisplayVizArray(rangeOptions, userTimeSlots));
 			}
