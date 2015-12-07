@@ -63,6 +63,11 @@
 	-webkit-animation: animatedBackgroundLeft 800s linear infinite;
 }
 
+.AnimateAll(){
+	transition: all 1s ease;
+	-webkit-transition: all 1s ease;
+}
+
 /*--------------------------------------------*/
 /*---> LAYOUT <-------------------------------*/
 /*--------------------------------------------*/
@@ -618,6 +623,56 @@ div.wood{
 	
 	
 
+}
+
+/*--------------------------------------------*/
+/*---> POPUPS <-------------------------------*/
+/*--------------------------------------------*/
+
+@textSize: 3vh;
+
+div.popup{
+
+	background: white;
+	height: 50vh;
+	width: 90vw;
+	position: fixed;
+	bottom: 0;
+	left: 5vw;
+	
+	button{
+		width: 50vw;
+		background: @ecoGreen;
+		height: 3.0 * @textSize;
+		line-height: 3.0 * @textSize;
+		padding: 0 (1 * @textSize);
+		margin: 0.5 * @textSize auto;
+		color: white;
+		font-family: "Bitter";
+		font-size: 2.0 * @textSize;
+		text-align: center;
+
+		&:hover{
+			background: @lightGreen;
+		}
+
+		.AnimateAll();
+
+	}
+
+	button.small{
+		background: #DDD;
+		height: 1.5 * @textSize;
+		line-height: 1.5 * @textSize;
+		font-size: 1.0 * @textSize;
+	}
+
+	.AnimateAll();
+
+}
+
+div.closed{
+	height: 0;
 }
 
 /*--------------------------------------------*/

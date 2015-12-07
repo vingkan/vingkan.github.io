@@ -22,3 +22,8 @@ function togglePayButton(id){
 		}
 	}, 500);
 }
+
+function closePopup(popupID){
+	var popup = document.getElementById(popupID);
+	popup.style.height = '0';
+}
