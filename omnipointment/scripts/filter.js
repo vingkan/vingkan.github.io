@@ -237,8 +237,8 @@ function loadDisplayViz(){
 
 					var timeSlotList = JSON.parse(snapshot.val());
 					
-					console.log(timeSlotList)
-					console.log(timeSlotList[0].uid)
+					/*console.log(timeSlotList)
+					console.log(timeSlotList[0].uid)*/
 					
 					var tSize = timeSlotList.length;
 					for(var l = 0; l < tSize; l++){

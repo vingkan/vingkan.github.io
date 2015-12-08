@@ -23,7 +23,8 @@ function viewMeetingHeatMap(loadMeetingID){
 			data: heatMap
 		};
 		//console.log(jsonData);
-		initHeatMapDisplay(jsonData);
+		//Turned off to prevent errors
+		//initHeatMapDisplay(jsonData);
 	}
 
 	function getJSONHeatMapFromMeeting(meetingID){

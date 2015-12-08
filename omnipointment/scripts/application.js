@@ -48,9 +48,11 @@ function renderTimeRange(outputID, timeSlotArray) {
 	}
 	//timeSlotArray.forEach((timeslot) => GLOBAL_TIMESLOTS.push(timeslot));
 	//REPLACE ARROW FUNCTIOn
-	var size = timeSlotArray.size;
+	//console.log(timeSlotArray)
+	var size = timeSlotArray.length;
 	for(var t = 0; t < size; t++){
 		GLOBAL_TIMESLOTS.push(timeSlotArray[t]);
+		//console.log(GLOBAL_TIMESLOTS)
 	}
 }
 
