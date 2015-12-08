@@ -82,7 +82,7 @@ function loadMeeting(){
 function updateAvailability(){
 	var meetingID = document.getElementById('find-meeting-id').value;
 	var timeslots = getFreeSlots();
-	console.log(timeslots)
+	//console.log(timeslots)
 	var data = JSON.stringify(timeslots);
 	var userRef = new Firebase("https://omnipointment.firebaseio.com/users/" + USER_ID + "/meetings/" + meetingID);
 	userRef.set(data);
