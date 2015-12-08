@@ -244,8 +244,13 @@ function loadDisplayViz(){
 					for(var l = 0; l < tSize; l++){
 
 						timeSlotList[l]['name'] = userName;
+
 						console.log(moment(timeSlotList[l]['time']).format('hh:mm: ') + timeSlotList[l]['name'])
-						allMeetingTimeSlots.push(timeSlotList[l]);
+
+						if(!isDuplicateTimeSlot(allMeetingTimeSlots, timeSlotList[l])){
+							allMeetingTimeSlots.push(timeSlotList[l]);
+						}
+						
 					}
 
 						if(u === usersSize){
@@ -263,7 +268,21 @@ function loadDisplayViz(){
 
 	//loadTimeSlotsCallback(allMeetingTimeSlots);
 
+}
 
+function isDuplicateTimeSlot(list, slot){
+	response = false;
+	var size = list.length;
+	for(var s = 0; s < size; s++){
+		/*console.log(list[s]['uid'] + ' === ' + slot['uid']);
+		console.log(list[s]['time'] + ' === ' + slot['time']);*/
+		var sameTime = list[s]['time'] === slot['time'];
+		var sameID = list[s]['uid'] === slot['uid'];
+		if(sameTime && sameID){
+			response = true;
+		}
+	}
+	return response;
 }
 
 function createVizGrid(meetingID, tableID, columns, rows, userTimeSlots, totalUsers){

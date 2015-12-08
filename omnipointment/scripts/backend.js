@@ -85,7 +85,12 @@ function updateAvailability(){
 	//console.log(timeslots)
 	var data = JSON.stringify(timeslots);
 	var userRef = new Firebase("https://omnipointment.firebaseio.com/users/" + USER_ID + "/meetings/" + meetingID);
-	userRef.set(data);
+	userRef.once('value', function(snapshot){
+		console.log(snapshot.val());
+		console.log(data);
+		userRef.set(data);
+	});
+
 	var meetingRef = new Firebase("https://omnipointment.firebaseio.com/meetings/" + meetingID + "/users");
 	meetingRef.once('value', function(snapshot){
 		var userArray = JSON.parse(snapshot.val());
