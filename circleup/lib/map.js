@@ -3,6 +3,8 @@ var oms;
 var mapUsers = [];
 var markerCount = 0;
 
+var mapMarkerArray = [];
+
 function initGoogleMap(markerArray){
 	var centerPoint = userLocation;
 	//markerArray.push(userLocation);
@@ -10,6 +12,7 @@ function initGoogleMap(markerArray){
 		//center: new google.maps.LatLng(userLocation.latitude, userLocation.longitude),
 		center: new google.maps.LatLng(centerPoint.getLat(), centerPoint.getLon()),
 		zoom: 18,
+		//zoom: 22,
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 	};
 	var mapDiv = document.getElementById('googleMap');
@@ -19,7 +22,8 @@ function initGoogleMap(markerArray){
 	});
 	var infoWindow = new google.maps.InfoWindow();
 	oms.addListener('click', function(marker, event){
-		infoWindow.setContent(marker.desc);
+		//infoWindow.setContent(marker.desc);
+		infoWindow.setContent(current.name + "hello");
 		infoWindow.open(googleMap, marker);
 	});
 	oms.addListener('spiderify', function(markers){

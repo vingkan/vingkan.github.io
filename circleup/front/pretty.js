@@ -1,4 +1,4 @@
-function initScrollingHeader(){
+/*function initScrollingHeader(){
 	window.addEventListener('scroll', function(event){
 		var distanceY = window.pageYOffset || document.documentElement.scrollTop,
 			shrinkOn = 50,
@@ -14,7 +14,7 @@ function initScrollingHeader(){
 	});
 }
 
-window.onload = initScrollingHeader();
+window.onload = initScrollingHeader();*/
 
 function toggleWindow(windowID){
 	var credentialWindow = document.getElementById(windowID);
@@ -98,7 +98,7 @@ function loadingSequence(){
 			var random = Math.floor(Math.random() * loadingMessages.length);
 			message = loadingMessages[random];
 			if($.isArray(lastMessage)){
-				console.log("was the last a burst? " + $.isArray(lastMessage))
+				//console.log("was the last a burst? " + $.isArray(lastMessage))
 				var tryCounter = 1;
 				var found = false;
 				while($.isArray(message)){
@@ -120,7 +120,7 @@ function loadingSequence(){
 					usedMessages.push(message);
 					loadingMessages.splice(random, 1);
 				}
-				console.log('replace with: ' + message)
+				//console.log('replace with: ' + message)
 			}
 			else{
 				usedMessages.push(message);
@@ -146,8 +146,8 @@ function loadingSequence(){
 		var scale = 0.40; //Scale of display size
 		var inputWidth = loadedWidth; //Get DOM Width
 		var displayLoadedWidth = inputWidth / scale;
-		var max = 15;
-		var min = 5;
+		var max = 30;
+		var min = 20;
 		var random = Math.floor(Math.random() * (max - min)) + min;
 		displayLoadedWidth += random;
 		if(displayLoadedWidth >= 100){
@@ -211,6 +211,6 @@ function loadingSequence(){
 		}, increment);
 	}
 
-	runLoadingSequence();
+	//runLoadingSequence();
 
 }

@@ -5,6 +5,7 @@
 		<link rel="icon" type="img/png" href="style/favicon.png" style="width:30px;">
 		<link rel="stylesheet" type="text/css" href="style/reset.css">
 		<link rel="stylesheet" type="text/css" href="style/main.css">
+		<link rel="stylesheet" type="text/css" href="style/bonus.css">
 		<link href='https://fonts.googleapis.com/css?family=Fredoka+One|News+Cycle:400,700' rel='stylesheet' type='text/css'>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 		<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
@@ -17,6 +18,17 @@
 		</style>
 	</head>
 	<body>
+
+		<header>
+			<button id="openMenu" class="button-left" onclick="closeAllSideBars(); toggleMenu('options');"></button>
+			<div id="options" class="options-close">
+				<button class="menuOption" onclick="toggleSideBar('cookbook');">Cookbook</button>
+				<button class="menuOption" onclick="toggleSideBar('shop');">Shop</button>
+				<!-- <button class="menuOption" onclick="toggleSideBar('cart');">View Cart</button> -->
+				<button class="menuOption" onclick="toggleSideBar('recipe');">View Recipe</button>
+				<button class="menuOption" onclick="toggleMenu('options', true);">Exit Menu</button>
+			</div>
+		</header>
 
 		<div id="shade"></div>
 		<div id="loading">
@@ -33,9 +45,12 @@
 					&#8634;
 				</button>
 				<button class="action" onclick="toggleWindow('login');" style="width: auto; padding: 0 2vh;">
-					Login
+					Switch Accounts
 				</button>
-				<button class="action" onclick="toggleWindow('redeye');">
+				<!-- <button class="action" onclick="toggleWindow('redeye');">
+					<img class="icon" src="style/markers/redeye.png">
+				</button> -->
+				<button class="action" onclick="redEyeDemo();">
 					<img class="icon" src="style/markers/redeye.png">
 				</button>
 			</center>
@@ -70,6 +85,7 @@
 		<script type="text/javascript" src="front/pretty.js"></script>
 		<!-- MODELS -->
 		<script src="models/user.js"></script>
+		<script src="models/thing.js"></script>
 		<script src="models/database.js"></script>
 		<!-- LIBS -->
 		<script src="lib/utils.js"></script>
@@ -77,6 +93,8 @@
 		<script src="lib/map.js"></script>
 		<!-- FUN -->
 		<script type="text/javascript" src="fun/redeye.js"></script>
+		<!-- DEV -->
+		<script type="text/javascript" src="dev/view.js"></script>
 
 		<script type="text/javascript">
 
@@ -92,17 +110,36 @@
 					longitude: "-87.664511"
 				}));*/
 
+				//Turned off for Constant Location Testing
+				navigator.geolocation.getCurrentPosition(function(position){
+					updateCoords(position);
+					console.log('getCurrentPosition');
+				});
+
 				//Constant Location for Testing
 				/*updateCoords({
 					coords: {
-						latitude: 41.853231,
-						longitude: -87.649223,
+						latitude: 41.888828,
+						longitude: -87.650546,
 						accuracy: 0
 					}
 				});*/
 
 				//initGoogleMap([userLocation]);
 				toggleWindow('login');
+
+				//Temporary Automatic Login Sequence
+				document.getElementById('loginEmail').value = "vkannan@imsa.edu";
+				login();
+
+				function redEyeDemo(){
+					var thing = createThing({
+						name: "SSV South Red Eye Box",
+						type: "redeyebox",
+						icon: "redeye"
+					});
+					addThing(thing);
+				}
 
 		</script>
 		

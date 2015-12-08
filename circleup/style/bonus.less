@@ -114,3 +114,183 @@ header.smaller{
 	}
 
 }
+
+/*--------------------------------------------*/
+/*---> GOOGLE STYLE OVERRIDES <---------------*/
+/*--------------------------------------------*/
+
+div#iw-container{
+	width: 60vw;
+	background: purple;
+}
+
+div.gm-style-iw{
+	background: orange;
+	width: 40vw;
+	height: 20vh;
+}
+
+.gm-style-iw{
+	width: 100vw !important;
+	top: 0 !important;
+	left: 0 !important;
+	border-radius: 2px 2px 0 0;
+}
+
+/*--------------------------------------------*/
+/*---> EXPERIMENTAL <-------------------------*/
+/*--------------------------------------------*/
+
+	@TextSize: 5vh;
+	@PrimaryColor: @focusColor;
+	@PrimaryDark: @darkTone;
+
+	.AnimateAll(@time: 0.5s){
+		transition: all @time ease;
+		-webkit-transition: all @time ease;
+	}
+
+
+	/*--------------------------------------------*/
+	/*---> HEADER <-------------------------------*/
+	/*--------------------------------------------*/
+
+	@headerHeight: 2.0 * @TextSize;
+
+	div#googleMap{
+		z-index: 10;
+	}
+
+	header{
+
+		width: 96vw;
+		padding: 2vw;
+		background: @PrimaryColor;
+		border-bottom: 2vw solid @PrimaryDark;
+
+			z-index: 100;
+
+		img.logo{
+			height: @headerHeight;
+		}
+
+		button#openMenu{
+			background: @PrimaryDark;
+			width: 2.0 * @TextSize;
+			height: 2.0 * @TextSize;
+			line-height: 2.0 * @TextSize;
+			border-radius: 1.0 * @TextSize;
+			position: fixed;
+			.AnimateAll();
+		}
+
+	}
+
+	div#options{
+
+		position: fixed;
+		background: transparent;
+		width: 80vw;
+		height: auto;
+		left: 8vw;
+		z-index: 80;
+
+		button.menuOption{
+
+			width: 100%;
+			height: 10vh;
+			margin: 0.25 * @TextSize 0;
+			color: @PrimaryDark;
+			background: white;
+			border-left: (0.5 * @TextSize) solid @PrimaryDark;
+			
+			&:hover{
+				background: @PrimaryDark;
+				color: white;
+			}
+
+			.AnimateAll();
+
+		}
+
+		.AnimateAll();
+
+	}
+
+	button.button-left{
+		left: 2vw;
+		&:before{
+			content: "O";
+		}
+	}
+
+	button.button-right{
+		left: 74vw;
+		&:before{
+			content: "X";
+		}
+	}
+
+	div.options-open{
+		top: 15vh;
+	}
+
+	div.options-close{
+		top: -50vh;
+	}
+
+	/*--------------------------------------------*/
+	/*---> SIDEBARS <-----------------------------*/
+	/*--------------------------------------------*/
+
+	div.sidebar{
+
+		position: fixed;
+		top: 0;	
+		width: 70vw;
+		height: 100vh;
+		background: white;
+		color: @PrimaryDark;
+		border-right: 2vw solid @PrimaryDark;
+		.AnimateAll();
+		z-index: 75;
+		//overflow-y: scroll;
+		overflow-x: visible;
+
+		div.container{
+			background: transparent;
+			width: 100%;
+			height: 100vh - (2.0 * @TextSize);
+			overflow-y: scroll;
+		}
+
+		h2{
+			background: @PrimaryColor;
+			color: white;
+			padding: (0.25 * @TextSize) 0;
+		}
+
+		/*button.closeSideBar{
+			position: absolute;
+			bottom: 10vh;
+			left: 20vw;
+			width: 30vw;
+			height: 7.5vh;
+			line-height: 7.5vh;
+			font-size: 0.5 * @TextSize;
+			background: @PrimaryColor;
+		}*/
+
+		button.closeSideBar{
+			display: none;
+		}
+
+	}
+
+		div.sidebar-open{
+			left: 0;
+		}
+
+		div.sidebar-close{
+			left: -72vw;
+		}
