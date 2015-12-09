@@ -221,7 +221,7 @@ function loadDisplayViz(){
 		for(var u = 0; u < usersSize; u++){
 
 			var currentUserID = meetingUsersList[u];
-			console.log(currentUserID + ' vs ' + meetingUsersList[u])
+			//console.log(currentUserID + ' vs ' + meetingUsersList[u])
 
 			var nameRef = new Firebase("https://omnipointment.firebaseio.com/users/" + currentUserID + "/google");
 			nameRef.once('value', function(snapshot){
@@ -245,7 +245,7 @@ function loadDisplayViz(){
 
 						timeSlotList[l]['name'] = userName;
 
-						console.log(moment(timeSlotList[l]['time']).format('hh:mm: ') + timeSlotList[l]['name'])
+						//console.log(moment(timeSlotList[l]['time']).format('hh:mm: ') + timeSlotList[l]['name'])
 
 						if(!isDuplicateTimeSlot(allMeetingTimeSlots, timeSlotList[l])){
 							allMeetingTimeSlots.push(timeSlotList[l]);

@@ -47,6 +47,7 @@ h1, h2, h3{
 	text-align: center;
 	font-weight: bolder;
 	color: @mainColor;
+	width: 95%;
 }
 
 h1{
@@ -86,11 +87,23 @@ li{
 /*---> BODY <---------------------------------*/
 /*--------------------------------------------*/
 
+.FillBackgroundImage(){
+	//background-image property filled in by HTML
+	background-repeat: no-repeat;
+	background-position: center center;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
 html{
 	background: url('img/wood.jpg');
-	background-attachment: fixed;
+	.FillBackgroundImage();
+	//background-size: 20vh;
+	/*background-attachment: fixed;
 	background-position: top center;
-	background-size: auto 150%;
+	background-size: auto 150%;*/
 	//Default Text Styles
 	.BodyFont();
 	font-size: @textSize;
@@ -141,6 +154,14 @@ div.container{
 
 		.AnimateAll();
 
+	}
+
+}
+
+section#load-meeting{
+
+	h1{
+		color: white;
 	}
 
 }
