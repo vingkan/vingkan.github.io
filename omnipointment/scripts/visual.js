@@ -4,7 +4,12 @@ function openAccess(){
 	ADMIN_ONLY_ACCESS = false;
 }
 
-function viewResponses(){
+function loadMeetingById(overrideID){
+	document.getElementById('find-meeting-id').value = overrideID;
+	toggleSection('view-responses');
+}
+
+function viewResponses(overrideID){
 	var meetingID = document.getElementById('find-meeting-id').value;
 	document.getElementById('responses-meeting-id').value = meetingID;
 	//console.log(meetingID)

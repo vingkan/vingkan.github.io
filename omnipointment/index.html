@@ -45,6 +45,7 @@
 					<input type="text" id='find-meeting-id' class="underscore-bar" placeholder="appointment id" onchange="checkMeetingName(this.id);">
 					<button id="search-button" onclick="searchMeetings();">&#128269;</button>
 				</center>
+				<button onclick="toggleSection('my-meetings')">View My Meetings</button>
 				<button onclick="toggleSection('create-event')">Create New Appointment</button>
 				<button onclick="toggleSection('about')">About Omnipointment</button>
 			</div>
@@ -120,7 +121,11 @@
 			</div>
 			<!-- RSVP GRID -->
 			<h1 id="load-meeting-name">Meeting Request</h1>
-			<table id="load-grid"></table>
+			<div class="meeting-wrapper">
+				<div class="meeting-slider" id="rsvp-slider">
+					<table id="load-grid"></table>
+				</div>
+			</div>
 		</section>
 
 		<section id='view-responses'>
@@ -135,7 +140,17 @@
 			</div>
 			<!-- Person Filter -->
 			<h1 id="view-meeting-name">Meeting Request</h1>
-			<table id="filter-responses"></table>
+			<div class="meeting-wrapper">
+				<div class="meeting-slider" id="view-slider">
+					<table id="filter-responses"></table>
+				</div>
+			</div>
+		</section>
+		<section id='my-meetings'>
+			<div class="container">
+				<h1>My Meetings</h1>
+				<ul id="my-meeting-list"></ul>
+			</div>
 		</section>
 
 		<!-- NATIVE SCRIPTS -->
@@ -154,16 +169,12 @@
 		<script type="text/javascript" src="scripts/visual.js"></script>
 		<script type="text/javascript" src="scripts/filter.js"></script>
 
-		<!-- D3 SCRIPTS -->
-		<script type="text/javascript" src="graph.js"></script>
-		<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-
 		<script type="text/javascript">
 
-			//var USER_ID = '103105083532765828171';
-			//var MEETING_ID = 'feed-me-nick';
+			/*var USER_ID = '103105083532765828171';
+			var MEETING_ID = 'entelechy-labs';
 
-			//toggleSection('view-menu');
+			loadMeetingById(MEETING_ID);*/
 			
 			/*document.getElementById('responses-meeting-id').value = MEETING_ID;
 			toggleSection('view-responses');*/

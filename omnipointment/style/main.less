@@ -126,6 +126,15 @@ body{
 /*---> STRUCTURE <----------------------------*/
 /*--------------------------------------------*/
 
+div.meeting-wrapper{
+	width: 95vw;
+	overflow-x: scroll;
+}
+
+div.meeting-slider{
+	width: 100vw;
+}
+
 div.container{
 
 	background: url('img/whiteDiagmonds.png');
@@ -171,16 +180,15 @@ center.two-buttons{
 }
 div#menu{
 
-
 	button#search-button{
 
 		width: 2.0 * @textSize;
 		height: 2.0 * @textSize;
-		margin-top: -2.25 * @textSize;
-		right: 2.25 * @textSize;
+		float: right;
+		position: relative;
+		margin-top: -2.0 * @textSize;
 		background: transparent;
 		color: @mainColor;
-		position: absolute;
 		font-weight: bolder;
 
 		&:hover{
@@ -190,6 +198,37 @@ div#menu{
 
 		.AnimateAll();
 
+	}
+
+}
+
+ul#my-meeting-list{
+
+	li{
+
+		background: @mainColor;
+		color: white;
+		list-style: none;
+		width: 100%;
+		text-align: center;
+		padding: 1vw;
+		margin-top: 1vh;
+
+		&:hover{
+			background: @freeGreen;
+			color: @charcoal;
+		}
+
+		.AnimateAll();
+
+	}
+
+}
+
+section#create-event{
+
+	p{
+		color: @mainColor;
 	}
 
 }
@@ -289,7 +328,7 @@ th{
 	line-height: 1.5 * @textSize;
 	background: @charcoal;
 	color: white;
-	width: 20%;
+	width: 20vw;
 }
 
 td.grid-label{

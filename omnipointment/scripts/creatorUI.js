@@ -23,7 +23,7 @@ function parseDateAspects(date){
 }
 
 function dateToHTMLIcon(aspects){
-	return '<div class="date-icon">' + aspects.month + '/' + aspects.day + '</div>';
+	return '<div class="date-icon">' + (aspects.month + 1) + '/' + aspects.day + '</div>';
 }
 
 function selectDate(input){

@@ -189,6 +189,17 @@ function loadDisplayViz(){
 		var database = new Firebase("https://omnipointment.firebaseio.com/meetings/" + meetingID);
 		database.once('value', function(snapshot){
 			var meeting = snapshot.val();
+			//Set Grid Size
+			//console.log('Naive Grid Sizing')
+			var datesList = JSON.parse(meeting.dateOptions);
+			var viewSlider = document.getElementById('view-slider');
+			var rsvpSlider = document.getElementById('rsvp-slider');
+			var dates = datesList.length + 2;
+			var newWidth = (dates * 20) + 'vw';
+			//console.log(newWidth)
+			viewSlider.style.width = newWidth;
+			rsvpSlider.style.width = newWidth;
+			//Done with Grid Sizing
 			document.getElementById('view-meeting-name').innerHTML = meeting.name;
 			var dateStrings = JSON.parse(meeting.dateOptions);
 			var size = dateStrings.length;

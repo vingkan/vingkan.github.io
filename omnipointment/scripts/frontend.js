@@ -10,6 +10,9 @@ function toggleSection(focusSection, override){
 		if(focusSection === 'view-responses'){
 			viewResponses();
 		}
+		if(focusSection === 'my-meetings'){
+			getMyMeetings();
+		}
 		currentSection = focusSection;
 		document.getElementById(focusSection).style.display = 'block';
 	}
@@ -27,6 +30,26 @@ function toggleSection(focusSection, override){
 function searchMeetings(){
 	toggleSection('view-responses');
 }
+
+function getMyMeetings(){
+	var output = document.getElementById('my-meeting-list');
+		output.innerHTML = '';
+	var path = "https://omnipointment.firebaseio.com/users/" + USER_ID + "/meetings/";
+	var userMeetings = new Firebase(path);
+	userMeetings.once("value", function(snapshot){
+		var meetings = snapshot.val();
+		for(var key in meetings){
+			var meetingID = JSON.parse(meetings[key])[0]['mid'];
+			var meetingPath = "https://omnipointment.firebaseio.com/meetings/" + meetingID + "/";
+			var meetingRef = new Firebase(meetingPath);
+			meetingRef.once("value", function(snapshot){
+				var meetingObj = snapshot.val();
+				output.innerHTML += '<li onclick="loadMeetingById(&quot;' + meetingObj.mid + '&quot;);">' + meetingObj.name + '</li>';
+			});
+		}
+	});
+}
+
 
 /*--------------------------------------------*/
 /*---> KEY BINDINGS <-------------------------*/
