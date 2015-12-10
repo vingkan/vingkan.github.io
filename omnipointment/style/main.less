@@ -280,14 +280,29 @@ header{
 	}
 
 	div#image-bubble{
+
 		z-index: 70;
 		height: 6vh;
 		width: 6vh;
 		background: url('img/tri-white.png');
-		border-radius: 4vh;
+		border-radius: 3vh;
 		background-size: 6vh;
 		top: 3vh;
 		left: 3vh;
+
+		&:hover{
+			top: 2vh;
+			left: 2vh;
+			height: 8vh;
+			width: 8vh;
+			border-radius: 4vh;
+			background-size: 8vh;
+			transform: rotate(-30deg);
+			-webkit-transform: rotate(-30deg);
+		}
+
+		.AnimateAll();
+
 	}
 
 }
