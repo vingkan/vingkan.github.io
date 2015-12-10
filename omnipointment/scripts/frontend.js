@@ -7,22 +7,9 @@ function toggleSection(focusSection, override){
 		for(var s = 0; s < size; s++){
 			sections[s].style.display = 'none';
 		}
-		/*if(focusSection === 'login' && userID){
-			userID = null;
-			displayMessage("You have been logged out.");
+		if(focusSection === 'view-responses'){
+			viewResponses();
 		}
-		if(focusSection === 'profile'){
-			loadProfile();
-		}
-		if(focusSection === 'browse'){
-			loadProfileData(loadBrowsingProfiles);
-		}
-		if(focusSection === 'contact'){
-			loadProfileData(loadContactProfiles);
-		}
-		if(currentSection === 'profile'){
-			updateProfile();
-		}*/
 		currentSection = focusSection;
 		document.getElementById(focusSection).style.display = 'block';
 	}
@@ -36,5 +23,20 @@ function toggleSection(focusSection, override){
 		//displayMessage("You must be logged in to continue");
 	}
 }
+
+function searchMeetings(){
+	toggleSection('view-responses');
+}
+
+/*--------------------------------------------*/
+/*---> KEY BINDINGS <-------------------------*/
+/*--------------------------------------------*/
+
+$('#find-meeting-id').keypress(function(event){
+	if(event.keyCode == 13){
+		checkMeetingName('find-meeting-id');
+		searchMeetings();
+	}
+});
 
 console.log("LOADED frontend.js");

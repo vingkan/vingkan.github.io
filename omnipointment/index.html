@@ -41,9 +41,10 @@
 			<div id="menu" class="container">
 				<h1>Menu</h1>
 				<p>You can open a meeting request by entering its appointment id.</p>
-				<input type="text" id='find-meeting-id' class="underscore-bar" placeholder="appointment id" onchange="checkMeetingName(this.id);">
-				<button onclick="loadMeeting()">RSVP to Meeting</button>
-				<button onclick="toggleSection('view-responses')">View Responses</button>
+				<center>
+					<input type="text" id='find-meeting-id' class="underscore-bar" placeholder="appointment id" onchange="checkMeetingName(this.id);">
+					<button id="search-button" onclick="searchMeetings();">&#128269;</button>
+				</center>
 				<button onclick="toggleSection('create-event')">Create New Appointment</button>
 				<button onclick="toggleSection('about')">About Omnipointment</button>
 			</div>
@@ -109,67 +110,33 @@
 		</section>
 
 		<section id="load-meeting">
-			
+			<div class="container">
+				<h1>RSVP to Meeting</h1>
+				<p>Fill out the times you are free here.</p>
+				<center class="two-buttons">
+					<button onclick="editResponses();">Edit RSVP</button>
+					<button onclick="toggleSection('view-responses');">Visualize</button>
+				</center>
+			</div>
+			<!-- RSVP GRID -->
 			<h1 id="load-meeting-name">Meeting Request</h1>
 			<table id="load-grid"></table>
-
 		</section>
 
 		<section id='view-responses'>
 			<div class="container">
-				<h1>View Meeting Responses</h1>
-				<p>This will allow you to visualize when your teammates are free to meet.</p>
-				<input type="text" id='responses-meeting-id' class="underscore-bar" placeholder="appointment id" onchange="checkMeetingName(this.id);">
-				<button onclick="viewResponses()">Visualize</button>
+				<h1>View Responses</h1>
+				<p>See when your teammates are free to meet.</p>
+				<input style="display: none;" type="text" id='responses-meeting-id' class="underscore-bar" placeholder="appointment id" onchange="checkMeetingName(this.id);">
+				<center class="two-buttons">
+					<button onclick="editResponses();">Edit RSVP</button>
+					<button onclick="viewResponses();">Visualize</button>
+				</center>
 			</div>
-				<!-- Person Filter -->
+			<!-- Person Filter -->
+			<h1 id="view-meeting-name">Meeting Request</h1>
 			<table id="filter-responses"></table>
-			<div class="container">
-				<!-- D3 Vizsualizer -->
-				<div id="d3viz" style="display: none;">
-					<div class="days-hours-heatmap">
-				  		<!-- calibration and render type controller -->
-				      	<div class="calibration" role="calibration">
-				        	<div class="group" role="example">
-				          		<svg width="120" height="17"> </svg>
-				          		<div role="description" class="description">
-				            		<label>Less</label>
-				            		<label>More</label>
-				          		</div>        
-				        	</div>
-				        	<div role="toggleDisplay" class="display-control">
-				          		<div>
-				            		<input type="radio" name="displayType" checked/>
-				           		 	<label>count</label>
-				          		</div>
-				          		<div>
-				            		<input type="radio" name="displayType"/>
-				            		<label>daily</label> 
-				          		</div>
-				        	</div>
-				      	</div>
-				  		<!-- heatmap -->
-				  		<svg role="heatmap" class="heatmap"></svg>
-					</div>
-				</div>
-			</div>
 		</section>
-
-<style>
-  	div#d3viz{font-family:arial, 'Hiragino Sans GB',Tahoma, Arial, Helvetica, STHeiti;font-size: 14px;}
-	.days-hours-heatmap{padding: 20px 0 20px 0;width: 500px;margin: 0 auto;}
-	.days-hours-heatmap .calibration{margin-bottom: 15px;width:400px;}
-	.days-hours-heatmap .calibration .group{display: inline-block;}
-	.days-hours-heatmap .calibration .description{width:108px;}
-	.days-hours-heatmap .calibration .description>label:last-child{float:right;}
-	.days-hours-heatmap .calibration>.display-control{float:right;}
-	.days-hours-heatmap .calibration>.display-control label{vertical-align: top;}
-	.days-hours-heatmap .calibration>.display-control input[type='radio']{cursor: pointer;}
-
-	.days-hours-heatmap .heatmap .axis path{display: none;}
-	.days-hours-heatmap .heatmap .axis line{fill: none;stroke: #000;shape-rendering: crispEdges;}
-	.days-hours-heatmap .heatmap .axis text{font-size: 12px}
-</style>
 
 		<!-- NATIVE SCRIPTS -->
 		<script type="text/javascript" src="scripts/user.js"></script>
@@ -193,14 +160,13 @@
 
 		<script type="text/javascript">
 
-			var USER_ID = '103105083532765828171';
-			var MEETING_ID = 'feed-me-nick';
+			//var USER_ID = '103105083532765828171';
+			//var MEETING_ID = 'feed-me-nick';
 
 			//toggleSection('view-menu');
 			
-			toggleSection('view-responses');
-			document.getElementById('responses-meeting-id').value = MEETING_ID;
-			viewResponses();
+			/*document.getElementById('responses-meeting-id').value = MEETING_ID;
+			toggleSection('view-responses');*/
 
 			//toggleSection('create-event');
 

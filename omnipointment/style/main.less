@@ -98,9 +98,9 @@ li{
 }
 
 html{
-	background: url('img/wood.jpg');
-	.FillBackgroundImage();
-	//background-size: 20vh;
+	background: url('img/tri-white.png');
+	//.FillBackgroundImage();
+	background-size: 20vh;
 	/*background-attachment: fixed;
 	background-position: top center;
 	background-size: auto 150%;*/
@@ -133,12 +133,14 @@ div.container{
 	width: 85vw;
 	padding: 2vh;
 	margin: 4vh auto;
+	margin-bottom: 2vh;
 	border-radius: 1vh;
 
 	button{
 
 		width: 100%;
-		background: url('img/purple.png');
+		//background: url('img/purple.png');
+		background: @mainColor;
 		color: white;
 		height: 2.0 * @textSize;
 		line-height: 2.0 * @textSize;
@@ -158,10 +160,36 @@ div.container{
 
 }
 
-section#load-meeting{
+center.two-buttons{
 
-	h1{
-		color: white;
+	button{
+		width: 45%;
+		margin: 2%;
+		margin-top: 2vh;
+	}
+
+}
+div#menu{
+
+
+	button#search-button{
+
+		width: 2.0 * @textSize;
+		height: 2.0 * @textSize;
+		margin-top: -2.25 * @textSize;
+		right: 2.25 * @textSize;
+		background: transparent;
+		color: @mainColor;
+		position: absolute;
+		font-weight: bolder;
+
+		&:hover{
+			background: @mainColor;
+			color: white;
+		}
+
+		.AnimateAll();
+
 	}
 
 }
@@ -189,7 +217,8 @@ header{
 	}
 
 	button{
-		background: #dddddd;
+
+		background: url('img/tri-white.png');
 		color: @mainColor;
 		//font-weight: bold;
 		font-size: 4vh;
@@ -198,6 +227,14 @@ header{
 		height: 10vh;
 		top: 1vh;
 		right: 0;
+
+		&:hover{
+			background: @mainColor;
+			color: white;
+		}
+
+		.AnimateAll();
+
 	}
 
 }
@@ -215,7 +252,8 @@ div#menu{
 	button{
 
 		width: 100%;
-		background: url('img/purple.png');
+		//background: url('img/purple.png');
+		background: @mainColor;
 		color: white;
 		height: 2.0 * @textSize;
 		line-height: 2.0 * @textSize;
@@ -242,9 +280,6 @@ div#menu{
 table{
 	margin: 1vh auto;
 	width: 98% - 2vh;
-}
-
-table#load-grid{
 	margin-bottom: 6.0 * @textSize;
 }
 
@@ -302,6 +337,8 @@ table#filter-responses{
 
 	div.people-free{
 		background: @freeGreen;
+		color: @charcoal;
+		font-weight: bold;
 	}
 
 	div.slot:hover div.name-filter{
@@ -608,6 +645,16 @@ div.editorUI{
 		background: @mainColor;
 		color: white;
 	}
+
+}
+
+button{
+
+	&:hover{
+		background: @freeGreen;
+	}
+
+	.AnimateAll();
 
 }
 

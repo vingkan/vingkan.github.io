@@ -5,10 +5,17 @@ function openAccess(){
 }
 
 function viewResponses(){
-	var meetingID = document.getElementById('responses-meeting-id').value;
-	console.log(meetingID)
-	viewMeetingHeatMap(meetingID);
+	var meetingID = document.getElementById('find-meeting-id').value;
+	document.getElementById('responses-meeting-id').value = meetingID;
+	//console.log(meetingID)
+	//viewMeetingHeatMap(meetingID);
 	loadDisplayViz();
+}
+
+function editResponses(){
+	var meetingID = document.getElementById('responses-meeting-id').value;
+	document.getElementById('find-meeting-id').value = meetingID;
+	loadMeeting();
 }
 
 function viewMeetingHeatMap(loadMeetingID){

@@ -189,8 +189,7 @@ function loadDisplayViz(){
 		var database = new Firebase("https://omnipointment.firebaseio.com/meetings/" + meetingID);
 		database.once('value', function(snapshot){
 			var meeting = snapshot.val();
-			/*console.log('Found in database:');
-			console.log(meeting);*/
+			document.getElementById('view-meeting-name').innerHTML = meeting.name;
 			var dateStrings = JSON.parse(meeting.dateOptions);
 			var size = dateStrings.length;
 			var grid = {

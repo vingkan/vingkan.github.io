@@ -45,7 +45,7 @@ function addMeeting(){
 		database.set(meeting);
 }
 
-function loadMeeting(){
+function loadMeeting(meetingID){
 
 	function loadTimeSlotsCallback(timeSlotList){
 		var database = new Firebase("https://omnipointment.firebaseio.com/meetings/" + meetingID);
@@ -65,11 +65,12 @@ function loadMeeting(){
 			grid.timeOptions = JSON.parse(meeting.timeOptions);
 			toggleSection('load-meeting');
 			document.getElementById('load-meeting-name').innerHTML = meeting.name;
+			document.getElementById('view-meeting-name').innerHTML = meeting.name;
 			createGrid(meetingID, 'load-grid', grid.dateOptions, grid.timeOptions, timeSlotList);
 		});
 	}
 
-	var meetingID = document.getElementById('find-meeting-id').value;
+	var meetingID = meetingID || document.getElementById('find-meeting-id').value;
 	var userRef = new Firebase("https://omnipointment.firebaseio.com/users/" + USER_ID + "/meetings/" + meetingID);
 	userRef.once('value', function(snapshot){
 		var timeSlotList = JSON.parse(snapshot.val());
@@ -95,6 +96,7 @@ function updateAvailability(){
 	meetingRef.once('value', function(snapshot){
 		var userArray = JSON.parse(snapshot.val());
 		if($.inArray(USER_ID, userArray) === -1){
+			console.log(USER_ID)
 			userArray.push(USER_ID);
 			var newArray = JSON.stringify(userArray);
 			meetingRef.set(newArray);
