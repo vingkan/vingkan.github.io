@@ -255,17 +255,20 @@ header{
 		margin-left: -3vh;
 	}
 
+	button, div#image-bubble{
+		position: fixed;
+		width: 6vh;
+		height: 10vh;
+		top: 1vh;
+		right: 0;
+	}
+
 	button{
 
 		background: url('img/tri-white.png');
 		color: @mainColor;
 		//font-weight: bold;
 		font-size: 4vh;
-		position: fixed;
-		width: 6vh;
-		height: 10vh;
-		top: 1vh;
-		right: 0;
 
 		&:hover{
 			background: @mainColor;
@@ -274,6 +277,17 @@ header{
 
 		.AnimateAll();
 
+	}
+
+	div#image-bubble{
+		z-index: 70;
+		height: 6vh;
+		width: 6vh;
+		background: url('img/tri-white.png');
+		border-radius: 4vh;
+		background-size: 6vh;
+		top: 3vh;
+		left: 3vh;
 	}
 
 }

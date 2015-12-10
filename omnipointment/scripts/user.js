@@ -21,6 +21,10 @@ function checkUserInDatabase(authData){
 		}
 		else{
 			toggleSection('view-menu');
+			var userImage = new Firebase(path + "/google/img/");
+			userImage.once('value', function(snapshot){
+				showUserImage(snapshot.val());
+			});
 		}
 	});
 }
@@ -40,6 +44,25 @@ function googleLogin(){
 	{
 		scope: "email"
 	});
+}
+
+function guestLogin(){
+	var authData = {
+		google: {
+			id: 0000,
+			displayName: 'Guest',
+			email: 'guestuser',
+			img: 'http://vingkan.github.io/omnipointment/style/img/purple.png'
+		}
+	}
+	console.log(authData);
+	authObject = authData;
+	checkUserInDatabase(authData);
+}
+
+function showUserImage(imgURL){
+	var bubble = document.getElementById('image-bubble');
+	bubble.style.backgroundImage = "url(" + imgURL + ")";
 }
 
 console.log('LOADED user.js');
