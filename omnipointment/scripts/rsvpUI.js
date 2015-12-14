@@ -60,17 +60,23 @@ function stopDrag(timeslot){
 	//Determine drag range in columns and rows
 	var rows = 0;
 	var cols = 0;
-	//Count columns
+	//Count Columns
 	var colTime = startTime;
 	while(colTime < stopTime){
 		colTime += columnInt;
 		cols++;
 	}
+	//Count Rows
 	var stopRow = stopTime - ((cols - 1) * columnInt);
 	var rowTime = startTime;
-	while(rowTime <= stopRow){
-		rowTime += rowInt;
-		rows++;
+	if(startTime === (stopTime - columnInt)){
+		rows = 0;
+	}
+	else{
+		while(rowTime <= stopRow){
+			rowTime += rowInt;
+			rows++;
+		}
 	}
 	console.log(cols + ' columns')
 	console.log(rows + ' rows')
@@ -79,7 +85,7 @@ function stopDrag(timeslot){
 		var firstCell = startTime + (c * columnInt);
 		for(var r = 0; r < rows; r++){
 			var targetCell = firstCell + (r * rowInt);
-			console.log('(' + c + ', ' + r + ') ' + targetCell);
+			//console.log('(' + c + ', ' + r + ') ' + targetCell);
 			var slot = getTimeSlotByTime(targetCell);
 			dragSlots.push(slot);
 		}
