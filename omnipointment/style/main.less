@@ -501,6 +501,7 @@ x-timeslot, div.timeslot{
 			text-align: center;
 			float: left;
 			clear: both;
+			display: inline-block;
 
 		}
 
@@ -725,6 +726,96 @@ button{
 	.AnimateAll();
 
 }
+
+/*--------------------------------------------*/
+/*---> DRAGGING <-----------------------------*/
+/*--------------------------------------------*/
+
+button#toggle-drag{
+
+	width: 95%;
+	margin: 1vh 2.5%;
+	font-size: 0.65 * @textSize;
+
+	&.drag-disabled{
+
+		background: @busyRed;
+
+		&::before{
+			content: 'Dragging is disabled. Click to turn on.'
+		}
+	
+	}
+
+	&.drag-enabled{
+
+		background: @freeGreen;
+
+		&::before{
+			content: 'Dragging is enabled. Click to turn off.'
+		}
+	
+	}
+
+}
+
+/*--------------------------------------------*/
+/*---> POPUPS <-------------------------------*/
+/*--------------------------------------------*/
+
+//NAME CONFLICT WITH RSVP POPUPS: DO NOT USE!
+
+/*div.popup{
+
+	position: fixed;
+	left: 25vw;
+	width: 50vw;
+	background: @mainColor;
+
+	h2{
+		color: white;
+	}
+
+	textarea{
+		width: 90%;
+		padding: 5%;
+		height: 5.0 * @textSize;
+		border: none;
+		outline: none;
+		font-size: 0.75 * @textSize;
+		line-height: 1.25 * @textSize;
+		font-family: @SourceSansPro;
+	}
+
+	button{
+
+		width: 20vw;
+		margin: 1.5vh 15vw;
+		background: url('img/tri-white.png');
+		font-size: 0.75 * @textSize;
+		line-height: 1.25 * @textSize;
+		font-weight: bolder;
+		color: @mainColor;
+
+		&:hover{
+			background: @freeGreen;
+		}
+
+		.AnimateAll();
+
+	}
+
+}
+
+div.popup-opened{
+	position: fixed;
+	bottom: 0;
+}
+
+div.popup-closed{
+	position: fixed;
+	bottom: 100vh;
+}*/
 
 /*--------------------------------------------*/
 /*---> SCROLLBAR <----------------------------*/
