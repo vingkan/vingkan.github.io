@@ -42,6 +42,14 @@ function handleDrag(timeslot){
 	}
 }
 
+function handlePreviewDrag(timeslot){
+	if(DRAG_ENABLED && dragging){
+		if(timeslot.model.attributes.time > startTime){
+			//stopDrag(timeslot, true);	
+		}
+	}
+}
+
 function startDrag(timeslot){
 	//Set Values
 	dragging = true;
@@ -53,6 +61,7 @@ function startDrag(timeslot){
 }
 
 function stopDrag(timeslot){
+	
 	//Set Values
 	dragging = false;
 	stopTime = timeslot.model.attributes.time;

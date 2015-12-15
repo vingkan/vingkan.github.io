@@ -70,7 +70,10 @@ var TimeSlotView = Backbone.View.extend({
   	
   	events: {
       'click .slot': 'handleClick',
-      'click .popup': 'setFree'
+      'click .popup': 'setFree',
+      /*'mouseover .slot': 'handleHover'
+      'dragstart .slot': 'handleClick',
+      'dragend .slot': 'handleClick'*/
     },
   
   	render: function () {
@@ -94,6 +97,10 @@ var TimeSlotView = Backbone.View.extend({
         handleDrag(this);
     },
 
+    handleHover: function(){
+        handlePreviewDrag(this);
+    },
+
   	toggle: function () {
       	if (this.model.get('isPriority')) {
         	this.togglePopup();
@@ -110,6 +117,10 @@ var TimeSlotView = Backbone.View.extend({
        * this accounts for dragging over different types of slots
       */
       this.model.set({ free: value });
+    },
+
+    previewToggle: function(value){
+        console.log(this);
     },
   
   	toggleFree: function () {
