@@ -71,7 +71,7 @@ var TimeSlotView = Backbone.View.extend({
   	events: {
       'click .slot': 'handleClick',
       'click .popup': 'setFree',
-      /*'mouseover .slot': 'handleHover'
+      /*'mouseover .slot': 'handleHover'
       'dragstart .slot': 'handleClick',
       'dragend .slot': 'handleClick'*/
     },

@@ -43,6 +43,8 @@ function addMeeting(){
 	console.log(meeting);
 	var database = new Firebase("https://omnipointment.firebaseio.com/meetings/" + meetingID);
 		database.set(meeting);
+	var creator = new Firebase("https://omnipointment.firebaseio.com/users/" + USER_ID + "/meetings/" + meetingID);
+		creator.set("[]");
 }
 
 function loadMeeting(meetingID){

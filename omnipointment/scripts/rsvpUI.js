@@ -21,6 +21,9 @@ function toggleDrag(){
 		toggleButton.classList.remove('drag-disabled');
 		toggleButton.classList.add('drag-enabled');
 	}
+	startTime = 0;
+	stopTime = 0;
+	dragSlots = [];
 }
 
 function handleDrag(timeslot){
