@@ -22,19 +22,23 @@ function renderCreatorForm(){
 	var currentDate = new Date();
 	var currentDateString = moment(currentDate).format("YYYY-MM-DD");
 	var html = '';
+		html += `<div id="error-output" onclick="this.style.display = 'none';"></div>`;
 		html += `<button id="creator-add-date" class="page-button">Add Date</button>`;
 		html += `<button id="creator-add-slot" class="page-button">Add Times</button>`;
-		html += `</center><form class="time-slot-creator">`;
+		html += `</center>`;
+		html += `<form class="time-slot-creator">`;
 		html += `<input id="creator-date" type="text" value="${currentDateString}" style="display: none;">`;
 		html += `<input id="creator-start" type="text" value="8:00 PM" style="display: none;">`;
-		html += `<div id="start-picker" style="display: none;"><h2>Choose Start Time</h2></div>`;
 		html += `<input id="creator-end" type="text" value="9:30 PM" style="display: none;">`;
-		html += `<div id="end-picker" style="display: none;"><h2>Choose End Time</h2></div>`;
 		html += `<label style="display: none;">`;
 			html += `Priority:`;
 			html += `<input id="creator-priority" type="checkbox">`;
 		html += `</label>`;
-		html += `</form><center>`;
+		html += `</form>`;
+		html += `<center>`;
+		html += `<div id="calendar-picker" style="display: none;"><h2>Choose Date</h2></div>`;
+		html += `<div id="start-picker" style="display: none;"><h2>Choose Start Time</h2></div>`;
+		html += `<div id="end-picker" style="display: none;"><h2>Choose End Time</h2></div>`;
 	return html;
 }
 
@@ -111,14 +115,16 @@ function setBindings(model){
 		});
 	});
 	
-
-
-
 	//pickadate.js Bindings and Settings
 
 	var creatorDatePicker = $("#creator-date").pickadate({
 		format: "yyyy-mm-dd",
+		container: "#calendar-picker",
+		onOpen: function(){
+			document.getElementById("calendar-picker").style.display = "block";
+		},
 		onClose: function(){
+			document.getElementById("calendar-picker").style.display = "none";
 			var date = Front.getDateOptionFromInput('creator');
 			model.addDateOption(date);
 		}

@@ -329,6 +329,14 @@ div#creator{
 
 	}
 
+	div.picker__frame{
+		width: 100%;
+	}
+
+	div.picker__wrap{
+		width: 100%;
+	}
+
 	div.picker--time{
 		min-width: 0;
 		max-width: 100vw;
@@ -337,6 +345,12 @@ div#creator{
 	div.picker__holder{
 		border: 1vh solid @mainColor;
 		outline: none;
+		
+	}
+
+	div.picker--time div.picker__holder{
+		overflow-x: hidden;
+		width: 80vw;
 	}
 
 	div.picker__day:hover{
@@ -350,6 +364,10 @@ div#creator{
 	div.picker__box{
 		width: 100%;
 	}
+
+	/*div.time-picker-container{
+		width: 50%;
+	}*/
 
 }
 
