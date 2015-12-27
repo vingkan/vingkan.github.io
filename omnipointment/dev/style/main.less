@@ -146,7 +146,7 @@ div.container{
 	margin-bottom: 2vh;
 	border-radius: 1vh;
 
-	button{
+	button.page-button{
 
 		width: 100%;
 		//background: url('img/purple.png');
@@ -227,6 +227,128 @@ section#create-event{
 
 	p{
 		color: @mainColor;
+	}
+
+}
+
+/*--------------------------------------------*/
+/*---> MEETING CREATOR <----------------------*/
+/*--------------------------------------------*/
+
+div#creator{
+
+	table{
+		margin-top: 1vh;
+	}
+
+	input{
+		width: 96%;
+		margin: 1vh auto;
+	}
+
+	input[type="text"]{
+
+		background: #F2F2F2;
+		border-left: 1vh solid @mainColor;
+		//TEXT STYLES
+		text-align: center;
+		font-size: 0.75 * @tx;
+		line-height: 1.25 * @tx;
+		.BodyFont();
+
+		&:focus, &:hover{
+			border-left: 1vh solid @freeGreen;
+		}
+
+		.AnimateAll();
+
+	}
+
+	input#creator-name{
+		padding: 4% 2%;
+		//TEXT STYLES
+		text-align: center;
+		font-size: 1.25 * @tx;
+		color: @mainColor;
+		line-height: 1.5 * @tx;
+		.HeadFont();
+	}
+
+	textarea{
+
+		width: 96%;
+		max-width: 96%;
+		padding: 2%;
+		margin-top: 1.5vh;
+		margin-bottom: 1vh;
+		border-left: 1vh solid @mainColor;
+		background: #F2F2F2;
+		//TEXT STYLES
+		font-size: 1.00 * @tx;
+		color: @charcoal;
+		line-height: 1.25 * @tx;
+		.BodyFont();
+
+		&:focus, &:hover{
+			border-left: 1vh solid @freeGreen;
+		}
+
+		.AnimateAll();
+
+	}
+
+	button.remove-date, button.remove-time{
+		background: none;
+		color: @busyRed;
+		margin-left: 1vh;
+		//TEXT STYLES
+		font-size: 0.75 * @tx;
+		line-height: 1.25 * @tx;
+		.BodyFont();
+	}
+
+	button.page-button{
+		width: 45%;
+		height: 1.5 * @tx;
+		margin: 1vh;
+		display: inline-block;
+		//TEXT STYLES
+		font-size: 0.75 * @tx;
+		line-height: 1.5 * @tx;
+	}
+
+	//OVERRIDE pickadate.js STYLES
+
+	div.picker{
+
+		width: 100%;
+
+		ul{
+			width: 100%;
+		}
+
+	}
+
+	div.picker--time{
+		min-width: 0;
+		max-width: 100vw;
+	}
+
+	div.picker__holder{
+		border: 1vh solid @mainColor;
+		outline: none;
+	}
+
+	div.picker__day:hover{
+		background: lighten(@mainColor, 65%);
+	}
+
+	div.picker__day--highlighted{
+		background: @mainColor;
+	}
+
+	div.picker__box{
+		width: 100%;
 	}
 
 }
@@ -340,6 +462,32 @@ div#menu{
 }
 
 /*--------------------------------------------*/
+/*---> USER ERROR OUTPUT <--------------------*/
+/*--------------------------------------------*/
+
+div#error-output{
+
+	background: @busyRed;
+	border: 0.5vh solid darken(@busyRed, 10%);
+	display: none;
+	margin: 1vh auto;
+
+	p{
+	
+		color: white;
+		font-size: 0.75 * @tx;
+		margin: 0;
+	
+		&::after{
+			content: ' (Click to Close)';
+			font-size: 0.5 * @tx;
+		}
+
+	}
+
+}
+
+/*--------------------------------------------*/
 /*---> TABLES <-------------------------------*/
 /*--------------------------------------------*/
 
@@ -360,7 +508,10 @@ th{
 
 table.time-grid-view{
 
-	td{
+	background: @freeGreen;
+	overflow: hidden;
+
+	td, th{
 		width: 10 * 2.5 * @tx;
 		text-align: center;
 		height: 1.25 * @tx;
@@ -370,12 +521,39 @@ table.time-grid-view{
 
 	td.time-slot{
 		background: @freeGreen;
+		color: @charcoal;
 	}
 
-	td.grid-label{
+	.grid-label{
 		background: @charcoal;
 		color: white;
 	}
+
+	/*tr:hover td{
+		opacity: 0.5;
+	}
+
+	td, th{
+
+		position: relative;
+
+		&:hover{
+			color: white !important;
+		}
+
+		&:hover::after{
+			content: '';
+			position: absolute;
+			background: @freeGreen;
+			opacity: 1.0;
+			left: 0;
+			top: -50vh;
+			height: 100vh;
+			width: 100%;
+			z-index: 50;
+		}
+
+	}*/
 
 }
 
@@ -506,7 +684,7 @@ x-timeslot, div.timeslot{
 		margin-top: (0 * @textSize);
 		margin-left: 4vh;
 
-		button{
+		button.page-button{
 
 			width: 100%;
 			padding: 1vh;
@@ -580,9 +758,10 @@ p.range-break{
 /*---> FORM <----------------------------------*/
 /*--------------------------------------------*/
 
-input, button, select{
+input, button, select, textarea{
 	outline: none;
 	border: none;
+	box-sizing: border-box;
 }
 
 input.underscore-bar{
@@ -621,7 +800,7 @@ div.editorUI{
 		color: @charcoal;
 	}
 
-	input, button, select{
+	input, button.page-button, select{
 		outline: none;
 		box-sizing: border-box;
 		margin: 0;
@@ -698,7 +877,7 @@ div.editorUI{
 		display: inline-block;
 	}
 
-	button{
+	button.page-button{
 
 		font-weight: bold;
 		height: 2.0 * @textSize;
@@ -732,7 +911,7 @@ div.editorUI{
 
 }
 
-button{
+button.page-button{
 
 	&:hover{
 		background: @freeGreen;
