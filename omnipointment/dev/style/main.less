@@ -307,7 +307,7 @@ div#creator{
 		.BodyFont();
 	}
 
-	button.page-button{
+	button.half-button{
 		width: 45%;
 		height: 1.5 * @tx;
 		margin: 1vh;
@@ -325,12 +325,29 @@ div#creator{
 
 		ul{
 			width: 100%;
+			//margin-top: 60 * (-1.5) * @tx;
+		}
+
+		li{
+
+			padding: 0;
+			border: none;
+			height: 1.5 * @tx;
+			//TEXT STYLES
+			text-align: center;
+			font-size: 0.75 * @tx;
+			line-height: 1.5 * @tx;
+
+			&:hover{
+				background: lighten(@mainColor, 65%);
+			}
+
 		}
 
 	}
 
 	div.picker__frame{
-		width: 100%;
+		width: 95%;
 	}
 
 	div.picker__wrap{
@@ -345,12 +362,15 @@ div#creator{
 	div.picker__holder{
 		border: 1vh solid @mainColor;
 		outline: none;
-		
+		overflow-x: hidden;
+		margin-bottom: 10vh;
 	}
 
 	div.picker--time div.picker__holder{
-		overflow-x: hidden;
 		width: 80vw;
+		height: 15 * @tx;
+		//margin-top: -7.5 * @tx;
+		margin-left: 2.5vw;
 	}
 
 	div.picker__day:hover{
@@ -480,6 +500,66 @@ div#menu{
 }
 
 /*--------------------------------------------*/
+/*---> LOADING SCREEN <------------------------*/
+/*--------------------------------------------*/
+
+.CircularRotation(@time: 2s, @degrees: 360deg){
+	@-webkit-keyframes circularRotation{
+		from{
+			transform: rotate(0deg);
+		}
+		to{
+			transform: rotate(@degrees);
+		}
+	}
+	animation: circularRotation @time linear infinite;
+}
+
+div.loading{
+
+	@clockDiameter: 15vw;
+	height: @clockDiameter;
+	width: 96%;
+	padding: 2%;
+	margin-top: 2vh;
+	background: url('img/tri-white.png');
+	background-size: 50%;
+
+	@-webkit-keyframes backgroundFun{
+		from{
+			background-position: 0%;
+		}
+		to{
+			background-position: 100%;
+		}
+	}
+	animation: backgroundFun 2s linear infinite;
+
+	h3{
+		line-height: @clockDiameter;
+		margin-top: -0.5%;
+	}
+
+	img{
+		width: @clockDiameter;
+		position: absolute;
+	}
+
+	img:nth-child(1){
+		.CircularRotation(60s);
+	}
+
+	img:nth-child(2){
+		.CircularRotation(30s);
+	}
+
+	img:nth-child(3){
+		.CircularRotation(2s);
+	}
+
+}
+
+/*--------------------------------------------*/
 /*---> USER ERROR OUTPUT <--------------------*/
 /*--------------------------------------------*/
 
@@ -488,7 +568,7 @@ div#error-output{
 	background: @busyRed;
 	border: 0.5vh solid darken(@busyRed, 10%);
 	display: none;
-	margin: 1vh auto;
+	margin: 2vh auto;
 
 	p{
 	
@@ -573,203 +653,67 @@ table.time-grid-view{
 
 	}*/
 
+	/*tr::after{
+		content: "...";
+	}*/
+
+	.ArrowBox(@arrowColor, @arrowSize){
+
+		&:after {
+			bottom: 100%;
+			left: 50%;
+			border: solid transparent;
+			content: " ";
+			height: 0;
+			width: 0;
+			position: absolute;
+			pointer-events: none;
+			border-color: rgba(0, 0, 0, 0);
+			border-bottom-color: @arrowColor;
+			border-width: @arrowSize;
+			margin-left: -1 * @arrowSize;
+		}
+
+	}
+
+
+	td{
+
+		div.member-list{
+
+			display: none;
+			position: absolute;
+			margin-top: -1.5vw;
+			background: blue;
+			width: 25vw;
+			.ArrowBox(@charcoal, 2vh);
+
+			ul{
+				//background: orange;
+			}
+
+			li{
+				list-style: none;
+				//TEXT STYLES
+				text-align: center;
+				font-size: 0.75 * @tx;
+				line-height: 1.25 * @tx;
+			}
+
+		}
+
+		&:hover div.member-list{
+			display: block;
+		}
+
+	}
+
+	.AnimateAll();
+
 }
 
 div.table-slider{
 	//border: 10px solid orange;
-}
-
-/*--------------------------------------------*/
-/*---> FILTER VIZ <---------------------------*/
-/*--------------------------------------------*/
-
-table#filter-responses{
-
-	div.slot{
-		overflow: visible;
-		//height: 3 * 1.5 * @textSize;
-		line-height: 1.5 * @textSize;
-		/*background: rgba(255, 255, 255, 0.5);
-		color: @charcoal;*/
-		font-weight: bold;
-		display: block;
-	}
-
-	/*div.grid-label{
-		background: @charcoal;
-		color: white;
-	}*/
-
-	div.pointer{
-		position: absolute;
-		margin: -2vh 2vh;
-		width: 0;
-		height: 0;
-		border-style: solid;
-		border-width: 0 2vh 2vh 2vh;
-		border-color: transparent transparent @charcoal transparent;
-	}
-
-	div.time-label{
-		display: none;
-	}
-
-	div.people-free{
-		background: @freeGreen;
-		color: @charcoal;
-		font-weight: bold;
-	}
-
-	div.slot:hover div.name-filter{
-		display: block;
-	}
-
-	div.name-filter{
-
-		display: none;
-		position: absolute;
-		z-index: 50;
-		margin-top: 0.25 * @textSize;
-		border: 0.25 * @textSize solid @charcoal;
-
-		background: @freeGreen;
-		color: @charcoal;
-		
-		margin-bottom: 0.5vh;
-
-		ul{
-
-			width: 100%;
-			margin: 0;
-			list-style: none;
-
-			li{
-				text-align: center;
-				font-size: 0.75 * @textSize;
-				line-height: 1.0 * @textSize;
-				list-style: none;
-				margin: (0.05 * @textSize) auto;
-				padding: 0.25 * @textSize;
-
-			}
-		}
-
-	}
-
-}
-
-
-/*--------------------------------------------*/
-/*---> X-TAGS <-------------------------------*/
-/*--------------------------------------------*/
-
-x-timeslot, div.timeslot{
-	
-	div{
-
-		font-size: 0.75 * @textSize;
-		text-align: center;
-		color: white;
-
-		&:hover{
-			//opacity: 0.5;
-		}
-
-		.AnimateAll(0.25s);
-
-	}
-
-	div.slot{
-		padding: 2%;
-		margin: 2% auto;
-		width: 94%;
-		height: 1.5 * @textSize;
-		line-height: 1.5 * @textSize;
-		overflow: hidden;
-	}
-
-	div.priority{
-		background-image: url('img/trans-lines.png');
-		background-size: 5vh;
-		font-weight: bold;
-	}
-
-	div.popup{
-		
-		background: white;
-		border: 1vh solid @charcoal;
-		position: absolute;
-		margin-top: (0 * @textSize);
-		margin-left: 4vh;
-
-		button.page-button{
-
-			width: 100%;
-			padding: 1vh;
-			background: @charcoal;
-			color: @charcoal;
-			font-weight: bold;
-			text-align: center;
-			float: left;
-			clear: both;
-			display: inline-block;
-
-		}
-
-		div.pointer{
-			position: absolute;
-			margin: -2vh 2vh;
-			width: 0;
-			height: 0;
-			border-style: solid;
-			border-width: 0 2vh 2vh 2vh;
-			border-color: transparent transparent @charcoal transparent;
-
-		}
-
-		button.available{
-			background: @freeGreen;
-		}
-
-		button.partial{
-			background: @maybeYellow;
-		}
-
-		button.unavailable{
-			background: @busyRed;
-		}
-
-	}
-
-}
-
-div.is-free{
-	background-color: @freeGreen;
-	color: @charcoal !important;
-	font-weight: bold;
-}
-
-div.maybe-free{
-	background-color: @maybeYellow;
-	color: @charcoal !important;
-	font-weight: bold;
-}
-
-div.not-free{
-	background-color: gray;
-}
-
-div.visible{
-	display: block;
-}
-
-div.invisible{
-	display: none;
-}
-
-p.range-break{
-	height: 0.5 * @textSize;
-	line-height: 0;
 }
 
 /*--------------------------------------------*/

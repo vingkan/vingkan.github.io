@@ -1,7 +1,7 @@
 //BROWSERIFY IMPORTS
 var $ = require('jquery');
-//GLOBAL VARIABLES
-var MINUTE = 60000; //in milliseconds
+//LOCAL IMPORTS
+import {DateTimeHelper} from './dateTimeHelper';
 
 /*
 * Set to String Prototype based on this S/O Function:
@@ -52,7 +52,7 @@ function getTimeOptionFromInput(idPath, errorMinder){
 	var endInput = document.getElementById(idPath + "-end");
 	var start = new Date(`1899-12-30 ${startInput.value}`);
 	var end = new Date(`1899-12-30 ${endInput.value}`);
-	var duration = (end.getTime() - start.getTime()) / MINUTE;
+	var duration = (end.getTime() - start.getTime()) / DateTimeHelper.MINUTE;
 	var priority = document.getElementById(idPath + "-priority").checked;
 	var option = {
 		dates: [],
@@ -69,9 +69,21 @@ function getTimeOptionFromInput(idPath, errorMinder){
 	}
 }
 
+function displayLoadingMessage(idPath, message = "Loading..."){
+	var html = `<div class="loading">`;
+			html += `<img src="style/img/clock-base.png">`;
+			html += `<img src="style/img/clock-hour.png">`;
+			html += `<img src="style/img/clock-minute.png">`;
+			html += `<h3>${message}</h3>`;
+		html += `</div>`;
+	var output = document.getElementById(idPath);
+		output.innerHTML = html;
+}
+
 export var Front = {
 	userErrorId: "",
 	checkMeetingName: checkMeetingName,
+	displayLoadingMessage: displayLoadingMessage,
 	getDateOptionFromInput: function(idPath){
 		return getDateOptionFromInput(idPath, this);
 	},
@@ -83,5 +95,14 @@ export var Front = {
 	},
 	displayUserError: function(message){
 		displayUserError(message, this.userErrorId);
+	},
+	checkIfInView: function(element){
+		console.log(element)
+		var offset = element.offset().top - $(window).scrollTop();
+		if(offset > window.innerHeight){
+			$('html,body').animate({scrollTop: offset}, 1000);
+			return false;
+		}
+		return true;
 	}
 }

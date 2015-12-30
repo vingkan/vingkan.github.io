@@ -9,6 +9,8 @@ import {Front} from './frontend';
 import {Menu} from './menu';
 //DEVELOPMENT USE
 import {FirebaseHandler} from './firebase-handler';
+import {Meeting} from './meeting';
+window.Meeting = Meeting;
 //FirebaseHandler.handle();
 
 Front.setUserErrorOutput('error-output');
@@ -39,31 +41,46 @@ var SAMPLE_ID = "entelechy-labs";
 
 if(location.search.length > 1){
 	var searchID = location.search.substr(1);
-	//console.log(searchID);
 	SAMPLE_ID = searchID;
 }
 
-//loadMeeting(SAMPLE_ID);
+loadMeeting(SAMPLE_ID);
 
 function loadMeeting(meetingID){
+	Front.displayLoadingMessage('grid');
+	//RESTFUL API CODE:
+		/*var meeting = new Meeting({ mid: meetingID });
+		meeting.fetch({
+			success: function (model) {
+				var grid = new TimeGridView({
+					model: model,
+					el: document.getElementById('grid')
+				});
+			},
+			error: function () {
+				// remove the loading message
+			}
+		});*/
 	var meetingPromise = Database.getMeetingById(meetingID);
 		meetingPromise.then(function(meetingData){
-			var gridModel = new TimeGridModel(meetingData);
+			var gridModel = new Meeting(meetingData);
 			var grid = new TimeGridView({
 				model: gridModel,
 				el: document.getElementById('grid')
 			});
-			console.log(grid);
+		}).catch(function(reason){
+			console.log("Failed to load meeting: " + reason);
 		});	
 }
 
-//New Meeting Creator
-			var emptyModel = new TimeGridModel();
-			var creator = new CreatorGridView({
-				model: emptyModel,
-				el: document.getElementById('creator')
-			});
-			console.log(creator);
+function createMeeting(){
+	var emptyModel = new Meeting();
+	var creator = new CreatorGridView({
+		model: emptyModel,
+		el: document.getElementById('creator')
+	});
+	return creator;
+}
 
 //BINDINGS
 
@@ -71,10 +88,6 @@ function loadMeeting(meetingID){
 
 $(".check-meeting-name").on("change", function(){
 	Front.checkMeetingName(this.id);
-});
-
-$(".remove-date").on("click", function(){
-	creator.model.removeDate()
 });
 
 //ID Bindings
@@ -103,8 +116,7 @@ $('#search-meetings').keypress(function(event){
 	}
 });
 
-$("#creator-save").on("click", function(){
-	console.log("NEW MEETING OUTPUT");
-	console.log(creator.model.attributes);
-	console.log(JSON.stringify(creator.model.attributes));
+$("#creator-new").on("click", function(){
+	var creator = createMeeting();
+	sessionStorage.setItem('creator', creator);
 });
