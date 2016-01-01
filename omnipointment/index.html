@@ -52,10 +52,10 @@
 		<section id="view-menu">
 			<div class="container">
 				<h1>Menu</h1>
-				<button class="page-button">Find Meeting</button>
+				<button class="page-button" id="menu-find">Find Meeting</button>
 				<button class="page-button" onclick="main_my_meetings();">My Meetings</button>
-				<button class="page-button" onclick="window.location = 'create.html';">Create Meeting</button>
-				<button class="page-button">About</button>
+				<button class="page-button" id="menu-create">Create Meeting</button>
+				<button class="page-button" id="menu-about">About</button>
 				<button class="page-button" onclick="window.location = 'login.html';">Logout</button>
 			</div>
 		</section>
@@ -81,17 +81,85 @@
 			</div>
 		</section>
 
+		<section id="create-event">
+
+			<div class="container" id="choose-mid">
+				<h1>Create Meeting</h1>
+				<input type="text" id='creator-mid' class="check-meeting-name" placeholder="choose an appointment id for this meeting">
+				<p>This id will be a quick code to help you share your meeting with others.</p>
+			</div>
+
+		<div id="meeting-creator" style="display: none;">
+
+			<div class="container">
+				<h2>Edit Meeting Details</h2>
+				<center>
+					<input type="text" id="creator-name" placeholder="Untitled Meeting">
+					<textarea id="creator-message" placeholder="Type a meeting description here for your teammates to see!"></textarea>
+					<button id="add-dates" class="page-button half-button">Add Dates</button>
+					<button id="add-times" class="page-button half-button">Add Times</button>
+					<div id="date-range-options" style="display: none;">
+						<h3>Add Date Range</h3>
+						<div class="input-label">
+							<h4>Dates:</h4>
+						</div>
+						<input id="creator-date" class="date-range-picker" type="text">
+					</div>
+					<div id="time-range-options" style="display: none;">
+						<h3>Add Time Range</h3>
+						<div class="input-label">
+							<h4>Start:</h4>
+						</div>
+						<input id="creator-start" type="text" class="time-picker">
+						<div class="input-label">
+							<h4>End:</h4>
+						</div>
+						<input id="creator-end" type="text" class="time-picker">
+						<button class="page-button" id="creator-time">Add Time Range</button>
+						<label style="display: none;">
+							Priority:
+							<input id="creator-priority" type="checkbox">
+						</label>
+					</div>
+				</center>
+			</div>
+
+			<div class="container">
+				<div class="container-tag">Preview</div>
+				<div id="creator"></div>
+				<button id="creator-save" class="page-button">Save Meeting</button>
+			</div>
+
+		</div>
+
+		</section>
+
 		<section id="about">
 			<div class="container">
 				<p>Use Omnipointment for omnipotent appointments.</p>
 			</div>
 		</section>
 
+		<div class="footerSpace"></div>
+
+		<footer onclick="giveFeedback();">
+			Give Feedback
+		</footer>
+
 		<script src="bundle.js"></script>
 
 		<script type="text/javascript">
 
-			
+			main_create();
+
+			$(".date-range-picker").daterangepicker({
+
+			},
+			function(start, end, label){
+				addDateRange(start, end);
+			});
+
+			$(".time-picker").timepicker();
 
 		</script>
 		

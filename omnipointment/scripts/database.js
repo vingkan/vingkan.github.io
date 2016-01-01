@@ -1,4 +1,7 @@
+//BROWSERIFY IMPORTS
 var _ = require('underscore');
+//LOCAL IMPORTS
+import {Front} from './frontend';
 
 var PATH = "https://omnipointment.firebaseio.com";
 
@@ -149,6 +152,11 @@ function postMeeting(meeting){
 			timeOptionsArray.push(option);
 		})
 		meeting.timeOptions = JSON.stringify(timeOptionsArray);
+		var userArray = [];
+		meeting.users.forEach(user => {
+			userArray.push(user);
+		})
+		meeting.users = JSON.stringify(userArray);
 		firebase.set(meeting);
 		resolve("Meeting saved successfully!");
 	});
@@ -157,9 +165,19 @@ function postMeeting(meeting){
 
 function postUserResponses(userID, meetingID, responses){
 	var postPromise = new Promise(function(resolve, reject){
-		var firebase = new Firebase(`${PATH}/users/${userID}/meetings/${meetingID}`);
-		firebase.set(JSON.stringify(responses));
-		resolve("Responses saved successfully!");
+		if(responses.length > 0){
+			var meetingRef = new Firebase(`${PATH}/meetings/${meetingID}/users`);
+				meetingRef.once("value", function(snapshot){
+					var users = JSON.parse(snapshot.val());
+					if(users.indexOf(userID) < 0){
+						users.push(userID);
+					}
+					meetingRef.set(JSON.stringify(users));
+				});
+			var firebase = new Firebase(`${PATH}/users/${userID}/meetings/${meetingID}`);
+			firebase.set(JSON.stringify(responses));
+			resolve("Responses saved successfully!");
+		}
 	});
 	return postPromise;
 }
@@ -181,11 +199,24 @@ function meetingIDExists(meetingID){
 	return promise;
 }
 
+function postFeedback(feedback){
+	var userPromise = getUserInformation(Front.getUID());
+	userPromise.then(function(userData){
+		var firebase = new Firebase(`${PATH}/feedback/`);
+		firebase.push({
+			user: userData,
+			feedback: feedback
+		});
+	});
+}
+
 export var Database = {
 	getMeetingById: getMeetingById,
 	getMeetingTimeSlots: getMeetingTimeSlots,
 	getUserMeetings: getUserMeetings,
 	getUserTimeSlots: getUserTimeSlots,
 	postMeeting: postMeeting,
-	meetingIDExists: meetingIDExists
+	postUserResponses: postUserResponses,
+	meetingIDExists: meetingIDExists,
+	postFeedback: postFeedback
 }

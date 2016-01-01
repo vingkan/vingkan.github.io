@@ -4,6 +4,8 @@ var Backbone = require('backbone');
 Backbone.$ = $;
 var _ = require('underscore');
 var moment = require('moment');
+var vex = require('vex-js');
+var vexDialog = require('vex-js/js/vex.dialog');
 //LOCAL IMPORTS
 import {Meeting} from './meeting';
 import {TimeSlotModel, TimeSlotView} from './timeslot';
@@ -22,9 +24,12 @@ export var RSVPModel = Meeting.extend({
     	var model = this;
     	var timeslotsPromise = Database.getUserTimeSlots(userID, this.get('mid'));
     	timeslotsPromise.then(function(data){
-    		model.set('slots', data.slots);
+    		var slots = []
+    		if(data.slots){
+    			slots = data.slots;
+    		}
+    		model.set('slots', slots);
     		model.set("responder", userID);
-    		console.log(model.attributes);
     	});
     },
     saveResponses: function(){
@@ -39,8 +44,16 @@ export var RSVPModel = Meeting.extend({
 function setBindings(view){
 
 	$(".toggle-time-slot").on("click", function(){
-		var time = this.id.split("-")[1];
+		var time = parseInt(this.id.split("-")[1]);
 		view.toggleSlot(time);
+	});
+
+	$("#faq-flicker").on("click", function(){
+		vexDialog.alert("Q: Why does the time grid flicker when I click a slot?<br>A: Oh, you're a curious one! Right now, the table you are RSVPing to refreshes whenever a slot inside it changes. In an upcoming upgrade, we will make slots only refresh themselves.")
+	});
+
+	$("#self-view").on("click", function(){
+		view.viewAllResponses();
 	});
 
 }
@@ -49,8 +62,9 @@ function getResponseButton(view, time){
 	var html = '';
 	var response = DateTimeHelper.getSlotFromTimeMap(view.model.get('slots'), time);
 	//console.log(response)
-		html += `<button id="toggle-${time}" class="toggle-time-slot">`;
-		html += `${response.free}`;
+		var classList = "toggle-time-slot" + (response.free === 2 ? " free-slot" : " busy-slot");
+		html += `<button id="toggle-${time}" class="${classList}">`;
+		html += `${response.free === 2 ? "&#10004;" : "X"}`;
 		html += `</button>`;
 	return html;
 }
@@ -70,16 +84,21 @@ export var RSVPView = TimeGridView.extend({
 		return html;
 	},
 	renderAfterGrid: function(model){
-		return '';
+		var html = `<a id="faq-flicker"><p>FAQ: Why does the time grid flicker when I click a slot?</p></a>`;
+			html += `<button id="self-view" class="page-button">`;
+			html += "View All Responses";
+			html += `</button>`;
+		return html;
 	},
 	afterRender: function(){
 		setBindings(this);
+		this.model.saveResponses();
 	},
 	toggleSlot: function(time){
 		var allSlots = _.clone(this.model.get('slots'));
 		var targetIndex = -1;
 		for(var s = 0; s < allSlots.length; s++){
-			if(allSlots[s].time === time){
+			if(parseInt(allSlots[s].time) === parseInt(time)){
 				targetIndex = s;
 			}
 		}
@@ -97,13 +116,17 @@ export var RSVPView = TimeGridView.extend({
 			slot = _.clone(allSlots[targetIndex]);
 			allSlots.splice(targetIndex, 1);
 		}
+		/*console.log(targetIndex)
 		console.log(slot)
-		console.log(`TOGGLE ${time} FROM ${slot.free} TO ${slot.free === 2 ? 0 : 2}`)
+		console.log(`TOGGLE ${time} FROM ${slot.free} TO ${slot.free === 2 ? 0 : 2}`)*/
 		slot.free = slot.free === 2 ? 0 : 2;
-		console.log(slot)
+		//console.log(slot)
 		allSlots.push(slot);
 		this.model.set({
 			slots: allSlots
 		});
+	},
+	viewAllResponses: function(){
+		convertRSVPToTimeGrid(this.el.id, this.model);
 	}
 });

@@ -57,11 +57,13 @@ export const Meeting = Backbone.Model.extend({
         return dateList;
     },
 
-    saveMeeting: function(){
+    saveMeeting: function(quiet = false){
         if(this.get('timeOptions').length > 0 && this.getDateList().length > 0){
             var promise = Database.postMeeting(this.attributes);
             promise.then(function(response){
-                Front.displayUserError(response);
+                if(!quiet){
+                    Front.displayUserError(response);
+                }
             }).catch(function(reason){
                 Front.displayUserError(reason);
             });

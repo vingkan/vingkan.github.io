@@ -30,7 +30,7 @@ var SAMPLE_ID = "github-party";
 
 if(location.search.length > 1){
 	var searchID = location.search.substr(1);
-	SAMPLE_ID = searchID;
+	loadMeeting(searchID)
 }
 
 function loadMeeting(meetingID, callback){
@@ -88,6 +88,18 @@ $("#logo").on("click", function(){
 $("#menu-button").on("click", function(){
 	Menu.toggleSection('view-menu');
 });
+
+	$("#menu-find").on("click", function(){
+		Menu.toggleSection('find-meeting');
+	});
+
+	$("#menu-create").on("click", function(){
+		Menu.toggleSection('create-event');
+	});
+
+	$("#menu-about").on("click", function(){
+		Menu.toggleSection('about');
+	});
 
 $("#search-button").on("click", function(){
 	Front.checkMeetingName(this.id);
@@ -203,6 +215,8 @@ window.main_my_meetings = function(){
 				html += meeting.name;
 				html += `</button>`;
 			output.innerHTML += html;
+		});
+		meetings.forEach(meeting => {
 			$("#load-" + meeting.mid).on("click", function(){
 				loadMeeting(meeting.mid);
 			});
@@ -210,14 +224,33 @@ window.main_my_meetings = function(){
 	});
 }
 
-loadMeeting(SAMPLE_ID, function(view){
+/*loadMeeting(SAMPLE_ID, function(view){
 	view.rsvpToMeeting();
-});
+});*/
 
 window.convertTimeGridToRSVP = function(id, model){
 	var rsvpModel = new RSVPModel(model.attributes);
 	var rsvpView = new RSVPView({
 		model: rsvpModel,
 		el: document.getElementById(id)
+	});
+}
+
+window.convertRSVPToTimeGrid = function(id, model){
+	var model = new Meeting(model.attributes);
+	var grid = new TimeGridView({
+		model: model,
+		el: document.getElementById(id)
+	});
+}
+
+window.giveFeedback = function(){
+	vexDialog.prompt({
+		message: "Hi! Care to give us some feedback on omnipointment?",
+		placeholder: "ex. Cool name, app needs work.",
+		callback: function(feedback){
+			Database.postFeedback(feedback);
+			vexDialog.alert(`Thank you!<br>Check us out <a href="https://github.com/vingkan/omnipointment/">on GitHub.</a>`);
+		}
 	});
 }

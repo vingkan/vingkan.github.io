@@ -89,6 +89,18 @@ li{
 	margin: (0.15 * @textSize) auto;
 }
 
+a{
+	
+	color: @mainColor;
+	font-weight: bold;
+
+	&:hover{
+		text-decoration: none;
+		color: @freeGreen;
+	}
+
+}
+
 /*--------------------------------------------*/
 /*---> BODY <---------------------------------*/
 /*--------------------------------------------*/
@@ -456,6 +468,36 @@ div.headerSpace{
 	height: 11vh;
 }
 
+div.footerSpace{
+	height: 5vh;
+}
+
+footer{
+
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100vw;
+	height: 4vh;
+	background: @mainColor;
+	//TEXT STYLES
+	.BodyFont();
+	color: white;
+	text-align: center;
+	line-height: 4vh;
+	font-size: 2vh;
+
+	&:hover{
+		height: 5vh;
+		line-height: 5vh;
+		background: @freeGreen;
+		color: @charcoal;
+	}
+
+	.AnimateAll();
+
+}
+
 /*--------------------------------------------*/
 /*---> MENU <---------------------------------*/
 /*--------------------------------------------*/
@@ -489,6 +531,20 @@ div#menu{
 /*--------------------------------------------*/
 /*---> TABLES <-------------------------------*/
 /*--------------------------------------------*/
+
+button.toggle-time-slot{
+	width: 100%;
+	height: 100%;
+	color: white;
+}
+
+	button.free-slot{
+		background: @freeGreen;
+	}
+
+	button.busy-slot{
+		background: @busyRed;
+	}
 
 div#creator{
 
