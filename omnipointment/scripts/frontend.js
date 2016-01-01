@@ -113,7 +113,8 @@ export var Front = {
 			this.showUserImage();
 			success = true;
 		}
-		if(window.location.pathname === "/login.html"){
+		var paths = window.location.pathname.split("/");
+		if(paths[paths.length - 1] === "login.html"){
 			success = true;
 		}
 		return success;
