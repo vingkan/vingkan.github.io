@@ -20,6 +20,7 @@
 /*--------------------------------------------*/
 
 @textSize: 3vh;
+@tx: @textSize;
 
 @Raleway: 'Raleway', sans-serif;
 
@@ -37,12 +38,12 @@
 /*---> TEXT <---------------------------------*/
 /*--------------------------------------------*/
 
-p, h1, h2, h3, ul, li{
+p, h1, h2, h3, h4, ul, li{
 	.BodyFont();
 	margin: (0.5 * @textSize) auto;
 }
 
-h1, h2, h3{
+h1, h2, h3, h4{
 	.HeadFont();
 	text-align: center;
 	font-weight: bolder;
@@ -60,9 +61,14 @@ h2{
 	line-height: 1.5 * @textSize;
 }
 
-h2{
+h3{
 	font-size: 1.1 * @textSize;
 	line-height: 1.35 * @textSize;
+}
+
+h4{
+	font-size: 0.755 * @textSize;
+	line-height: 1.0 * @textSize;
 }
 
 p{
@@ -99,12 +105,7 @@ li{
 
 html{
 	background: url('img/tri-white.png');
-	//.FillBackgroundImage();
 	background-size: 20vh;
-	/*background-attachment: fixed;
-	background-position: top center;
-	background-size: auto 150%;*/
-	//Default Text Styles
 	.BodyFont();
 	font-size: @textSize;
 	color: white;
@@ -115,6 +116,7 @@ body{
 	margin: 0;
 	width: 98vw;
 	margin: 0 auto;
+	background: url('img/tri-white.png');
 }
 
 .AnimateAll(@time: 0.5s){
@@ -137,7 +139,9 @@ div.meeting-slider{
 
 div.container{
 
-	background: url('img/whiteDiagmonds.png');
+	//background: url('img/whiteDiagmonds.png');
+	box-shadow: 0 0 5vh rgba(26, 26, 26, 0.15);
+	background: white;
 	color: @charcoal;
 	width: 85vw;
 	padding: 2vh;
@@ -145,7 +149,7 @@ div.container{
 	margin-bottom: 2vh;
 	border-radius: 1vh;
 
-	button{
+	button.page-button{
 
 		width: 100%;
 		//background: url('img/purple.png');
@@ -167,6 +171,21 @@ div.container{
 
 	}
 
+	div.container-tag{
+		background: @mainColor;
+		position: absolute;
+		margin-top: -2vh;
+		padding: 0.5vh 1vh;
+		border-bottom-left-radius: 1vh;
+		border-bottom-right-radius: 1vh;
+		//TEXT STYLES
+		color: white;
+		.BodyFont();
+		height: 1.25 * @textSize;
+		line-height: 1.0 * @textSize;
+		font-size: 0.75 * @textSize;
+	}
+
 }
 
 center.two-buttons{
@@ -178,27 +197,28 @@ center.two-buttons{
 	}
 
 }
-div#menu{
 
-	button#search-button{
+input#search-meetings{
+	margin-bottom: 1vh;
+}
 
-		width: 2.0 * @textSize;
-		height: 2.0 * @textSize;
-		float: right;
-		position: relative;
-		margin-top: -2.0 * @textSize;
-		background: transparent;
-		color: @mainColor;
-		font-weight: bolder;
+button#search-button{
 
-		&:hover{
-			background: @mainColor;
-			color: white;
-		}
+	width: 2.0 * @textSize;
+	height: 2.0 * @textSize;
+	float: right;
+	position: relative;
+	margin-top: -7vh;
+	background: transparent;
+	color: @mainColor;
+	font-weight: bolder;
 
-		.AnimateAll();
-
+	&:hover{
+		background: @mainColor;
+		color: white;
 	}
+
+	.AnimateAll();
 
 }
 
@@ -234,6 +254,130 @@ section#create-event{
 }
 
 /*--------------------------------------------*/
+/*---> MEETING CREATOR <----------------------*/
+/*--------------------------------------------*/
+
+section#create-event{
+
+	table{
+		margin-top: 1vh;
+	}
+
+	input{
+		width: 96%;
+		margin: 1vh auto;
+	}
+
+	input[type="text"]{
+
+		background: #F2F2F2;
+		border-left: 1vh solid @mainColor;
+		//TEXT STYLES
+		text-align: center;
+		font-size: 0.75 * @tx;
+		line-height: 1.25 * @tx;
+		.BodyFont();
+
+		&:focus, &:hover{
+			border-left: 1vh solid @freeGreen;
+		}
+
+		.AnimateAll();
+
+	}
+
+	input#creator-name{
+		padding: 4% 2%;
+		//TEXT STYLES
+		text-align: center;
+		font-size: 1.25 * @tx;
+		color: @mainColor;
+		line-height: 1.5 * @tx;
+		.HeadFont();
+	}
+
+	textarea{
+
+		width: 96%;
+		max-width: 96%;
+		padding: 2%;
+		margin-top: 1.5vh;
+		margin-bottom: 1vh;
+		border-left: 1vh solid @mainColor;
+		background: #F2F2F2;
+		//TEXT STYLES
+		font-size: 1.00 * @tx;
+		color: @charcoal;
+		line-height: 1.25 * @tx;
+		.BodyFont();
+
+		&:focus, &:hover{
+			border-left: 1vh solid @freeGreen;
+		}
+
+		.AnimateAll();
+
+	}
+
+	button.remove-date, button.remove-time{
+		background: none;
+		color: @busyRed;
+		margin-left: 1vh;
+		//TEXT STYLES
+		font-size: 0.75 * @tx;
+		line-height: 1.25 * @tx;
+		.BodyFont();
+	}
+
+	button.half-button{
+		width: 45%;
+		height: 1.5 * @tx;
+		margin: 1vh;
+		display: inline-block;
+		//TEXT STYLES
+		font-size: 0.75 * @tx;
+		line-height: 1.5 * @tx;
+	}
+
+	div.input-label{
+
+		width: 15%;
+		display: inline-block;
+		//TEXT STYLES
+		font-size: 0.75 * @tx;
+		line-height: 1.25 * @tx;
+		.BodyFont();		
+
+		& + input{
+			width: 75%;
+			display: inline-block;
+		}
+
+	}
+
+}
+
+	//OVERRIDE BOOTSTRAP STYLES
+
+	div.bootstrap-timepicker-widget{
+
+		a{
+
+			background: #E5E5E5;
+			width: 1vh;
+			height: 1vh;
+			border-radius: 0.5vh;
+			
+			&:hover{
+				border: none;
+				outline: none;
+			}
+
+		}
+
+	}
+
+/*--------------------------------------------*/
 /*---> HEADER & FOOTER <----------------------*/
 /*--------------------------------------------*/
 
@@ -246,7 +390,8 @@ header{
 	left: 0;
 	border-top: 1vh solid @mainColor;
 	border-bottom: 1vh solid @mainColor;
-	height: 10vh;
+	box-shadow: 0 0 5vh rgba(26, 26, 26, 0.5);
+	height: 12vh;
 	z-index: 60;
 
 	img{
@@ -345,229 +490,151 @@ div#menu{
 /*---> TABLES <-------------------------------*/
 /*--------------------------------------------*/
 
-table{
-	margin: 1vh auto;
-	width: 98% - 2vh;
-	margin-bottom: 6.0 * @textSize;
+div#creator{
+
+	//TO-DO: No scrolling on the creator TimeGridView
+
+	div.table-slider{
+		width: 100%;
+		padding-bottom: 1vh;
+	}
+
+	table.time-grid-view{
+		table-layout: auto;
+	}
+
 }
 
-th{
-	font-size: 0.75 * @textSize;
-	height: 1.5 * @textSize;
-	line-height: 1.5 * @textSize;
-	background: @charcoal;
-	color: white;
-	width: 20vw;
+@cellWidth: 15vh;
+
+div.table-slider{
+	width: 100%;
+	overflow-x: auto;
+	padding-bottom: 1vh;
 }
 
-td.grid-label{
-	
-	div.slot{
-		background: @charcoal;
-	}
-	
-}
+table.time-grid-view{
 
-/*--------------------------------------------*/
-/*---> FILTER VIZ <---------------------------*/
-/*--------------------------------------------*/
+	background: @freeGreen;
+	overflow: hidden;
+	table-layout: fixed;
 
-table#filter-responses{
+	td, th{
 
-	div.slot{
-		overflow: visible;
-		//height: 3 * 1.5 * @textSize;
-		line-height: 1.5 * @textSize;
-		/*background: rgba(255, 255, 255, 0.5);
-		color: @charcoal;*/
-		font-weight: bold;
-		display: block;
-	}
-
-	/*div.grid-label{
-		background: @charcoal;
-		color: white;
-	}*/
-
-	div.pointer{
-		position: absolute;
-		margin: -2vh 2vh;
-		width: 0;
-		height: 0;
-		border-style: solid;
-		border-width: 0 2vh 2vh 2vh;
-		border-color: transparent transparent @charcoal transparent;
-	}
-
-	div.time-label{
-		display: none;
-	}
-
-	div.people-free{
-		background: @freeGreen;
-		color: @charcoal;
-		font-weight: bold;
-	}
-
-	div.slot:hover div.name-filter{
-		display: block;
-	}
-
-	div.name-filter{
-
-		display: none;
-		position: absolute;
-		z-index: 50;
-		margin-top: 0.25 * @textSize;
-		border: 0.25 * @textSize solid @charcoal;
-
-		background: @freeGreen;
-		color: @charcoal;
-		
-		margin-bottom: 0.5vh;
-
-		ul{
-
-			width: 100%;
-			margin: 0;
-			list-style: none;
-
-			li{
-				text-align: center;
-				font-size: 0.75 * @textSize;
-				line-height: 1.0 * @textSize;
-				list-style: none;
-				margin: (0.05 * @textSize) auto;
-				padding: 0.25 * @textSize;
-
-			}
+		div.grid-cell{
+			width: @cellWidth;
+			text-align: center;
+			height: 1.25 * @tx;
+			line-height: 1.25 * @tx;
+			font-size: 0.75 * @tx;
 		}
-
+		
 	}
 
-}
+	td.time-slot{
+		background: @freeGreen;
+		color: @charcoal;
+	}
 
-
-/*--------------------------------------------*/
-/*---> X-TAGS <-------------------------------*/
-/*--------------------------------------------*/
-
-x-timeslot, div.timeslot{
-	
-	div{
-
-		font-size: 0.75 * @textSize;
-		text-align: center;
+	.grid-label{
+		background: @charcoal;
 		color: white;
+	}
+
+	/*tr:hover td{
+		opacity: 0.5;
+	}
+
+	td, th{
+
+		position: relative;
 
 		&:hover{
-			//opacity: 0.5;
+			color: white !important;
 		}
 
-		.AnimateAll(0.25s);
-
-	}
-
-	div.slot{
-		padding: 2%;
-		margin: 2% auto;
-		width: 94%;
-		height: 1.5 * @textSize;
-		line-height: 1.5 * @textSize;
-		overflow: hidden;
-	}
-
-	div.priority{
-		background-image: url('img/trans-lines.png');
-		background-size: 5vh;
-		font-weight: bold;
-	}
-
-	div.popup{
-		
-		background: white;
-		border: 1vh solid @charcoal;
-		position: absolute;
-		margin-top: (0 * @textSize);
-		margin-left: 4vh;
-
-		button{
-
-			width: 100%;
-			padding: 1vh;
-			background: @charcoal;
-			color: @charcoal;
-			font-weight: bold;
-			text-align: center;
-			float: left;
-			clear: both;
-			display: inline-block;
-
-		}
-
-		div.pointer{
+		&:hover::after{
+			content: '';
 			position: absolute;
-			margin: -2vh 2vh;
-			width: 0;
-			height: 0;
-			border-style: solid;
-			border-width: 0 2vh 2vh 2vh;
-			border-color: transparent transparent @charcoal transparent;
-
-		}
-
-		button.available{
 			background: @freeGreen;
+			opacity: 1.0;
+			left: 0;
+			top: -50vh;
+			height: 100vh;
+			width: 100%;
+			z-index: 50;
 		}
 
-		button.partial{
-			background: @maybeYellow;
-		}
+	}*/
 
-		button.unavailable{
-			background: @busyRed;
+	/*tr::after{
+		content: "...";
+	}*/
+
+	.ArrowBox(@arrowColor, @arrowSize){
+
+		&:after {
+			bottom: 100%;
+			left: 50%;
+			border: solid transparent;
+			content: " ";
+			height: 0;
+			width: 0;
+			position: absolute;
+			pointer-events: none;
+			border-color: rgba(0, 0, 0, 0);
+			border-bottom-color: @arrowColor;
+			border-width: @arrowSize;
+			margin-left: -1 * @arrowSize;
 		}
 
 	}
 
-}
 
-div.is-free{
-	background-color: @freeGreen;
-	color: @charcoal !important;
-	font-weight: bold;
-}
+	td{
 
-div.maybe-free{
-	background-color: @maybeYellow;
-	color: @charcoal !important;
-	font-weight: bold;
-}
+		div.member-list{
 
-div.not-free{
-	background-color: gray;
-}
+			display: none;
+			position: absolute;
+			width: @cellWidth;
+			color: white;
+			@divBackground: rgba(26, 26, 26, 0.5);
+			background: @divBackground;
+			.ArrowBox(@divBackground, 1vh);
 
-div.visible{
-	display: block;
-}
+			ul{
+				//background: orange;
+			}
 
-div.invisible{
-	display: none;
-}
+			li{
+				list-style: none;
+				//TEXT STYLES
+				text-align: center;
+				font-size: 0.75 * @tx;
+				line-height: 1.25 * @tx;
+			}
 
-p.range-break{
-	height: 0.5 * @textSize;
-	line-height: 0;
+		}
+
+		&:hover div.member-list{
+			display: block;
+		}
+
+	}
+
+	.AnimateAll();
+
 }
 
 /*--------------------------------------------*/
 /*---> FORM <----------------------------------*/
 /*--------------------------------------------*/
 
-input, button, select{
+input, button, select, textarea{
 	outline: none;
 	border: none;
+	box-sizing: border-box;
 }
 
 input.underscore-bar{
@@ -588,136 +655,20 @@ input.underscore-bar{
 
 }
 
-option{
-	text-align: center;
-	width: 50%;
-}
+button.page-button{
 
-div.editorUI{
+	font-weight: bold;
+	height: 2.0 * @textSize;
 
-	background: url('img/whiteDiagmonds.png');
-	color: @charcoal;
-	width: 85vw;
-	padding: 2vh;
-	margin: 4vh auto;
-	border-radius: 1vh;
-
-	h1, h2, h3{
-		color: @charcoal;
+	&:hover{
+		height: 2.5 * @textSize;
 	}
 
-	input, button, select{
-		outline: none;
-		box-sizing: border-box;
-		margin: 0;
-		padding: 0;
-		height: 2.0 * @textSize;
-		font-size: 1.0 * @textSize;
-		text-align: center;
-		width: 96%;
-		margin: 1vh 2%;
-		.BodyFont();
-	}
-
-	input[type="date"]{
-		background: @lightGray;
-		padding-left: 2.6 * @textSize;
-		color: @charcoal;
-		font-weight: bold;
-		margin: 1vh auto;
-	}
-
-	div#selected-dates{
-
-		width: 92%;
-		margin: 1vh 2%;
-		padding: 1%;
-		background: @lightGray;
-
-		div.date-icon{
-			background: @mainColor;
-			width: 22%;
-			height: 1.5 * @textSize;
-			line-height: 1.5 * @textSize;
-			color: white;
-			border-radius: 0.5vh;
-			font-weight: bold;
-			text-align: center;
-			display: inline-block;
-			margin: 1%;
-		}
-
-	}
-
-	/*div.selector-label{
-		background: @charcoal;
-		color: white;
-		width: 2.0 * @textSize;
-		height: 1.8 * @textSize;
-		padding: (0.1 * @textSize) (0.2 * @textSize);
-		line-height: 2.0 * @textSize;
-		font-size: 0.75 * @textSize;
-		position: absolute;
-		margin-top: 1vh;
-		text-align: center;
-	}
-
-	div.start-label{
-		margin-left: 0.25 * @textSize;
-
-		&+ select{
-			padding-left: 1.8 * @textSize;
-		}
-	}
-
-	div.end-label{
-		margin-top: -7vh;
-		right: 0.25 * @textSize;
-	}*/
-
-	select{
-		background: @lightGray;
-		color: @charcoal;
-		font-weight: bold;
-		width: 45%;
-		display: inline-block;
-	}
-
-	button{
-
-		font-weight: bold;
-		height: 2.0 * @textSize;
-
-		&:hover{
-			height: 2.5 * @textSize;
-		}
-
-		.AnimateAll();
-
-	}
-
-	button.priority-setter{
-		width: 45%;
-		margin: 2%;
-		display: inline-block;
-	}
-
-	button#set-normal{
-		background: @maybeYellow;
-	}
-
-	button#set-priority{
-		background: @freeGreen;
-	}
-
-	button#add-meeting{
-		background: @mainColor;
-		color: white;
-	}
+	.AnimateAll();
 
 }
 
-button{
+button.page-button{
 
 	&:hover{
 		background: @freeGreen;
@@ -731,91 +682,95 @@ button{
 /*---> DRAGGING <-----------------------------*/
 /*--------------------------------------------*/
 
-button#toggle-drag{
-
-	width: 95%;
-	margin: 1vh 2.5%;
-	font-size: 0.65 * @textSize;
-
-	&.drag-disabled{
-
-		background: @busyRed;
-
-		&::before{
-			content: 'Dragging is disabled. Click to turn on.'
-		}
-	
-	}
-
-	&.drag-enabled{
-
-		background: @freeGreen;
-
-		&::before{
-			content: 'Dragging is enabled. Click to turn off.'
-		}
-	
-	}
-
-}
-
 /*--------------------------------------------*/
 /*---> POPUPS <-------------------------------*/
 /*--------------------------------------------*/
 
-//NAME CONFLICT WITH RSVP POPUPS: DO NOT USE!
+/*--------------------------------------------*/
+/*---> LOADING SCREEN <------------------------*/
+/*--------------------------------------------*/
 
-/*div.popup{
+.CircularRotation(@time: 2s, @degrees: 360deg){
+	@-webkit-keyframes circularRotation{
+		from{
+			transform: rotate(0deg);
+		}
+		to{
+			transform: rotate(@degrees);
+		}
+	}
+	animation: circularRotation @time linear infinite;
+}
 
-	position: fixed;
-	left: 25vw;
-	width: 50vw;
-	background: @mainColor;
+div.loading{
 
-	h2{
+	@clockDiameter: 15vw;
+	height: @clockDiameter;
+	width: 96%;
+	padding: 2%;
+	margin-top: 2vh;
+	background: url('img/tri-white.png');
+	background-size: 50%;
+
+	@-webkit-keyframes backgroundFun{
+		from{
+			background-position: 0%;
+		}
+		to{
+			background-position: 100%;
+		}
+	}
+	animation: backgroundFun 2s linear infinite;
+
+	h3{
+		line-height: @clockDiameter;
+		margin-top: -0.5%;
+	}
+
+	img{
+		width: @clockDiameter;
+		position: absolute;
+	}
+
+	img:nth-child(1){
+		.CircularRotation(60s);
+	}
+
+	img:nth-child(2){
+		.CircularRotation(30s);
+	}
+
+	img:nth-child(3){
+		.CircularRotation(2s);
+	}
+
+}
+
+/*--------------------------------------------*/
+/*---> USER ERROR OUTPUT <--------------------*/
+/*--------------------------------------------*/
+
+div#error-output{
+
+	background: @busyRed;
+	border: 0.5vh solid darken(@busyRed, 10%);
+	display: none;
+	margin: 2vh auto;
+
+	p{
+	
 		color: white;
-	}
-
-	textarea{
-		width: 90%;
-		padding: 5%;
-		height: 5.0 * @textSize;
-		border: none;
-		outline: none;
-		font-size: 0.75 * @textSize;
-		line-height: 1.25 * @textSize;
-		font-family: @SourceSansPro;
-	}
-
-	button{
-
-		width: 20vw;
-		margin: 1.5vh 15vw;
-		background: url('img/tri-white.png');
-		font-size: 0.75 * @textSize;
-		line-height: 1.25 * @textSize;
-		font-weight: bolder;
-		color: @mainColor;
-
-		&:hover{
-			background: @freeGreen;
+		font-size: 0.75 * @tx;
+		margin: 0;
+	
+		&::after{
+			content: ' (Click to Close)';
+			font-size: 0.5 * @tx;
 		}
 
-		.AnimateAll();
-
 	}
 
 }
-
-div.popup-opened{
-	position: fixed;
-	bottom: 0;
-}
-
-div.popup-closed{
-	position: fixed;
-	bottom: 100vh;
-}*/
 
 /*--------------------------------------------*/
 /*---> SCROLLBAR <----------------------------*/

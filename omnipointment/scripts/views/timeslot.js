@@ -117,6 +117,8 @@ var TimeSlotView = Backbone.View.extend({
        * this accounts for dragging over different types of slots
       */
       this.model.set({ free: value });
+      console.log(value)
+      updateAvailability();
     },
 
     previewToggle: function(value){

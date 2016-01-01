@@ -26,13 +26,7 @@
 		<!-- STYLE -->
 		<style>
 
-			section{
-				display: none;
-			}
 
-			section#view-menu{
-				display: block;
-			}
 
 		</style>
 	</head>
@@ -49,44 +43,16 @@
 
 		<div class="headerSpace"></div>
 
-		<section id="view-menu">
+		<section>
+
 			<div class="container">
-				<h1>Menu</h1>
-				<button class="page-button">Find Meeting</button>
-				<button class="page-button" onclick="main_my_meetings();">My Meetings</button>
-				<button class="page-button" onclick="window.location = 'create.html';">Create Meeting</button>
-				<button class="page-button">About</button>
-				<button class="page-button" onclick="window.location = 'login.html';">Logout</button>
+				<h1>Login</h1>
+				<button class="page-button" onclick="googleLogin();">Google</button>
 			</div>
+
 		</section>
 
-		<section id="find-meeting">
-			<div class="container">
-				<h1>Find Meeting</h1>
-				<p>You can open a meeting request by entering its appointment id.</p>
-				<center>
-					<input type="text" id='search-meetings' class="underscore-bar check-meeting-name" placeholder="appointment id">
-					<button id="search-button" onclick="searchMeetings(this.value);">&#128269;</button>
-				</center>
-				<div id="demo"></div>
-				<!-- <button id="demo-toggle">Toggle</button> -->
-				<div id="grid"></div>
-			</div>
-		</section>
-
-		<section id="my-meetings">
-			<div class="container">
-				<h1>My Meetings</h1>
-				<div id="meetings-list"></div>
-			</div>
-		</section>
-
-		<section id="about">
-			<div class="container">
-				<p>Use Omnipointment for omnipotent appointments.</p>
-			</div>
-		</section>
-
+		<script src="scripts/auth.js"></script>
 		<script src="bundle.js"></script>
 
 		<script type="text/javascript">
