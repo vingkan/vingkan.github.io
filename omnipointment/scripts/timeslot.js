@@ -34,7 +34,9 @@ export var TimeSlotModel = Backbone.Model.extend({
 		promise.then(function(data){
 			if(data.userIsNew){
 				var userList = _.clone(meetingModel.get('users'));
-				userList.push(slotUID);
+				if(userList.indexOf(slotUID) < 0){
+					userList.push(slotUID);
+				}
 				meetingModel.set({
 					users: userList
 				}, {silent: true});
