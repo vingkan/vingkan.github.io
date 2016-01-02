@@ -18,15 +18,13 @@ import {Meeting} from './meeting';
 //FirebaseHandler.handle();
 vex.defaultOptions.className = 'vex-theme-wireframe';
 
-if(!Front.loadUser()){
-	window.location = 'login.html';
-}
+Front.getUID();
 
 function searchMeetings(value){
 	loadMeeting(value);
 }
 
-var SAMPLE_ID = "github-party";
+var SAMPLE_ID = "sample-meeting";
 
 if(location.search.length > 1){
 	var searchID = location.search.substr(1);
@@ -106,7 +104,7 @@ $("#search-button").on("click", function(){
 	searchMeetings(this.value);
 });
 
-$('#search-meetings').keypress(function(event){
+$("#search-meetings").keypress(function(event){
 	if(event.keyCode == 13){
 		Front.checkMeetingName(this.id);
 		searchMeetings(this.value);
@@ -226,6 +224,8 @@ window.main_my_meetings = function(){
 
 /*loadMeeting(SAMPLE_ID, function(view){
 	view.rsvpToMeeting();
+	//view.getSlotData(1452555000000);
+	//view.inviteUsers();
 });*/
 
 window.convertTimeGridToRSVP = function(id, model){
@@ -249,8 +249,10 @@ window.giveFeedback = function(){
 		message: "Hi! Care to give us some feedback on omnipointment?",
 		placeholder: "ex. Cool name, app needs work.",
 		callback: function(feedback){
-			Database.postFeedback(feedback);
-			vexDialog.alert(`Thank you!<br>Check us out <a href="https://github.com/vingkan/omnipointment/">on GitHub.</a>`);
+			if(feedback){
+				Database.postFeedback(feedback);
+				vexDialog.alert(`Thank you!<br>Check us out <a href="https://github.com/vingkan/omnipointment/">on GitHub.</a>`);
+			}
 		}
 	});
 }

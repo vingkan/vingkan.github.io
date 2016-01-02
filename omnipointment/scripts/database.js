@@ -12,7 +12,7 @@ var PATH = "https://omnipointment.firebaseio.com";
  */
 function getMeetingById(id){
 	var meetingPromise = new Promise(function(resolve, reject){
-		var firebase = new Firebase(`${PATH}/meetings/${id}/`);	
+		var firebase = new Firebase(`${PATH}/meetings/${id}/`);
 		firebase.once("value", function(snapshot){
 			var meeting = snapshot.val();
 			if(meeting === null){
@@ -137,7 +137,9 @@ function getUserInformation(userID){
 			var profile = snapshot.val();
 			resolve({
 				uid: userID,
-				name: profile.name
+				name: profile.name,
+				img: profile.img,
+				email: profile.email
 			});
 		});
 	});
@@ -166,6 +168,7 @@ function postMeeting(meeting){
 function postUserResponses(userID, meetingID, responses){
 	var postPromise = new Promise(function(resolve, reject){
 		if(responses.length > 0){
+			//Check if user is in meeting's user list, if not, add user ID
 			var meetingRef = new Firebase(`${PATH}/meetings/${meetingID}/users`);
 				meetingRef.once("value", function(snapshot){
 					var users = JSON.parse(snapshot.val());
@@ -174,10 +177,51 @@ function postUserResponses(userID, meetingID, responses){
 					}
 					meetingRef.set(JSON.stringify(users));
 				});
+			//Post list of responses
 			var firebase = new Firebase(`${PATH}/users/${userID}/meetings/${meetingID}`);
 			firebase.set(JSON.stringify(responses));
 			resolve("Responses saved successfully!");
 		}
+	});
+	return postPromise;
+}
+
+function postTimeSlot(userID, meetingID, timeSlot){
+	var postPromise = new Promise(function(resolve, reject){
+		if(timeSlot.free > 0){
+			//Check if user is in meeting's user list, if not, add user ID
+			var meetingRef = new Firebase(`${PATH}/meetings/${meetingID}/users`);
+				meetingRef.once("value", function(snapshot){
+					var users = JSON.parse(snapshot.val());
+					if(users.indexOf(userID) < 0){
+						users.push(userID);
+					}
+					meetingRef.set(JSON.stringify(users));
+				});
+		}
+		//Post timeslot response
+		var firebase = new Firebase(`${PATH}/users/${userID}/meetings/${meetingID}`);
+		firebase.once("value", function(snapshot){
+			var responses = JSON.parse(snapshot.val());
+			var newResponses = [];
+			var found = false;
+			responses.forEach(slot => {
+				if(parseInt(slot.time) === parseInt(timeSlot.time)){
+					found = true;
+					if(parseInt(slot.free) !== parseInt(slot.free)){
+						newResponses.push(timeSlot);
+					}
+				}
+				else{
+					newResponses.push(slot);
+				}
+			});
+			if(!found){
+				newResponses.push(timeSlot);
+			}
+			firebase.set(JSON.stringify(newResponses));
+		});
+		resolve("Response saved successfully!");
 	});
 	return postPromise;
 }
@@ -210,6 +254,56 @@ function postFeedback(feedback){
 	});
 }
 
+function addUserToMeeting(meetingID, userEmail){
+	var addPromise = new Promise(function(resolve, reject){
+		var users = new Firebase(`${PATH}/users/`);
+		users.once("value", function(snapshot){
+			var allUsers = snapshot.val();
+			var userData = null;
+			for(var uid in allUsers){
+				var userRef = allUsers[uid];
+				if(userRef.google.email === userEmail){
+					userData = userRef.google;
+				}
+			}
+			if(userData === null){
+				reject({
+					message: "That person does not have an Omnipointment account. Invite them to join!",
+					success: false,
+					data: null
+				});
+			}
+			else{
+				//Add user to meeting's users list
+				var meetingRef = new Firebase(`${PATH}/meetings/${meetingID}/users`);
+				meetingRef.once("value", function(snapshot){
+					var users = JSON.parse(snapshot.val());
+					if(users.indexOf(userData.uid) < 0){
+						users.push(userData.uid);
+						meetingRef.set(JSON.stringify(users));
+						//Create space for user's timeslots
+						var userMeeting = new Firebase(`${PATH}/users/${userData.uid}/meetings/${meetingID}`);
+						userMeeting.set(JSON.stringify([]));
+						resolve({
+							message: userData.name + " was successfully invited!",
+							success: true,
+							data: userData.uid
+						});
+					}
+					else{
+						reject({
+							message: userData.name + " was already invited to this meeting.",
+							success: false,
+							data: null
+						});
+					}
+				});
+			}
+		});
+	});
+	return addPromise;
+}
+
 export var Database = {
 	getMeetingById: getMeetingById,
 	getMeetingTimeSlots: getMeetingTimeSlots,
@@ -217,6 +311,8 @@ export var Database = {
 	getUserTimeSlots: getUserTimeSlots,
 	postMeeting: postMeeting,
 	postUserResponses: postUserResponses,
+	postTimeSlot: postTimeSlot,
 	meetingIDExists: meetingIDExists,
-	postFeedback: postFeedback
+	postFeedback: postFeedback,
+	addUserToMeeting: addUserToMeeting
 }

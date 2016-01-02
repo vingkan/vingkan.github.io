@@ -92,7 +92,7 @@ export var DateTimeHelper = {
 	 * @Param time: timestamp of the desired timeSlot
 	 * @Return list: the matching timeSlot, if none, will return a timeSlot set to zero
 	 */
-	getSlotFromTimeMap: function(map, time){
+	getSlotFromTimeMap: function(map, time, overrides = false){
 		var response = {
 			time: time,
 			duration: 15,
@@ -103,6 +103,9 @@ export var DateTimeHelper = {
 				response = slot;
 			}
 		});
+		if(overrides){
+			response = _.extend(response, overrides);
+		}
 		return response;
 	},
 

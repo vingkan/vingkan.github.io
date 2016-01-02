@@ -210,9 +210,9 @@ center.two-buttons{
 
 }
 
-input#search-meetings{
+/*input#search-meetings{
 	margin-bottom: 1vh;
-}
+}*/
 
 button#search-button{
 
@@ -571,25 +571,29 @@ div.table-slider{
 
 table.time-grid-view{
 
-	background: @freeGreen;
+	background: transparent;
 	overflow: hidden;
 	table-layout: fixed;
 
 	td, th{
 
 		div.grid-cell{
+
 			width: @cellWidth;
 			text-align: center;
 			height: 1.25 * @tx;
 			line-height: 1.25 * @tx;
 			font-size: 0.75 * @tx;
+
+			&:hover{
+				background: @charcoal;
+				color: white;
+			}
+
+			.AnimateAll();
+
 		}
 		
-	}
-
-	td.time-slot{
-		background: @freeGreen;
-		color: @charcoal;
 	}
 
 	.grid-label{
@@ -597,86 +601,61 @@ table.time-grid-view{
 		color: white;
 	}
 
-	/*tr:hover td{
+	.AnimateAll();
+
+}
+
+/*--------------------------------------------*/
+/*---> TEAMMATE VIEWS <-----------------------*/
+/*--------------------------------------------*/
+
+.ArrowBox(@arrowColor, @arrowSize){
+
+	&:after {
+		bottom: 100%;
+		left: 50%;
+		border: solid transparent;
+		content: " ";
+		height: 0;
+		width: 0;
+		position: absolute;
+		pointer-events: none;
+		border-color: rgba(0, 0, 0, 0);
+		border-bottom-color: @arrowColor;
+		border-width: @arrowSize;
+		margin-left: -1 * @arrowSize;
+	}
+
+}
+
+div.member-data{
+
+	width: 100%;
+	margin-top: 1vh;
+
+	@rowHeight: 6vh;
+
+	div.member-data-img{
+		height: @rowHeight;
+		width: @rowHeight;
+		background-size: @rowHeight;
+		border-radius: @rowHeight / 2;
+		display: inline-block;
+	}
+
+	div.member-data-name{
+		height: @rowHeight;
+		line-height: @rowHeight;
+		font-size: @rowHeight / 2;
+		position: absolute;
+		display: inline-block;
+		margin-left: 2vh;
+		.BodyFont();
+	}
+
+	&:hover{
 		opacity: 0.5;
-	}
-
-	td, th{
-
-		position: relative;
-
-		&:hover{
-			color: white !important;
-		}
-
-		&:hover::after{
-			content: '';
-			position: absolute;
-			background: @freeGreen;
-			opacity: 1.0;
-			left: 0;
-			top: -50vh;
-			height: 100vh;
-			width: 100%;
-			z-index: 50;
-		}
-
-	}*/
-
-	/*tr::after{
-		content: "...";
-	}*/
-
-	.ArrowBox(@arrowColor, @arrowSize){
-
-		&:after {
-			bottom: 100%;
-			left: 50%;
-			border: solid transparent;
-			content: " ";
-			height: 0;
-			width: 0;
-			position: absolute;
-			pointer-events: none;
-			border-color: rgba(0, 0, 0, 0);
-			border-bottom-color: @arrowColor;
-			border-width: @arrowSize;
-			margin-left: -1 * @arrowSize;
-		}
-
-	}
-
-
-	td{
-
-		div.member-list{
-
-			display: none;
-			position: absolute;
-			width: @cellWidth;
-			color: white;
-			@divBackground: rgba(26, 26, 26, 0.5);
-			background: @divBackground;
-			.ArrowBox(@divBackground, 1vh);
-
-			ul{
-				//background: orange;
-			}
-
-			li{
-				list-style: none;
-				//TEXT STYLES
-				text-align: center;
-				font-size: 0.75 * @tx;
-				line-height: 1.25 * @tx;
-			}
-
-		}
-
-		&:hover div.member-list{
-			display: block;
-		}
-
+		margin-left: -1vh;
 	}
 
 	.AnimateAll();
@@ -697,6 +676,7 @@ input.underscore-bar{
 
 	width: 100%;
 	color: @charcoal;
+	margin-bottom: 1vh;
 	border-bottom: 1vh solid @mainColor;
 	text-align: center;
 	height: 2.0 * @textSize;
@@ -806,7 +786,7 @@ div.loading{
 /*---> USER ERROR OUTPUT <--------------------*/
 /*--------------------------------------------*/
 
-div#error-output{
+div.error-output{
 
 	background: @busyRed;
 	border: 0.5vh solid darken(@busyRed, 10%);
@@ -827,6 +807,26 @@ div#error-output{
 	}
 
 }
+
+p.p-alert{
+
+	width: 100%;
+	padding: 1%;
+	font-size: 0.75 * @tx;
+	margin: 0;
+
+
+}
+
+	p.success{
+		background: @freeGreen;
+		color: @charcoal !important;
+	}
+
+	p.failure{
+		background: @busyRed;
+		color: white !important;
+	}
 
 /*--------------------------------------------*/
 /*---> SCROLLBAR <----------------------------*/

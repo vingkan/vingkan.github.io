@@ -98,26 +98,20 @@ export var Front = {
 	},
 	getUID: function(){
 		var uid = sessionStorage.getItem('uid');
-		if(uid === null){
-			window.location = 'login.html';
+		var paths = window.location.pathname.split("/");
+		if(paths[paths.length - 1] === "login.html"){
+			//Do Nothing
+		}
+		else{
+			if(uid === null){
+				window.location = 'login.html';
+			}
 		}
 		return uid;
 	},
 	loadUser: function(){
-		var success = false;
-		var uid = sessionStorage.getItem('uid');
-		if(uid === null){
-			success = false;
-		}
-		else{
-			this.showUserImage();
-			success = true;
-		}
-		var paths = window.location.pathname.split("/");
-		if(paths[paths.length - 1] === "login.html"){
-			success = true;
-		}
-		return success;
+		this.getUID();
+		this.showUserImage();
 	},
 	showUserImage: function(){
 		var imgURL = sessionStorage.getItem('img');

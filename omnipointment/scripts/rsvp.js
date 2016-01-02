@@ -43,29 +43,38 @@ export var RSVPModel = Meeting.extend({
 
 function setBindings(view){
 
-	$(".toggle-time-slot").on("click", function(){
-		var time = parseInt(this.id.split("-")[1]);
-		view.toggleSlot(time);
-	});
-
-	$("#faq-flicker").on("click", function(){
-		vexDialog.alert("Q: Why does the time grid flicker when I click a slot?<br>A: Oh, you're a curious one! Right now, the table you are RSVPing to refreshes whenever a slot inside it changes. In an upcoming upgrade, we will make slots only refresh themselves.")
-	});
-
 	$("#self-view").on("click", function(){
 		view.viewAllResponses();
+	});
+
+	$("#self-invite").on("click", function(){
+		view.inviteUsers();
+	});
+
+	//Assign models to their respective cells
+	var slotList = view.model.get('slots')
+	var timeMapPromise = view.getTimeMap();
+	timeMapPromise.then(function(timeMap){
+		timeMap.forEach(cell => {
+			var overrides = {
+				uid: view.model.get('responder'),
+				mid: view.model.get('mid')
+			}
+			var slot = DateTimeHelper.getSlotFromTimeMap(slotList, cell.time, overrides);
+			var idPath = 'time-slot-button-' + slot.time;
+			var slotModel = new TimeSlotModel(slot);
+			var slotView = new TimeSlotView({
+				model: slotModel,
+				el: document.getElementById(idPath)
+			});
+		});
 	});
 
 }
 
 function getResponseButton(view, time){
 	var html = '';
-	var response = DateTimeHelper.getSlotFromTimeMap(view.model.get('slots'), time);
-	//console.log(response)
-		var classList = "toggle-time-slot" + (response.free === 2 ? " free-slot" : " busy-slot");
-		html += `<button id="toggle-${time}" class="${classList}">`;
-		html += `${response.free === 2 ? "&#10004;" : "X"}`;
-		html += `</button>`;
+		html = `<div id="time-slot-button-${time}"></div>`;
 	return html;
 }
 
@@ -84,47 +93,20 @@ export var RSVPView = TimeGridView.extend({
 		return html;
 	},
 	renderAfterGrid: function(model){
-		var html = `<a id="faq-flicker"><p>FAQ: Why does the time grid flicker when I click a slot?</p></a>`;
+		var html = '';
 			html += `<button id="self-view" class="page-button">`;
 			html += "View All Responses";
 			html += `</button>`;
+			if(this.model.get('responder') === this.model.get('creator')){
+				html += `<button id="self-invite" class="page-button">`;
+				html += "Invite Others";
+				html += `</button>`;
+			}
 		return html;
 	},
 	afterRender: function(){
 		setBindings(this);
 		this.model.saveResponses();
-	},
-	toggleSlot: function(time){
-		var allSlots = _.clone(this.model.get('slots'));
-		var targetIndex = -1;
-		for(var s = 0; s < allSlots.length; s++){
-			if(parseInt(allSlots[s].time) === parseInt(time)){
-				targetIndex = s;
-			}
-		}
-		var slot;
-		if(targetIndex < 0){
-			slot = {
-				uid: this.model.get("responder"),
-				mid: this.model.get("mid"),
-				time: time,
-				duration: 15,
-				free: 0
-			};
-		}
-		else{
-			slot = _.clone(allSlots[targetIndex]);
-			allSlots.splice(targetIndex, 1);
-		}
-		/*console.log(targetIndex)
-		console.log(slot)
-		console.log(`TOGGLE ${time} FROM ${slot.free} TO ${slot.free === 2 ? 0 : 2}`)*/
-		slot.free = slot.free === 2 ? 0 : 2;
-		//console.log(slot)
-		allSlots.push(slot);
-		this.model.set({
-			slots: allSlots
-		});
 	},
 	viewAllResponses: function(){
 		convertRSVPToTimeGrid(this.el.id, this.model);
