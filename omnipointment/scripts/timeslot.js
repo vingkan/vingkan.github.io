@@ -12,7 +12,8 @@ export var TimeSlotModel = Backbone.Model.extend({
 		duration: 15,
 		uid: '',
 		mid: '',
-		free: 0
+		free: 0,
+		meeting: null
 	},
 	initialize: function(){
 
@@ -21,11 +22,24 @@ export var TimeSlotModel = Backbone.Model.extend({
 		return _.extend(this.attributes);
 	},
 	saveResponse: function(){
-		Database.postTimeSlot(
+		var slotUID = this.get('uid');
+		var meetingModel = this.get('meeting');
+		var timeSlotData = _.clone(this.attributes);
+			timeSlotData.meeting = null;
+		var promise = Database.postTimeSlot(
 			this.get('uid'),
 			this.get('mid'),
-			this.attributes
+			timeSlotData
 		);
+		promise.then(function(data){
+			if(data.userIsNew){
+				var userList = _.clone(meetingModel.get('users'));
+				userList.push(slotUID);
+				meetingModel.set({
+					users: userList
+				}, {silent: true});
+			}
+		});
 	}
 });
 

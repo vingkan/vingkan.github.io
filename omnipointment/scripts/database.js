@@ -203,25 +203,37 @@ function postTimeSlot(userID, meetingID, timeSlot){
 		var firebase = new Firebase(`${PATH}/users/${userID}/meetings/${meetingID}`);
 		firebase.once("value", function(snapshot){
 			var responses = JSON.parse(snapshot.val());
-			var newResponses = [];
-			var found = false;
-			responses.forEach(slot => {
-				if(parseInt(slot.time) === parseInt(timeSlot.time)){
-					found = true;
-					if(parseInt(slot.free) !== parseInt(slot.free)){
-						newResponses.push(timeSlot);
-					}
-				}
-				else{
-					newResponses.push(slot);
-				}
-			});
-			if(!found){
-				newResponses.push(timeSlot);
+			if(responses === null){
+				firebase.set(JSON.stringify([timeSlot]));
+				resolve({
+					message: "Response saved successfully!",
+					userIsNew: true
+				});
 			}
-			firebase.set(JSON.stringify(newResponses));
+			else{
+				var newResponses = [];
+				var found = false;
+				responses.forEach(slot => {
+					if(parseInt(slot.time) === parseInt(timeSlot.time)){
+						found = true;
+						if(parseInt(slot.free) !== parseInt(slot.free)){
+							newResponses.push(timeSlot);
+						}
+					}
+					else{
+						newResponses.push(slot);
+					}
+				});
+				if(!found){
+					newResponses.push(timeSlot);
+				}
+				firebase.set(JSON.stringify(newResponses));
+				resolve({
+					message: "Response saved successfully!",
+					userIsNew: false
+				});
+			}
 		});
-		resolve("Response saved successfully!");
 	});
 	return postPromise;
 }

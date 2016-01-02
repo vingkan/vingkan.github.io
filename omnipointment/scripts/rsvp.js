@@ -62,7 +62,10 @@ function setBindings(view){
 			}
 			var slot = DateTimeHelper.getSlotFromTimeMap(slotList, cell.time, overrides);
 			var idPath = 'time-slot-button-' + slot.time;
-			var slotModel = new TimeSlotModel(slot);
+			var data = _.extend(slot, {
+				meeting: view.model
+			});
+			var slotModel = new TimeSlotModel(data);
 			var slotView = new TimeSlotView({
 				model: slotModel,
 				el: document.getElementById(idPath)
