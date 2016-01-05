@@ -6,8 +6,8 @@
 		<!-- JQuery -->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<!-- BOOTSTRAP STYLES -->
-		<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/latest/css/bootstrap.css" />
-		<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+		<link rel="stylesheet" type="text/css" href="imports/global-bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="imports/global-bootstrap-datepicker.css" />
 		<link rel="stylesheet" type="text/css" href="imports/bootstrap-timepicker.min.css" />
 		<!-- VEX.JS STYLES -->
 		<link rel="stylesheet" type="text/css" href="imports/vex.css" />
@@ -46,8 +46,13 @@
 		<section>
 
 			<div class="container">
-				<h1>Login</h1>
-				<button class="page-button" onclick="googleLogin();">Google</button>
+				<h1>The Prototype</h1>
+				<p>Can't wait for omnipointment.com to launch? Try our minimum viable product now!</p>
+				<h2>Features</h2>
+				<ul>
+					<li>Create meetings.</li>
+				</ul>
+				<button class="page-button" onclick="googleLogin();">Login with Google</button>
 			</div>
 
 		</section>
@@ -56,6 +61,15 @@
 		<script src="bundle.js"></script>
 
 		<script type="text/javascript">
+
+		function signup(){
+			var firebase = new Firebase("https://omnipointment.firebaseio.com/signup");
+			/*firebase.push({
+				email: 
+			});*/
+		}
+
+		
 
 			
 
