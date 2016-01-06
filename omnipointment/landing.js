@@ -15,7 +15,7 @@ var SAMPLE_MEMBERS = [
 	},
 	{
 		name: "The Sleepy One",
-		picture: "style/propic/evan.png"
+		picture: "style/propic/evan.PNG"
 	},
 ]
 
