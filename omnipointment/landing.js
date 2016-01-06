@@ -72,6 +72,7 @@ function showSlotData(timestamp, numFree){
 	else{
 		html += '<p>No one is free :(</p>';
 	}
+	html += "<p>You don't always get to choose your teammates, but you should be able to choose when you meet.</p>";
 	vex.dialog.alert(html);
 }
 
