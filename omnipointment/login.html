@@ -9,9 +9,10 @@
 		<link rel="stylesheet" type="text/css" href="imports/global-bootstrap.css" />
 		<link rel="stylesheet" type="text/css" href="imports/global-bootstrap-datepicker.css" />
 		<link rel="stylesheet" type="text/css" href="imports/bootstrap-timepicker.min.css" />
-		<!-- VEX.JS STYLES -->
+		<!-- VEX.JS -->
 		<link rel="stylesheet" type="text/css" href="imports/vex.css" />
 		<link rel="stylesheet" type="text/css" href="imports/vex-theme-wireframe.css" />
+		<script type="text/javascript" src="imports/vex.combined.min.js"></script>
 		<!-- NATIVE STYLES -->
 		<link rel="stylesheet" type="text/css" href="style/main.css">
 		<link rel="icon" type="img/png" href="style/favicon.png" style="width:30px;">
@@ -46,32 +47,51 @@
 		<section>
 
 			<div class="container">
+
+				<p>Group chats, long emails, and even Doodle are clumsy ways to schedule your team's meeting...</p>
+
+				<div id="grid">
+					<center>
+						<h1>Omnipotent Appointments</h1>
+						<p>Omnipointment merges whole team's availability to reveal the best time to meet.</p>
+						<div class="table-slider">
+							<table class="time-grid-view"><tbody><tr><td class="grid-label"><div class="grid-cell">Time</div></td><td class="grid-label"><div class="grid-cell">1/11</div></td><td class="grid-label"><div class="grid-cell">1/12</div></td><td class="grid-label"><div class="grid-cell">1/13</div></td><td class="grid-label"><div class="grid-cell">1/14</div></td><td class="grid-label"><div class="grid-cell">1/15</div></td></tr><tr><td class="grid-label"><div class="grid-cell">5:00 PM</div></td><td class="time-slot " style="background: rgba(179, 255, 153, 0.5);"><div class="grid-cell has-slot-data" id="slot-data-1452553200000">4</div></td><td class="time-slot " style="background: rgba(179, 255, 153, 0.25);"><div class="grid-cell has-slot-data" id="slot-data-1452639600000">2</div></td><td class="time-slot " style="background: rgba(179, 255, 153, 0.125);"><div class="grid-cell has-slot-data" id="slot-data-1452726000000">1</div></td><td class="time-slot " style="background: rgba(179, 255, 153, 0);"><div class="grid-cell has-slot-data" id="slot-data-1452812400000">0</div></td><td class="time-slot " style="background: rgba(179, 255, 153, 0);"><div class="grid-cell has-slot-data" id="slot-data-1452898800000">0</div></td></tr><tr><td class="grid-label"><div class="grid-cell">5:15 PM</div></td><td class="time-slot " style="background: rgba(179, 255, 153, 0.5);"><div class="grid-cell has-slot-data" id="slot-data-1452554100000">4</div></td><td class="time-slot " style="background: rgba(179, 255, 153, 0.25);"><div class="grid-cell has-slot-data" id="slot-data-1452640500000">2</div></td><td class="time-slot " style="background: rgba(179, 255, 153, 0.125);"><div class="grid-cell has-slot-data" id="slot-data-1452726900000">1</div></td><td class="time-slot " style="background: rgba(179, 255, 153, 0.125);"><div class="grid-cell has-slot-data" id="slot-data-1452813300000">1</div></td><td class="time-slot " style="background: rgba(179, 255, 153, 0);"><div class="grid-cell has-slot-data" id="slot-data-1452899700000">0</div></td></tr><tr><td class="grid-label"><div class="grid-cell">5:30 PM</div></td><td class="time-slot " style="background: rgba(179, 255, 153, 0.5);"><div class="grid-cell has-slot-data" id="slot-data-1452555000000">4</div></td><td class="time-slot " style="background: rgba(179, 255, 153, 0.25);"><div class="grid-cell has-slot-data" id="slot-data-1452641400000">2</div></td><td class="time-slot " style="background: rgba(179, 255, 153, 0.125);"><div class="grid-cell has-slot-data" id="slot-data-1452727800000">1</div></td><td class="time-slot " style="background: rgba(179, 255, 153, 0.125);"><div class="grid-cell has-slot-data" id="slot-data-1452814200000">1</div></td><td class="time-slot " style="background: rgba(179, 255, 153, 0);"><div class="grid-cell has-slot-data" id="slot-data-1452900600000">0</div></td></tr><tr><td class="grid-label"><div class="grid-cell">5:45 PM</div></td><td class="time-slot " style="background: rgba(179, 255, 153, 0.375);"><div class="grid-cell has-slot-data" id="slot-data-1452555900000">3</div></td><td class="time-slot " style="background: rgba(179, 255, 153, 0.5);"><div class="grid-cell has-slot-data" id="slot-data-1452642300000">4</div></td><td class="time-slot " style="background: rgba(179, 255, 153, 0.25);"><div class="grid-cell has-slot-data" id="slot-data-1452728700000">2</div></td><td class="time-slot " style="background: rgba(179, 255, 153, 0.125);"><div class="grid-cell has-slot-data" id="slot-data-1452815100000">1</div></td><td class="time-slot " style="background: rgba(179, 255, 153, 0);"><div class="grid-cell has-slot-data" id="slot-data-1452901500000">0</div></td></tr><tr><td class="grid-label"><div class="grid-cell">6:00 PM</div></td><td class="time-slot " style="background: rgba(179, 255, 153, 0.25);"><div class="grid-cell has-slot-data" id="slot-data-1452556800000">2</div></td><td class="time-slot " style="background: rgba(179, 255, 153, 0.125);"><div class="grid-cell has-slot-data" id="slot-data-1452643200000">1</div></td><td class="time-slot " style="background: rgba(179, 255, 153, 0.25);"><div class="grid-cell has-slot-data" id="slot-data-1452729600000">2</div></td><td class="time-slot " style="background: rgba(179, 255, 153, 0);"><div class="grid-cell has-slot-data" id="slot-data-1452816000000">0</div></td><td class="time-slot " style="background: rgba(179, 255, 153, 0);"><div class="grid-cell has-slot-data" id="slot-data-1452902400000">0</div></td></tr><tr><td class="grid-label"><div class="grid-cell">6:15 PM</div></td><td class="time-slot " style="background: rgba(179, 255, 153, 0.25);"><div class="grid-cell has-slot-data" id="slot-data-1452557700000">2</div></td><td class="time-slot " style="background: rgba(179, 255, 153, 0.25);"><div class="grid-cell has-slot-data" id="slot-data-1452644100000">2</div></td><td class="time-slot " style="background: rgba(179, 255, 153, 0.25);"><div class="grid-cell has-slot-data" id="slot-data-1452730500000">2</div></td><td class="time-slot " style="background: rgba(179, 255, 153, 0);"><div class="grid-cell has-slot-data" id="slot-data-1452816900000">0</div></td><td class="time-slot " style="background: rgba(179, 255, 153, 0);"><div class="grid-cell has-slot-data" id="slot-data-1452903300000">0</div></td></tr><tr><td class="grid-label"><div class="grid-cell">6:30 PM</div></td><td class="time-slot " style="background: rgba(179, 255, 153, 0.125);"><div class="grid-cell has-slot-data" id="slot-data-1452558600000">1</div></td><td class="time-slot " style="background: rgba(179, 255, 153, 0.125);"><div class="grid-cell has-slot-data" id="slot-data-1452645000000">1</div></td><td class="time-slot " style="background: rgba(179, 255, 153, 0.125);"><div class="grid-cell has-slot-data" id="slot-data-1452731400000">1</div></td><td class="time-slot " style="background: rgba(179, 255, 153, 0.125);"><div class="grid-cell has-slot-data" id="slot-data-1452817800000">1</div></td><td class="time-slot " style="background: rgba(179, 255, 153, 0);"><div class="grid-cell has-slot-data" id="slot-data-1452904200000">0</div></td></tr><tr><td class="grid-label"><div class="grid-cell">6:45 PM</div></td><td class="time-slot " style="background: rgba(179, 255, 153, 0);"><div class="grid-cell has-slot-data" id="slot-data-1452559500000">0</div></td><td class="time-slot " style="background: rgba(179, 255, 153, 0.25);"><div class="grid-cell has-slot-data" id="slot-data-1452645900000">2</div></td><td class="time-slot " style="background: rgba(179, 255, 153, 0);"><div class="grid-cell has-slot-data" id="slot-data-1452732300000">0</div></td><td class="time-slot " style="background: rgba(179, 255, 153, 0);"><div class="grid-cell has-slot-data" id="slot-data-1452818700000">0</div></td><td class="time-slot " style="background: rgba(179, 255, 153, 0);"><div class="grid-cell has-slot-data" id="slot-data-1452905100000">0</div></td></tr></tbody></table>
+						</div>
+					</center>
+					<!-- <button id="self-rsvp" class="page-button">RSVP to this Meeting</button> -->
+				</div>
+
+			</div>
+
+			<div class="container" id="signup-div">
+
+				<h2>Tell Me When It's Here!</h2>
+				<center>
+					<input type="text" id='signup-email' class="underscore-bar" placeholder="youremail@hype.com">
+					<button id="signup-button" class="icon-button">&#9741;</button>
+				</center>
+
+			</div>
+
+			<div class="container">
 				<h1>The Prototype</h1>
-				<p>Can't wait for omnipointment.com to launch? Try our minimum viable product now!</p>
-				<h2>Features</h2>
-				<ul>
-					<li>Create meetings.</li>
-				</ul>
+				<p>Can't wait for omnipointment.com to launch? Use our minimum viable product now!</p>
 				<button class="page-button" onclick="googleLogin();">Login with Google</button>
+				<h2>Upcoming Features</h2>
+				<ul>
+					<li>Drag to select large blocks of time.</li>
+					<li>Respond to meeting requests by voice.</li>
+					<li>Filter teammates to see different schedules.</li>
+				</ul>
 			</div>
 
 		</section>
 
 		<script src="scripts/auth.js"></script>
-		<script src="bundle.js"></script>
+		<script src="landing.js"></script>
+		<!--<script src="bundle.js"></script>-->
 
 		<script type="text/javascript">
-
-		function signup(){
-			var firebase = new Firebase("https://omnipointment.firebaseio.com/signup");
-			/*firebase.push({
-				email: 
-			});*/
-		}
-
-		
-
-			
 
 		</script>
 		
