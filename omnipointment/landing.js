@@ -89,3 +89,29 @@ function shuffle(array){
 	}
 	return array;
 }
+
+function giveFeedback(){
+	vex.dialog.prompt({
+		message: "Hi! Care to give us some feedback on omnipointment?",
+		placeholder: "ex. Cool name, app needs work.",
+		callback: function(feedback){
+			if(feedback){
+				postFeedback(feedback);
+				vex.dialog.alert(`Thank you!<br>Check us out <a href="https://github.com/vingkan/omnipointment/">on GitHub.</a>`);
+			}
+		}
+	});
+}
+
+function postFeedback(feedback){
+	var timestamp = new Date().getTime();
+	var firebase = new Firebase("https://omnipointment.firebaseio.com/feedback");
+	firebase.push({
+		timestamp: timestamp,
+		feedback: feedback
+	});
+}
+
+$("#give-feedback").click(function(event){
+	giveFeedback();
+});

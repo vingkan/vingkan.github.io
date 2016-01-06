@@ -481,6 +481,7 @@ footer{
 	width: 100vw;
 	height: 4vh;
 	background: @mainColor;
+	padding: 0;
 	//TEXT STYLES
 	.BodyFont();
 	color: white;
@@ -491,8 +492,48 @@ footer{
 	&:hover{
 		height: 5vh;
 		line-height: 5vh;
-		background: @freeGreen;
-		color: @charcoal;
+		div.footer-section{
+			img{
+				margin-top: 1vh;
+			}
+		}
+	}
+
+	a{
+		color: white;
+		text-decoration: none;
+	}
+
+
+	div.footer-section{
+
+		width: 32%;
+		background: transparent;
+		display: inline-block;
+
+		&:hover{
+			
+			height: 5vh;
+			line-height: 5vh;
+			background: @freeGreen;
+			color: @charcoal;
+
+			img{
+				margin-top: 1vh;
+			}
+
+		}
+
+		img{
+			height: 3vh;
+			position: absolute;
+			margin-left: -4vh;
+			margin-top: 0.5vh;
+			.AnimateAll();
+		}
+
+		.AnimateAll();
+
 	}
 
 	.AnimateAll();
