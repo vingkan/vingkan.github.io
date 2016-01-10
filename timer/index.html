@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Simulation Timer</title>
+		<link rel="stylesheet" type="text/css" href="style/reset.css">
+		<link rel="stylesheet" type="text/css" href="style/main.css">
+		<!--<link rel="icon" type="img/png" href="style/favicon.png" style="width:30px;">-->
+		<!-- IMPORTED SCRIPTS -->
+		<!-- GOOGLE FONTS -->
+		<link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,700,900' rel='stylesheet' type='text/css'>
+		<script src="import/jquery.js"></script>
+		<script src="import/moment.js"></script>
+		<!-- VEX.JS -->
+		<link rel="stylesheet" type="text/css" href="import/vex.css" />
+		<link rel="stylesheet" type="text/css" href="import/vex-theme-wireframe.css" />
+		<script type="text/javascript" src="import/vex.combined.min.js"></script>
+		<!-- FIREBASE -->
+		<script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+		<style>
+
+			section#menu{
+				display: none;
+			}
+
+			div.month{
+				display: none;
+			}
+
+			div.month:nth-child(1){
+				display: block;
+			}
+
+		</style>
+	</head>
+
+	<body>
+
+		<section id="menu">
+			<button class="page-button" onclick="getUserKey();">Open a Simulation</button>
+			<button class="page-button">Create a Simulation</button>
+		</section>
+
+		<section id="main-timer">
+
+			<h1>Real Time</h1>
+			<div class="clock" id="real-clock"></div>
+			<h1>Simulation Time</h1>
+			<div class="clock" id="simulation-clock"></div>
+			<h1>Time To Next Checkpoint</h1>
+			<h2>Checkpoint: <span id="checkpoint-label"></span></h2>
+			<div class="clock" id="countdown-clock"></div>
+
+			<div class="slider">
+				<div class="button-toolbar" id="calendar-toolbar"></div>
+			</div>
+			<center>
+				<div class="calendar" id="simulation-calendar"></div>
+			</center>
+
+		</section>
+
+		<script src="scripts/main.js"></script>
+		<script src="scripts/server.js"></script>
+
+		<script type="text/javascript">
+
+		</script>
+		
+	</body>
+</html>
