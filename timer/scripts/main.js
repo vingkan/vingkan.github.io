@@ -61,7 +61,8 @@ window.setInterval(function(){
 	}
 }, 25);
 
-getUserKey()
+//getUserKey()
+getConfiguration("sample");
 
 function getUserKey(){
 	vex.dialog.prompt({
@@ -121,7 +122,7 @@ function getWeekInMonthInSimulation(timestamp, config){
 function setClock(now, config){
 	var simTime = getSimulationTime(now, config);
 	realClock.innerHTML = moment(now).format("M/D hh:mm:ss A");
-	simulationClock.innerHTML = moment(simTime).format("M/D hh:mm A");
+	simulationClock.innerHTML = moment(simTime).format("MMMM Do YYYY | hh:mm A");
 }
 
 function showCurrentDate(now, simWeek, config){
