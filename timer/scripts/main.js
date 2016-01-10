@@ -61,8 +61,8 @@ window.setInterval(function(){
 	}
 }, 25);
 
-//getUserKey()
-getConfiguration("sample");
+getUserKey()
+//getConfiguration("sample");
 
 function getUserKey(){
 	vex.dialog.prompt({
