@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Omnipointment</title>
+        <link rel="stylesheet" type="text/css" href="style/reset.css">
+        <!-- JQuery -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- BOOTSTRAP STYLES -->
+        <link rel="stylesheet" type="text/css" href="imports/global-bootstrap.css" />
+        <!-- VEX.JS STYLES -->
+        <script type="text/javascript" src="imports/vex.combined.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="imports/vex.css" />
+        <link rel="stylesheet" type="text/css" href="imports/vex-theme-wireframe.css" />
+        <!-- Font Awesome! -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <!-- NATIVE STYLES -->
+        <link rel="stylesheet" type="text/css" href="style/main.css">
+        <link rel="icon" type="img/png" href="style/favicon.png" style="width:30px;">
+        <!-- Google Fonts -->
+        <link href='https://fonts.googleapis.com/css?family=Raleway:700|Source+Sans+Pro:400,600,400italic' rel='stylesheet' type='text/css'>
+        <!-- Firebase -->
+        <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+        <!-- LESS.JS -->
+        <script type="text/javascript" src="style/less-1.5.0.min.js"></script>
+    </head>
+
+    <body>
+
+        <header>
+            <center>
+                <div id="image-bubble"></div>
+                <img id="logo" src="style/img/purple-long-logo.png">
+                <button id="menu-button">&#8801;</button>
+            </center>
+        </header>
+
+        <div class="headerSpace"></div>
+
+        <section>
+
+            <div class="container">
+                <h1>Login</h1>
+                <a href="/auth/google"><button class="page-button"><i class="fa fa-google"></i>&nbsp;&nbsp;Google</button></a>
+                <a href="/auth/facebook"><button class="page-button"><i class="fa fa-facebook"></i>&nbsp;&nbsp;Facebook</button></a>
+            </div>
+
+        </section>
+
+        <footer>
+            <center>
+            <a target="_blank" href="https://gust.com/companies/omnipointment"><div class="footer-section">
+                <img src="style/img/icon-gust-whitescale.png">
+                Gust Profile
+            </div></a>
+            <div class="footer-section" id="give-feedback">
+                <img src="style/img/icon-pencil-white.png">
+                Give Feedback
+            </div>
+            <div class="footer-section">
+                <img src="style/img/icon-chrome-white.png">
+                Best on Chrome
+            </div>
+            </center>
+        </footer>
+
+        <script src="scripts/window-resizer.js"></script>
+
+        <script type="text/javascript">
+            vex.defaultOptions.className = 'vex-theme-wireframe';
+            
+            function giveFeedback(){
+                vex.dialog.prompt({
+                    message: "Hi! Care to give us some feedback on omnipointment?",
+                    placeholder: "ex. Cool name, app needs work.",
+                    callback: function(feedback){
+                        if(feedback){
+                            postFeedback(feedback);
+                            vex.dialog.alert(`Thank you!<br>We appreciate your feedback.`);
+                        }
+                    }
+                });
+            }
+
+            function postFeedback(feedback){
+                var timestamp = new Date().getTime();
+                var firebase = new Firebase("https://omnipointment.firebaseio.com/feedback");
+                firebase.push({
+                    timestamp: timestamp,
+                    feedback: feedback
+                });
+            }
+        </script>
+
+        <script src="scripts/landing.js"></script>
+        
+    </body>
+</html>
