@@ -66,7 +66,7 @@ getUserKey()
 
 function getUserKey(){
 	vex.dialog.prompt({
-		message: "Enter the key give to you by your simulation organizer.",
+		message: "Enter the key given to you by your simulation organizer.",
 		callback: function(key){
 			if(key){
 				getConfiguration(key);	
