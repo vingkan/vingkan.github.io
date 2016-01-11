@@ -137,8 +137,8 @@ div.clock{
 }
 
 div.clock-big{
-	font-size: 4 * @tx;
-	line-height: 4 * @tx;
+	font-size: 3 * @tx;
+	line-height: 3 * @tx;
 	text-transform: uppercase;
 	text-shadow: 0 0 5vh rgba(0, 0, 0, 0.75);
 }
@@ -151,6 +151,7 @@ div.month{
 
 	color: white;
 	text-align: center;
+	margin-bottom: 5vh;
 
 	h1{
 		color: @charcoal;
@@ -162,11 +163,19 @@ div.month{
 		margin: 0.5%;
 
 		div.weekday{
+
 			width: 10%;
 			height: 3 * @tx;
 			line-height: 3 * @tx;
 			margin: 0.5%;
 			display: inline-block;
+
+			&:hover{
+				opacity: 0.15;
+			}
+
+			.AnimateAll();
+
 		}
 
 		div.weekday-inactive{
@@ -175,12 +184,23 @@ div.month{
 		}
 
 		div.weekday-active{
-			background: @mainLight;
+			background: @mainColor;
 			color: white;
 		}
 
 		div.weekday-active:nth-child(1), div.weekday-active:nth-child(7){
 			background: @mainDark;
+		}
+
+		div.weekday-past{
+			opacity: 0.25;
+		}
+
+		div.weekday-label{
+			background: @mainDark;
+			color: white;
+			height: 1.5 * @tx;
+			line-height: 1.5 * @tx;
 		}
 
 	}
@@ -205,7 +225,7 @@ div.button-toolbar{
 	width: 1000vw;
 
 	button{
-		background: @mainDark;
+		background: @mainColor;
 		width: 20vw;
 		margin: 1vh;
 		height: @buttonHeight;

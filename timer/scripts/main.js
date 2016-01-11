@@ -52,17 +52,58 @@ function getConfiguration(key){
 	});
 }
 
+function updatePastOpacities(simTimestamp){
+	var dateBoxes = document.getElementsByClassName("weekday");
+	$.each(dateBoxes, function(index, div){
+		if(div.id.length > 0){
+			var divDate = parseInt(div.id.split("-")[1], 10);
+			//console.log(div.id)
+			if(divDate < simTimestamp){
+				if(!div.classList.contains("weekday-label")){
+					div.classList.add("weekday-past");
+				}
+			}
+		}
+	});
+}
+
+function updateOpacity(now, config){
+	var simTime = getSimulationTime(now, config);
+	var simDate = new Date(simTime);
+	var findBox = new Date(
+		simDate.getFullYear(),
+		simDate.getMonth(),
+		simDate.getDate()
+	);
+	var dateBox = document.getElementById("weekday-" + findBox.getTime());
+	var opacity = ((1 - (simDate.getHours() / 24)) * 0.75) + 0.25;
+	dateBox.style.opacity = opacity;
+	if(counter < 1){
+		updatePastOpacities(findBox.getTime());
+		var index = getMonthInSimulation(simDate.getTime(), config);
+		toggleMonthView(simulationCalendar, index);
+	}
+}
+
+var counter = 0;
+
 window.setInterval(function(){
 	if(STATE.LOADED){
 		var realNow = new Date().getTime();
 		setClock(realNow, CONFIG);
 		setCountdown(realNow, STATE.CHECKPOINT, CONFIG);
 		//setMonthView(realNow, CONFIG);
+		updateOpacity(realNow, CONFIG);
+		counter++;
 	}
 }, 25);
 
-getUserKey()
-//getConfiguration("sample");
+getUserKey();
+//getConfiguration("test");
+
+function convertUTCToTimeZone(utcDate, timezone){
+	//if(timezone === "CS")
+}
 
 function getUserKey(){
 	vex.dialog.prompt({
@@ -130,7 +171,7 @@ function showCurrentDate(now, simWeek, config){
 	var simDate = new Date(simTime);
 	var monthIndex = getMonthInSimulation(now, config);
 	var monthDiv = getMonthDiv(calendarDiv, monthIndex);
-	var dateBox = monthDiv.children[simWeek + 1].children[simDate.getDay()];
+	var dateBox = monthDiv.children[simWeek + 2].children[simDate.getDay()];
 }
 
 //Returns real time remaining in minutes
@@ -172,6 +213,8 @@ function toggleMonthView(calendarDiv, monthIndex){
 	monthDiv.style.display = "block";
 }
 
+var weekdayLabel = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
 function createCalendar(calendarDiv, toolbarDiv, config){
 	var startMonth = new Date(config.SIMULATION_START).getMonth();
 	var endMonth = new Date(config.SIMULATION_END).getMonth();
@@ -196,6 +239,10 @@ function createCalendar(calendarDiv, toolbarDiv, config){
 	}
 	var monthDivs = calendarDiv.getElementsByClassName("month");
 	$.each(monthDivs, function(index, div){
+		var weekDiv = document.createElement("div");
+				weekDiv.classList.add("week");
+				weekDiv.classList.add("week-label");
+				div.appendChild(weekDiv);
 		for(var w = 0; w < 5; w++){
 			var weekDiv = document.createElement("div");
 				weekDiv.classList.add("week");
@@ -209,6 +256,10 @@ function createCalendar(calendarDiv, toolbarDiv, config){
 				dayDiv.classList.add("weekday");
 				dayDiv.classList.add("weekday-inactive");
 				dayDiv.innerHTML = "-";
+			if(div.classList.contains("week-label")){
+				dayDiv.classList.add("weekday-label");
+				dayDiv.innerHTML = weekdayLabel[d].substr(0, 2);
+			}
 				div.appendChild(dayDiv);
 		}
 	});
@@ -234,7 +285,7 @@ function loadCalendar(calendarDiv, config){
 	while(simTime <= config.SIMULATION_END){
 		var simDate = new Date(simTime);
 		var monthDiv = getMonthDiv(calendarDiv, simMonth);
-		var dateBox = monthDiv.children[simWeek + 1].children[simDate.getDay()];
+		var dateBox = monthDiv.children[simWeek + 2].children[simDate.getDay()];
 		dateBox.innerHTML = simDate.getDate();
 		dateBox.classList.remove("weekday-inactive");
 		dateBox.classList.add("weekday-active");
