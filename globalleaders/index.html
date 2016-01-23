@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Global Leaders Program</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="style/reset.css">
+		<link rel="stylesheet" type="text/css" href="style/main.css">
+		<link rel="stylesheet" type="text/css" href="style/animate.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+		<link rel="icon" type="img/png" href="style/img/favicon.png" style="width:30px;">
+		<!-- IMPORTED SCRIPTS -->
+		<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700|Iceberg' rel='stylesheet' type='text/css'>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<!-- NEED FIREBASE LATER -->
+		<style>
+
+
+		</style>
+	</head>
+
+	<body>
+
+		<header>
+			<a href="#top">
+				<img src="style/img/logo-short.png">
+			</a>
+			<div class="show-menu"><i class="fa fa-bars"></i></div>
+			<nav>
+				<a href="#teams"><i class="fa fa-users"></i> The Teams</a>
+				<a href="#new"><i class="fa fa-newspaper-o"></i> What's New</a>
+				<a href="#involved"><i class="fa fa-compass"></i> Get Involved</a>
+				<a href="#timeline"><i class="fa fa-calendar"></i> Timeline</a>
+				<a href="#signin"><i class="fa fa-sign-in"></i> Sign In</a>
+			</nav>
+		</header>
+
+		<div class="header-space" id="top"></div>
+
+		<div id="loading-screen" class="loading">
+			<!-- <div id="loading-logo"></div>
+			<img src="style/img/hollow-logo-square.png"> -->
+			<img class="spinning-ball" src="style/img/logo-ball-orange.png">
+			<p>Even innovation takes time...</p>
+		</div>
+
+		<section class="section-page" id="landing">
+			<center>
+				<img src="style/img/logo-tall.png" class="animated flash">
+			</center>
+			<h1 class="contrast">Community Innovation Projects</h1>
+			<p>We believe that the best way to develop leadership is through hands on and collaborative problem solving.</p>
+			<a href="#involved">
+				<button class="page-button">Get Involved</button>
+			</a>
+		</section>
+
+		<section class="section-page" id="teams">
+			<h2 class="arrow-title">The Teams</h2>
+			<div class="arrow-down"></div>
+			<div id="team-boxes"></div>
+		</section>
+
+		<section class="section-page" id="new">
+			<h2 class="arrow-title">What's New</h2>
+			<div class="arrow-down"></div>
+			<p>Click on the links to learn more about how our scholars are giving back to the community and growing as leaders.</p>
+			<ul>
+				<li>E.D.U. is set to host a workshop helping high school students build learning skills at Illinois Tech on February 21st. <i class="fa fa-arrow-circle-right"></i></li>
+				<li>Check out G-Squad's latest video! <i class="fa fa-arrow-circle-right"></i></li>
+				<li>Bully Busters launch "One Voice" campaign. <i class="fa fa-arrow-circle-right"></i></li>
+			</ul>
+		</section>
+
+		<section class="section-page" id="involved">
+			<h2 class="arrow-title">Get Involved</h2>
+			<div class="arrow-down"></div>
+			<div class="half-button" style="background-image: url('style/img/apply.jpg');">
+				<h3>Apply to be a Scholar</h3>
+			</div>
+			<div class="half-button" style="background-image: url('style/img/volunteer.jpg');">
+				<h3>Volunteer to Help</h3>
+			</div>
+			<button class="page-button">Contact Us</button>
+		</section>
+
+		<section class="section-page" id="timeline">
+			<h2 class="arrow-title">Timeline</h2>
+			<div class="arrow-down"></div>
+			<h1>Coming Soon...</h1>
+			<img class="spinning-ball" src="style/img/logo-ball-orange.png">
+		</section>
+
+		<section class="section-page" id="signin">
+			<h2 class="arrow-title">Sign In</h2>
+			<div class="arrow-down"></div>
+			<input type="text" placeholder="Email...">
+			<input type="password" placeholder="Password...">
+			<button class="page-button">Sign In</button>
+			<p>- or -</p>
+			<button class="page-button">Sign Up</button>
+		</section>
+
+		<footer>
+			<p>Sunny Shah | SaaS (Shah as a Service) 2016 | Vinesh Kannan</p>
+		</footer>
+
+		<script type="text/javascript">
+
+			$('a').click(function(){
+				$('html, body').animate({
+					scrollTop: $( $.attr(this, 'href') ).offset().top
+				}, 500);
+				return false;
+			});
+
+			var TEAMS = [{
+				name: 'Bully Busters',
+				img: 'style/img/bully-busters.jpg'
+			},{
+				name: 'Ed-Assist',
+				img: 'style/img/ed-assist.jpg'
+			},{
+				name: 'G-Squad',
+				img: 'style/img/g-squad.jpg'
+			},{
+				name: 'Super Sustainers',
+				img: 'style/img/super-sustainers.jpg'
+			}];
+
+			function getTeamBox(data){
+				var html = '';
+				html += '<div class="team-box" style="background-image: url(' + data.img + ');">';
+					html += '<h3>' + data.name + '</h3>';
+				html += '</div>';
+				return html;
+			}
+
+			var teamsDiv = document.getElementById('team-boxes');
+			$.each(TEAMS, function(index, data){
+				teamsDiv.innerHTML += getTeamBox(data);
+			});
+
+			function onReady(callback){
+				var intervalID = window.setInterval(checkReady, 1000);
+				function checkReady(){
+					if(document.getElementsByTagName('body')[0] !== undefined){
+						window.clearInterval(intervalID);
+						callback();
+					}
+				}
+			}
+
+			onReady(function(){
+				document.getElementById('loading-screen').classList.toggle('loading');
+			});
+
+			console.log("LOADED MAIN");
+
+		</script>
+		
+	</body>
+</html>

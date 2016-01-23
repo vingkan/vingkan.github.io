@@ -1,0 +1,735 @@
+/*--------------------------------------------*/
+/*---> COLORS <-------------------------------*/
+/*--------------------------------------------*/
+
+@Charcoal: #1a1a1a;
+@LightGray: rgb(150, 150, 150);
+
+@GlobalOrange: #F49525;
+
+@PeterRiver: #3498db;
+@Emerald: #2ecc71;
+@Amethyst: #9b59b6;
+@Silver: #bdc3c7;
+@Asbestos: #7f8c8d;
+
+@mainColor: @PeterRiver;
+@mainLight: @mainColor + #222222;
+@mainDark: @mainColor - #222222;
+
+
+/*--------------------------------------------*/
+/*---> FONTS <--------------------------------*/
+/*--------------------------------------------*/
+
+@vh: 6.5px;
+@textSize: 3vh;
+
+@Titillium: 'Titillium Web', sans-serif;
+@OpenSans: 'Open Sans Condensed', sans-serif;
+@Allan: 'Allan', sans-serif;
+@Acme: 'Acme', sans-serif;
+@Iceberg: 'Iceberg', sans-serif;
+
+.HeadFont(){
+	font-family: @Titillium;
+	font-weight: bold;
+}
+
+.BodyFont(){
+	font-family: @OpenSans;
+	letter-spacing: 0.5px;
+}
+
+/*--------------------------------------------*/
+/*---> TEXT <---------------------------------*/
+/*--------------------------------------------*/
+
+p, h1, h2, h3, ul, li{
+	.BodyFont();
+	margin: (0.5 * @textSize) auto;
+}
+
+p, h1, h2, h3{
+	width: 95%;
+}
+
+h1, h2, h3{
+	.HeadFont();
+	text-align: center;
+}
+
+.EmphasizeText(@emphasisColor: white){
+	text-transform: uppercase;
+	webkit-text-transform: uppercase;
+	text-shadow: 0 0 (3 * @vh) rgba(0, 0, 0, 0.5);
+	color: @emphasisColor;
+}
+
+h1{
+	font-size: 1.5 * @textSize;
+	line-height: 1.75 * @textSize;
+}
+
+h2{
+	font-size: 1.25 * @textSize;
+	line-height: 1.5 * @textSize;
+}
+
+h3{
+	font-size: 1.1 * @textSize;
+	line-height: 1.35 * @textSize;
+}
+
+p{
+	font-size: 1.0 * @textSize;
+	line-height: 1.25 * @textSize;
+	text-align: center;
+}
+
+ul{
+	width: 80%;
+	margin: auto 10%;
+}
+
+li{
+
+	font-size: 1.0 * @textSize;
+	line-height: 1.5 * @textSize;
+	margin: (0.15 * @textSize) auto;
+	list-style: none;
+	background-image: url('img/logo-ball-charcoal.png');
+	background-size: 1.0 * @textSize;
+	background-position: left center;
+	background-repeat: no-repeat;
+	padding-left: 1.5 * @textSize;
+
+	&:hover{
+		background-image: url('img/logo-ball-orange.png');
+		color: @GlobalOrange;
+	}
+
+	.AnimateAll();
+
+}
+
+/*--------------------------------------------*/
+/*---> BODY <---------------------------------*/
+/*--------------------------------------------*/
+
+html{
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	background: white;
+	//Default Text Styles
+	.BodyFont();
+	font-size: @textSize;
+	color: @Charcoal;
+}
+
+body{
+	margin: 0;
+	width: 100%;
+	padding: 0;
+	margin: 0 auto;
+}
+
+.AnimateAll(@time: 0.5s){
+	transition: all @time ease;
+	-webkit-transition: all @time ease;
+}
+
+.FillBackgroundImage(){
+	//background-image property filled in by HTML
+	background-repeat: no-repeat;
+	background-position: center center;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+/*--------------------------------------------*/
+/*---> DESIGN <-------------------------------*/
+/*--------------------------------------------*/
+
+.ArrowDown(@triColor: @mainColor, @triWidth: 10 * @vh , @triHeight: 2.5 * @vh){
+	width: 0;
+	height: 0;
+	border-left: (@triWidth / 2) solid transparent;
+	border-right: (@triWidth / 2) solid transparent;
+	border-top: @triHeight solid @triColor;
+}
+
+
+/*--------------------------------------------*/
+/*---> STRUCTURE <----------------------------*/
+/*--------------------------------------------*/
+
+@paddingSize: 2 * @vh;
+
+section.section-page{
+	.SectionPage(url('img/new-year.png'), @Charcoal, @mainColor);
+}
+
+section#landing{
+
+	img{
+		height: 30vh;
+		margin: (2 * @vh) auto;
+	}
+
+	h1{
+		color: @PeterRiver;
+		text-transform: uppercase;
+		webkit-text-transform: uppercase;
+		font-size: 2.5 * @textSize;
+		line-height: 2.75 * @textSize;
+		//.EmphasizeText(@PeterRiver);
+	}
+
+	button{
+		background: @GlobalOrange;
+	}
+
+}
+
+section#teams{
+	.SectionPage(url('img/grey-wash.png'), white, @mainColor);
+}
+
+section#involved{
+
+	.SectionPage(url('img/grey-wash.png'), white, @mainColor);
+	height: 31 * @vh;
+
+	button{
+		background: @PeterRiver;
+		margin-top: 16.5 * @vh;
+		position: absolute;
+	}
+
+	div.half-button{
+		
+		padding-bottom: 5 * @vh;
+
+		h3{
+			top: 37.5%;
+		}
+
+	}
+
+}
+
+section#timeline{
+	.SectionPage(url('img/grey-wash.png'), white, @mainColor);
+}
+
+section#signin{
+
+	button{
+		width: 40%;
+		margin: (1 * @vh) 30%;
+	}
+
+	button:nth-child(5){
+		background: @GlobalOrange;
+	}
+
+}
+
+/*--------------------------------------------*/
+/*---> SECTIONS <-----------------------------*/
+/*--------------------------------------------*/
+
+.SectionPage(@backgroundColor: @Charcoal, @textColor: white, @borderColor: @mainColor){
+
+	@borderHeight: 2.5 * @vh;
+
+	background: @backgroundColor;
+	color: @textColor;
+	border-bottom: @borderHeight solid @borderColor;
+	padding: @paddingSize 0;
+	margin: 0;
+
+	h2.arrow-title{
+
+		@arrowWidth: 40vw;
+		@arrowHeight: @borderHeight;
+		@arrowBoxHeight: 1.5 * @textSize;
+		@arrowColor: @borderColor;
+
+		z-index: 40;
+		position: relative;
+
+		width: @arrowWidth;
+		margin: (-1 * @paddingSize) auto;
+		background: @arrowColor;
+		color: white;
+		//TEXT STYLES
+		text-align: center;
+		font-size: 0.75 * @arrowBoxHeight;
+		line-height: @arrowBoxHeight;
+		height: @arrowBoxHeight;
+
+		& + div.arrow-down{
+			.ArrowDown(@arrowColor, @arrowWidth, @arrowHeight);
+			margin: @paddingSize auto;
+			z-index: 40;
+			position: relative;
+		}
+
+	}
+
+}
+
+/*--------------------------------------------*/
+/*---> LINKS <--------------------------------*/
+/*--------------------------------------------*/
+
+a{
+	
+	text-decoration: none;
+	color: white;
+	
+	&:visited{
+		color: white;
+	}
+
+}
+
+/*--------------------------------------------*/
+/*---> TEAMS <--------------------------------*/
+/*--------------------------------------------*/
+
+div#team-boxes{
+	padding: 2.5%;
+}
+
+div.team-box{
+
+	.FillBackgroundImage();
+	background-position: top;
+	opacity: 0.75;
+	display: inline-block;
+	width: 45%;
+	margin: 2.5%;
+	height: 25 * @vh;
+	position: relative;
+	box-shadow: 0 0 (5 * @vh) rgba(0, 0, 0, 0.5);
+
+	h3{
+		position: absolute;
+		bottom: -1 * @vh;
+		left: 0;
+		padding: 2 * @vh;
+		width: 85%;
+		text-align: left;
+		//SLIDING BACKGROUND
+		background: linear-gradient(to left, transparent 50%, @Charcoal 50%);
+		background-size: 200% 100%;
+		background-position: right bottom;
+		.AnimateAll();
+
+	}
+
+	&:hover{
+
+		opacity: 1.0;
+		
+		h3{
+			background-position: left bottom;
+		}
+
+	}
+
+	.AnimateAll();
+
+}
+
+/*--------------------------------------------*/
+/*---> HEADER & FOOTER <----------------------*/
+/*--------------------------------------------*/
+
+header{
+
+	@headerHeight: 2.0 * @textSize;
+
+	& + div.header-space{
+		width: 100%;
+		height: @headerHeight;
+		background: transparent;
+	}
+
+	position: fixed;
+	width: 100%;
+	height: @headerHeight;
+	padding: 0;
+	background: @mainColor;
+	color: white;
+	box-shadow: 0 0 (5 * @vh) rgba(0, 0, 0, 0.5);
+	z-index: 60;
+
+	img, nav{
+		position: fixed;
+		top: 0;
+	}
+
+	img{
+		left: 0;
+		height: 0.75 * @headerHeight;
+		margin: 0.125 * @headerHeight;
+		display: inline-block;
+	}
+
+	div.show-menu{
+		display: none;
+	}
+
+	nav{
+
+		right: 0;
+		padding: 0;
+		width: auto;
+		background: transparent;
+		
+		a{
+
+			background: transparent;
+			border-left: (0.25 * @vh) solid white;
+			padding: 0.5 * @paddingSize;
+			//TEXT STYLES
+			text-align: center;
+			font-size: 0.35 * @headerHeight;
+			line-height: @headerHeight;
+			height: @headerHeight;
+			//SLIDING BACKGROUND
+			background-color: linear-gradient(to left, transparent 50%, @GlobalOrange 50%);
+			background-size: 200% 100%;
+			background-position: right bottom;
+
+			&:hover{
+				background-position: left bottom;
+			}
+
+			.AnimateAll();
+
+		}
+
+		.AnimateAll();
+
+	}
+
+	//RESPONSIVE STYLES
+
+	@media screen{
+		
+		@media (max-width: 545px){
+
+			height: 1.75 * @headerHeight;
+
+			& + div.header-space{
+				height: 1.75 * @headerHeight;
+			}
+
+			img{
+				width: 30vw;
+				margin: (0.25 * @headerHeight) 35vw;
+				height: auto;
+			}
+
+			div.show-menu{
+				
+				display: block;
+				position: absolute;
+				background: @mainLight;
+				width: 10vw;
+				height: 1.75 * @headerHeight;
+				line-height: 1.75 * @headerHeight;
+				text-align: center;
+
+				&:hover{
+					background: @Charcoal;
+				}
+
+				&:hover + nav{
+					top: 0;
+				}
+
+				.AnimateAll();
+
+			}
+
+			nav{
+
+				width: 10vw;
+				top: -14 * (@paddingSize + @headerHeight);
+				position: relative;
+				z-index: 65;
+
+				a{
+					
+					width: 100vw;
+					float: left;
+					clear: left;
+					border-left: (0.5 * @vh) solid white;
+					background-color: @Charcoal;
+					background-color: linear-gradient(to left, transparent 50%, @GlobalOrange 50%);
+					background-size: 200% 100%;
+					background-position: right bottom;
+					font-size: 0.5 * @headerHeight;
+					z-index: 70;
+
+					i{
+						padding-right: 1 * @vh;
+					}
+
+					&:hover{
+						background-position: left bottom;
+					}
+				
+				}
+
+				&:hover{
+					top: 0;
+				}
+
+			}
+
+		}
+	}
+
+}
+
+footer{
+	background: @mainLight;
+	color: white;
+	padding: @paddingSize;
+	margin: 0;
+}
+
+/*--------------------------------------------*/
+/*---> FORM <----------------------------------*/
+/*--------------------------------------------*/
+
+input, button, select{
+	outline: none;
+	border: none;
+	.BodyFont();
+}
+
+@formElementHeight: 5 * @vh;
+
+button.page-button{
+
+	background: @PeterRiver;
+	color: white;
+	margin: (1 * @vh) 25%;
+	width: 50%;
+	height: @formElementHeight;
+	//TEXT STYLES
+	text-align: center;
+	font-size: 1.0 * @textSize;
+	line-height: @formElementHeight;
+	font-weight: bold;
+	cursor: pointer;
+
+	&:hover{
+		opacity: 0.5;
+	}
+
+	.AnimateAll();
+
+}
+
+div.half-button{
+
+	.FillBackgroundImage();
+	width: 50%;
+	padding: 0;
+	margin: 0;
+	display: inline-block;
+	float: left;
+	margin-top: -8.85 * @vh;
+	height: 30 * @vh;
+	position: relative;
+
+	h3{
+		position: absolute;
+		top: 45%;
+		width: 90%;
+		margin: 0 5%;
+		cursor: pointer;
+		.AnimateAll();
+	}
+
+	&:hover h3{
+		background: @GlobalOrange;
+		padding: 2%;
+		margin: -2% 3%;
+	}
+
+	.AnimateAll();
+
+}
+
+input{
+
+	height: @formElementHeight;
+	line-height: @formElementHeight;
+	background: @Asbestos;
+	color: white;
+	margin: (1 * @vh) 25%;
+	width: 46%;
+	padding: 0 2%;
+	border-radius: 0.5 * @vh;
+
+	&::webkit-input-placeholder{
+		color: white;
+	}
+
+	&:focus{
+		background: @PeterRiver;
+	}
+
+	.AnimateAll();
+
+}
+
+/*--------------------------------------------*/
+/*---> SCROLLBAR <----------------------------*/
+/*--------------------------------------------*/
+
+@scrollBar: white;
+@scrollBarBack: @mainColor;
+
+::-webkit-scrollbar{
+	width: 10px;
+	height: 10px;
+	background: @scrollBarBack;
+	z-index: 50;
+}
+
+::-webkit-scrollbar-button{
+	background: @scrollBarBack;
+}
+
+::-webkit-scrollbar-track{
+	background: @scrollBarBack;
+}
+
+::-webkit-scrollbar-track-piece{
+	background: @scrollBarBack;
+}
+
+::-webkit-scrollbar-thumb{
+	background: @scrollBar;
+	//border-radius: 5px;
+	position: absolute;
+	margin-left: -10px;
+}
+
+::-webkit-scrollbar-corner{
+	width: 10px;
+	height: 10px;
+	background: @scrollBarBack;
+}
+
+::-webkit-resizer{
+	background: @scrollBarBack;
+}
+
+/*--------------------------------------------*/
+/*---> LOADING <------------------------------*/
+/*--------------------------------------------*/
+
+.ShiftingColors(){
+
+	background-color: linear-gradient(to left, @PeterRiver 50%, @GlobalOrange 50%);
+	background-size: 200% 100%;
+
+	@-webkit-keyframes shiftingColors{
+		0%{
+			background-position: right bottom;
+		}
+		50%{
+			background-position: left bottom;
+		}
+		100%{
+			background-position: right bottom;
+		}
+	}
+
+	animation: shiftingColors 2s ease infinite;
+	-webkit-animation: shiftingColors 2s ease infinite;
+
+}
+
+div#loading-screen{
+
+	background: @Charcoal;
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	top: -100vh;
+	left: 0;
+	z-index: 60;
+
+	&.loading{
+		top: 0;
+	}
+
+	@loadingLogoSize: 20vw;
+
+	div#loading-logo{
+		width: @loadingLogoSize;
+		height: @loadingLogoSize;
+		margin: 15vh 40vw;
+		background: transparent;
+		.ShiftingColors();
+	}
+
+	img{
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: @loadingLogoSize;
+		height: @loadingLogoSize;
+		margin: 15vh 40vw;
+	}
+
+	p{
+		color: white;
+		position: absolute;
+		top: 20vw + 20vh;
+		width: 100%;
+	}
+
+	.AnimateAll();
+
+}
+
+.SpinningBall(){
+
+	@-webkit-keyframes spinBall{
+		from{
+			transform: rotate(0deg);
+			webkit-transform: rotate(0deg);
+		}
+		to{
+			transform: rotate(360deg);
+			webkit-transform: rotate(360deg);
+		}
+	}
+
+	animation: spinBall 1s linear infinite;
+	-webkit-animation: spinBall 1s linear infinite;
+
+}
+
+img.spinning-ball{
+	width: 10vw;
+	margin: @vh 44vw;
+	.SpinningBall();
+}
