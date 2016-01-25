@@ -36,12 +36,16 @@
 
 		<div class="header-space" id="top"></div>
 
-		<div id="loading-screen" class="loading">
+		<div id="loading-screen">
+		<!-- <div id="loading-screen" class="loading"> -->
 			<!-- <div id="loading-logo"></div>
 			<img src="style/img/hollow-logo-square.png"> -->
 			<img class="spinning-ball" src="style/img/logo-ball-orange.png">
 			<p>Even innovation takes time...</p>
 		</div>
+		
+		<!-- <h1>Coming Soon...</h1>
+		<img class="spinning-ball" src="style/img/logo-ball-orange.png"> -->
 
 		<section class="section-page" id="landing">
 			<center>
@@ -64,7 +68,8 @@
 			<h2 class="arrow-title">What's New</h2>
 			<div class="arrow-down"></div>
 			<p>Click on the links to learn more about how our scholars are giving back to the community and growing as leaders.</p>
-			<ul>
+			<hr width="80%">
+			<ul class="glp-bullets">
 				<li>E.D.U. is set to host a workshop helping high school students build learning skills at Illinois Tech on February 21st. <i class="fa fa-arrow-circle-right"></i></li>
 				<li>Check out G-Squad's latest video! <i class="fa fa-arrow-circle-right"></i></li>
 				<li>Bully Busters launch "One Voice" campaign. <i class="fa fa-arrow-circle-right"></i></li>
@@ -86,8 +91,56 @@
 		<section class="section-page" id="timeline">
 			<h2 class="arrow-title">Timeline</h2>
 			<div class="arrow-down"></div>
-			<h1>Coming Soon...</h1>
-			<img class="spinning-ball" src="style/img/logo-ball-orange.png">
+			<ul class="timeline">
+				<li>
+					<h2>Jun<span>e</span></h2>
+					<p>Summer Session <i class="fa fa-arrow-circle-right"></i></p>
+				</li>
+				<li>
+					<h2>Jul<span>y</span></h2>
+					<p>Summer Session <i class="fa fa-arrow-circle-right"></i></p>
+				</li>
+				<li>
+					<h2>Aug<span>ust</span></h2>
+					<p>Team Building <i class="fa fa-arrow-circle-right"></i></p>
+				</li>
+				<li>
+					<h2>Sept<span>ember</span></h2>
+					<p>Project Management <i class="fa fa-arrow-circle-right"></i></p>
+				</li>
+				<li>
+					<h2>Oct<span>ober</span></h2>
+					<p>Defining the Scope <i class="fa fa-arrow-circle-right"></i></p>
+				</li>
+				<li>
+					<h2>Nov<span>ember</span></h2>
+					<p>Taking Action <i class="fa fa-arrow-circle-right"></i></p>
+				</li>
+				<li>
+					<h2>Dec<span>ember</span></h2>
+					<p>Capacity Building <i class="fa fa-arrow-circle-right"></i></p>
+				</li>
+				<li>
+					<h2>Jan<span>uary</span></h2>
+					<p>Implementation and Planning <i class="fa fa-arrow-circle-right"></i></p>
+				</li>
+				<li>
+					<h2>Feb<span>ruary</span></h2>
+					<p>Testing and Documentation <i class="fa fa-arrow-circle-right"></i></p>
+				</li>
+				<li>
+					<h2>Mar<span>ch</span></h2>
+					<p>Execution <i class="fa fa-arrow-circle-right"></i></p>
+				</li>
+				<li>
+					<h2>Apr<span>il</span></h2>
+					<p>Expansion <i class="fa fa-arrow-circle-right"></i></p>
+				</li>
+				<li>
+					<h2>May</h2>
+					<p>Final Presentation <i class="fa fa-arrow-circle-right"></i></p>
+				</li>
+			</ul>
 		</section>
 
 		<section class="section-page" id="signin">
@@ -151,7 +204,7 @@
 			}
 
 			onReady(function(){
-				document.getElementById('loading-screen').classList.toggle('loading');
+				//document.getElementById('loading-screen').classList.toggle('loading');
 			});
 
 			console.log("LOADED MAIN");
