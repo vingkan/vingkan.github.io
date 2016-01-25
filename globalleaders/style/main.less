@@ -82,8 +82,8 @@ h3{
 }
 
 p{
-	font-size: 1.0 * @textSize;
-	line-height: 1.25 * @textSize;
+	font-size: 1.25 * @textSize;
+	line-height: 1.5 * @textSize;
 	text-align: center;
 }
 
@@ -93,7 +93,7 @@ ul{
 }
 
 li{
-	font-size: 1.0 * @textSize;
+	font-size: 1.25 * @textSize;
 	line-height: 1.5 * @textSize;
 }
 
@@ -110,6 +110,7 @@ html{
 	.BodyFont();
 	font-size: @textSize;
 	color: @Charcoal;
+	overflow-x: hidden;
 }
 
 body{
@@ -194,22 +195,17 @@ section#teams{
 section#involved{
 
 	.SectionPage(url('img/grey-wash.png'), white, @mainColor);
-	height: 31 * @vh;
+	height: 50 * @vh;
+	overflow: hidden;
 
 	button{
 		background: @GlobalOrange;
-		margin-top: 16.5 * @vh;
+		margin-top: 26 * @vh;
 		position: absolute;
 	}
 
 	div.half-button{
-		
-		padding-bottom: 5 * @vh;
-
-		h3{
-			top: 37.5%;
-		}
-
+		height: 50 * @vh;
 	}
 
 }
@@ -230,6 +226,11 @@ section#signin{
 	}
 
 }
+
+section#comingsoon{
+	.SectionPage(url('img/grey-wash.png'), white, @mainColor);
+}
+
 
 /*--------------------------------------------*/
 /*---> SECTIONS <-----------------------------*/
@@ -307,13 +308,13 @@ div.team-box{
 	display: inline-block;
 	width: 45%;
 	margin: 2.5%;
-	height: 25 * @vh;
+	height: 35 * @vh;
 	position: relative;
 	box-shadow: 0 0 (5 * @vh) rgba(0, 0, 0, 0.5);
 
 	h3{
 		position: absolute;
-		bottom: -1 * @vh;
+		bottom: 0 * @vh;
 		left: 0;
 		padding: 2 * @vh;
 		width: 85%;
@@ -646,7 +647,6 @@ button.page-button{
 
 div.half-button{
 
-	.FillBackgroundImage();
 	width: 50%;
 	padding: 0;
 	margin: 0;
@@ -656,19 +656,31 @@ div.half-button{
 	height: 30 * @vh;
 	position: relative;
 
-	h3{
-		position: absolute;
-		top: 45%;
-		width: 90%;
-		margin: 0 5%;
-		cursor: pointer;
+	div.image-back{
+
+		width: 100%;
+		height: 100%;
+		padding-bottom: 5 * @vh;
+		
+		.FillBackgroundImage();
+		background-position: top;
+		
+		filter: grayscale(100%) blur(05x);
+		-webkit-filter: grayscale(100%) blur(5px);
+
 		.AnimateAll();
 	}
 
-	&:hover h3{
-		background: @GlobalOrange;
-		padding: 2%;
-		margin: -2% 3%;
+	&:hover div.image-back{
+		filter: grayscale(0%) blur(0px);
+		-webkit-filter: grayscale(0%) blur(0px);
+	}
+	
+	button{
+		position: absolute;
+		top: -10%;
+		width: 90%;
+		margin: 0 5%;
 	}
 
 	.AnimateAll();

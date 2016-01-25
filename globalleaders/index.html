@@ -36,8 +36,8 @@
 
 		<div class="header-space" id="top"></div>
 
-		<div id="loading-screen">
-		<!-- <div id="loading-screen" class="loading"> -->
+		<!-- <div id="loading-screen"> -->
+		<div id="loading-screen" class="loading">
 			<!-- <div id="loading-logo"></div>
 			<img src="style/img/hollow-logo-square.png"> -->
 			<img class="spinning-ball" src="style/img/logo-ball-orange.png">
@@ -79,11 +79,13 @@
 		<section class="section-page" id="involved">
 			<h2 class="arrow-title">Get Involved</h2>
 			<div class="arrow-down"></div>
-			<div class="half-button" style="background-image: url('style/img/apply.jpg');">
-				<h3>Apply to be a Scholar</h3>
+			<div class="half-button">
+				<div class="image-back" style="background-image: url('style/img/apply.jpg');"></div>
+				<a href="#comingsoon"><button class="page-button">Apply to be a Scholar</button></a>
 			</div>
-			<div class="half-button" style="background-image: url('style/img/volunteer.jpg');">
-				<h3>Volunteer to Help</h3>
+			<div class="half-button">
+				<div class="image-back" style="background-image: url('style/img/volunteer.jpg');"></div>
+				<a href="#comingsoon"><button class="page-button">Volunteer to Help</button></a>
 			</div>
 			<button class="page-button">Contact Us</button>
 		</section>
@@ -153,6 +155,13 @@
 			<button class="page-button">Sign Up</button>
 		</section>
 
+		<section class="section-page" id="comingsoon">
+			<h2 class="arrow-title">Coming Soon</h2>
+			<div class="arrow-down"></div>
+			<img class="spinning-ball" src="style/img/logo-ball-orange.png">
+			<p>There is more to come!</p>
+		</section>
+
 		<footer>
 			<p>Sunny Shah | SaaS (Shah as a Service) 2016 | Vinesh Kannan</p>
 		</footer>
@@ -206,6 +215,10 @@
 			onReady(function(){
 				//document.getElementById('loading-screen').classList.toggle('loading');
 			});
+
+			setTimeout(function(){
+				document.getElementById('loading-screen').classList.toggle('loading');
+			}, 3000);
 
 			console.log("LOADED MAIN");
 
