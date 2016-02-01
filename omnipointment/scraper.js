@@ -67,11 +67,55 @@ var clean = dirty.substr(0, dirty.indexOf("\n"));
 MEETING_DATA.name = clean;
 
 //SET MEETING MID
-var midFromName = clean.replace(/ /g, "-");
+var midFromName = clean.replace(/ /g, "-").toLowerCase();
 MEETING_DATA.mid = midFromName;
 
+//SET MEETING MESSAGE
+MEETING_DATA.message = "Converted from When2Meet with love by Omnipointment.";
+
+//SET MEETING USERS
+MEETING_DATA.users = PeopleIDs;
+
 //GET MEETING RESPONDERS
+var respondersById = {};
+for(var k = 0; k < PeopleIDs.length; k++){
+	respondersById[PeopleIDs[k]] = [];
+}
+//SORT AVAILABILITY DATA INTO TIMESLOTS BY PERSON ID
+for(var t = 0; t < TimeOfSlot.length; t++){
+	var time = getDateTime(TimeOfSlot[t]);
+	var duration = 15;
+	var free = 2;
+	for(var a = 0; a < AvailableAtSlot[t].length; a++){
+		var userID = AvailableAtSlot[t][a];
+		var slotID = userID + "-" + time;
+		var timeslot = {
+			_id: slotID,
+			duration: duration,
+			time: time,
+			userId: userID,
+			free: free
+		}
+		respondersById[userID].push(timeslot);
+	}
+}
+//CONVERT TO RESPONDERS FORMAT
+var responders = [];
+for(id in respondersById){
+	var name = PeopleNames[PeopleIDs.indexOf(parseInt(id, 10))];
+	responders.push({
+		name: name,
+		providerId: id,
+		providerType: "when2meet",
+		email: "[Email for: " + name + "]",
+		timeslots: respondersById[id]
+	});
+}
+MEETING_DATA.responders = responders;
 
+//OUTPUT
+var stringified = JSON.stringify(MEETING_DATA);
 
+console.log("OUTPUT: JSON Meeting Object for Omnipointment:");
 console.log(MEETING_DATA);
 copy(MEETING_DATA);
