@@ -1,6 +1,6 @@
 var MEETING_DATA = {
 	mid: null,
-	creator: null,
+	creator: "CREATED ON WHEN2MEET",
 	name: null,
 	message: null,
 	users: [],
@@ -65,6 +65,13 @@ var nameDiv = document.getElementById("NewEventNameDiv");
 var dirty = nameDiv.innerText;
 var clean = dirty.substr(0, dirty.indexOf("\n"));
 MEETING_DATA.name = clean;
+
+//SET MEETING MID
+var midFromName = clean.replace(/ /g, "-");
+MEETING_DATA.mid = midFromName;
+
+//GET MEETING RESPONDERS
+
 
 console.log(MEETING_DATA);
 copy(MEETING_DATA);
