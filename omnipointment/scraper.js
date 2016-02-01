@@ -1,6 +1,6 @@
 var MEETING_DATA = {
 	mid: null,
-	creator: "CREATED ON WHEN2MEET",
+	creator: "Created on When2Meet",
 	name: null,
 	message: null,
 	users: [],
@@ -11,6 +11,17 @@ var MEETING_DATA = {
 var GLOBAL = {
 	DAY: 86400000,
 	MINUTE: 60000
+}
+
+//Thanks to this S/O Post: http://stackoverflow.com/questions/3665115/create-a-file-in-memory-for-user-to-download-not-through-server
+function download(filename, text) {
+	var element = document.createElement('a');
+	element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+	element.setAttribute('download', filename);
+	element.style.display = 'none';
+	document.body.appendChild(element);
+	element.click();
+	document.body.removeChild(element);
 }
 
 function getDateTime(timestamp){
@@ -35,10 +46,6 @@ for(var d = 0; d < allDivs.length; d++){
 }
 var start = scrapeCellTime(timeDivs[0]);
 var end = scrapeCellTime(timeDivs[timeDivs.length-1]);
-/*console.log("START TIME: ")
-console.log(moment(start).format("M/D/YYYY dddd hh:mm A"));
-console.log("END TIME: ")
-console.log(moment(end).format("M/D/YYYY dddd hh:mm A"));*/
 var datesList = [];
 var currentTime = start.getTime();
 while(currentTime <= end.getTime()){
@@ -116,6 +123,9 @@ MEETING_DATA.responders = responders;
 //OUTPUT
 var stringified = JSON.stringify(MEETING_DATA);
 
-console.log("OUTPUT: JSON Meeting Object for Omnipointment:");
+console.warn("OUTPUT: JSON Meeting Object for Omnipointment:");
 console.log(MEETING_DATA);
-copy(MEETING_DATA);
+/*copy(MEETING_DATA);
+console.warn("The object is now copied to your clipboard.");*/
+console.warn("The JSON data is being downloaded to your computer.");
+download(MEETING_DATA.mid + ".txt", stringified);
