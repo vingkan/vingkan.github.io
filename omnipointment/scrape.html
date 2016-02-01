@@ -7,6 +7,7 @@
 		<link rel="icon" type="img/png" href="style/favicon.png" style="width:30px;">
 		<!-- Google Fonts -->
 		<link href='https://fonts.googleapis.com/css?family=Raleway:700|Source+Sans+Pro:400,600,400italic' rel='stylesheet' type='text/css'>
+		<script src="imports/moment.min.js"></script>
 		<style>
 
 		</style>
@@ -14,6 +15,11 @@
 
 	<body>
 
+<div id="target" style="display: none;">
+
+<div id="GroupTime1450443600" onmouseover="ShowSlot(1450443600);" style="vertical-align:top;display:inline-block;*display:inline;zoom:1;width:44px;height:9px;font-size:0px;border-left: 1px black solid;background: #add699;border-top: 1px black solid;"></div>
+
+</div>
 
 		<div class="container">
 
@@ -25,7 +31,14 @@
 
 		<script type="text/javascript">
 
-			//window.location = "http://omnipointment.com/";
+			var target = document.getElementById('target');
+			var slots = target.getElementsByTagName('div');
+			for(var s = 0; s < slots.length; s++){
+				var time = scrapeCellDate(slots[s].id);
+				console.log(moment(time).format("M/D/YYYY dddd hh:mm A"));
+			}
+
+
 
 		</script>
 
