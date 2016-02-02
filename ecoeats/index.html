@@ -61,8 +61,8 @@
 	</div>
 
 	<div class="wood">
-		<h1>Upcoming Meals</h1>
-		<p>To gauge what meals students are interested in, EcoEats is pausing student chef meals and ordering from local restaurants. We hope you will sign up for and enjoy these offerings. Email pay.ecoeats@gmail.com if you would like to suggest a meal!</p>
+		<h1>Past Meals</h1>
+		<p>EcoEats has paused its services. Check out some of the past meals our student chefs cooked up! If you'd like to bring EcoEats to your community, shoot our founder Sunny Shah an email at sunnyshah1000@gmail.com.</p>
 		<div id="upcomingMeals">No meals are currently listed. Host your own!</div>
 		<h1>Become a Chef</h1>
 		<p>If you like food, people, and money, send us your email address and find out how you can become an EcoEats Chef!</p>
@@ -73,7 +73,7 @@
 			<h1>See our stats!</h1>
 			<button onclick="window.location='stats.html'">Go!</button>
 			<button class="small" onclick="closePopup('stats');">Close</button>
-		</div>-->
+		</div>-->
 
 		<div id="footer">
 			<p>Illinois Institute of Technology | EcoEats 2015 | Webpage by Vinesh Kannan</p>
@@ -81,6 +81,8 @@
 	</div>
 
 	<script type="text/javascript">
+
+		var DISPLAY_PAST = true;
 
 		function submitChef(){
 			var newUser = new Date();
@@ -101,7 +103,7 @@
 				var meal = new Meal(childData);
 				meals.push(meal);
 			});
-			loadMeals();
+			loadMeals(DISPLAY_PAST);
 		});
 
 		var chefsDatabase = new Firebase('https://ecoeats.firebaseio.com/chefs');
