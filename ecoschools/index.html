@@ -161,7 +161,7 @@
 						email: email
 					}
 					var firebase = new Firebase('https://ecoschools.firebaseio.com/students/');
-					//firebase.push(student);
+					firebase.push(student);
 					event.target.classList.add('success');
 					event.target.innerText = 'Let the adventure begin!';
 				}
