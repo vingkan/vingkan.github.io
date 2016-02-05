@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>EcoSchools</title>
+		<link rel="stylesheet" type="text/css" href="style/reset.css">
+		<link rel="stylesheet" type="text/css" href="style/main.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="icon" type="img/png" href="style/favicon.png" style="width:30px;">
+		<!-- IMPORTED SCRIPTS -->
+		<!-- NEED GOOGLE FONTS LATER -->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+		<style>
+
+
+
+		</style>
+	</head>
+
+	<body>
+
+		<div class="scene sky">
+			<p>Schools of the future will be part of an ecosystem.</p>
+			<div class="circle-wrapper" id="earth">
+				<div class="circle">
+					<h1 class="circle-element">EcoSchools</h1>
+					<div class="chord-six">
+						<div class="circle-chord"></div>
+						<div class="circle-chord"></div>
+						<div class="circle-chord"></div>
+						<div class="circle-chord"></div>
+						<div class="circle-chord"></div>
+						<div class="circle-chord"></div>
+					</div>
+					<div class="circle-six">
+						<div class="circle-element circle-div">
+							<span>
+								Innovation
+								<div class="arrow-down"></div>
+							</span>
+							<i class="fa fa-flask"></i></div>
+						<div class="circle-element circle-div">
+							<span>
+								Scholarship
+								<div class="arrow-down"></div>
+							</span>
+							<i class="fa fa-graduation-cap"></i></div>
+						<div class="circle-element circle-div">
+							<span>
+								Creativity
+								<div class="arrow-down"></div>
+							</span>
+							<i class="fa fa-pencil"></i></div>
+						<div class="circle-element circle-div">
+							<span>
+								Dreams
+								<div class="arrow-down"></div>
+							</span>
+							<i class="fa fa-rocket"></i></div>
+						<div class="circle-element circle-div">
+							<span>
+								Play
+								<div class="arrow-down"></div>
+							</span>
+							<i class="fa fa-futbol-o"></i></div>
+						<div class="circle-element circle-div">
+							<span>
+								Collaboration
+								<div class="arrow-down"></div>
+							</span>
+							<i class="fa fa-group"></i></div>
+					</div>
+				</div>
+			</div>
+			<a href="#contact-form"><button id="landing-button">Help Build the Future</button></a>
+			<h1>What does it mean to be an ecosystem?</h1>
+			<br>
+			<div id="slants-space">
+				<div class="slant slant-left"></div>
+				<div class="slant-text">
+					<h2>Learning will be connected to doing.</h2>
+					<p></p>
+				</div>
+				<div class="slant slant-right"></div>
+				<div class="slant-text">
+					<h2>Schools will be connected to communities.</h2>
+				</div>
+				<div class="slant slant-left"></div>
+				<div class="slant-text">
+					<h2>Students will be connected to each other.</h2>
+				</div>
+				<div id="contact-form" class="slant slant-right"></div>
+				<div class="slant-text">
+					<h2 class="center-text">Students will lead the way.</h2>
+					<p class="center-text">We are hosting workshops for high school students to redesign learning experiences: a prototype of how we believe future schools will improve by acting on the needs and ideas of their students. Let us know if you want to join or help in some other way.</p>
+					<h4 class="form-title">Your Name</h4>
+					<input id="student-name" class="student-form" type="text">
+					<h4 class="form-title">Your Email</h4>
+					<input id="student-email" class="student-form" type="text">
+					<button id="student-submit">I want to help!</button>
+				</div>
+			</div>
+		</div>
+		<div class="scene ground">
+			<div id="xq-circle" class="circle-wrapper">
+				<div class="circle">
+					<h1 class="circle-element">An XQ Super School</h1>
+					<div class="chord-six">
+						<div class="circle-chord"></div>
+						<div class="circle-chord"></div>
+						<div class="circle-chord"></div>
+						<div class="circle-chord"></div>
+						<div class="circle-chord"></div>
+						<div class="circle-chord"></div>
+					</div>
+					<div class="circle-six">
+						<div class="circle-element circle-div"></div>
+						<div class="circle-element circle-div"></div>
+						<div class="circle-element circle-div"></div>
+						<div class="circle-element circle-div"></div>
+						<div class="circle-element circle-div"></div>
+						<div class="circle-element circle-div"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<script type="text/javascript">
+
+			$('a').click(function(){
+				$('html, body').animate({
+					scrollTop: $( $.attr(this, 'href') ).offset().top
+				}, 500);
+				return false;
+			});
+
+			$('.student-form').change(function(event){
+				var target = document.getElementById('student-submit');
+				var name = document.getElementById('student-name').value;
+				var email = document.getElementById('student-email').value;
+				if(name && email && email.includes('@')){
+					target.classList.remove('error');
+					target.innerText = 'I want to help!';
+				}
+			})
+
+			$('#student-submit').click(function(event){
+				var name = document.getElementById('student-name').value;
+				var email = document.getElementById('student-email').value;
+				if(!name || !email || !email.includes('@')){
+					event.target.classList.add('error');
+					event.target.innerText = 'Please add name and email.';
+				}
+				else{
+					event.target.classList.remove('error');
+					var student = {
+						timestamp: new Date().getTime(),
+						name: name,
+						email: email
+					}
+					var firebase = new Firebase('https://ecoschools.firebaseio.com/students/');
+					//firebase.push(student);
+					event.target.classList.add('success');
+					event.target.innerText = 'Let the adventure begin!';
+				}
+			});
+
+			
+
+			console.log("LOADED MAIN");
+
+		</script>
+		
+	</body>
+</html>
