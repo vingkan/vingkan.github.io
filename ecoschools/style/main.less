@@ -421,6 +421,10 @@ div#earth{
 	position: relative;
 
 	.CircularPosition(@dm, @angle){
+		-webkit-transform: rotate(-1 * @angle) translate(0.5 * @dm) rotate(@angle);
+		-moz-transform: rotate(-1 * @angle) translate(0.5 * @dm) rotate(@angle);
+		-ms-transform: rotate(-1 * @angle) translate(0.5 * @dm) rotate(@angle);
+		-o-transform: rotate(-1 * @angle) translate(0.5 * @dm) rotate(@angle);
 		transform: rotate(-1 * @angle) translate(0.5 * @dm) rotate(@angle);
 	}
 
@@ -463,12 +467,54 @@ div#earth{
 
 	div.chord-six div.circle-chord{
 
-		&:nth-child(1){transform: translate(-1 * @half-x, 1 * @x-root-3) rotate(60deg);}
-		&:nth-child(2){transform: rotate(180deg) translate(-2 * @half-x, -2 * @x-root-3);}
-		&:nth-child(3){transform: rotate(120deg) translate(-1 * @half-x, -3 * @x-root-3);}
-		&:nth-child(4){transform: rotate(60deg) translate(1 * @half-x, -3 * @x-root-3);}
-		&:nth-child(5){transform: rotate(180deg) translate(-2 * @half-x, 2 * @x-root-3);}
-		&:nth-child(6){transform: rotate(120deg) translate(-1 * @half-x, 1 * @x-root-3);}
+		&:nth-child(1){
+			-webkit-transform: translate(-1 * @half-x, 1 * @x-root-3) rotate(60deg);
+			-moz-transform: translate(-1 * @half-x, 1 * @x-root-3) rotate(60deg);
+			-ms-transform: translate(-1 * @half-x, 1 * @x-root-3) rotate(60deg);
+			-o-transform: translate(-1 * @half-x, 1 * @x-root-3) rotate(60deg);
+			transform: translate(-1 * @half-x, 1 * @x-root-3) rotate(60deg);
+		}
+
+		&:nth-child(2){
+			-webkit-transform: rotate(180deg) translate(-2 * @half-x, -2 * @x-root-3);
+			-moz-transform: rotate(180deg) translate(-2 * @half-x, -2 * @x-root-3);
+			-ms-transform: rotate(180deg) translate(-2 * @half-x, -2 * @x-root-3);
+			-o-transform: rotate(180deg) translate(-2 * @half-x, -2 * @x-root-3);
+			transform: rotate(180deg) translate(-2 * @half-x, -2 * @x-root-3);
+		}
+
+		&:nth-child(3){
+			-webkit-transform: rotate(120deg) translate(-1 * @half-x, -3 * @x-root-3);
+			-moz-transform: rotate(120deg) translate(-1 * @half-x, -3 * @x-root-3);
+			-ms-transform: rotate(120deg) translate(-1 * @half-x, -3 * @x-root-3);
+			-o-transform: rotate(120deg) translate(-1 * @half-x, -3 * @x-root-3);
+			transform: rotate(120deg) translate(-1 * @half-x, -3 * @x-root-3);
+		}
+
+		&:nth-child(4){
+			-webkit-transform: rotate(60deg) translate(1 * @half-x, -3 * @x-root-3);
+			-moz-transform: rotate(60deg) translate(1 * @half-x, -3 * @x-root-3);
+			-ms-transform: rotate(60deg) translate(1 * @half-x, -3 * @x-root-3);
+			-o-transform: rotate(60deg) translate(1 * @half-x, -3 * @x-root-3);
+			transform: rotate(60deg) translate(1 * @half-x, -3 * @x-root-3);
+		}
+
+		&:nth-child(5){
+			-webkit-transform: rotate(180deg) translate(-2 * @half-x, 2 * @x-root-3);
+			-moz-transform: rotate(180deg) translate(-2 * @half-x, 2 * @x-root-3);
+			-ms-transform: rotate(180deg) translate(-2 * @half-x, 2 * @x-root-3);
+			-o-transform: rotate(180deg) translate(-2 * @half-x, 2 * @x-root-3);
+			transform: rotate(180deg) translate(-2 * @half-x, 2 * @x-root-3);
+		}
+
+		&:nth-child(6){
+			-webkit-transform: rotate(120deg) translate(-1 * @half-x, 1 * @x-root-3);
+			-moz-transform: rotate(120deg) translate(-1 * @half-x, 1 * @x-root-3);
+			-ms-transform: rotate(120deg) translate(-1 * @half-x, 1 * @x-root-3);
+			-o-transform: rotate(120deg) translate(-1 * @half-x, 1 * @x-root-3);
+			transform: rotate(120deg) translate(-1 * @half-x, 1 * @x-root-3);
+		}
+
 
 	}
 
