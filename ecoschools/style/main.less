@@ -5,7 +5,8 @@
 @PerspectivePurple: #3C1642;
 @TeachingTeal: #086375;
 @AcademicAqua: #1DD3B0;
-@LearningLime: #AFFC41;
+	@BrightLime: #AFFC41;
+@LearningLime: darken(@BrightLime, 20%);
 @StudentCentricCeladon: #B2FF9E;
 @OverallOrange: #FA7921;
 
@@ -130,7 +131,7 @@ div.sky{
 }
 
 div.ground{
-	background: @LearningLime;
+	background: @TeachingTeal;
 }
 
 div.rsvp{
@@ -281,8 +282,12 @@ div.slant-right{
 		padding-bottom: 1.5 * @slantHeight;
 		background: @slantColor;
 
-		h2, p{
+		h1, h2, p{
 			text-align: left;
+		}
+
+		video{
+			width: 100%;
 		}
 
 	}
@@ -317,6 +322,16 @@ div.circle-wrapper{
 	& when not (@down){
 		box-shadow: (-1 * @shadowSize) (-1 * @shadowSize) 0 rgba(0, 0, 0, 0.1);	
 	}
+}
+
+div#xq-circle{
+
+	background: @AcademicAqua;
+
+	h1{
+		margin: (50% - (0.70 * @tx)) auto;
+	}
+
 }
 
 div#xq-circle div.chord-six div.circle-chord{
