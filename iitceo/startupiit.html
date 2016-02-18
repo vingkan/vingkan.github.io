@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>StartUp IIT</title>
+		<!-- <link rel="icon" type="img/png" href="style/favicon.png" style="width:30px;"> -->
+		<link rel="stylesheet" type="text/css" href="style/reset.css">
+		<link rel="stylesheet" type="text/css" href="style/main.css">
+		<link rel="stylesheet" type="text/css" href="style/parallax.css">
+		<link href='https://fonts.googleapis.com/css?family=Alfa+Slab+One|Source+Sans+Pro:400,400italic,900' rel='stylesheet' type='text/css'>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+		<style>
+
+			span.iitPun{
+				color: #E51937;
+			}
+
+			.noBottomSpace{
+				margin-bottom: 0;
+				padding-bottom: 0;
+			}
+
+			#formAlert{
+				display: none;
+			}
+
+		</style>
+	</head>
+	<body>
+
+		<header>
+			<center>
+				<ul>
+					<a href="#home"><li onmouseover="document.getElementById('ceoLogo').src='style/img/ceoBlackLogo.png';" onmouseout="document.getElementById('ceoLogo').src='style/img/ceoWhiteLogo.png';"><img id="ceoLogo" src="style/img/ceoWhiteLogo.png"></li></a>
+					<a href="#register"><li>Register</li></a>
+					<a href="#prizes"><li>Prizes</li></a>
+					<a href="#schedule"><li>Schedule</li></a>
+					<a href="#teams"><li>Teams</li></a>
+				</ul>
+			</center>
+		</header>
+
+		<div class="headerSpace" id="home"></div>
+
+		<section class="module parallax section1">
+			<div class="container">
+				<h1>StartUP <span class="iitPun">IIT</span></h1>
+			</div>
+		</section>
+
+		<section class="module content">
+			<div class="container">
+				<h2>Meet in E1 on Saturday</h2>
+				<p>StartUp IIT is a shark tank style pitch competition for entrepreneurs, hackers, creatives, and pretty much anyone that likes talking ideas.</p>
+				<p>Feel free to pitch ideas from previous hackathon projects, IPRO projects, or your own start up.</p>
+			</div>
+		</section>
+
+		<section class="module parallax section2" id="register">
+			<div class="container">
+				<h1 class="noBottomSpace">Register</h1>
+				<div id="registration">
+					<input type="text" id="name" placeholder="Your Name">
+					<input type="text" id="email" placeholder="Your Email">
+					<center>
+						<button onclick="submitUser();">Submit</button>
+					</center>
+				</div>
+			</div>
+		</section>
+
+		<section class="module content">
+			<div class="container">
+				<p id="formAlert"><span class="iitPun">Please enter a valid name and email address.</span></p>
+				<p>Invite your friends to RSVP on our <a href="https://www.facebook.com/events/999480900103276/" target="_blank">Facebook Event</a>!</p>
+			</div>
+		</section>
+
+		<section class="module parallax section3" id="prizes">
+			<div class="container">
+				<h1>Prizes</h1>
+			</div>
+		</section>
+
+		<section class="module content">
+			<div class="container">
+				<p>More than $1000 worth of prizes will be up for grabs in these three categories:</p>
+				<h2>Social Enterprise</h2>
+				<p>Best business plan for a social venture, based on creativity and potential impact.</p>
+				<h2>Best MVP</h2>
+				<p>Best combination of a business plan and successful execution of a clever and informative Minimum Viable Product.</p>
+				<h2>Best Overall</h2>
+				<p>Like no one ever was.</p>
+				</p>
+			</div>
+		</section>
+		
+		<section class="module parallax section4" id="schedule">
+			<div class="container">
+				<h1>Schedule</h1>
+			</div>
+		</section>
+
+		<section class="module content">
+			<div class="container">
+				<h2>Saturday</h2>
+					<ul>
+						<li><span>5:00 PM</span> Doors open, dinner provided. Introductions and all that jazz.</li>
+						<li><span>5:30 PM</span> Team formation. Those with ideas may present to recruit teammates. Breakout sessions and <a href="#teams">Tinderpreneurship</a> will be available to assist in forming new teams. Then go nuts!</li>
+						<li><span>8:00 PM</span> Presentation and activity on how to design da real MVP.</li>
+						<li><span>10:00 PM</span> Doors close, feel free to continue working elsewhere.</li>
+					</ul>
+				<h2>Sunday</h2>
+					<ul>
+						<li><span>7:00 AM</span> Doors open, breakfast provided.</li>
+						<li><span>12:00 PM</span> Lunch provided</li>
+						<li><span>1:00 PM</span> Presentations begin.</li>
+						<li><span>3:00 PM</span> Awards and closing marks.</li>
+					</ul>
+			</div>
+		</section>
+
+		<section class="module parallax section5" id="teams">
+			<div class="container">
+				<h1>Teams</h1>
+			</div>
+		</section>
+
+		<section class="module content">
+			<div class="container">
+				<p id="submitMessage">Don't worry if you don't know who to work with this weekend...</p>
+				<center>
+					<a href="http://tinderpreneurship.tk/" target="_blank">
+						<img class="logo" src='style/img/tinderpreneurship.png'>
+					</a>
+				</center>
+				<p>Click the logo to try it out!</p>
+				<p>Tinderpreneurship is a tool based on the popular dating app to take the anxiety out of finding teammates. Check back in the days leading up to the event for the app's MVP, which StartUp IIT will be piloting!</p>
+			</div>
+			<div class="footerSpace"></div>
+		</section>
+
+		<footer>
+			<address>iitceo.tk</address>
+		</footer>
+
+
+		<script type="text/javascript">
+
+			function submitUser(){
+				var name = document.getElementById('name').value;
+				var email = document.getElementById('email').value;
+				if(name != "" && email != ""){
+					var eventRef = new Firebase("https://tinderpreneurship.firebaseio.com/events/startup-iit");
+					eventRef.push({
+						name: name,
+						email: email
+					});
+					document.getElementById('formAlert').style.display = 'none';
+					document.getElementById('submitMessage').innerHTML = "Thanks for signing up! In case you're wondering about who you should work with this weekend...";
+					window.location = "#teams";
+				}
+				else{
+					document.getElementById('formAlert').style.display = 'block';
+				}
+			}
+
+		</script>
+		
+	</body>
+</html>
