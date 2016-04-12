@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>FireDates</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="icon" type="img/png" href="style/img/favicon.png" style="width:30px;">
+		<link rel="stylesheet" type="text/css" href="style/reset.css">
+		<link rel="stylesheet" type="text/css" href="style/main.css">
+		<!-- EXTERNAL SCRIPTS -->
+		<script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+	</head>
+	<body>
+
+		<header>
+			<h1>FireDates</h1>
+		</header>
+		<div class="viewer">
+			<div id="user-viewer-1" class="view-box"></div><div id="user-viewer-2" class="view-box"></div>
+		</div>
+
+		<div id="editor"></div>
+		<div class="viewer">
+			<button id="run-code">Run</button><button id="stop-code">Stop</button>
+		</div>
+
+		<!-- LOCAL SCRIPTS -->
+		<script src="ace/ace.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="lib/generator.js"></script>
+		<script type="text/javascript" src="lib/viewer.js"></script>
+		<script type="text/javascript">
+
+			Generator.generateUser(function(user){
+				console.log(user)
+				console.log(user.results[0])
+			});
+			Generator.generateUser(function(user){
+				Viewer.showUser(user.results[0], 1)
+			});
+			Generator.generateUser(function(user){
+				Viewer.showUser(user.results[0], 2)
+			});
+			var key = Generator.continuousUser(function(user){
+				Viewer.showUser(user.results[0], 2)
+			});
+			Viewer.Editor.toClear.push(key);
+
+		</script>
+
+	</body>
+</html>
