@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Graffiti Graph</title>
+		<!-- ThinkChicago Team Giordano's | 16 October 2015 -->
+		<link rel="stylesheet" type="text/css" href="style/reset.css">
+		<link rel="stylesheet" type="text/css" href="style/demo.css">
+		<link href='https://fonts.googleapis.com/css?family=Bevan|Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script src="http://maps.googleapis.com/maps/api/js"></script>
+		<script src="overlappingMarkerSpiderfier.js"></script>
+		<style>
+
+
+
+		</style>
+	</head>
+	<body>
+
+		<div id="entry" class="floatingHeader">
+			<h1>Graffiti Graph <span>version 0.0.1</span></h1>
+			<p>
+				Showing the first 100 incidents of gang-related graffiti from the <a target="blank_" href="https://data.illinois.gov/Municipality/Graffiti/u4ca-yfeq">Rockford municipal open dataset.</a><br>
+				<a onclick="collapseEntryText();"><span>Click here to explore the map.</span></a>
+			</p>
+		</div>
+
+		<div id="googleMap"></div>
+
+		<div id="pitch" onclick="this.style.height='0';">
+			<p>Click outside of the slides to try the demo.</p>
+			<iframe id="slides" src="https://docs.google.com/presentation/d/1Dx82iX1UcC9fba25aizZVlNhbD7HewzNOjnJtB8qakU/embed?start=true&loop=false&delayms=3500" frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+		</div>
+
+		<div id="exit">
+			<p><span><b>By ThinkChicago Team Giordano's</b></span></p>
+		</div>
+
+		<script type="text/javascript" src="pretty.js"></script>
+		<script type="text/javascript" src="graffiti.js"></script>
+		<script type="text/javascript" src="storage.js"></script>
+		<script type="text/javascript" src="requests.js"></script>
+		<script type="text/javascript" src="map.js"></script>
+
+		<script type="text/javascript">
+
+			function sampleGraffitiData(){
+				function plotData(){
+					var results = storage.get(callId);
+					initGoogleMap(results);
+				}
+				var callId = 'sample';
+				var limit = 100;
+				getGraffiti(callId, {
+					'graffititype': 'Gang'
+				}, limit, plotData);
+			}
+
+			sampleGraffitiData();
+
+			//$('#pitch').click();
+
+		</script>
+		
+	</body>
+</html>
