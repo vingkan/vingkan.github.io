@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Graffiti Graph</title>
+		<link rel="stylesheet" type="text/css" href="style/reset.css">
+		<link rel="stylesheet" type="text/css" href="style/main.css">
+		<!--<link rel="icon" type="img/png" href="style/favicon.png" style="width:30px;">-->
+		<!-- IMPORTED SCRIPTS -->
+		<!-- NEED GOOGLE FONTS LATER -->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<!-- FIREBASE.JS -->
+		<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+		<!-- MOMENT.JS -->
+		<script type="text/javascript" src="moment.min.js"></script>
+		<!-- LEAFLET.JS -->
+		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+		<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+		<!-- OVERLAPPING MARKER SPIDERFIER -->
+		<script type="text/javascript" src="oms.min.js"></script>
+		<style>
+
+			
+
+		</style>
+	</head>
+
+	<body>
+
+		<div id="map"></div>
+
+		<script type="text/javascript" src="lib/storage.js"></script>
+		<script type="text/javascript" src="lib/graffiti.js"></script>
+		<script type="text/javascript" src="lib/requests.js"></script>
+		<script type="text/javascript" src="lib/main.js"></script>
+		<script type="text/javascript">
+
+		function getGeoIP(callback){
+			var x = new XMLHttpRequest();
+			x.open('GET', 'https://geoip.nekudo.com/api/', false);
+			x.send();
+			var res = x.responseText;
+			var geoip = JSON.parse(res);
+			if(callback){
+				callback(geoip);
+			}
+		}
+
+		getGeoIP(main);
+
+		</script>
+
+	</body>
+
+</html>
