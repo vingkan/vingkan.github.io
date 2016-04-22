@@ -22,8 +22,8 @@ function main(geoip){
 	marker.addTo(map);
 	marker.bindPopup('<h4>Your Location</h4>').openPopup();
 	//getFirebaseGraffiti();
-	getGraffiti({}, 100, function(list){
-		plotGraffiti(list.slice(30));
+	getGraffiti({}, 300, function(list){
+		plotGraffiti(list.slice(100));
 		listenToFirebase();
 	}, 'location-markers');
 }
