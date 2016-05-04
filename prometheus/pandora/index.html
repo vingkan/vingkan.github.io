@@ -35,9 +35,12 @@
 
 		</style>
 		<script type="text/babel" src="config.js"></script>
+		<script type="text/javascript" src="lib/notifications.js"></script>
 		<script type="text/babel" src="lib/main.js"></script>
 		<script type="text/babel" src="lib/user-module.js"></script>
+		<script type="text/babel" src="lib/errors-module.js"></script>
 		<script type="text/babel" src="lib/feature-module.js"></script>
+		<script type="text/babel" src="lib/map-module.js"></script>
 		<script type="text/babel" src="lib/screenshot-module.js"></script>
 		<script type="text/babel" src="lib/milestone-module.js"></script>
 		
@@ -54,19 +57,22 @@
 
 		<div class="sidebar">
 			<h3 id="dashboard-key">Dashboard</h3>
-			<div class="sidebar-button blue-stripe" onclick="renderUserModule();">
+			<div class="sidebar-button" onclick="renderUserModule();">
 				<i class="fa fa-icon fa-home"></i> Home
 			</div>
-			<div class="sidebar-button orange-stripe" onclick="renderUserModule();">
+			<div class="sidebar-button" onclick="renderUserModule();">
 				<i class="fa fa-icon fa-users"></i> Users
 			</div>
-			<div class="sidebar-button gold-stripe" onclick="renderFeatureModule();">
+			<div class="sidebar-button" onclick="renderErrorModule();">
+				<i class="fa fa-icon fa-exclamation-triangle"></i> Errors
+			</div>
+			<div class="sidebar-button" onclick="renderFeatureModule();">
 				<i class="fa fa-icon fa-gear"></i> Features
 			</div>
-			<div class="sidebar-button green-stripe" onclick="renderMapModule();">
+			<div class="sidebar-button" onclick="renderMapModule();">
 				<i class="fa fa-icon fa-globe"></i> Map
 			</div>
-			<div class="sidebar-button purple-stripe" onclick="renderScreenshotModule();">
+			<div class="sidebar-button" onclick="renderScreenshotModule();">
 				<i class="fa fa-icon fa-camera"></i> Screenshots
 			</div>
 			<div class="sidebar-button" onclick="renderMilestoneModule();">
@@ -87,6 +93,15 @@
 					<div id="user-info">
 						<p>Click on a user to see more specific information.</p>
 					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="space" id="errors">
+			<div class="column full scrollable">
+				<h1>Errors</h1>
+				<div id="error-list">
+					<p>Coming Soon.</p>
 				</div>
 			</div>
 		</div>
@@ -125,8 +140,8 @@
 		
 
 		<script type="text/javascript">
-
-
+			
+			
 
 		</script>
 		

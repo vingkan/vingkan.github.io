@@ -6,6 +6,7 @@
 @AnalyticalPurple: #4A148C;
 @RetentionGold: #FFCA28;
 @AcceleratorGreen: #CDDC39;
+@MetricsPink: #FC8F8C;
 
 @Charcoal: #1a1a1a;
 @LightGray: #DDDDDD;
@@ -151,6 +152,15 @@ html{
 	font-size: 0;
 }
 
+@SidebarButtonHeight: 6 * @vh;
+
+.LeftBorderStripe(@StripeColor: white){
+	border-left: @vh solid @StripeColor;
+	&:hover{
+		border-left: @vh solid @MischiefBlue;
+	}
+}
+
 div.sidebar, div.space{
 	display: inline-block;
 	height: 100vh;
@@ -178,12 +188,6 @@ div.space{
 	background-size: 37.5%;
 }
 
-@SidebarButtonHeight: 6 * @vh;
-
-.LeftBorderStripe(@StripeColor: white){
-	border-left: @vh solid @StripeColor;
-}
-
 div.sidebar-button{
 
 	.StandardText();
@@ -204,6 +208,9 @@ div.sidebar-button{
 	&.blue-stripe{
 		.LeftBorderStripe(@MischiefBlue);
 	}
+	&.pink-stripe{
+		.LeftBorderStripe(@MetricsPink);
+	}
 	&.orange-stripe{
 		.LeftBorderStripe(@FireOrange);
 	}
@@ -219,12 +226,17 @@ div.sidebar-button{
 
 	&:hover{
 		background: lighten(@Charcoal, 10%);
+		cursor: pointer;
+		i{
+			color: @MischiefBlue
+		}
 	}
 
 	i{
 		display: inline-block;
 		width: 20%;
 		text-align: center;
+		.AnimateAll();
 	}
 
 	.AnimateAll();
@@ -267,7 +279,7 @@ div.module{
 	width: 96%;
 	padding: 1%;
 	margin: 2% 1% 1% 1%;
-	background: white;
+	background: rgba(255, 255, 255, 1.0);
 	font-size: @tx;
 	max-height: 95vh;
 	overflow-y: scroll;
@@ -369,7 +381,7 @@ div.user-view{
 
 	div.visits-field{
 		margin-top: 2 * @vh;
-		background: white;
+		background: transparent;
 		width: 100%;
 	}
 
@@ -418,6 +430,8 @@ div.user-visit-view{
 
 			img.panel-view-screenshot{
 				width: 100%;
+				display: block;
+				margin: (2 * @vh) auto;
 			}
 
 		}
@@ -484,6 +498,19 @@ div.feature-module{
 div#map-page{
 	width: 100%;
 	height: 100%;
+}
+
+div.map-tooltip-container{
+
+	img{
+		display: block;
+		margin: (2 * @vh) auto;
+	}
+
+	h4{
+		text-align: center;
+	}
+
 }
 
 div.screenshot-module{
@@ -680,8 +707,8 @@ body.loading{
 @scrollBarBack: @LightGray;
 
 ::-webkit-scrollbar{
-	width: 5px;
-	height: 5px;
+	width: 10px;
+	height: 10px;
 	background: @scrollBarBack;
 	z-index: 50;
 }
