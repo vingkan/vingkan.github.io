@@ -28,3 +28,33 @@ function handleRequestData(cleaner, callback, dataList){
 	}
 	callback(cleanList);
 }
+
+function buildTreeFromData(config){
+	var empty = {};
+		empty[config.success] = 0;
+		empty[config.failure] = 0;
+	config.attributes.push(config.outcome);
+	getData(config.url, {}, config.size,
+		function(data){
+			if(data[config.outcome] !== config.success){
+				data[config.outcome] = config.failure;
+			}
+			clean = {}
+			for(var k in config.attributes){
+				var key = config.attributes[k];
+				if(key){
+					clean[key] = data[key]
+				}
+			}
+			return clean;
+		},
+		function(dataSet){
+			var tree = DecisionTree({
+				title: config.title,
+				outcomeKey: config.outcome,
+				emptySet: empty
+			});
+			tree.train(dataSet);
+			tree.render();
+	});
+}

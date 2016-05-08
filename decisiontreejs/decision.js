@@ -7,22 +7,19 @@ function Node(type, value, contents, children){
 	}
 }
 
-var countem = 0;
-
-function DecisionTree(dataSet, outcomeKey, emptySet){
+function DecisionTree(config){
 	return {
-		dataSet: dataSet,
-		outcomeKey: outcomeKey, 
-		emptySet: emptySet,
-
+		title: config.title || "Decision Tree",
+		outcomeKey: config.outcomeKey, 
+		emptySet: config.emptySet,
 		root: null,
 
-		init: function(){
-			this.root = Node('root', {}, this.dataSet);
-			this.root = this.handleNode(this.root);
+		train: function(dataSet){
+			this.root = Node('root', {}, dataSet);
+			this.root = this.trainNode(this.root);
 		},
 
-		handleNode: function(node){
+		trainNode: function(node){
 			var split = Entropy.chooseSplitPoint(node.contents, this.outcomeKey, this.emptySet);
 			if(split.attr !== 'NONE_DEFAULT'){
 				node.value.result = split.attr;
@@ -32,7 +29,7 @@ function DecisionTree(dataSet, outcomeKey, emptySet){
 			var children = this.getChildren(branches, split);
 			for(var n in children){
 				if(children[n] && children[n].type === 'split'){
-					var decisionNode = this.handleNode(children[n]);
+					var decisionNode = this.trainNode(children[n]);
 					node.children.push(decisionNode);
 				}
 				else if(children[n]){
@@ -61,44 +58,40 @@ function DecisionTree(dataSet, outcomeKey, emptySet){
 
 		getChildren: function(branches, split){
 			var children = [];
-			for(var b in branches){
-				if(branches[b]){
-					var newNode = null;
-					var branch = branches[b];
-					var smolMatrix = Entropy.getMatrixFromDataSet(branch, this.outcomeKey, this.emptySet);
-					/*console.log(smolMatrix)
-					console.log(split.attr)
-					console.log(b)*/
-					if(split.attr !== 'NONE_DEFAULT'){
-						var infoMatrix = smolMatrix[split.attr][b]
+			if(split.attr !== 'NONE_DEFAULT'){
+				for(var b in branches){
+					if(branches[b]){
+						var newNode = null;
+						var branch = branches[b];
+						var smolMatrix = Entropy.getMatrixFromDataSet(branch, this.outcomeKey, this.emptySet);
+						try{
+							var infoMatrix = smolMatrix[split.attr][b]
+						}
+						catch(e){
+							console.warn(e);
+							console.log(smolMatrix)
+						}
 						var entropy = Entropy.entropyOneAttr(infoMatrix);
 						var result = resultFromFrequency(infoMatrix, this.outcomeKey);
+						var value = {
+							result: result.name,
+							attr: split.attr,
+							branch: b,
+							confidence: result.confidence
+						}
+						var type = 'split'
 						if(entropy > 0){
-							var type = 'split'
 							var hasSplit = Entropy.chooseSplitPoint(branch, this.outcomeKey, this.emptySet);
 							if(hasSplit.attr === 'NONE_DEFAULT'){
 								type = 'terminal'
 							}
-							var value = {
-								result: result.name,
-								branch: b,
-								confidence: result.confidence
-							}
-							newNode = Node(type, value, branch);
 						}
 						else{
-							var value = {
-								result: result.name,
-								branch: b,
-								confidence: result.confidence
-							}
-							newNode = Node('terminal', value, branch);
+							type = 'terminal'
 						}
+						newNode = Node(type, value, branch);
+						children.push(newNode);
 					}
-					else{
-						console.log('AHHH')
-					}
-					children.push(newNode);
 				}
 			}
 			return children;
@@ -110,11 +103,15 @@ function DecisionTree(dataSet, outcomeKey, emptySet){
 				var rules = [];
 				var rulePath = '';
 				var rule = ruleStub || '';
+				var nodeRuleContent = '';
+				if(node.value.attr && node.value.branch){
+					nodeRuleContent = node.value.attr + ': ' + node.value.branch;
+				}
 				if(rule.length > 0){
-					rulePath = rule + ' &rarr; ' + node.value.branch;	
+					rulePath = rule + ' &rarr; ' + nodeRuleContent;	
 				}
 				else{
-					rulePath = node.value.branch;
+					rulePath = nodeRuleContent;
 				}
 				if(node.children.length > 0){
 					for(var n in node.children){
@@ -126,9 +123,9 @@ function DecisionTree(dataSet, outcomeKey, emptySet){
 				}
 				else{
 					rulePath += ' &rarr; ' + node.value.result;
-					rulePath += ' (' + node.value.confidence.toFixed(4) + ')';
 					rules.push({
 						rule: rulePath,
+						size: node.contents.length,
 						confidence: node.value.confidence
 					});
 				}
@@ -174,18 +171,41 @@ function DecisionTree(dataSet, outcomeKey, emptySet){
 			return html;
 		},
 
-		render: function(target){
-			var html = this.renderNode(this.root);
-				html += '<h2>Decision Rules</h2>'
-				html += '<ul>'
+		render: function(targetID){
+			var target = document.getElementById(targetID);
+			var html = ''
+				html += '<h1>' + this.title + '</h1>';
+				html += this.renderNode(this.root);
+				html += '<h2>Decision Rules</h2>';
+				html += '<ul>';
 				var rules = this.traverseRules();
+				rules = rules.sort(function(a, b){
+					var aConf = a.confidence * a.size;
+					var bConf = b.confidence * b.size;
+					return bConf - aConf;
+				});
 				for(var r in rules){
 					if(rules[r]){
-						html += '<li style="opacity: ' + rules[r].confidence + '">' + rules[r].rule + '</li>';
+						content = rules[r].rule;
+						stats = ' (n: ' + rules[r].size + ', p: ' + (1.0 - rules[r].confidence).toFixed(4) + ')';
+						if(rules[r].confidence < 0.95){
+							content += stats;
+						}
+						else{
+							content += '<span class="confident">' + stats + '</span>';
+						}
+						html += '<li style="opacity: ' + rules[r].confidence + '">' + content + '</li>';
 					}
 				}
 				html += '</ul>'
-			target.innerHTML = html;
+			if(target){
+				target.innerHTML = html;
+			}
+			else{
+				var div = document.createElement('div');
+				div.innerHTML = html;
+				document.body.appendChild(div);
+			}
 		}
 
 	}

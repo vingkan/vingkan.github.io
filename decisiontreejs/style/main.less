@@ -1,16 +1,14 @@
 /*--------------------------------------------*/
 /*---> COLORS <-------------------------------*/
 /*--------------------------------------------*/
-@FireOrange: #FF3B2A;
-@MischiefBlue: #0D47A1;
-@AnalyticalPurple: #4A148C;
-@RetentionGold: #FFCA28;
-@AcceleratorGreen: #CDDC39;
+@LeafColor: #00CECB;
+@BranchColor: #D8D8D8;
+@SplitColor: #FF5E5B;
 
 @Charcoal: #1a1a1a;
 @LightGray: #DDDDDD;
 
-@MainColor: @FireOrange;
+@MainColor: @Charcoal;
 @MainLight: @MainColor + #222222;
 @MainDark: @MainColor - #222222;
 
@@ -18,7 +16,7 @@
 /*---> FONTS <--------------------------------*/
 /*--------------------------------------------*/
 
-@vh: 5.5px;
+@vh: 4.0px;
 
 @textSize: 3.5 * @vh;
 @tx: @textSize;
@@ -74,11 +72,6 @@ p{
 	text-align: center;
 }
 
-/*ol, ul{
-	width: 9%;
-	margin: auto 10%;
-}*/
-
 li{
 	font-size: 1.0 * @textSize;
 	line-height: 1.25 * @textSize;
@@ -106,18 +99,6 @@ a{
 	line-height: @scale * 1.25 * @textSize;
 	text-align: left;
 }
-
-.WrapWords(){
-	white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
-	white-space: -webkit-pre-wrap; /*Chrome & Safari */ 
-	white-space: -pre-wrap;      /* Opera 4-6 */
-	white-space: -o-pre-wrap;    /* Opera 7 */
-	white-space: pre-wrap;       /* css-3 */
-	word-wrap: break-word;       /* Internet Explorer 5.5+ */
-	word-break: break-all;
-	white-space: normal;
-}
-
 /*--------------------------------------------*/
 /*---> BODY <---------------------------------*/
 /*--------------------------------------------*/
@@ -145,10 +126,6 @@ body{
 /*--------------------------------------------*/
 /*---> STRUCTURE <----------------------------*/
 /*--------------------------------------------*/
-
-@LeafColor: #00CECB;
-@BranchColor: #D8D8D8;
-@SplitColor: #FF5E5B;
 
 html, body, table, tr, td{
 	padding: 0;
@@ -199,7 +176,7 @@ td.node-terminal{
 }
 
 td.node-value, td.node-terminal div{
-	padding: 10px;
+	padding: 7.5px;
 }
 
 div.node-split{
@@ -225,75 +202,8 @@ li{
 	margin: 10px auto;
 }
 
-/*--------------------------------------------*/
-/*---> HEADER & FOOTER <----------------------*/
-/*--------------------------------------------*/
-
-/*--------------------------------------------*/
-/*---> IMAGES <-------------------------------*/
-/*--------------------------------------------*/
-
-img.showcase{
-	width: 90%;
-	display: block;
-	margin: (3 * @vh) auto;
-}
-
-/*--------------------------------------------*/
-/*---> FORM <----------------------------------*/
-/*--------------------------------------------*/
-
-@formItemHeight: 6 * @vh;
-
-input, button, select, textarea{
-	outline: none;
-	border: none;
-	box-sizing: border-box;
-	display: block;
-	//SIZE
-	margin: (3 * @vh) auto;
-	width: 98%;
-	padding: 1%;
-	height: @formItemHeight;
-	//STYLE
-	background: darken(white, 25%);
-	//TEXT
-	line-height: @formItemHeight;
-	.BodyFont();
-	font-size: 1.0 * @textSize;
-}
-
-button{
-
-	background: @MainColor;
-	color: white;
-	padding: 0;
-	height: 1.5 * @formItemHeight;
-	line-height: 1.5 * @formItemHeight;
-
-	&:hover{
-		background: @Charcoal;
-		border-radius: 10px;
-		cursor: pointer;
-	}
-
-	.HeadFont();
-	.AnimateAll();
-
-}
-
-input, textarea{
-	
-	&:hover{
-		background: darken(white, 5%);
-	}
-
-	.AnimateAll();
-
-}
-
-textarea{
-	height: 4 * @formItemHeight;
+span.confident{
+	color: @LeafColor;
 }
 
 /*--------------------------------------------*/
@@ -314,59 +224,44 @@ textarea{
 	animation: circularRotation @time linear infinite;
 }
 
+.PulsingBall(@time: 4s, @max: 300px, @min: 100px){
+	@-webkit-keyframes pulse{
+		0&{
+			width: @min;
+			height: @min;
+		}
+		50%{
+			width: @max;
+			height: @max;
+		}
+		100%{
+			width: @min;
+			height: @min;
+		}
+	}
+	animation: pulse @time ease-in-out infinite;
+}
+
+.FullCenter(){
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+
 body.loading{
 
-	div.sidebar, div.space{
-		opacity: 0.25;
-	}
-	
-	div.cover{
-		z-index: 30;
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		background: rgba(0, 0, 0, 0.5)
-	}
-
-	div.loading{
-		
-		z-index: 40;
-		position: fixed;
-		top: 50%;
-		left: 50%;
-		width: 30 * @vh;
-		height: 30 * @vh;
-		transform: translate(-50%, -50%);
-		-webkit-transform: translate(-50%, -50%);
-
-		div.wheel{
-			opacity: 0.75;
-			position: absolute;
-			border-radius: 50%;
-			background: transparent;
-			&:nth-child(1){
-				margin: 0;
-				width: 28 * @vh;
-				height: 28 * @vh;
-				border: @vh dashed @MischiefBlue;
-				.CircularRotation(6s, 360deg);
-			}
-			&:nth-child(2){
-				margin: 5 * @vh;
-				width: 18 * @vh;
-				height: 18 * @vh;
-				border: @vh dashed white;
-				.CircularRotation(3s, -360deg);
-			}
-			&:nth-child(3){
-				margin: 10 * @vh;
-				width: 8 * @vh;
-				height: 8 * @vh;
-				border: @vh dashed @MischiefBlue;
-				.CircularRotation();
-			}
-		}
-
+	div.loading-ball{
+		.FullCenter();
+		z-index: 20;
+		background: @LeafColor;
+		border-radius: 50%;
+		@min: 100px;
+		@max: 300px;
+		width: @min;
+		height: @min;
+		.PulsingBall(1s, @max, @min);
 	}
 
 }
