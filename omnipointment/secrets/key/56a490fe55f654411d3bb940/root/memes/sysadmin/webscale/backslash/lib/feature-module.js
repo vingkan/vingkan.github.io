@@ -2,7 +2,6 @@ window.PersonBox = React.createClass({
 	mixins: [ReactFireMixin],
 	getInitialState: function(){
 		return {
-			fb_key: window.CONFIG.FIREBASE_KEY,
 			uid: this.props.uid,
 			data: {
 				key: null,
@@ -15,29 +14,31 @@ window.PersonBox = React.createClass({
 		}
 	},
 	componentWillMount: function(){
-		var fb_url = 'http://' + this.state.fb_key + '.firebaseio.com/prometheus/users/' + this.state.uid + '/';
-		this.firebaseRef =  new Firebase(fb_url);
+		var fb_url = 'prometheus/users/' + this.state.uid + '/';
+		this.firebaseRef = firebase.database().ref(fb_url);
 		var _this = this;
 		this.firebaseRef.on('value', function(snapshot){
 			var user = snapshot.val();
-			user.key = snapshot.key();
-			var visitList = [];
-			for(var i in user.visits){
-				visitList.push(user.visits[i]);
-			}
-			user.visits = visitList;
-			if(user.key !== 'ANONYMOUS_USER'){
-				var userData = {
-					key: user.key,
-					img: user.profile.img || user.profile.picture,
-					name: user.profile.name,
-					visits: user.visits.length,
-					lastTime: user.visits[user.visits.length-1].meta.datetime.timestamp,
-					visitList: visitList
+			if(user){
+				user['key'] = snapshot.key;
+				var visitList = [];
+				for(var i in user.visits){
+					visitList.push(user.visits[i]);
 				}
-				_this.setState({
-					data: userData
-				});
+				user.visits = visitList;
+				if(user.key !== 'ANONYMOUS_USER'){
+					var userData = {
+						key: user.key,
+						img: user.profile.img || user.profile.picture,
+						name: user.profile.name,
+						visits: user.visits.length,
+						lastTime: user.visits[user.visits.length-1].meta.datetime.timestamp,
+						visitList: visitList
+					}
+					_this.setState({
+						data: userData
+					});
+				}
 			}
 		}).bind(this);
 	},
@@ -66,8 +67,8 @@ window.PersonBox = React.createClass({
 });
 
 window.deliverFeatureAccess = function(fid, uid){
-	var fb_url = 'http://' + window.CONFIG.FIREBASE_KEY + '.firebaseio.com/prometheus/features/' + fid + '/access/';
-	var ref = new Firebase(fb_url);
+	var fb_url = 'prometheus/features/' + fid + '/access/';
+	var ref = firebase.database().ref(fb_url);
 	ref.push(uid);
 }
 
@@ -112,8 +113,8 @@ window.StaticUserSearch = React.createClass({
 		}
 	},
 	componentWillMount: function(){
-		var fb_url = 'http://' + this.state.fb_key + '.firebaseio.com/prometheus/users';
-		this.firebaseRef =  new Firebase(fb_url);
+		var fb_url = 'prometheus/users';
+		this.firebaseRef =  firebase.database().ref(fb_url);
 		var _this = this;
 		var bank = lunr(function(){
 			this.field('name', {boost: 10});
@@ -124,7 +125,7 @@ window.StaticUserSearch = React.createClass({
 			var userMap = snapshot.val();
 			snapshot.forEach(function(childSnap){
 				var user = childSnap.val();
-				user.key = childSnap.key();
+				user.key = childSnap.key;
 				var visitList = [];
 				for(var i in user.visits){
 					visitList.push(user.visits[i]);
@@ -239,8 +240,8 @@ window.FeatureModule = React.createClass({
 		}
 	},
 	componentWillMount: function(){
-		var fb_url = 'http://' + this.state.fb_key + '.firebaseio.com/prometheus/features/';
-		this.firebaseRef =  new Firebase(fb_url);
+		var fb_url = 'prometheus/features/';
+		this.firebaseRef =  firebase.database().ref(fb_url);
 		var _this = this;
 		this.firebaseRef.on('value', function(snapshot){
 			var data = snapshot.val();
@@ -274,16 +275,13 @@ window.FeatureModule = React.createClass({
 		this.state.fid = e.target.value;
 	},
 	addFeature: function(e){
-		var fb_url = 'http://' + this.state.fb_key + '.firebaseio.com/prometheus/features/' + this.state.fid;
-		var ref =  new Firebase(fb_url);
+		var fb_url = 'prometheus/features/' + this.state.fid;
+		var ref = firebase.database().ref(fb_url);
 		ref.set({
 			info: {
 				name: this.state.name
 			}
 		});
-		/*var fb_url = 'http://' + this.state.fb_key + '.firebaseio.com/prometheus/features/' + this.state.fid + '/access/';
-		var ref =  new Firebase(fb_url);
-		ref.push('NONE');*/
 		this.state.name = null;
 		this.state.fid = null;
 	},

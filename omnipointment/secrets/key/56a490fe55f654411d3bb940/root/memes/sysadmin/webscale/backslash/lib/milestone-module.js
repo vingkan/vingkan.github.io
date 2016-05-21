@@ -2,7 +2,6 @@ window.MilestoneModule = React.createClass({
 	mixins: [ReactFireMixin],
 	getInitialState: function(){
 		return {
-			fb_key: window.CONFIG.FIREBASE_KEY,
 			visits: {},
 			users: []
 		}
@@ -14,8 +13,8 @@ window.MilestoneModule = React.createClass({
 			return r;
 		}
 
-		var fb_url = 'http://' + window.CONFIG.FIREBASE_KEY + '.firebaseio.com/prometheus/users/';
-		var ref =  new Firebase(fb_url);
+		var fb_url = 'prometheus/users/';
+		var ref = firebase.database().ref(fb_url);
 		var _this = this;
 		ref.on('value', function(snapshot){
 			var userMap = snapshot.val();

@@ -77,13 +77,12 @@ window.UserViewModule = React.createClass({
 		window.toggleLoading(true);
 		return {
 			name: '',
-			fb_key: window.CONFIG.FIREBASE_KEY,
 			uid: this.props.uid
 		}
 	},
 	componentWillMount: function(){
-		var fb_url = 'http://' + this.state.fb_key + '.firebaseio.com/prometheus/users/' + this.state.uid;
-		this.firebaseRef =  new Firebase(fb_url);
+		var fb_url = 'prometheus/users/' + this.state.uid;
+		this.firebaseRef = firebase.database().ref(fb_url);
 		var _this = this;
 		this.firebaseRef.on('value', function(snapshot){
 			var data = snapshot.val();
@@ -184,14 +183,13 @@ window.UserModule = React.createClass({
 		window.toggleLoading(true);
 		return {
 			users: [],
-			fb_key: window.CONFIG.FIREBASE_KEY,
 			bank: null,
 			map: null
 		}
 	},
 	componentWillMount: function(){
-		var fb_url = 'http://' + this.state.fb_key + '.firebaseio.com/prometheus/users';
-		this.firebaseRef =  new Firebase(fb_url);
+		var fb_url = 'prometheus/users';
+		this.firebaseRef = firebase.database().ref(fb_url);
 		var _this = this;
 		var bank = lunr(function(){
 			this.field('name', {boost: 10});
@@ -202,7 +200,7 @@ window.UserModule = React.createClass({
 			var userMap = snapshot.val();
 			snapshot.forEach(function(childSnap){
 				var user = childSnap.val();
-				user.key = childSnap.key();
+				user.key = childSnap.key;
 				var visitList = [];
 				for(var i in user.visits){
 					visitList.push(user.visits[i]);
