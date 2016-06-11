@@ -1,4 +1,4 @@
-window.CONFIG =  {
+window.CONFIG = {
 	apiKey: "AIzaSyDzqDG7BigYHeePB5U74VgVWlIRgjEyV3s",
 	authDomain: "omnipointment.firebaseapp.com",
 	databaseURL: "https://omnipointment.firebaseio.com",
