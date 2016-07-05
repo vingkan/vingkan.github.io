@@ -109,10 +109,11 @@ window.UserViewModule = React.createClass({
 			for(var i in data.visits){
 				visitList.push(data.visits[i]);
 			}
+			var email = data.profile.email || 'not listed';
 			_this.setState({
 				name: data.profile.name,
 				img: data.profile.img || data.profile.picture,
-				email: data.profile.email || "Not accessible.",
+				email: email,
 				visits: visitList
 			});
 			window.toggleLoading(false);
@@ -167,6 +168,10 @@ window.UserViewModule = React.createClass({
 						{visits.length} total visits
 					</p>
 					<p>
+						<i className="fa fa-icon fa-envelope-o"></i>
+						{this.state.email || 'no email listed'}
+					</p>
+					<p>
 						<i className="fa fa-icon fa-code-fork"></i>
 						UID: {this.state.uid}
 					</p>
@@ -196,6 +201,10 @@ window.UserViewModule = React.createClass({
 					<p>
 						<i className="fa fa-icon fa-eye"></i>
 						{visits.length} total visits
+					</p>
+					<p>
+						<i className="fa fa-icon fa-envelope-o"></i>
+						{this.state.email || 'no email listed'}
 					</p>
 					<p>
 						<i className="fa fa-icon fa-code-fork"></i>
@@ -289,6 +298,7 @@ window.UserModule = React.createClass({
 			snapshot.forEach(function(childSnap){
 				var user = childSnap.val();
 				user.key = childSnap.key;
+				//console.log(user.key)
 				var visitList = [];
 				for(var i in user.visits){
 					visitList.push(user.visits[i]);
@@ -299,6 +309,7 @@ window.UserModule = React.createClass({
 						key: user.key,
 						img: user.profile.img || user.profile.picture,
 						name: user.profile.name,
+						email: user.profile.email || 'none listed',
 						visits: user.visits.length,
 						lastTime: user.visits[user.visits.length-1].meta.datetime.timestamp,
 						visitList: visitList
