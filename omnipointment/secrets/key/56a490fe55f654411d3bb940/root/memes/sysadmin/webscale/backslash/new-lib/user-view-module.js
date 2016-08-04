@@ -19,12 +19,17 @@ window.UserViewModule = React.createClass({
 				visitList.push(data.visits[i]);
 			}
 			var email = data.profile.email || 'not listed';
-			_this.setState({
+			// Dirty Fix for ReactError: Can only update a mounted or mounting component.
+			/*_this.setState({
 				name: data.profile.name,
 				img: data.profile.img || data.profile.picture,
 				email: email,
 				visits: visitList
-			});
+			});*/
+			_this.state.name = data.profile.name;
+			_this.state.img = data.profile.img || data.profile.picture;
+			_this.state.email = email;
+			_this.state.visits = visitList;
 			window.toggleLoading(false);
 		}).bind(this);
 	},
@@ -32,6 +37,9 @@ window.UserViewModule = React.createClass({
 		this.setState(function(prev, curr){
 			return {limit: prev.limit + 10};
 		});
+	},
+	getUserSnippet: function(){
+		window.getUserSnippet();
 	},
 	render: function(){
 		var visits = _.clone(this.state.visits);
@@ -82,6 +90,9 @@ window.UserViewModule = React.createClass({
 						backgroundImage: 'url(' + (this.state.img || '"/style/img/faded-logo.png"') + ')'
 					}}></div>
 					<div className="visits-field">
+						<button onClick={this.getUserSnippet}>
+							Export User Snippet
+						</button>
 						{visitNodes}
 						<p>
 							Showing {this.state.limit}/{this.state.visits.length} visits.
@@ -117,6 +128,9 @@ window.UserViewModule = React.createClass({
 						backgroundImage: 'url(' + this.state.img + ')'
 					}}></div>
 					<div className="visits-field">
+						<button onClick={this.getUserSnippet}>
+							Export User Snippet
+						</button>
 						{visitNodes}
 						<p>End of History</p>
 					</div>

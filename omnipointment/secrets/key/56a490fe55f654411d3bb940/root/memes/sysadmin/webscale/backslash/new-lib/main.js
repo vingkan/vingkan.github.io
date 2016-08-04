@@ -21,3 +21,25 @@ window.toggleSpace = function(spaceID){
 
 renderUserModule();
 renderSearchModule();
+
+window.toSentenceCase = function(string){
+	var response = '';
+	var names = string.toLowerCase().split(' ');
+	for(var i = 0; i < names.length; i++){
+		var name = names[i];
+		response += name[0].toUpperCase() + name.substr(1) + ' ';
+	}
+	return response.trim();
+}
+
+window.getUserSnippet = function(){
+	var info = document.querySelector('#user-info').childNodes[0].childNodes;
+	var user = {};
+	user.name = window.toSentenceCase(info[0].innerText);
+	user.since = info[1].innerText;
+	user.visits = info[2].innerText;
+	user.email = info[3].innerText;
+	user.uid = info[4].innerText.split('UID: ')[1];
+	var snippet = user.name + '\t' + 'User' + '\t\t' + user.since + '\t' + user.uid + '\t\t\t\t' + user.email + '\t' + user.visits;
+	window.prompt('Copy the user snippet:', snippet);
+}
