@@ -19,7 +19,7 @@ window.VisitView = React.createClass({
 				<div className="prop-info" key={key}>
 					<i className={'fa fa-icon fa-' + icon}></i>
 					<span className="meta-prop-label">{name}:</span>
-					<a href={data.url} target="_blank" key={key}>
+					<a href={data.url + '?rdr=false'} target="_blank" key={key}>
 						{data.title}
 						<i className={'fa fa-icon fa-external-link'}></i>
 					</a>
