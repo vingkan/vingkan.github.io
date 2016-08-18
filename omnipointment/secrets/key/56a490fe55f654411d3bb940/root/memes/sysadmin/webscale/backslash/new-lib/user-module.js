@@ -64,6 +64,9 @@ window.UserModule = React.createClass({
 				for(var i in user.visits){
 					visitList.push(user.visits[i]);
 				}
+				visitList.sort(function(a, b){
+					return b.meta.datetime.timestamp - a.meta.datetime.timestamp;
+				});
 				user.visits = visitList;
 				if(user.key !== 'ANONYMOUS_USER' && user.profile){
 					var userData = {
@@ -138,11 +141,11 @@ window.UserModule = React.createClass({
 		);
 	},
 	componentDidUpdate: function(){
-		var users = this.state.users;
+		/*var users = this.state.users;
 		if(users.length > 0){
 			var last = users[0];
 			renderUserViewModule(last.key);
-		}
+		}*/
 	}
 });
 
