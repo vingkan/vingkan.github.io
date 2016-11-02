@@ -64,11 +64,11 @@ window.UserSearchModule = React.createClass({
 		);
 	},
 	componentDidUpdate: function(){
-		/*var users = this.state.users;
+		var users = this.state.users;
 		if(users.length > 0){
 			var last = users[0];
 			renderUserViewModule(last.key);
-		}*/		
+		}		
 	}
 });
 
