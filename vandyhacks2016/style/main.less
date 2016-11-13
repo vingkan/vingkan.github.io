@@ -1,0 +1,187 @@
+/*--------------------------------------------*/
+/*---> COLORS <-------------------------------*/
+/*--------------------------------------------*/
+
+@MainColor: #2d0a58;
+@MainLight: @MainColor + #222222;
+@MainDark: @MainColor - #222222;
+
+@Charcoal: #1a1a1a;
+
+@OpenColor: #22BFF9;
+@TakenColor: #FF6F59;
+@BoxColor: lighten(@OpenColor, 35%);
+@PageColor: lighten(@OpenColor, 25%);
+
+/*--------------------------------------------*/
+/*---> FONTS <--------------------------------*/
+/*--------------------------------------------*/
+
+@vh: 6.5px;
+@tx: 3.0 * @vh;
+
+.HeadFont(){
+	font-family: 'Squada One', sans-serif;
+}
+
+.BodyFont(){
+	font-family: 'Squada One', sans-serif;
+}
+
+/*--------------------------------------------*/
+/*---> TEXT <---------------------------------*/
+/*--------------------------------------------*/
+
+p, h1, h2, h3, ul, li{
+	.BodyFont();
+	margin: (0.5 * @tx) auto;
+}
+
+h1, h2, h3{
+	.HeadFont();
+	font-weight: 900;
+}
+
+h1{
+	font-size: 1.5 * @tx;
+	line-height: 1.75 * @tx;
+}
+
+h2{
+	font-size: 1.25 * @tx;
+	line-height: 1.5 * @tx;
+}
+
+h3{
+	font-size: 1.1 * @tx;
+	line-height: 1.35 * @tx;
+}
+
+p{
+	font-size: 1.0 * @tx;
+	line-height: 1.25 * @tx;
+}
+
+li{
+	font-size: 1.0 * @tx;
+	line-height: 1.25 * @tx;
+	list-style: disc;
+	margin-left: 1.5 * @tx;
+}
+
+/*--------------------------------------------*/
+/*---> BODY <---------------------------------*/
+/*--------------------------------------------*/
+
+html{
+	//Default Text Styles
+	.BodyFont();
+	font-size: @tx;
+	color: @Charcoal;
+}
+
+body{
+	background: @PageColor;
+	margin: 0 auto;
+	padding: 5px;
+}
+
+.AnimateAll(@time: 0.5s){
+	transition: all @time ease;
+	-webkit-transition: all @time ease;
+}
+
+/*--------------------------------------------*/
+/*---> STRUCTURE <----------------------------*/
+/*--------------------------------------------*/
+
+h1, h2 {
+	color: @Charcoal;
+}
+
+h1 {
+	margin: 5px 15px;
+}
+
+h2 {
+	margin: 5px;
+}
+
+room, spot {
+	display: inline-block;
+	padding: 5px;
+	margin: 5px;
+}
+
+room {
+	background: @BoxColor;
+	vertical-align: top;
+}
+
+spot {
+	color: @BoxColor;
+	width: 20px;
+	height: 20px;
+	line-height: 20px;
+	text-align: center;
+}
+
+spot.open {
+	background: @OpenColor;
+}
+
+spot.taken {
+	background: @TakenColor;
+}
+
+div#spaces{
+	position: absolute;
+	width: 100vw;
+	left: 0;
+	top: 0;
+	height: 70vh;
+	overflow-y: scroll;
+}
+
+div#editor{
+	position: absolute;
+	width: 100vw;
+	left: 0;
+	bottom: 0;
+	background: @TakenColor;
+	padding: 10px 0;
+}
+
+button {
+	width: 200px;
+	height: 30px;
+	line-height: 30px;
+	display: block;
+	margin: 5px auto;
+	background: @Charcoal;
+	color: white;
+	text-align: center;
+	.BodyFont();
+	transition: background 0.5s;
+	-webkit-transition: background 0.5s;
+	&:hover{
+		background: @OpenColor;
+	}
+}
+
+/*--------------------------------------------*/
+/*---> HEADER & FOOTER <----------------------*/
+/*--------------------------------------------*/
+
+
+
+/*--------------------------------------------*/
+/*---> FORM <----------------------------------*/
+/*--------------------------------------------*/
+
+input, button, select{
+	outline: none;
+	border: none;
+	font-size: 1.1 * @tx;
+	line-height: 1.35 * @tx;
+}
