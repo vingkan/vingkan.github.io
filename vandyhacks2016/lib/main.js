@@ -2,13 +2,13 @@ var OPEN = '<i class="fa fa-check"></i>';
 var TAKEN = '<i class="fa fa-times"></i>';
 
 function getTag(tag, content, opt){
-	var classList = false;
+	var inline = '';
 	if(opt){
-		if(opt.classes){
-			classList = ' class="' + opt.classes.join(' ') + '"';
+		for(var s in opt){
+			inline += ' ' + s + '="' + opt[s] + '"';
 		}
 	}
-	return '<' + tag + (classList ? classList : '') + '>' + content + '</' + tag + '>';
+	return '<' + tag + (inline.length > 1 ? inline : '') + '>' + content + '</' + tag + '>';
 }
 
 function ClickEvent(id, fn){
@@ -48,7 +48,8 @@ function constructBuilding(bData, sData){
 		directory[r] = room.floor;
 		resData.floors[room.floor].rooms[r] = {
 			name: room.name,
-			spots: {}
+			spots: {},
+			pictures: room.pictures
 		}
 	}
 	for(var s in sData){
@@ -75,6 +76,7 @@ function constructBuilding(bData, sData){
 
 function getHTML(data){
 	var html = '';
+	html += getTag('room', getTag('h2', 'Temperature: ' + data.temp + '&deg;'));
 	for(var f = 0; f < data.floors.length; f++){
 		var floor = data.floors[f];
 		html += getTag('h1', floor.name);
@@ -83,9 +85,27 @@ function getHTML(data){
 			var spotHTML = getTag('h2', room.name);
 			room.spots.forEach(function(a){
 				var aH = getTag('spot', a.open ? OPEN : TAKEN, {
-					classes: [a.open ? 'open' : 'taken']
+					class: a.open ? 'open' : 'taken'
 				});
 				spotHTML += aH;
+			});
+			spotHTML += getTag('spot', getTag('i', '', {
+				class: 'fa fa-camera'
+			}), {
+				onclick: 'toggleById(&quot;pics-' + f + '-' + r + '&quot;);'
+			});
+			var scrollerHTML = '';
+			if(room.pictures){
+				for(var p in room.pictures){
+					var pic = room.pictures[p];
+					scrollerHTML += getTag('img', '', {
+						src: pic
+					});
+				}
+			}
+			spotHTML += getTag('scroller', scrollerHTML, {
+				id: 'pics-' + f + '-' + r,
+				class: 'closed'
 			});
 			html += getTag('room', spotHTML);
 		}
@@ -104,6 +124,7 @@ db.ref().on('value', function(snapshot){
 		floors: val.floors,
 		rooms: val.rooms
 	}, val.sensors);
+	inData.temp = val.Temp.val;
 	var roomHTML = getHTML(inData);
 	var spaces = document.getElementById('spaces');
 	spaces.innerHTML = roomHTML;
@@ -198,9 +219,72 @@ var Editor = {
 				}
 			}
 		});
+	},
+	addPicture: function(){
+		var html = '';
+		html += '<select name="room">'
+		var roomList = MapToList(STATE.rooms, function(room, key){
+			return {
+				name: room.name,
+				key: key
+			}
+		}, function(a, b){
+			return a.name.localeCompare(b.name);
+		});
+		for(var f = 0; f < roomList.length; f++){
+			var room = roomList[f];
+			html += '<option value="' + room.key + '">' + room.name + '</option>';
+		}
+		html += '</select>';
+		vex.dialog.open({
+			message: 'What room is this a picture of?',
+			input: html,
+			buttons: [
+				$.extend({}, vex.dialog.buttons.YES, {text: 'Save'}),
+				$.extend({}, vex.dialog.buttons.NO, {text: 'Cancel'})
+			],
+			callback: function(data){
+				if(data){
+					db.ref('rooms/' + data.room + '/pictures').push(window.IMAGE_DATA);
+				}
+				window.IMAGE_DATA = false;
+			}
+		});
+	}
+}
+
+function toggleById(id){
+	var eDiv = document.getElementById(id);
+	if(eDiv.classList.contains('closed')){
+		eDiv.classList.remove('closed');
+		eDiv.classList.add('opened');
+	}
+	else{
+		eDiv.classList.remove('opened');
+		eDiv.classList.add('closed');
 	}
 }
 
 ClickEvent('add-sensor', Editor.addSensor);
 ClickEvent('add-room', Editor.addRoom);
 ClickEvent('add-floor', Editor.addFloor);
+
+ClickEvent('add-picture', function(){
+	toggleById('camera');
+});
+
+ClickEvent('view-dashboard', function(){
+	document.getElementById('dashboard').style.display = 'block';
+	document.getElementById('spaces').style.display = 'none';
+	toggleById('editor');
+});
+
+ClickEvent('view-spaces', function(){
+	document.getElementById('dashboard').style.display = 'none';
+	document.getElementById('spaces').style.display = 'block';
+	toggleById('editor');
+});
+
+ClickEvent('menu-toggle', function(){
+	toggleById('editor');
+});

@@ -8,7 +8,7 @@
 		<link rel="stylesheet/less" type="text/css" href="style/main.less">
 		<script type="text/javascript" src="lib/less.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link href="https://fonts.googleapis.com/css?family=Squada+One" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Jura:300,600" rel="stylesheet">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/3.6.0/firebase.js"></script>
 		<script>
@@ -27,40 +27,10 @@
 		<script>vex.defaultOptions.className = 'vex-theme-os'</script>
 		<link rel="stylesheet" href="vex/vex.css" />
 		<link rel="stylesheet" href="vex/vex-theme-os.css" />
-
-		<!--<script src="lib/webcam.js"></script>-->
-
-		<style>
-
-
-
-		</style>
 	</head>
 
 	<body>
 
-		<!--<div id="camera" style="width:320px; height:240px;"></div>
-		<div id="camera_result"></div>
-		<script language="JavaScript">
-			Webcam.attach('#camera');
-			function take_snapshot(){
-				Webcam.snap(function(data_uri){
-					document.getElementById('camera_result').innerHTML = '<img src="' + data_uri + '"/>';
-				});
-			}
-		</script>-->
-
-<!-- <div class="select">
-<label for="audioSource">Audio source: </label><select id="audioSource"></select>
-</div>
-
-<div class="select">
-<label for="videoSource">Video source: </label><select id="videoSource"></select>
-</div>
-
-<video muted autoplay></video> -->
-
-		<!-- <div id="spaces" style="display: none;"> -->
 		<div id="spaces">
 			<h1>Floor</h1>
 			<room>
@@ -77,14 +47,26 @@
 			</room>
 		</div>
 
-		<div id="editor">
+		<div id="camera" class="closed">
+			<video id="video" muted autoplay></video>
+		</div>
+
+		<iframe id="dashboard" width="98%" height="600px" src="https://app.initialstate.com/embed/#/tiles/LPruR6Mon3WOWLJYxpgT28qitz6bY8YX"></iframe>
+
+		<div id="editor" class="closed">
+			<div id="menu-toggle"><i class="fa fa-bars"></i></div>
+			<h1>Views</h1>
+			<button id="view-spaces">View Sensors</button>
+			<button id="view-dashboard">View Dashboard</button>
+			<h1>Editor</h1>
 			<button id="add-sensor">Add Sensor</button>
+			<button id="add-picture">Add Picture</button>
 			<button id="add-room">Add Room</button>
 			<button id="add-floor">Add Floor</button>
 		</div>
 
-		<!--<script src="lib/owebcam.js"></script>-->
-
+		<script type="text/javascript" src="lib/adapter.js"></script>
+		<script type="text/javascript" src="lib/camera.js"></script>
 		<script type="text/javascript" src="lib/main.js"></script>
 
 		<script type="text/javascript">
