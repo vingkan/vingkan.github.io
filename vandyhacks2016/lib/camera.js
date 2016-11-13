@@ -32,7 +32,7 @@ MediaStreamTrack.getSources(function(sourceInfos) {
 
 
 var video;
-var scale = 0.25;
+var scale = 2.0;
 window.IMAGE_DATA = false;
 
 var initialize = function() {

@@ -5,8 +5,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<!--<link rel="icon" type="img/png" href="style/favicon.png" style="width:30px;">-->
 		<link rel="stylesheet" type="text/css" href="style/reset.css">
-		<link rel="stylesheet/less" type="text/css" href="style/main.less">
-		<script type="text/javascript" src="lib/less.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="style/main.css">
+		<!--<link rel="stylesheet/less" type="text/css" href="style/main.less">
+		<script type="text/javascript" src="lib/less.min.js"></script>-->
+		<link rel="stylesheet" type="text/css" href="style/loader.css">
 		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link href="https://fonts.googleapis.com/css?family=Jura:300,600" rel="stylesheet">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -28,30 +30,24 @@
 		<link rel="stylesheet" href="vex/vex.css" />
 		<link rel="stylesheet" href="vex/vex-theme-os.css" />
 	</head>
-
 	<body>
 
 		<div id="spaces">
-			<h1>Floor</h1>
-			<room>
-				<h2>Room 1</h2>
-				<spot class="taken">A</spot>
-				<spot class="open">B</spot>
-				<spot class="taken">C</spot>
-			</room>
-			<room>
-				<h2>Room 2</h2>
-				<spot class="taken">1</spot>
-				<spot class="taken">2</spot>
-				<spot class="taken">3</spot>
-			</room>
+			<div class="cssload-thecube">
+				<div class="cssload-cube cssload-c1"></div>
+				<div class="cssload-cube cssload-c2"></div>
+				<div class="cssload-cube cssload-c4"></div>
+				<div class="cssload-cube cssload-c3"></div>
+			</div>
 		</div>
+
+		<img id="spotlight">
 
 		<div id="camera" class="closed">
 			<video id="video" muted autoplay></video>
 		</div>
 
-		<iframe id="dashboard" width="98%" height="600px" src="https://app.initialstate.com/embed/#/tiles/LPruR6Mon3WOWLJYxpgT28qitz6bY8YX"></iframe>
+		<!-- <iframe id="dashboard" width="98%" height="600px" src="https://app.initialstate.com/embed/#/tiles/LPruR6Mon3WOWLJYxpgT28qitz6bY8YX"></iframe> -->
 
 		<div id="editor" class="closed">
 			<div id="menu-toggle"><i class="fa fa-bars"></i></div>

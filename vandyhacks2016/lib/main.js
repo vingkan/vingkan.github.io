@@ -76,41 +76,47 @@ function constructBuilding(bData, sData){
 
 function getHTML(data){
 	var html = '';
-	html += getTag('room', getTag('h2', 'Temperature: ' + data.temp + '&deg;'));
 	for(var f = 0; f < data.floors.length; f++){
 		var floor = data.floors[f];
 		html += getTag('h1', floor.name);
 		for(var r = 0; r < floor.rooms.length; r++){
 			var room = floor.rooms[r];
 			var spotHTML = getTag('h2', room.name);
+			if(room.name === 'Fish Bowl'){
+				spotHTML += getTag('room', getTag('h3', 'Temperature: ' + data.temp + '&deg;')) + '<br>';
+				spotHTML += getTag('room', getTag('h3', 'Traffic: ' + (data.traffic/1000).toFixed(1) + '% busy')) + '<br>';
+			}
 			room.spots.forEach(function(a){
 				var aH = getTag('spot', a.open ? OPEN : TAKEN, {
 					class: a.open ? 'open' : 'taken'
 				});
 				spotHTML += aH;
 			});
-			spotHTML += getTag('spot', getTag('i', '', {
-				class: 'fa fa-camera'
-			}), {
-				onclick: 'toggleById(&quot;pics-' + f + '-' + r + '&quot;);'
-			});
 			var scrollerHTML = '';
 			if(room.pictures){
 				for(var p in room.pictures){
 					var pic = room.pictures[p];
-					scrollerHTML += getTag('img', '', {
-						src: pic
+					spotHTML += getTag('spot', '', {
+						style: 'background-image: url(&quot;' + pic + '&quot;);',
+						class: 'room-photos',
+						onclick: 'projectImage(&quot;' + pic + '&quot;)'
 					});
 				}
 			}
-			spotHTML += getTag('scroller', scrollerHTML, {
-				id: 'pics-' + f + '-' + r,
-				class: 'closed'
-			});
-			html += getTag('room', spotHTML);
+			html += getTag('room', spotHTML) + '<br>';
 		}
 	}
+	html += '<br><br><br><br><br><br><br><br>'
 	return html;
+}
+
+function projectImage(imgDat){
+	vex.dialog.alert({
+		unsafeMessage: getTag('img', '', {
+			src: imgDat,
+			style: 'width: 100%;'
+		})
+	});
 }
 
 var STATE = {};
@@ -125,6 +131,7 @@ db.ref().on('value', function(snapshot){
 		rooms: val.rooms
 	}, val.sensors);
 	inData.temp = val.Temp.val;
+	inData.traffic = val.Traffic.val;
 	var roomHTML = getHTML(inData);
 	var spaces = document.getElementById('spaces');
 	spaces.innerHTML = roomHTML;
@@ -287,4 +294,8 @@ ClickEvent('view-spaces', function(){
 
 ClickEvent('menu-toggle', function(){
 	toggleById('editor');
+});
+
+ClickEvent('spotlight', function(){
+	toggleById('spotlight');
 });
