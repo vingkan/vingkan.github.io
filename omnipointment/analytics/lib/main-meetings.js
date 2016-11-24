@@ -48,6 +48,7 @@ query.once('value', function(snap){
 	for(var i in val){
 		var resp = val[i].responders;
 		Array.prototype.push.apply(users, resp);
+		users.push(val[i].creator);
 	}
 	users = uniqueList(users);
 	var promises = [];
@@ -76,6 +77,14 @@ query.once('value', function(snap){
 var list = document.getElementById('meetings-list');
 var num = document.getElementById('meetings-count');
 
+function appendVisit(html){
+	var newNode = document.createElement('div');
+		newNode.classList.add('visit');
+		//newNode.innerText = text;
+		newNode.innerHTML = '<div class="anchor"></div>' + html;
+	list.insertBefore(newNode, list.childNodes[0]);	
+}
+
 function main(meetingMap){
 
 	list.innerHTML = '';
@@ -86,7 +95,7 @@ function main(meetingMap){
 		return meetingMap[mid];
 	});
 	meetingsList = meetingsList.sort(function(a, b){
-		return b.lastActiveTime - a.lastActiveTime;
+		return a.lastActiveTime - b.lastActiveTime;
 	});
 
 	var count = 0;
@@ -94,7 +103,8 @@ function main(meetingMap){
 		var meeting = meetingsList[m];
 		if(meeting.mid !== 'sample'){
 			var html = MeetingToHTML(meeting);
-			list.innerHTML += html;
+			//list.innerHTML += html;
+			appendVisit(html);
 			count++;
 		}
 	}
@@ -126,9 +136,9 @@ function MeetingToHTML(meeting){
 	var dur = moment.duration(moment(meeting.lastActiveTime).diff(meeting.created));
 	var loStr = (locData.city || 'Unknown') + ', ' + (locData.country || 'Unknown');
 		html += '<h2>' + meeting.title + '</h2>';
-		html += '<ul>';
-		html += '<li>Creator: ' + USERS[meeting.creator].name + '</li>';
-		html += '<li>Location:: ' + loStr + '</li>';
+		html += '<ul class="desc">';
+		html += '<li>Creator: ' + (USERS[meeting.creator].name || 'Unknown') + '</li>';
+		html += '<li>Location: ' + loStr + '</li>';
 		html += '<li>Active: ' + dur.asDays().toFixed(1) + ' days</li>';
 		html += '<li>' + resp.length + ' responders</li>';
 		html += '</ul>';
@@ -136,6 +146,7 @@ function MeetingToHTML(meeting){
 		var img = USERS[resp[r]].picture;
 		html += '<div class="responder" style="background-image: url(&quot;' + img + '&quot;)"></div>'
 	}
+		html += '<div class="time">' + moment(meeting.lastActiveTime).format('dddd M/D h:mm A') + '</div>';
 		html += '</div>';
 	return html;
 }
