@@ -656,25 +656,29 @@ function Application() {
 		// this function is specific to the items needed at the roster page
 		loadRosterPage: () => {
 
-			Application().getLeagueData({
-				leagueid: USER['leagueid']
-			}).then(() => {
-				Application().getLeague({
-					userid: USER.userid,
-					leagueid: USER.leagueid,
-					from: USER.rosterdate.prevfrom,
-					to: USER.rosterdate.prevto
-				}).then((userSelect) => {
-					log(userSelect);
-					USER['selectedleague'] = userSelect;
-					log(USER);
-					Application().displayRoster();
-					Application().displayAllPlayers();
+			Database.when('rosters_change', {
+				leagueid: USER.leagueid
+			}, () => {
+				Application().getLeagueData({
+					leagueid: USER['leagueid']
+				}).then(() => {
+					Application().getLeague({
+						userid: USER.userid,
+						leagueid: USER.leagueid,
+						from: USER.rosterdate.prevfrom,
+						to: USER.rosterdate.prevto
+					}).then((userSelect) => {
+						log(userSelect);
+						USER['selectedleague'] = userSelect;
+						log(USER);
+						Application().displayRoster();
+						Application().displayAllPlayers();
+					}).catch((err) => {
+						log("Thrown, " + err);
+					});
 				}).catch((err) => {
 					log("Thrown, " + err);
 				});
-			}).catch((err) => {
-				log("Thrown, " + err);
 			});
 
 		}
