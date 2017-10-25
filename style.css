@@ -13,13 +13,38 @@ h1, h2 {
 	text-align: center;
 }
 
+a {
+	text-decoration: none;
+	color: black;
+	font-weight: bold;
+}
+
+a:hover {
+	color: #8BDD00;
+	border-bottom: 1px dashed #8BDD00;
+}
+
 section h2 {
 	border-bottom: 2px solid black;
+	margin-bottom: 5px;
+	padding-bottom: 5px;
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background: rgba(0, 0, 0, 0.05);
 }
 
 div.page {
-	margin: 0 auto;
+	background: white;
+	margin: 20px auto;
+	margin-bottom: 0;
 	width: 760px;
+	padding: 10px 40px;
 }
 
 ul {
@@ -29,6 +54,7 @@ ul {
 li {
 	list-style-type: none;
 	list-style-position: outside;
+	margin-bottom: 5px;
 }
 
 li::before {
@@ -43,6 +69,37 @@ li::before {
 	margin-bottom: 2px;
 }
 
-ul.columns-4 {
+.resume-section {
+	padding: 5px 10px;
+}
+
+.resume-section:hover {
+	background: rgba(139, 221, 0, 0.05);
+}
+
+.columns-2 {
+	column-count: 2;
+}
+
+.columns-4 {
 	column-count: 4;
+}
+
+.experience-bar {
+	overflow: hidden;
+}
+
+.experience-bar h4 {
+	margin-top: 0px;
+	margin-bottom: 5px;
+}
+
+.experience-bar h4:nth-child(1) {
+	width: 400px;
+	float: left;
+}
+
+.experience-bar h4:nth-child(2) {
+	overflow: hidden;
+	text-align: right;
 }
