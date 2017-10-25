@@ -1,0 +1,48 @@
+body {
+	font-family: 'Droid Sans', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Droid Sans', sans-serif;
+	font-weight: bold;
+}
+
+h1, h2 {
+	font-family: 'Oswald', sans-serif;
+	text-transform: uppercase;
+	text-align: center;
+}
+
+section h2 {
+	border-bottom: 2px solid black;
+}
+
+div.page {
+	margin: 0 auto;
+	width: 760px;
+}
+
+ul {
+	padding-left: 10px;
+}
+
+li {
+	list-style-type: none;
+	list-style-position: outside;
+}
+
+li::before {
+	content: ' ';
+	width: 7px;
+	height: 7px;
+	display: inline-block;
+	color: black;
+	background: black;
+	transform: rotate(45deg);
+	margin-right: 10px;
+	margin-bottom: 2px;
+}
+
+ul.columns-4 {
+	column-count: 4;
+}
