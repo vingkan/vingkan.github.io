@@ -2,6 +2,10 @@ body {
 	font-family: 'Droid Sans', sans-serif;
 }
 
+h1, h2, h3, h4, h5, h6, p {
+	margin: 10px auto;
+}
+
 h1, h2, h3, h4, h5, h6 {
 	font-family: 'Droid Sans', sans-serif;
 	font-weight: bold;
@@ -13,7 +17,38 @@ h1, h2 {
 	text-align: center;
 }
 
+h1 {
+	font-size: 32px;
+	line-height: 64px;
+}
+
+h2 {
+	font-size: 22px;
+	line-height: 44px;
+}
+
+h3 {
+	font-size: 18px;
+	line-height: 32px;
+}
+
+h4 {
+	font-size: 16px;
+	line-height: 28px;
+}
+
+p {
+	font-size: 16px;
+	line-height: 24px;
+}
+
+li {
+	font-size: 16px;
+	line-height: 20px;
+}
+
 a {
+	cursor: pointer;
 	text-decoration: none;
 	color: black;
 	font-weight: bold;
@@ -24,7 +59,7 @@ a:hover {
 	border-bottom: 1px dashed #8BDD00;
 }
 
-section h2 {
+section h1, section h2 {
 	border-bottom: 2px solid black;
 	margin-bottom: 5px;
 	padding-bottom: 5px;
@@ -35,16 +70,17 @@ html, body {
 	padding: 0;
 }
 
-body {
-	background: rgba(0, 0, 0, 0.05);
+html {
+	background: #364959;
 }
 
 div.page {
 	background: white;
 	margin: 20px auto;
 	margin-bottom: 0;
-	width: 760px;
-	padding: 10px 40px;
+	width: 85%;
+	padding: 40px;
+	box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.1);
 }
 
 ul {
@@ -69,12 +105,16 @@ li::before {
 	margin-bottom: 2px;
 }
 
-.resume-section {
+.page-section {
 	padding: 5px 10px;
+	margin: 10px 5px;
+	transition: border 0.25s;
 }
 
-.resume-section:hover {
-	background: rgba(139, 221, 0, 0.05);
+.page-section:hover {
+	background: rgba(0, 0, 0, 0.025);
+	border-left: 5px solid rgba(139, 221, 0, 0.5);
+	padding-left: 10px;
 }
 
 .columns-2 {
@@ -103,3 +143,79 @@ li::before {
 	overflow: hidden;
 	text-align: right;
 }
+
+.corner-link {
+	text-align: right;
+}
+
+.base-link {
+	text-align: center;
+}
+
+.entry {
+	color: white;
+	text-align: center;
+	padding: 40px;
+}
+
+.entry h1 {
+	font-size: 40px;
+	line-height: 80px;
+}
+
+.entry p {
+	font-size: 18px;
+	line-height: 32px;
+}
+
+.entry a {
+	color: white;
+}
+
+.main-headshot {
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+	display: block;
+	margin: 20px auto;
+	box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.1);
+}
+
+.icons-tray {
+	font-size: 30px;
+	line-height: 30px;
+	padding: 20px;
+}
+
+.icons-tray a {
+	color: white;
+	padding: 0 10px;
+}
+
+.icons-tray a:hover {
+	cursor: pointer;
+	color: #8BDD00;
+}
+
+.story-image {
+	position: relative;
+	margin: 5px 20px;
+	width: 200px;
+	height: 150px;
+	line-height: 150px;
+	float: right;
+	overflow: hidden;
+}
+
+.story-image img {
+	width: 100%;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+}
+
+
+
+
+
