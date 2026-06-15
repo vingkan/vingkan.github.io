@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>List Diff</title>
+<style>
+  :root {
+    --bg: #0e1117;
+    --surface: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --accent: #58a6ff;
+    --green: #3fb950;
+    --red: #f85149;
+    --orange: #d29922;
+    --purple: #bc8cff;
+    --mono: 'SF Mono', 'Cascadia Code', 'Fira Code', Consolas, monospace;
+    --sans: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    min-height: 100vh;
+    padding: 24px 16px;
+  }
+
+  .wrap { max-width: 820px; margin: 0 auto; }
+
+  h1 { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 4px; }
+
+  .subtitle { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+
+  .inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+
+  .input-header {
+    display: flex; justify-content: space-between; margin-bottom: 6px;
+    font-size: 12px; color: var(--muted);
+  }
+  .input-header strong { font-weight: 600; }
+
+  textarea {
+    width: 100%; height: 160px; padding: 10px;
+    font-family: var(--mono); font-size: 12.5px; line-height: 1.5;
+    color: var(--text); background: var(--surface);
+    border: 1px solid var(--border); border-radius: 8px;
+    resize: vertical; outline: none;
+  }
+  textarea:focus { border-color: var(--accent); }
+
+  .badges {
+    display: flex; flex-wrap: wrap; gap: 24px;
+    padding: 14px 16px; background: var(--surface);
+    border: 1px solid var(--border); border-radius: 8px; margin-bottom: 16px;
+  }
+
+  .badge-num {
+    font-size: 28px; font-weight: 700; font-family: var(--mono); line-height: 1;
+  }
+  .badge-label { font-size: 13px; color: var(--muted); margin-left: 8px; }
+
+  .sections { display: flex; flex-direction: column; gap: 8px; }
+
+  .section {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .section-btn {
+    width: 100%; display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 14px; background: transparent; border: none; cursor: pointer;
+    color: var(--text); font-family: var(--sans); font-size: 13px; font-weight: 600;
+  }
+  .section-btn:hover { background: rgba(255,255,255,0.03); }
+
+  .section-left { display: flex; align-items: center; gap: 8px; }
+
+  .dot {
+    width: 8px; height: 8px; border-radius: 50%; display: inline-block; flex-shrink: 0;
+  }
+
+  .section-count { color: var(--muted); font-weight: 400; }
+
+  .chevron {
+    color: var(--muted); font-size: 16px; transition: transform 150ms;
+    display: inline-block;
+  }
+  .chevron.collapsed { transform: rotate(-90deg); }
+
+  .section-body { padding: 0 14px 12px; max-height: 260px; overflow-y: auto; }
+
+  .empty-msg { color: var(--muted); font-size: 13px; font-style: italic; padding: 4px 0; }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 4px; }
+
+  .tag {
+    display: inline-block; padding: 3px 8px; border-radius: 4px;
+    font-size: 12.5px; font-family: var(--mono); color: var(--text);
+    line-height: 1.4; word-break: break-all;
+  }
+
+  #results { display: none; }
+
+  @media (max-width: 560px) {
+    .inputs { grid-template-columns: 1fr; }
+    .badges { gap: 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>List Diff</h1>
+  <p class="subtitle">Paste two newline-delimited lists. Duplicates within each list are auto-removed.</p>
+
+  <div class="inputs">
+    <div>
+      <div class="input-header"><strong>List A</strong><span id="countA">0 unique</span></div>
+      <textarea id="inputA" placeholder="one item per line…" spellcheck="false"></textarea>
+    </div>
+    <div>
+      <div class="input-header"><strong>List B</strong><span id="countB">0 unique</span></div>
+      <textarea id="inputB" placeholder="one item per line…" spellcheck="false"></textarea>
+    </div>
+  </div>
+
+  <div id="results">
+    <div class="badges">
+      <div><span class="badge-num" style="color:var(--accent)" id="bUnion">0</span><span class="badge-label">union</span></div>
+      <div><span class="badge-num" style="color:var(--green)" id="bShared">0</span><span class="badge-label">shared</span></div>
+      <div><span class="badge-num" style="color:var(--orange)" id="bOnlyA">0</span><span class="badge-label">only A</span></div>
+      <div><span class="badge-num" style="color:var(--purple)" id="bOnlyB">0</span><span class="badge-label">only B</span></div>
+    </div>
+
+    <div class="sections">
+      <div class="section" id="secShared"></div>
+      <div class="section" id="secOnlyA"></div>
+      <div class="section" id="secOnlyB"></div>
+      <div class="section" id="secUnion"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const inputA = document.getElementById("inputA");
+const inputB = document.getElementById("inputB");
+const results = document.getElementById("results");
+
+function parse(raw) {
+  const seen = new Set();
+  return raw.split("\n").map(s => s.trim()).filter(s => {
+    if (!s || seen.has(s)) return false;
+    seen.add(s);
+    return true;
+  });
+}
+
+function buildSection(container, title, color, items, emptyMsg) {
+  const open = container.dataset.open !== "false";
+  container.innerHTML = `
+    <button class="section-btn" aria-expanded="${open}">
+      <span class="section-left">
+        <span class="dot" style="background:${color}"></span>
+        ${title}
+        <span class="section-count">(${items.length})</span>
+      </span>
+      <span class="chevron ${open ? "" : "collapsed"}">▾</span>
+    </button>
+    ${open ? `<div class="section-body">${
+      items.length === 0
+        ? `<div class="empty-msg">${emptyMsg}</div>`
+        : `<div class="tags">${items.map(item =>
+            `<span class="tag" style="background:${color}14;border:1px solid ${color}33">${escapeHtml(item)}</span>`
+          ).join("")}</div>`
+    }</div>` : ""}
+  `;
+  container.querySelector(".section-btn").addEventListener("click", () => {
+    container.dataset.open = container.dataset.open === "false" ? "true" : "false";
+    buildSection(container, title, color, items, emptyMsg);
+  });
+}
+
+function escapeHtml(s) {
+  return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+
+function update() {
+  const a = parse(inputA.value);
+  const b = parse(inputB.value);
+  const setA = new Set(a);
+  const setB = new Set(b);
+  const intersection = a.filter(x => setB.has(x));
+  const onlyA = a.filter(x => !setB.has(x));
+  const onlyB = b.filter(x => !setA.has(x));
+  const union = [...new Set([...a, ...b])];
+
+  document.getElementById("countA").textContent = a.length + " unique";
+  document.getElementById("countB").textContent = b.length + " unique";
+
+  const hasInput = a.length > 0 || b.length > 0;
+  results.style.display = hasInput ? "block" : "none";
+  if (!hasInput) return;
+
+  document.getElementById("bUnion").textContent = union.length;
+  document.getElementById("bShared").textContent = intersection.length;
+  document.getElementById("bOnlyA").textContent = onlyA.length;
+  document.getElementById("bOnlyB").textContent = onlyB.length;
+
+  const cs = getComputedStyle(document.documentElement);
+  buildSection(document.getElementById("secShared"), "Shared (A ∩ B)", cs.getPropertyValue("--green").trim(), intersection, "No items in common");
+  buildSection(document.getElementById("secOnlyA"), "Only in A", cs.getPropertyValue("--orange").trim(), onlyA, "Every item in A also appears in B");
+  buildSection(document.getElementById("secOnlyB"), "Only in B", cs.getPropertyValue("--purple").trim(), onlyB, "Every item in B also appears in A");
+  buildSection(document.getElementById("secUnion"), "Union (A ∪ B)", cs.getPropertyValue("--accent").trim(), union, "Both lists are empty");
+}
+
+inputA.addEventListener("input", update);
+inputB.addEventListener("input", update);
+</script>
+</body>
+</html>
